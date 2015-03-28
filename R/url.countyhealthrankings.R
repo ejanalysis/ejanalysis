@@ -1,4 +1,7 @@
-url.countyhealthrankings <- function(fips='http://www.countyhealthrankings.org', launch=TRUE) {
+url.countyhealthrankings <- function(fips='http://www.countyhealthrankings.org', launch=TRUE, year=2015) {
+  
+  year <- as.character(year)
+  
 
   fipstype <- 'none'
   
@@ -512,15 +515,15 @@ cat(stateportion, countyportion, stateok,'\n')
   if (fipstype=='fips.state') {
     statename <- valid.FIPS.ST$statename[match(fips, valid.FIPS.ST$FIPS.ST)]
     statename <- gsub(' ', '-', statename)
-    myurl <- paste('http://www.countyhealthrankings.org/app/#!/', statename, '/2014/overview', sep='')
-    # http://www.countyhealthrankings.org/app/#!/new-york/2014/overview
+    myurl <- paste('http://www.countyhealthrankings.org/app/#!/', statename, '/',year,'/overview', sep='')
+    # http://www.countyhealthrankings.org/app/#!/new-york/2015/overview
   }
   
   if (fipstype=='name.state') { 
     statename <- valid.FIPS.ST$statename[match(tolower(fips), tolower(valid.FIPS.ST$statename))] # already lowercase, but ok to do again
     statename <- gsub(' ', '-', statename)
-    myurl <- paste('http://www.countyhealthrankings.org/app/#!/', statename, '/2014/overview', sep='')
-    # http://www.countyhealthrankings.org/app/#!/new-york/2014/overview
+    myurl <- paste('http://www.countyhealthrankings.org/app/#!/', statename, '/',year,'/overview', sep='')
+    # http://www.countyhealthrankings.org/app/#!/new-york/2015/overview
     #   ### valid.FIPS.ST$statename  
   }
   
@@ -528,8 +531,8 @@ cat(stateportion, countyportion, stateok,'\n')
     statename <- valid.FIPS.ST$statename[match(substr(fips, 1, 2), valid.FIPS.ST$FIPS.ST)]
     statename <- gsub(' ', '-', statename)
     # one option is this URL, and it doesn't require knowing the full county name, just the county fips & statename, so it is easier to get to here:
-    # http://www.countyhealthrankings.org/app/#!/california/2014/compare?counties=001
-    myurl <- paste('http://www.countyhealthrankings.org/app/#!/', statename, '/2014/compare?counties=', substr(fips, 3, 5), sep='')
+    # http://www.countyhealthrankings.org/app/#!/california/2015/compare?counties=001
+    myurl <- paste('http://www.countyhealthrankings.org/app/#!/', statename, '/',year,'/compare?counties=', substr(fips, 3, 5), sep='')
   }
   
   if (fipstype=='name.county') {
@@ -537,22 +540,23 @@ cat(stateportion, countyportion, stateok,'\n')
     # countyname <- countyinfo$countyname[match( tolower(fips), tolower(countyinfo$countyname))] # presumes we have all countyname data here
     # countyname <- gsub(' ', '-', countyname) 
     # if we have the countyname, we could use this other URL, which gives a slighty different view of the county info:
-    # myurl <- paste('http://www.countyhealthrankings.org/app/#!/', statename, '/2014/rankings/', countyname,'/county/outcomes/overall/snapshot', sep='')
+    # myurl <- paste('http://www.countyhealthrankings.org/app/#!/', statename, '/',year,'/rankings/', countyname,'/county/outcomes/overall/snapshot', sep='')
     # e.g.,
-    # http://www.countyhealthrankings.org/app/#!/new-york/2014/rankings/bronx/county/outcomes/overall/snapshot
+    # http://www.countyhealthrankings.org/app/#!/new-york/2015/rankings/bronx/county/outcomes/overall/snapshot
     # 
     # one option is this URL, and it doesn't require knowing the full county name, just the fips, so it is easier to get to here:
-    # http://www.countyhealthrankings.org/app/#!/california/2014/compare?counties=001
+    # http://www.countyhealthrankings.org/app/#!/california/2015/compare?counties=001
     #myfullname <- paste(countyportion, ', ', stateportion)
     fips.county <- fips #countyinfo$FIPS.COUNTY[match( tolower(myfullname), tolower(countyinfo$fullname))] # presumes we have all countyname data here
     statename   <- countyinfo$statename[match(tolower(stateportion), tolower(countyinfo$countyname))] # presumes we have all countyname data here
     statename <- gsub(' ', '-', statename)
-    myurl <- paste('http://www.countyhealthrankings.org/app/#!/', statename, '/2014/compare?counties=', fips.county, sep='')
+    myurl <- paste('http://www.countyhealthrankings.org/app/#!/', statename, '/',year,'/compare?counties=', fips.county, sep='')
   }
 
 
   if (launch) {
-    url.open(myurl)
+    #url.open(myurl)
+    browseURL(myurl)
   }
   
   return(myurl)

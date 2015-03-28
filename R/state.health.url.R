@@ -1,44 +1,91 @@
-#####################################
-#	URL scheme for linking to Resources for health data by state or by county:
-#####################################
-
-#State-level data from SHADAC:
-#http://www.shadac.org/
-
-#State-level data from 
-#http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub.html
-#
-# ***** see entire US clickable map of states
-# shell.exec('http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/scope/national/ind/31/dist/29/char/119/time/13/viz/map/fstate/2/locs/2,52/cmp/brkdwn')
-
-#use this URL format to figure out API or state-specific set of links to nice state reports
-#Public health, premature deaths, MD vs US, 2009-2010 
-#http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/scope/state/ind/66/dist/23/char/91/time/3/viz/bar/fstate/21/locs/21,52/cmp/stcmp
-#
-#Public health, life expectancy, MD (state number 21) vs US
-#http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/scope/state/ind/31/dist/29/char/119/time/14/viz/line/fstate/21/locs/21,52/cmp/brkdwn
-#http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/scope/state/ind/31/dist/29/char/119/time/14/viz/bar/fstate/21/locs/21,52/cmp/stcmp
-
-# cancer by race in arizona (defaults to 2008-2009)
-#http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/scope/state/ind/7/dist/22/char/85/time/18/viz/bar/fstate/3/locs/3,52/cmp/stcmp
-
-#####################################
-#	FUNCTION TO CREATE URL
-#####################################
-
-# It requires list of state numbers corresponding to state abbreviations so user can use state abbreviation as parameter.
-# Get table of states with numbering by alpha of full name, which is how RWJF site numbers them in URLs
-#x<-data.frame(state.name,state.abb,stringsAsFactors=FALSE)
-#x<-rbind(x,c("District of Columbia","DC"))
-#x<-x[order(x$state.name),]
-#x<-data.frame(x,fstate=1:51)
-#rownames(x)<-1:51
-#x[52,]<-c("United States","US",52)
-#dput(x)
-
-
+#' @title Get URL(s) with State health indicator data from RWJF - ** url scheme obsolete now so needs to be redone
+#' @description Robert Woods Johnson Foundation provides health indicator data by state. This function provides a basic interface to those webpages.
+#' @details 
+#' NEWER URL SCHEME NOW... E.G. \url{http://www.rwjf.org/en/how-we-work/rel/research-features/rwjf-datahub/national.html#q/scope/national/ind/10/dist/0/char/0/time/3/viz/map/cmp/brkdwn}
+#' 
+#' see also related percent insured data here: e.g., 
+#' \url{http://datacenter.shadac.org/profile/70#2/alabama/percent,moe,count/a/hide}
+#' DEFAULT IF NO PARAMETERS USED:
+#' state.health.url() \cr
+#' url created: \cr
+#' http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/scope/state/ind/66/dist/23/char/87/time/3/viz/bar/fstate/33/locs/33,52,9/cmp/stcmp \cr
+#' url that it resolves to on website: \cr
+#' http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/scope/state/ind/66/dist/23/char/87/time/3/viz/bar/fstate/33/locs/33,52,9/cmp/stcmp \cr
+#' # state.health.url("MD") \cr
+#' # url created: \cr
+#' # \url{http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/scope/state/ind/66/dist/23/char/87/time/14/viz/bar/fstate/21/locs/21/cmp/stcmp} \cr
+#' # url that it resolves to on website should be  \cr
+#' # \url{http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/scope/state/ind/66/dist/23/char/87/time/3/viz/bar/fstate/21/locs/21,52/cmp/stcmp} \cr
+#' #	URL scheme for linking to Resources for health data by state or by county: \cr
+#' \cr
+#' #State-level data from SHADAC: \url{http://www.shadac.org/} \cr
+#' #State-level data from RWJF: \url{http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub.html} \cr
+#' ***** see entire US clickable map of states
+#' # shell.exec('http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/scope/national/ind/31/dist/29/char/119/time/13/viz/map/fstate/2/locs/2,52/cmp/brkdwn')
+#' # Use this URL format to figure out API or state-specific set of links to nice state reports. 
+#' Public health, premature deaths, MD vs US, 2009-2010 
+#' \url{http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/scope/state/ind/66/dist/23/char/91/time/3/viz/bar/fstate/21/locs/21,52/cmp/stcmp}
+#' Public health, life expectancy, MD (state number 21) vs US
+#' \url{http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/scope/state/ind/31/dist/29/char/119/time/14/viz/line/fstate/21/locs/21,52/cmp/brkdwn}
+#' \url{http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/scope/state/ind/31/dist/29/char/119/time/14/viz/bar/fstate/21/locs/21,52/cmp/stcmp} \cr
+#' Cancer by race in arizona (defaults to 2008-2009): 
+#' \url{http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/scope/state/ind/7/dist/22/char/85/time/18/viz/bar/fstate/3/locs/3,52/cmp/stcmp}
+#' @param ST State abbreviation, FIPS code, or name as character vector
+#' @param scope Character, default is "state" view in results, but can be "national" view as well
+#' @param ind Health Indicator code number. Number, default is 66. Possible values: \cr
+#' \itemize{
+#' \item 6=Cancer Incidence: Incidence of breast, cervical, lung and colorectal cancer per 100,000 population; age adjusted
+#' \item 7=Cancer Incidence by Race: Incidence of breast, cervical, lung and colorectal cancer per 100,000 population; age adjusted
+#' \item 10=Chronic Disease Prevalence: asthma/CVD/diabetes, 
+#' \item 15=Limited Activity: Average number of days in the previous 30 days when a person indicates their activities are limited due to mental or physical health difficulties, 
+#' \item 22=Tobacco taxes: State cigarette excise tax rate ($)
+#' \item 25=Income Inequality (Gini Coefficient)
+#' \item 31=life expectancy= Life expectancy at birth: number of years that a newborn is expected to live if current mortality rates continue to apply
+#' \item 44=Public health funding: Per capita state public health funding
+#' \item 45=Poor/Fair Health: Self-reported health status: percent of adults reporting fair or poor health
+#' \item 65=Premature death: Premature deaths: Average number of years of potential life lost prior to age 75 per 100,000 population
+#' \item 66=Premature Death by Race/Ethnicity: Premature deaths: Average number of years of potential life lost prior to age 75 per 100,000 population
+#' }
+#' @param dist default is 23. unclear what this controls. 23 or 29 or 0 or 19 possible. dist/char were 0/0 for US totals not by race, and were 19/58 for same by race.
+#' @param char default is 87. unclear what this controls. 91=?, 119=?, 121=?  58? others possible.
+#' @param time Code for which years are covered by the data. default is 3, which means 2009-2010. Possible values: \cr
+#' \itemize{
+#' \item 3=2009-2010
+#' \item 22=2010-2011
+#' \item 23=2011-2012 
+#' \item 5=2000
+#' \item 10=2005 
+#' \item 11=2006 
+#' \item 12=2007 
+#' \item 13=2008 
+#' \item 1=2009 
+#' \item 14=2010  
+#' \item 4=2011 
+#' \item 24=2012
+#' \item OTHERS? 
+#' }
+#' @param viz Type of visualization of data. Default is "bar" and can be line or bar or table.
+#' @param fstate State number. default is NA
+#' @param locs Locations to compare. default is NA
+#' @param cmp Comparisons to view. Default is "stcmp" to see 2+ states compared (or state vs US). Can also see breakdown for one state if set to "brkdwn"
+#' @param open.browser Logical, default is FALSE. Should URL be opened by launching browser.
+#' @return URL(s) character vector, default: \url{http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/scope/state/ind/66/dist/23/char/87/time/3/viz/bar/fstate/33/locs/33,52,9/cmp/stcmpind/66/dist/23/char/87/time/3/viz/bar/fstate/33/locs/33,52,9/cmp/stcmp}
+#' @examples #
+#'  shell.exec(state.health.url('CA'))
+#'
+#' @export 
 state.health.url <- function(ST=NA, scope="state", ind=66, dist=23, char=87, time=3, viz="bar", fstate=NA, locs=NA, cmp="stcmp", open.browser=FALSE) {
 
+  # Requires list of state numbers corresponding to state abbreviations so user can use state abbreviation as parameter.
+  # Get table of states with numbering by alpha of full name, which is how RWJF site numbers them in URLs
+  #x<-data.frame(state.name,state.abb,stringsAsFactors=FALSE)
+  #x<-rbind(x,c("District of Columbia","DC"))
+  #x<-x[order(x$state.name),]
+  #x<-data.frame(x,fstate=1:51)
+  #rownames(x)<-1:51
+  #x[52,]<-c("United States","US",52)
+  #dput(x)
+  
   stnums <- structure(list(state.name = c("Alabama", "Alaska", "Arizona", 
   "Arkansas", "California", "Colorado", "Connecticut", "Delaware", 
   "District of Columbia", "Florida", "Georgia", "Hawaii", "Idaho", 
@@ -64,10 +111,6 @@ state.health.url <- function(ST=NA, scope="state", ind=66, dist=23, char=87, tim
 
   #########
   # basic error checking of parameters
-
-  # DEFAULT TO USE IF NO PARAMETERS SET:
-  # http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/scope/state/ind/66/dist/23/char/87/time/3/viz/bar/fstate/33/locs/33,52,9/cmp/stcmp
-  #ind/66/dist/23/char/87/time/3/viz/bar/fstate/33/locs/33,52,9/cmp/stcmp
 
   # specify the state using fstate, but set it based on ST if that was specified (& ignore fstate specified). 
   if (!is.na(ST)) {
@@ -99,9 +142,12 @@ state.health.url <- function(ST=NA, scope="state", ind=66, dist=23, char=87, tim
   	if (cmp=='stcmp') { locs <- paste(fstate,"52",sep=",") }
   	if (cmp=='brkdwn') { locs <- fstate }
   }  
-  #########
 
-  my.url <- paste("http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q",
+  # new scheme:
+  # http://www.rwjf.org/en/how-we-work/rel/research-features/rwjf-datahub/national.html#q/scope/national/ind/10/dist/0/char/0/time/3/viz/map/cmp/brkdwn
+  
+  #my.url <- paste("http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q",
+  my.url <- paste("http://www.rwjf.org/en/how-we-work/rel/research-features/rwjf-datahub/national.html#q",
 	"/scope/",	scope,	# scope is one "state", typically, but can see "national" too
 	"/ind/", 	ind, 
 	"/dist/", 	dist,
@@ -118,49 +164,7 @@ state.health.url <- function(ST=NA, scope="state", ind=66, dist=23, char=87, tim
   }
   
   return(my.url)
-
-#	"/scope/",	scope,	# scope is one "state", typically, but can see "national" too
-#	"/ind/", 	ind, 	
-# indicator number; #
-#6=Cancer Incidence: Incidence of breast, cervical, lung and colorectal cancer per 100,000 population; age adjusted
-#7=Cancer Incidence by Race: Incidence of breast, cervical, lung and colorectal cancer per 100,000 population; age adjusted
-#10=Chronic Disease Prevalence: asthma/CVD/diabetes, 
-#15=Limited Activity: Average number of days in the previous 30 days when a person indicates their activities are limited due to mental or physical health difficulties, 
-#22=Tobacco taxes: State cigarette excise tax rate ($)
-#25=Income Inequality (Gini Coefficient)
-#31=life expectancy= Life expectancy at birth: number of years that a newborn is expected to live if current mortality rates continue to apply
-#44=Public health funding: Per capita state public health funding
-#45=Poor/Fair Health: Self-reported health status: percent of adults reporting fair or poor health
-#65=Premature death: Premature deaths: Average number of years of potential life lost prior to age 75 per 100,000 population
-#66=Premature Death by Race/Ethnicity: Premature deaths: Average number of years of potential life lost prior to age 75 per 100,000 population
-
-#	"/dist/", 	dist, 	# 23 or 29 or 0 or 19 seen. dist/char were 0/0 for US totals not by race, and were 19/58 for same by race.
-#	"/char/", 	char, 	# 91=?, 119=?, 121=?  58? ****
-#	"/time/", 	time, 	# 5=2000, 10=2005, 11=2006, 12=2007, 13=2008, 1=2009, 14=2010,  4=2011, 24=2012,  / 3=2009-2010, 23=2011-2012, OTHERS? 
-#	"/viz/", 	viz,	# line or bar or table
-#	"/fstate/", 	fstate, 	# state number
-#	"/locs/", 	locs,	# locations to compare? ***
-#	"/cmp/", 	cmp,	# brkdwn for one state, or stcmp for 2+ states compared (or state vs US)
-
-# EXAMPLE:
-#  shell.exec(state.health.url('CA'))
-#
-# DEFAULT IF NO PARAMETERS USED:
-#state.health.url()
-#url created:
-#http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/scope/state/ind/66/dist/23/char/87/time/3/viz/bar/fstate/33/locs/33,52,9/cmp/stcmp
-#url that it resolves to on website:
-#http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/scope/state/ind/66/dist/23/char/87/time/3/viz/bar/fstate/33/locs/33,52,9/cmp/stcmp
-
-#> state.health.url("MD")
-#url created:
-#http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/scope/state/ind/66/dist/23/char/87/time/14/viz/bar/fstate/21/locs/21/cmp/stcmp
-#url that it resolves to on website:
-# should be 
-#http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/scope/state/ind/66/dist/23/char/87/time/3/viz/bar/fstate/21/locs/21,52/cmp/stcmp
-
 }
-
 
 #############################
 
