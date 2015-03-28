@@ -27,4 +27,10 @@ myregions <- get.epa.region() # to see full list
  myregions <- get.epa.region(c(4,36,72)) # for a vector of state FIPS codes as numeric with no leading zeroes
  myregions <- get.epa.region(c('NY', 'Ohio')) # CANNOT MIX WAYS OF DEFINING STATES - PICK ONE FORMAT
 }
+\seealso{
+\code{\link{clean.fips.1215}}, \code{\link{get.fips.bg}}, \code{\link{get.fips.tract}}, \code{\link{get.fips.county}}, \code{\link{get.fips.st}} to get partial FIPS from longer FIPS, or
+  \code{\link{get.name.county}}, \code{\link{get.name.state}} to extract name from longer Census name, or
+  \code{\link{get.state.info}}, \code{\link{get.county.info}}, \code{\link{get.epa.region}}
+  to look up info such as FIPS, state abbreviation, statename, countyname, or region based on FIPS or name.
+}
 

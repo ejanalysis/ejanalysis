@@ -7,7 +7,7 @@
 #' @template seealsoFIPS
 #' @examples
 #' samplefips <- c("011030001003", "011030001003001", 11030001003001, 35, 1, NA, 'invalidtext', '02')
-#' get.fips.ST(samplefips)
+#' get.fips.st(samplefips)
 #' @export
 get.fips.st <- function(fips) {
   fips <- clean.fips.1215(fips) # checks length, NAs, infers missing leading zero, warns

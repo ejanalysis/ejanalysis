@@ -1,35 +1,35 @@
 RR.if.address.top.x <- function(rank.by.df, e.df, d.pct, popcounts, d.pct.us, or.tied=TRUE, if.multiply.e.by=0, zones=NULL, mycuts=c(50,80,90:100), silent=TRUE) {
-  
+
   ################################################################
   # DEFINE FUNCTION TO GET STATS ON WHAT % OF POP OR PLACES COULD "ACCOUNT FOR" ALL RR,
   # AND WHAT IS RR IF YOU REDUCE E BY USING SOME MULTIPLIER ON E, IN TOP X% OF PLACES
   ################################################################
-  
+
   if (missing(d.pct.us)) {
     warning('assumed that d.pct.us is popcounts-wtd mean of d.pct, which is not right if correct denominator for d.pct is not popcounts')
-    d.pct.us <- weighted.mean(d.pct, w=popcounts)
+    d.pct.us <- weighted.mean(d.pct, w=popcounts) # *** na.rm should be explicit and differs between Hmisc::wtd.mean and stats::weighted.mean
   }
-  
+
   rrs <- data.frame(matrix(NA, ncol=length(names(e.df)), nrow=length(mycuts)))
   rownames(rrs)=mycuts
   names(rrs)=names(e.df)
   worst.as.pct <- vector(length=length( names(e.df) ))
   worst.as.pct.of.bgs <- worst.as.pct
   state.tables <- list()
-  
+
   for (i in 1:(length(e.df))) {
-    
+
     if (!silent) { cat('\nStats for', names(e.df)[i], '-----------------------------------\n\n') }
-    
+
     for (mycut.i in 1:length(mycuts) ) {
-      
+
       if (or.tied) {
-        worst.x <- ( rank.by.df[ , i] >= mycuts[mycut.i]) # those above given EJ %ile cutoff, or specified cutoff        
+        worst.x <- ( rank.by.df[ , i] >= mycuts[mycut.i]) # those above given EJ %ile cutoff, or specified cutoff
       } else {
-        worst.x <- ( rank.by.df[ , i] > mycuts[mycut.i]) # those above given EJ %ile cutoff, or specified cutoff        
+        worst.x <- ( rank.by.df[ , i] > mycuts[mycut.i]) # those above given EJ %ile cutoff, or specified cutoff
       }
       worst.x[is.na(worst.x)] <- FALSE
-      
+
       new.E <- e.df[ , i]
       new.E[is.na(new.E)] <- 0  # have to set these to zero for logical subsetting to work
       new.E[worst.x] <- new.E[worst.x] * if.multiply.e.by  # THIS SETS ENVT INDICATOR SCORE TO ZERO or cuts it using specified multiplier WHERE BG IDENTIFIED AS "WORST" AS RANKED BY EJ INDEX or specified rank.by.df
@@ -38,7 +38,7 @@ RR.if.address.top.x <- function(rank.by.df, e.df, d.pct, popcounts, d.pct.us, or
         cat(round(  rrs[mycut.i , i], 3) )
         cat(' = RR nationwide if top', 100-mycuts[mycut.i],'% of pop (if popwtd pctiles used to rank) had', names(e.df)[i],' = ', if.multiply.e.by, " x ", names(e.df)[i])
         cat('[', round(  RR( e.df[ , i][worst.x],  d.pct[worst.x], popcounts[worst.x] ), 2) )
-        cat(' = RR among just those top places ]\n')        
+        cat(' = RR among just those top places ]\n')
       }
     }
     if (!silent) {
@@ -46,12 +46,12 @@ RR.if.address.top.x <- function(rank.by.df, e.df, d.pct, popcounts, d.pct.us, or
       cat(' = overall USA RR for ', names(e.df)[i], '\n')
       cat('\n')
     }
-    
+
     # Now for a calculated cutoff, not the specified cutoff:
     # Calculate the cutoff that will get RR==1, using specified rank.by.df and if.multiply.e.by, etc.:
-    
+
     # DOES NOT WORK YET
-    
+
     raw.ej <- popcounts * e.df[ , i] * (d.pct - d.pct.us)
     raw.ej[is.na(raw.ej)] <- 0
     raw.ej <- data.frame(raw.ej, originalrow=1:(length(raw.ej)))   # somewhere around here is super slow !!!  # somewhere around here is super slow !!!
@@ -60,7 +60,7 @@ RR.if.address.top.x <- function(rank.by.df, e.df, d.pct, popcounts, d.pct.us, or
     cum.raw.ej <- cum.raw.ej[order(raw.ej$originalrow)]  # somewhere around here is super slow !!!
     worst.x <- (cum.raw.ej < 0) # check if < or > here
     worst.x[is.na(worst.x)] <- FALSE
-    
+
     worst.as.pct.of.bgs[i] <- mean(worst.x)
     worst.as.pct[i] <- sum( popcounts[worst.x] ) / sum(popcounts)
     new.E <- e.df[ , i]
@@ -75,25 +75,25 @@ RR.if.address.top.x <- function(rank.by.df, e.df, d.pct, popcounts, d.pct.us, or
       } else {state.tables[[i]] <- 'no zones specified'}
     }
   }
-  
+
   rrs2=rbind(round(rrs,3), key.pctile=paste(round(100 - 100 * worst.as.pct, 3),'%',sep=''), key.pct=paste(round(100 * worst.as.pct,3),'%',sep=''))
   names(worst.as.pct) <- names(e.df)
   names(worst.as.pct.of.bgs) <- names(e.df)
 
   return(list(
-    rrs=rrs, 
-    rrs2=rrs2, 
-    state.tables=state.tables, 
-    worst.as.pct=worst.as.pct, 
+    rrs=rrs,
+    rrs2=rrs2,
+    state.tables=state.tables,
+    worst.as.pct=worst.as.pct,
     worst.as.pct.of.bgs=worst.as.pct.of.bgs)
     )
-  
+
   # EXAMPLE
   #
   # VSI.eo.US <- with(bg, ( sum(mins) / sum(pop) + sum(lowinc) / sum(povknownratio) ) / 2) # or for 2008-2012 use...
   # VSI.eo.US <- 0.3493374
   #
-  # results <- RR.if.address.top.x(rank.by.df=bg[,names.ej.pctile], e.df, d.pct, popcounts, d.pct.us=VSI.eo.US, zones=bg$ST, or.tied=TRUE, if.multiply.e.by=0, mycuts=c(50,80,90:100), silent=TRUE)   
+  # results <- RR.if.address.top.x(rank.by.df=bg[,names.ej.pctile], e.df, d.pct, popcounts, d.pct.us=VSI.eo.US, zones=bg$ST, or.tied=TRUE, if.multiply.e.by=0, mycuts=c(50,80,90:100), silent=TRUE)
   # #results$rrs2
   #
   # str(results)
@@ -134,6 +134,6 @@ RR.if.address.top.x <- function(rank.by.df, e.df, d.pct, popcounts, d.pct.us, or
 #   ..- attr(*, "names")= chr [1:12] "pm" "o3" "cancer" "neuro" ...
 
 #   $ worst.as.pct.of.bgs: Named num [1:12] 0.988 0.989 0.959 0.964 0.946 ...
-#   ..- attr(*, "names")= chr [1:12] "pm" "o3" "cancer" "neuro" ...  
+#   ..- attr(*, "names")= chr [1:12] "pm" "o3" "cancer" "neuro" ...
 
 }
