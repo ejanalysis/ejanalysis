@@ -2,7 +2,7 @@
 % Please edit documentation in R/assign.pctiles.R
 \name{assign.pctiles}
 \alias{assign.pctiles}
-\title{Assign percentiles to values (weighted, by zone)}
+\title{Assign percentiles to vector of values (weighted, by zone)}
 \usage{
 assign.pctiles(values, weights = NULL, zone = NULL, na.rm = TRUE)
 }
@@ -14,13 +14,13 @@ assign.pctiles(values, weights = NULL, zone = NULL, na.rm = TRUE)
 \item{na.rm}{NOT IMPLEMENTED HERE. Logical, optional, TRUE by default. Should NA values (missing data) be removed first to get percentile of those with valid data.
 If FALSE, NA values are treated as being at the high percentiles.}
 
-\item{x}{vector or data.frame}
+\item{x}{vector}
 }
 \value{
-Returns a numeric vector or data.frame same size as x, but if zone is specified, provides percentile with given zone.
+Returns a numeric vector same size as x, but if zone is specified, provides percentile with given zone.
 }
 \description{
-For each column look at the distribution of values across all rows in a given zone (e.g., places in zone),
+For the vector, look at the distribution of values across all rows in a given zone (e.g., places in zone),
 and find what percentile a given value is at.
 }
 \details{
@@ -55,18 +55,24 @@ cbind(wts, x, PCTILE.alt2=assign.pctiles.alt2(x, wts, na.rm=FALSE), pctile=assig
 cbind(wts, x, PCTILE.alt2=assign.pctiles.alt2(x, wts, na.rm=TRUE), pctile=assign.pctiles(x,wts))[order(x),]
 }
 \seealso{
-\code{\link{make.bin.pctile.cols}} to call make.pctile.cols and make.bin.cols \cr
-\code{\link{assign.pctiles}} to assign percentile (quantile) to each value within its column, in data.frame  \cr
-\code{\link{assign.pctiles.alt2}} for alternative method to replicate assign.pctiles \cr
-\code{\link{get.pctile}} to get (weighted) percentile of 1+ values within given vector of values \cr
-\code{\link{assign.map.bins}} to assign map color bin using breaks to each value in data.frame given its percentile \cr
-\code{\link{make.pctile.cols}} to take df and return same-sized df that is wtd.quantile of each value within its column \cr
-\code{\link{make.pctile.cols.alt2}} to use alt version of make.pctile.cols for replication \cr
-\code{\link{make.bin.cols}} to take df of pctile values and return same-sized df that is bin number (map color bin) using preset breaks. \cr
+\code{\link{make.bin.pctile.cols}} to call functions below, converting columns of values to percentiles and then bins \cr
+\cr
+\code{\link{assign.pctiles}} for one vector, assign (weighted) percentile (quantile) to each value within its zone (subset)  \cr
+\code{\link{assign.pctiles.alt2}} as an alternative method, to replicate assign.pctiles, but not by zone \cr
+\code{\link{get.pctile}} to get (weighted) percentile of just 1+ values within given vector of values \cr
+\cr
+\code{\link{make.pctile.cols}} for a data.frame, assign percentiles, return a same-sized df that is wtd.quantile of each value within its column \cr
+\code{\link{make.pctile.cols.alt2}} as an alternative method, to replicate make.pctile.cols \cr
+\cr
+\code{\link{assign.map.bins}} for one vector (or data.frame) of values (e.g. percentiles), return same-sized df that is bin number (map color bin) using preset breaks. \cr
+\cr
+\code{\link{make.bin.cols}} for a data.frame of values (e.g. percentiles), return same-sized df that is bin number (map color bin) using preset breaks. \cr
+\cr
 \code{\link{write.pctiles}} to save file that is lookup table of percentiles for columns of a data.frame \cr
 \code{\link{write.pctiles.by.zone}} to save file that is lookup table of percentiles for columns of a data.frame, for each geographic zone (subset of rows) \cr
 \code{\link{write.wtd.pctiles}} to save file that is lookup table of weighted percentiles for columns of a data.frame \cr
 \code{\link{write.wtd.pctiles.by.zone}} to save file that is lookup table of weighted percentiles for columns of a data.frame, for each geographic zone (subset of rows) \cr
+\cr
 \code{\link{lookup.pctile}} to look up current approx weighted percentiles in a lookup table that is already in global memory \cr
 }
 
