@@ -68,8 +68,7 @@
 #'   or NA if certain problems arise.
 #' If no query term, or fields not specified, then all information fields are returned: 
 #' ST     countyname FIPS.COUNTY statename                fullname
-#' @seealso \code{\link{get.name.county}}  \code{\link{get.county.info}} \code{\link{get.state.info}} to use FIPS.ST, ST, or statename, to look up all of those 3.
-
+#' @template seealsoFIPS
 #' @examples
 #' x <- get.county.info(); str(x); print(''); head(x)
 #' get.county.info(c('05001','01005'), fields=c('countyname', 'ST'))

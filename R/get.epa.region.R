@@ -12,6 +12,7 @@
 #'  myregions <- get.epa.region(c('04', '36', '72')) # for a vector of state FIPS codes as characters with leading zeroes
 #'  myregions <- get.epa.region(c(4,36,72)) # for a vector of state FIPS codes as numeric with no leading zeroes
 #'  myregions <- get.epa.region(c('NY', 'Ohio')) # CANNOT MIX WAYS OF DEFINING STATES - PICK ONE FORMAT
+#'  @template seealsoFIPS
 #' @export
 get.epa.region <- function(state) {
 

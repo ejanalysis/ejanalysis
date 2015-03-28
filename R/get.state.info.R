@@ -1,37 +1,53 @@
+#' @title Get information on state - **IN PROGRESS - MAY CONVERT TO data()
+#' @description Download or use existing file of info on states, like name, FIPS, etc.
+#' @details FOR 1+ OR ALL STATES PLUS DC PLUS PR PLUS ISLAND AREAS (PLUS USA OVERALL FOR FTP URL USAGE):\cr\cr
+#'   EPA REGION, FIPS, NAME, ABBREVIATION FOR STATE(S); BASED ON ANY OF \cr\cr
+#'   state's FIPS, state's NAME, OR state's ABBREVIATION, (i.e.,  FIPS.ST, statename, or ST). \cr\cr
+#'   Also see data in packages \code{\link{[acs]}} and \code{\link{[choroplethr]}} \cr\cr
+#'   Also see \url{http://www.census.gov/geo/reference/docs/state.txt} and \url{http://www.census.gov/geo/reference/ansi.html} \cr
+#'     # Note on definitions of is.usa, is.contiguous.us, etc.:  \cr
+#' \url{https://www.census.gov/geo/reference/gtc/gtc_usa.html} \cr
+#' \url{https://www.census.gov/geo/reference/gtc/gtc_codes.html} \cr
+#' \url{https://www.census.gov/geo/reference/gtc/gtc_island.html} \cr
+#' \url{http://en.wikipedia.org/wiki/Contiguous_United_States} \cr
+#' Note this other possible list of abbreviations (not used) lacks US, PR, DC: \cr
+#' require(datasets); state.abb \cr
+#' Note another possible list of States, abbrev, FIPS \cr
+#' which has island areas but not US total and not leading zeroes on FIPS: \cr
+#'   require(acs) \cr
+#'   print(fips.state) \cr
+#' Note FIPS were also available here: \cr
+#'  State: \url{http://www.census.gov/geo/reference/ansi_statetables.html}  \cr
+#'  County: \url{http://www.census.gov/geo/www/codes/county/download.html}  \cr
+#' @param query vector of 1+ elements, which can be \cr
+#'   state FIPS code(s) (as numbers or strings with numbers), \cr 
+#'   state name(s) (exactly matching formats here), or \cr
+#'   2-letter state abbreviation(s) (case insensitive). \cr
+#' @param fields vector of 1+ character string names of the fields available here: 
+#'   FIPS.ST, ST, statename, ftpname, REGION, is.usa.plus.pr, is.usa, is.state, is.contiguous.us, is.island.areas
+#' @return A data.frame (if query has 2+ elements), providing all or specified fields of information, covering matching states/dc/pr/island areas,
+#'   a vector of the same type of information for just one place (if only 1 query term, i.e., one element in the query vector is provided), 
+#'   or NA if certain problems arise.\cr\cr
+#'   If no query term, or fields not specified, then all information fields are returned: \cr
+#'   FIPS.ST, ST, statename, ftpname, (EPA) REGION, is.usa.plus.pr, is.usa, is.state, is.contiguous.us, is.island.areas
+#' @template seealsoFIPS
+#' @examples 
+#' #  x <- get.state.info(); str(x); print(''); head(x)
+#' # get.state.info(c('alaska','north carolina', 'montana', "hawaii"), fields=c('ST','statename','REGION'))
+#' # get.state.info('DC'); get.state.info('U.S. Virgin Islands'); get.state.info(4)
+#' # get.state.info(c('New york','alaska','North Carolina','MONTANA', 'typo'))
+#' # get.state.info(c('ny','DC','AK','mt', 'PR'))
+#' # get.state.info( c(36, 36, 'ny', '  ny', 'ny  ', 'California', 'DC','AK','mt', 'PR', '02', 2, 'North carolina') )
+#' # get.state.info(1:80)
+#' @export
 get.state.info <- function(query, fields='all') {
-
-  # FUNCTION TO REPORT SOME OR ALL OF A TABLE OF DATA ABOUT STATES
-  # FOR 1+ OR ALL STATES PLUS DC PLUS PR PLUS ISLAND AREAS (PLUS USA OVERALL FOR FTP URL USAGE):
-  # EPA REGION, FIPS, NAME, ABBREVIATION FOR STATE(S) 
-  # BASED ON ANY OF state's FIPS, state's NAME, OR state's ABBREVIATION, (i.e.,  FIPS.ST, statename, or ST)
-  
-  # Inputs: 
-  # query= vector of 1+ elements, which can be 
-  #   state FIPS code(s) (as numbers or strings with numbers), 
-  #   state name(s) (exactly matching formats here), or 
-  #   2-letter state abbreviation(s) (case insensitive).
-  # fields= vector of 1+ character string names of the fields available here:
-  #   FIPS.ST, ST, statename, ftpname, REGION, is.usa.plus.pr, is.usa, is.state, is.contiguous.us, is.island.areas
-  #
-  # Value returned:
-  # a data.frame (if query has 2+ elements), providing all or specified fields of information, covering matching states/dc/pr/island areas,
-  # a vector of the same type of information for just one place (if only 1 query term, i.e., one element in the query vector is provided), 
-  # or NA if certain problems arise.
-  # If no query term, or fields not specified, then all information fields are returned:
-  # FIPS.ST, ST, statename, ftpname, (EPA) REGION, is.usa.plus.pr, is.usa, is.state, is.contiguous.us, is.island.areas
   
 # used to read in only if not already there but now will read it in again anyway, since had been a bug in code and this ensures using newer fixed version.
 #if (!exists('lookup'))  {
 if (1==1)  {
     
-    
-  # SHOULD RECODE PERHAPS TO USE THIS OFFICIAL LIST OF STATE NAMES AND FIPS?:
-  #   http://www.census.gov/geo/reference/docs/state.txt
-  # also see   # also see http://www.census.gov/geo/reference/ansi.html  
-
+  # SHOULD RECODE PERHAPS TO USE THIS OFFICIAL LIST OF STATE NAMES AND FIPS?
   # also see data.lookup.R
-  # also see data in packages acs and choroplethr
-  #
   # Otherwise just keep using data below:
   
   # Put the data into (at least local) memory here if not already available:
@@ -175,38 +191,6 @@ results <- data.frame(QUERY=query, results, stringsAsFactors=FALSE)
 
 return(results)
 }
-
-  #############################
-
-# Usage examples:
-
-  #  x <- get.state.info(); str(x); print(''); head(x)
-  # get.state.info(c('alaska','north carolina', 'montana', "hawaii"), fields=c('ST','statename','REGION'))
-  # get.state.info('DC'); get.state.info('U.S. Virgin Islands'); get.state.info(4)
-  # get.state.info(c('New york','alaska','North Carolina','MONTANA', 'typo'))
-  # get.state.info(c('ny','DC','AK','mt', 'PR'))
-  # get.state.info( c(36, 36, 'ny', '  ny', 'ny  ', 'California', 'DC','AK','mt', 'PR', '02', 2, 'North carolina') )
-  # get.state.info(1:80)
-
-  # Note on definitions of is.usa, is.contiguous.us, etc.: 
-  # https://www.census.gov/geo/reference/gtc/gtc_usa.html
-  # https://www.census.gov/geo/reference/gtc/gtc_codes.html
-  # https://www.census.gov/geo/reference/gtc/gtc_island.html
-  # http://en.wikipedia.org/wiki/Contiguous_United_States
-
-  # Note this other possible list of abbreviations (not used) lacks US, PR, DC:
-  # require(datasets); state.abb
-  
-  # Note another possible list of States, abbrev, FIPS
-  # which has island areas but not US total and not leading zeroes on FIPS:
-  # require(acs)
-  # print(fips.state)
-  
-  # Note FIPS are also available here:
-  #  State: http://www.census.gov/geo/reference/ansi_statetables.html 
-  #  County: http://www.census.gov/geo/www/codes/county/download.html 
-
-  #############################
 
 ### OUTPUTS OF FUNCTION:
 

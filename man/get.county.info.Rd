@@ -27,7 +27,8 @@ for 1 or more counties, 1 or more States plus DC, PR, Island Areas, and USA over
 Provides FIPS.COUNTY, countyname, fullname, ST based on COUNTYs FIPS (FIPS.COUNTY), or maybe countyname plus ST (STATE ABBREVIATION)
 }
 \details{
-May convert this to data rather than a function. \cr
+*** May convert this to data rather than a function. \cr
+As of 3/2015, list is here: \url{http://www2.census.gov/geo/docs/reference/codes/files/national_county.txt} \cr
 help(county.names, package='choroplethr') \cr
 data(county.names) \cr
 compare that function to this one: \cr
@@ -64,6 +65,8 @@ AL,01,001,Autauga County,H1 \cr
 AL,01,003,Baldwin County,H1 \cr
  \cr
 also see:
+\cr
+As of 3/2015, list is here: \url{http://www2.census.gov/geo/docs/reference/codes/files/national_county.txt} \cr
 \url{http://www.census.gov/geo/reference/ansi.html} \cr
 \url{http://www.census.gov/geo/reference/codes/files/national_county.txt} \cr
 \url{http://www.census.gov/geo/reference/docs/state.txt} for just state info \cr
