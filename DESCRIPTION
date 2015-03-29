@@ -10,17 +10,20 @@ Description: Tools that simplify some basic tasks in
   that contains data on demographics (e.g., counts of residents in poverty)
   and local environmental indicators (e.g., an air quality index),
   with one row per spatial location (e.g., Census block group).
-  Key functions help to find relative risk or similar ratios of means in demographic groups,
-  , etc.
-  Will add to suggests when available:
+  Key functions help to find relative risk or similar ratios of means in demographic groups, etc.
+  The analyze.stuff, proxistat, ejanalysis, and countyhealthrankings packages,
+  once made public can be installed from github using the devtools package:
+  devtools::install_github(c("ejanalysis/analyze.stuff", "ejanalysis/proxistat",
+  "ejanalysis/ejanalysis", "ejanalysis/countyhealthrankings"))
+Depends:
+  R (>= 3.1.2),
+  analyze.stuff,
   proxistat
-  countyhealthrankings
-Depends: R (>= 3.1.2)
 License: MIT + file LICENSE
 Suggests:
+  countyhealthrankings,
   data.table
-Requires:
+Imports:
   sp,
-  analyze.stuff,
   Hmisc
 URL: http://www.ejanalysis.com

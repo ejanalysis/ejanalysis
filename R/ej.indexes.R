@@ -1,7 +1,10 @@
-#' @title Calculate environmental justice (EJ) index
-#' @description Create an index that combines environmental and demographic indicators.
-#' @details Creates one EJ index column for each environmental indicator column.
+#' @title Calculate environmental justice (EJ) index for each place
+#'
+#' @description Create an index that combines environmental and demographic indicators for each Census unit (e.g., block group).
+#' @details Creates one EJ index column for each environmental indicator column,
 #'  or if given a vector or single column of environmental indicators instead of data.frame, returns a vector or column.
+#'  Each "place" can be a Census unit such as a State, County, zip code, tract, block group, block, for example (or even by individual if person-level data are available).
+#'
 #' @param env.df Environmental indicators vector or numeric data.frame, one column per environmental factor, one row per place (e.g., block group).
 #' @param demog Demographic indicator(s) vector or data.frame, numeric fractions of population that is in specified demographic group (e.g., fraction below poverty line), one per place.
 #' @param us.demog Optional number specifying overal area-wide value for demog (e.g., US percent Hispanic). Default is to calculate it as weighted mean of demog,
@@ -14,9 +17,10 @@
 #'   universe.us.demog if specified should be a vector that has the count, for each place, of the denominator for finding the US overall percent  and this may be slightly different than total population.
 #'   For example if demog=places$pctlowinc then true universe.us.demog=places$povknownratio which is the count for whom poverty ratio is known in each place, which is <= pop.
 #' @param type Specifies type of EJ Index. Default is type=1. Several formulas are available: \cr
-#' For type=1, ej.indexes = weights * env.df * (demog  - us.demog)  # us.demog could also be called d.avg.all \cr
-#' na.rm is ignored for type=1 \cr
-#' For type=1.5 ej.indexes= weights * env.df * (demog  - d.avg.all.elsewhere) # for a place that is one of many this can be almost identical to type 1 \cr
+#' \itemize{
+#' For type=1,   ej.indexes = weights * env.df * (demog  - us.demog)  # us.demog could also be called d.avg.all \cr
+#'  (** note that na.rm is currently ignored for type=1) \cr
+#' For type=1.5, ej.indexes= weights * env.df * (demog  - d.avg.all.elsewhere) # for a place that is one of many this can be almost identical to type 1 \cr
 #' For type=2,   ej.indexes = weights * demog  * (env.df - e.avg.nond) \cr
 #' For type=2.5, ej.indexes = weights * demog  * (env.df - e.avg.nond.elsewhere ) # like type 1 but env and demog roles are swapped \cr
 #' For type=3,   ej.indexes = weights * ( (demog * env.df) - (d.avg.all           * e.avg.nond ) )   \cr
@@ -25,17 +29,22 @@
 #' For type=4.5, ej.indexes = weights * ( (demog - d.avg.all.elsewhere) * (env.df - e.avg.nond.elsewhere) ) \cr
 #' For type=5  , ej.indexes = weights * env.df * demog \cr
 #' For type=6,   ej.indexes = env.df * demog \cr
-#'   where us.demog= overall demog where avg person lives (pop wtd mean of demog). This may be almost exactly the same as d.avg.all.elsewhere \cr
-#'   where d.avg.all           = overall value for d as fraction of entire population (including the one place being analyzed). \cr
-#'   where d.avg.all.elsewhere = overall value for d as fraction of entire population other than the one place being analyzed. \cr
-#'   where e.avg.nond =           avg environmental indicator value for average person who is not in the D-group, among all (including the one place being analyzed). \cr
-#'   where e.avg.nond.elsewhere = avg environmental indicator value for average person who is not in the D-group, among all except in the one place being analyzed. \cr
+#' }
+#' \cr\cr where \cr
+#' \itemize{
+#'  \item us.demog = overall demog where avg person lives (pop wtd mean of demog). This may be almost exactly the same as d.avg.all.elsewhere \cr
+#'  \item d.avg.all           = overall value for d as fraction of entire population (including the one place being analyzed). \cr
+#'  \item d.avg.all.elsewhere = overall value for d as fraction of entire population other than the one place being analyzed. \cr
+#'  \item e.avg.nond =           avg environmental indicator value for average person who is not in the D-group, among all (including the one place being analyzed). \cr
+#'  \item e.avg.nond.elsewhere = avg environmental indicator value for average person who is not in the D-group, among all except in the one place being analyzed. \cr
+#' }
 #' @return Returns a numeric data.frame (or matrix if as.df=FALSE) of EJ indexes, one per place per environmental indicator.
 #' @examples
-#' statedat <- data.frame(state.x77)
-#' hist(myej <- ej.indexes(env.df=statedat[ , c('Life.Exp', 'Frost')], demog=statedat$HS.Grad/100, weights=statedat$Population, prefix='EJtype1.', type=1 ))
-#' set.seed(999)
-#' myej <- ej.indexes(env.df=rnorm(1000, 10, 3), demog=runif(1000, 0, 1), weights=runif(1000, 500, 5000))
+#'  statedat <- data.frame(state.x77)
+#'  hist(myej <- ej.indexes(env.df=statedat[ , c('Life.Exp', 'Frost')], demog=statedat$HS.Grad/100, weights=statedat$Population, prefix='EJtype1.', type=1 ))
+#'  set.seed(999)
+#'  myej <- ej.indexes(env.df=rnorm(1000, 10, 3), demog=runif(1000, 0, 1), weights=runif(1000, 500, 5000))
+#'  myej
 #' @export
 ej.indexes <- function(env.df, demog, weights, us.demog, universe.us.demog, as.df=TRUE, prefix="EJ.DISPARITY.", type=1, na.rm=FALSE) {
 

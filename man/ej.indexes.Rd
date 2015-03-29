@@ -2,7 +2,7 @@
 % Please edit documentation in R/ej.indexes.R
 \name{ej.indexes}
 \alias{ej.indexes}
-\title{Calculate environmental justice (EJ) index}
+\title{Calculate environmental justice (EJ) index for each place}
 \usage{
 ej.indexes(env.df, demog, weights, us.demog, universe.us.demog, as.df = TRUE,
   prefix = "EJ.DISPARITY.", type = 1, na.rm = FALSE)
@@ -25,9 +25,10 @@ universe.us.demog if specified should be a vector that has the count, for each p
 For example if demog=places$pctlowinc then true universe.us.demog=places$povknownratio which is the count for whom poverty ratio is known in each place, which is <= pop.}
 
 \item{type}{Specifies type of EJ Index. Default is type=1. Several formulas are available: \cr
-For type=1, ej.indexes = weights * env.df * (demog  - us.demog)  # us.demog could also be called d.avg.all \cr
-na.rm is ignored for type=1 \cr
-For type=1.5 ej.indexes= weights * env.df * (demog  - d.avg.all.elsewhere) # for a place that is one of many this can be almost identical to type 1 \cr
+\itemize{
+For type=1,   ej.indexes = weights * env.df * (demog  - us.demog)  # us.demog could also be called d.avg.all \cr
+ (** note that na.rm is currently ignored for type=1) \cr
+For type=1.5, ej.indexes= weights * env.df * (demog  - d.avg.all.elsewhere) # for a place that is one of many this can be almost identical to type 1 \cr
 For type=2,   ej.indexes = weights * demog  * (env.df - e.avg.nond) \cr
 For type=2.5, ej.indexes = weights * demog  * (env.df - e.avg.nond.elsewhere ) # like type 1 but env and demog roles are swapped \cr
 For type=3,   ej.indexes = weights * ( (demog * env.df) - (d.avg.all           * e.avg.nond ) )   \cr
@@ -36,26 +37,32 @@ For type 4  , ej.indexes = weights * ( (demog - d.avg.all          ) * (env.df -
 For type=4.5, ej.indexes = weights * ( (demog - d.avg.all.elsewhere) * (env.df - e.avg.nond.elsewhere) ) \cr
 For type=5  , ej.indexes = weights * env.df * demog \cr
 For type=6,   ej.indexes = env.df * demog \cr
-  where us.demog= overall demog where avg person lives (pop wtd mean of demog). This may be almost exactly the same as d.avg.all.elsewhere \cr
-  where d.avg.all           = overall value for d as fraction of entire population (including the one place being analyzed). \cr
-  where d.avg.all.elsewhere = overall value for d as fraction of entire population other than the one place being analyzed. \cr
-  where e.avg.nond =           avg environmental indicator value for average person who is not in the D-group, among all (including the one place being analyzed). \cr
-  where e.avg.nond.elsewhere = avg environmental indicator value for average person who is not in the D-group, among all except in the one place being analyzed. \cr}
+}
+\cr\cr where \cr
+\itemize{
+ \item us.demog = overall demog where avg person lives (pop wtd mean of demog). This may be almost exactly the same as d.avg.all.elsewhere \cr
+ \item d.avg.all           = overall value for d as fraction of entire population (including the one place being analyzed). \cr
+ \item d.avg.all.elsewhere = overall value for d as fraction of entire population other than the one place being analyzed. \cr
+ \item e.avg.nond =           avg environmental indicator value for average person who is not in the D-group, among all (including the one place being analyzed). \cr
+ \item e.avg.nond.elsewhere = avg environmental indicator value for average person who is not in the D-group, among all except in the one place being analyzed. \cr
+}}
 }
 \value{
 Returns a numeric data.frame (or matrix if as.df=FALSE) of EJ indexes, one per place per environmental indicator.
 }
 \description{
-Create an index that combines environmental and demographic indicators.
+Create an index that combines environmental and demographic indicators for each Census unit (e.g., block group).
 }
 \details{
-Creates one EJ index column for each environmental indicator column.
+Creates one EJ index column for each environmental indicator column,
  or if given a vector or single column of environmental indicators instead of data.frame, returns a vector or column.
+ Each "place" can be a Census unit such as a State, County, zip code, tract, block group, block, for example (or even by individual if person-level data are available).
 }
 \examples{
 statedat <- data.frame(state.x77)
-hist(myej <- ej.indexes(env.df=statedat[ , c('Life.Exp', 'Frost')], demog=statedat$HS.Grad/100, weights=statedat$Population, prefix='EJtype1.', type=1 ))
-set.seed(999)
-myej <- ej.indexes(env.df=rnorm(1000, 10, 3), demog=runif(1000, 0, 1), weights=runif(1000, 500, 5000))
+ hist(myej <- ej.indexes(env.df=statedat[ , c('Life.Exp', 'Frost')], demog=statedat$HS.Grad/100, weights=statedat$Population, prefix='EJtype1.', type=1 ))
+ set.seed(999)
+ myej <- ej.indexes(env.df=rnorm(1000, 10, 3), demog=runif(1000, 0, 1), weights=runif(1000, 500, 5000))
+ myej
 }
 

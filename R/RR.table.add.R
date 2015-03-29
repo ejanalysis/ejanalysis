@@ -9,28 +9,28 @@
 #'@param xxx xxx/what/type/default.
 #'@param xxx xxx/what/type/default.
 #'@return Returns a xxx/type/what/size.
-#'@seealso xxx to do xxx.
-#'@keywords EJ
-#'@examples
-#'RRS.US  <- RR.table(mydat=bg, Enames=names.e, Dnames=c(names.d, names.d.subgroups.pct), popcolname='pop')
-#'RRS.ST  <- RR.table(mydat=bg, Enames=names.e, Dnames=c(names.d, names.d.subgroups.pct), popcolname='pop', Zcolname='ST')
-#'RRS <- RR.table.add(RRS.ST, RRS.US)
-#'RRS[ 'pctlowinc', , ]
-#'RRS[ , , 'CA']
-#'RRS[ , 'pm', ]
-#'RRS.REGION  <- RR.table(mydat=bg, Enames=names.e, Dnames=c(names.d, names.d.subgroups.pct), popcolname='pop', Zcolname='REGION')
-#'RRS2 <- RR.table.add(RRS, RRS.REGION)
-#'RRS2[ , , '8']
-#'@note Future work: xxx.
-#'@export
+#' @template seealsoRR
+#' @keywords EJ
+#' @examples
+#' RRS.US  <- RR.table(mydat=bg, Enames=names.e, Dnames=c(names.d, names.d.subgroups.pct), popcolname='pop')
+#' RRS.ST  <- RR.table(mydat=bg, Enames=names.e, Dnames=c(names.d, names.d.subgroups.pct), popcolname='pop', Zcolname='ST')
+#' RRS <- RR.table.add(RRS.ST, RRS.US)
+#' RRS[ 'pctlowinc', , ]
+#' RRS[ , , 'CA']
+#' RRS[ , 'pm', ]
+#' RRS.REGION  <- RR.table(mydat=bg, Enames=names.e, Dnames=c(names.d, names.d.subgroups.pct), popcolname='pop', Zcolname='REGION')
+#' RRS2 <- RR.table.add(RRS, RRS.REGION)
+#' RRS2[ , , '8']
+#' @note Future work: xxx.
+#' @export
+table.add <- function(rrs1, rrs2, zones2) {
 
-
-RR.table.add <- function(rrs1, rrs2, zones2) {
   ############################
   # MERGE ANY TABLE OF ZONES AND US TABLE *****
   ############################
-  # Function to merge set of Relative Risk tables as 3D array from RR.table() with one or more such tables 
+  # Function to merge set of Relative Risk tables as 3D array from RR.table() with one or more such tables
   # e.g., for the overall area (aggregate of those places), also from RR.table()
+
   zones2 <- dimnames(rrs2)[[3]]
   len1 <- dim(rrs1)[3]
   len2 <- dim(rrs2)[3]

@@ -1,9 +1,45 @@
+#' @title Analyze how much RR would change if top-ranked places were addressed - ** NOT WORKING/ IN PROGRESS
+#'
+#' @description Function to analyze data on demographic and environmental (e) indicators by place (e.g., Census block group)
+#'   to get stats on what percent of population or places could account for
+#'   all risk ratio (RR, or ratio of mean e in one demog group vs others), and what is risk ratio if you reduce e (environmental indicator)
+#'   by using some multiplier on e, in top x percent of places
+#'
+#' @details
+#'   The effects of one place on overall RR is related to an ej.index, which here is a metric describing one place's contribution to an overall metric of disparity.
+#'   RR is one overall metric of disparity, the ratio of mean environmental indicator value in one demographic group over the mean in the reference group.
+#'   If RR = E/e, where E=avg environmental indicator or risk in key demographic group and e= in reference group,
+#'   another metric of disparity is the excess individual risk, or E-e.
+#'   The excess population risk or excess cases would be (E-e) * p * d where p=total population and d=fraction that is in key demographic group.
+#'   Various counterfactuals could be used here for
+#'   scenario defining what it means to address the top places and
+#'   what is used to define top places.
+#'
+#' @param rank.by.df Data.frame of indicators to rank places by, when defining top places
+#' @param e.df Environmental indicators data.frame, one row per place, required.
+#' @param d.pct Demographic percentage, as fraction, defining what fraction of population in each place (row) is in demographic group of interest. Required.
+#' @param popcounts Numeric vector of counts of total population in each place
+#' @param d.pct.us xxxxx
+#' @param or.tied Logical value, optional, TRUE by default, in which case ties of ranking variable with a cutoff value (value >= cutoff) are included in places within that bin.
+#' @param if.multiply.e.by Optional, 0 by default. Specifies the number that environmental indicator values would be multiplied by
+#'   in the scenario where some places are addressed. Zero means those top-ranked places would have the environmental indicator set to zero,
+#'   while 0.9 would mean and 10 percent cut in the environmental indicator value.
+#' @param zones Subsets of places such as States
+#' @param mycuts optional vector of cutoff values to analyze. Default is c(50,80,90:100)
+#' @param silent optional logical, default is TRUE, while FALSE means more information is printed
+#' @return Returns a list of results:
+#'   \enumerate{
+#'   \item rrs data.frame, one column per environmental indicator, one row per cutoff value
+#'   \item rrs2 data.frame, Relative risks 2
+#'   \item state.tables A list
+#'   \item worst.as.pct Worst as percent, vector as long as number of environmental indicators
+#'   \item worst.as.pct.of.bgs Worst as percent of places (e.g., block groups)
+#'   }
+#' @seealso \code{\link{RR}} and \code{\link{RR.if.address.top.x}} and \code{\link{ej.indexes}} and \code{\link{ej.added}}
+#' @examples
+#'  ###
+#' @export
 RR.if.address.top.x <- function(rank.by.df, e.df, d.pct, popcounts, d.pct.us, or.tied=TRUE, if.multiply.e.by=0, zones=NULL, mycuts=c(50,80,90:100), silent=TRUE) {
-
-  ################################################################
-  # DEFINE FUNCTION TO GET STATS ON WHAT % OF POP OR PLACES COULD "ACCOUNT FOR" ALL RR,
-  # AND WHAT IS RR IF YOU REDUCE E BY USING SOME MULTIPLIER ON E, IN TOP X% OF PLACES
-  ################################################################
 
   if (missing(d.pct.us)) {
     warning('assumed that d.pct.us is popcounts-wtd mean of d.pct, which is not right if correct denominator for d.pct is not popcounts')
@@ -50,7 +86,7 @@ RR.if.address.top.x <- function(rank.by.df, e.df, d.pct, popcounts, d.pct.us, or
     # Now for a calculated cutoff, not the specified cutoff:
     # Calculate the cutoff that will get RR==1, using specified rank.by.df and if.multiply.e.by, etc.:
 
-    # DOES NOT WORK YET
+    # DOES NOT WORK YET ***
 
     raw.ej <- popcounts * e.df[ , i] * (d.pct - d.pct.us)
     raw.ej[is.na(raw.ej)] <- 0
@@ -90,10 +126,12 @@ RR.if.address.top.x <- function(rank.by.df, e.df, d.pct, popcounts, d.pct.us, or
 
   # EXAMPLE
   #
-  # VSI.eo.US <- with(bg, ( sum(mins) / sum(pop) + sum(lowinc) / sum(povknownratio) ) / 2) # or for 2008-2012 use...
+  # VSI.eo.US <- with(bg, ( sum(mins) / sum(pop) + sum(lowinc) / sum(povknownratio) ) / 2)
+    ## or for 2008-2012 use...
   # VSI.eo.US <- 0.3493374
   #
-  # results <- RR.if.address.top.x(rank.by.df=bg[,names.ej.pctile], e.df, d.pct, popcounts, d.pct.us=VSI.eo.US, zones=bg$ST, or.tied=TRUE, if.multiply.e.by=0, mycuts=c(50,80,90:100), silent=TRUE)
+  # results <- RR.if.address.top.x(rank.by.df=bg[,names.ej.pctile], e.df, d.pct, popcounts, d.pct.us=VSI.eo.US,
+  #    zones=bg$ST, or.tied=TRUE, if.multiply.e.by=0, mycuts=c(50,80,90:100), silent=TRUE)
   # #results$rrs2
   #
   # str(results)

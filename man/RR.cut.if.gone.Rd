@@ -23,7 +23,10 @@ As with RR function, calculates RR as ratio of means in one demographic group vs
   Then this finds how much smaller RR would be if the given place did not exist.
 }
 \examples{
-# x=RR.cut.if.gone(bg[ , names.e[8]], bg$pctmin, bg$pop)
+# x=RR.cut.if.gone(bg[ , names.e[8]], bg$pctlowinc, bg$pop)
  # summary(x*1000)
+ mydat=data.frame(AQI=99:101, pctlowinc=c(0.20,0.30,0.40), pop=rep(1000,3))
+ RR(mydat$AQI, mydat$pctlowinc, mydat$pop)
+ RR.cut.if.gone(e=mydat$AQI, d=mydat$pctlowinc, pop=mydat$pop)
 }
 
