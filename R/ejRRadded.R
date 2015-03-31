@@ -223,7 +223,7 @@ ejRRadded   <- function(E,D,P, na.rm=TRUE, ...) {
   # excess cases in other scenarios  # **** need to check if these are correct and vectorize right: ****
   ########
 
-  cases.excess.if.here.was.egoal <- risk.excess.if.here.was.egoal.vector * count.D.overall
+  cases.excess.if.here.was.egoal.vector <- risk.excess.if.here.was.egoal.vector * count.D.overall
   cases.excess.if.here.was.risk.dref.overall  <- risk.excess.if.here.was.risk.dref.overall * count.D.overall
   cases.excess.if.here.was.risk.dref.elsewhere <- risk.excess.if.here.was.risk.dref.elsewhere * count.D.overall
   cases.excess.if.here.was.zero <- risk.excess.if.here.was.zero * count.D.overall
@@ -251,11 +251,18 @@ ejRRadded   <- function(E,D,P, na.rm=TRUE, ...) {
 
   xname='cases excess overall'
   x0=cases.excess.overall
-  x1=cases.excess.if.here.was.egoal
+  x1=cases.excess.if.here.was.egoal.vector
   x2=cases.excess.if.here.was.risk.dref.overall
   x3=cases.excess.if.here.was.risk.dref.elsewhere
   x4=cases.excess.if.here.was.zero
+  printstuff(xname,x0,x1,x2,x3,x4)
 
+  xname='risk excess overall'
+  x0=risk.excess.overall
+  x1=risk.excess.if.here.was.egoal.vector ##### ok
+  x2=risk.excess.if.here.was.risk.dref.overall
+  x3=risk.excess.if.here.was.risk.dref.elsewhere
+  x4=risk.excess.if.here.was.zero
   printstuff(xname,x0,x1,x2,x3,x4)
 
   xname='RR now'
@@ -264,6 +271,42 @@ ejRRadded   <- function(E,D,P, na.rm=TRUE, ...) {
   x2=RR.if.here.was.risk.dref.overall
   x3=RR.if.here.was.risk.dref.elsewhere
   x4=RR.if.here.was.zero
-
   printstuff(xname,x0,x1,x2,x3,x4)
+
+  xname='Risk D overall now'
+  x0=risk.D.overall
+  x1=risk.D.overall.if.here.was.egoal.vector
+  x2=risk.D.overall.if.here.was.risk.dref.overall
+  x3=risk.D.overall.if.here.was.risk.dref.elsewhere
+  x4=risk.D.overall.if.here.was.zero
+    printstuff(xname,x0,x1,x2,x3,x4)
+
+  xname='cases D overall now'
+  x0=cases.D.overall
+  x1=cases.D.overall.if.here.was.egoal.vector     ###
+  x2=cases.D.overall.if.here.was.risk.dref.overall  ###
+  x3=cases.D.overall.if.here.was.risk.dref.elsewhere  ###
+  x4=cases.D.overall.if.here.was.zero  ###
+    printstuff(xname,x0,x1,x2,x3,x4)
+
+  ###############
+
+  printstuff2 <-  function() {
+    cat('\n')
+
+    cat('count.overall', 'count.dref.overall', 'count.D.overall: ', '\n')
+    cat(count.overall, count.dref.overall, count.D.overall, '\n','\n')
+
+    cat('pct.dref.overall', 'pct.D.overall:' , '\n')
+    cat(pct.dref.overall, pct.D.overall, '\n','\n')
+
+    cat('count.overall', 'count.dref.overall', 'count.D.overall:', '\n')
+    cat(count.overall, count.dref.overall, count.D.overall, '\n','\n')
+
+    cat('risk.overall', 'risk.D.overall', 'risk.dref.overall:', '\n')
+    cat(risk.overall, risk.D.overall, risk.dref.overall, '\n','\n')
+  }
+
+  printstuff2()
+
 }
