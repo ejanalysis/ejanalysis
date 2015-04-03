@@ -2,7 +2,7 @@
 % Please edit documentation in R/get.state.info.R
 \name{get.state.info}
 \alias{get.state.info}
-\title{Get information on state - **IN PROGRESS - MAY CONVERT TO data()}
+\title{Get information on state - **IN PROGRESS - CONVERTED PART OF IT TO data()}
 \usage{
 get.state.info(query, fields = "all")
 }
@@ -23,7 +23,7 @@ A data.frame (if query has 2+ elements), providing all or specified fields of in
   FIPS.ST, ST, statename, ftpname, (EPA) REGION, is.usa.plus.pr, is.usa, is.state, is.contiguous.us, is.island.areas
 }
 \description{
-Download or use existing file of info on states, like name, FIPS, etc.
+Look for information from proxistat package data in data(lookup.states) -- info on states, like name, FIPS, etc.
 }
 \details{
 FOR 1+ OR ALL STATES PLUS DC PLUS PR PLUS ISLAND AREAS (PLUS USA OVERALL FOR FTP URL USAGE):\cr\cr

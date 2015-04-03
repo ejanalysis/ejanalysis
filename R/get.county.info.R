@@ -145,8 +145,8 @@ get.county.info <- function(query, fields='all') {
   # FIND WHICH OF QUERY TERMS ARE VALID ST (2-letter abbreviation) AND GET STATE DATA FOR THOSE
   #  upx <- toupper(x)
   #  is.valid.ST <- grepl('^[[:space:][:alpha:]]*$', upx)
-  #  is.valid.ST[is.valid.ST] <- upx[is.valid.ST] %in% toupper(lookup$ST)
-  #  results[is.valid.ST, ] <- lookup[ match( upx[is.valid.ST], toupper(lookup$ST)), fields]
+  #  is.valid.ST[is.valid.ST] <- upx[is.valid.ST] %in% toupper(lookup.states$ST)
+  #  results[is.valid.ST, ] <- lookup.states[ match( upx[is.valid.ST], toupper(lookup.states$ST)), fields]
   
   upx <- toupper(x)
   is.valid.countyname <- grepl('^[[:space:][:alpha:][:punct:]]*$', upx)

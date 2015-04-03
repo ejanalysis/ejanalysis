@@ -1,5 +1,5 @@
-#' @title Get information on state - **IN PROGRESS - MAY CONVERT TO data()
-#' @description Download or use existing file of info on states, like name, FIPS, etc.
+#' @title Get information on state - **IN PROGRESS - CONVERTED PART OF IT TO data()
+#' @description Look for information from proxistat package data in data(lookup.states) -- info on states, like name, FIPS, etc.
 #' @details FOR 1+ OR ALL STATES PLUS DC PLUS PR PLUS ISLAND AREAS (PLUS USA OVERALL FOR FTP URL USAGE):\cr\cr
 #'   EPA REGION, FIPS, NAME, ABBREVIATION FOR STATE(S); BASED ON ANY OF \cr\cr
 #'   state's FIPS, state's NAME, OR state's ABBREVIATION, (i.e.,  FIPS.ST, statename, or ST). \cr\cr
@@ -42,16 +42,18 @@
 #' @export
 get.state.info <- function(query, fields='all') {
   
+    # ********* INFO IS NOW AVAILABLE VIA data(lookup.states) in proxistat package
+  data(lookup.states, package='proxistat')
+
 # used to read in only if not already there but now will read it in again anyway, since had been a bug in code and this ensures using newer fixed version.
 #if (!exists('lookup'))  {
-if (1==1)  {
+if (1==0)  {
     
-  # SHOULD RECODE PERHAPS TO USE THIS OFFICIAL LIST OF STATE NAMES AND FIPS?
-  # also see data.lookup.R
+  # SHOULD RECODE PERHAPS TO USE THAT OR AN  OFFICIAL LIST OF STATE NAMES AND FIPS?
   # Otherwise just keep using data below:
   
   # Put the data into (at least local) memory here if not already available:
-
+  # used to use the name lookup but now using lookup.states
   lookup <- structure(list(
     FIPS.ST = c(NA, "01", "02", "04", "05", "06", 
 "08", "09", "10", "11", "12", "13", "15", "16", "17", "18", "19", 
@@ -134,16 +136,16 @@ FALSE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE)),
 ######  Query & report results differently depending on nature of the query term if any:
 
   # If no fields specified, return all fields.
-  if (any(fields=='all')) {fields <- names(lookup)}
+  if (any(fields=='all')) {fields <- names(lookup.states)}
 
   # If any bad fieldnames are specified, stop.
-  if (any(!(fields %in% names(lookup)))) {
-    cat('Available field names:\n'); cat(names(lookup)); cat('\n'); 
+  if (any(!(fields %in% names(lookup.states)))) {
+    cat('Available field names:\n'); cat(names(lookup.states)); cat('\n'); 
     stop('fields requested must all be among fields available')
   }
 
   # If no query term specified, return entire table of data (or just specified fields).
-  if (missing(query)) { return(lookup[ , fields]) }
+  if (missing(query)) { return(lookup.states[ , fields]) }
 
   # If query has any NA values, warn user.
   if (any(is.na(query))) {cat('Warning - some NA values in input query\n')}
@@ -152,7 +154,7 @@ FALSE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE)),
 
 x <- query
 
-# If FIPS.ST is kept at NA, it will match the NA FIPS code that is associated with USA overall in the lookup table, so set it to zero.
+# If FIPS.ST is kept at NA, it will match the NA FIPS code that is associated with USA overall in the lookup.states table, so set it to zero.
 x[is.na(x)]  <- 0 
 
 # prepopulate the output variable
@@ -165,22 +167,22 @@ x <- gsub('^\\s+|\\s+$', '', x)
 
 # FIND WHICH OF QUERY TERMS ARE VALID FIPS.ST AND GET STATE DATA FOR THOSE
 is.valid.FIPS.ST <- grepl('^[0-9]*$', x) 
-is.valid.FIPS.ST[is.valid.FIPS.ST] <- as.numeric(x[is.valid.FIPS.ST]) %in% as.numeric(lookup$FIPS.ST)
+is.valid.FIPS.ST[is.valid.FIPS.ST] <- as.numeric(x[is.valid.FIPS.ST]) %in% as.numeric(lookup.states$FIPS.ST)
 # cbind(x, is.valid.FIPS.ST  )
 # as.numeric('NY') would fail
-results[is.valid.FIPS.ST, ] <- lookup[ match(as.numeric(x[is.valid.FIPS.ST]), as.numeric(lookup$FIPS.ST)), fields] 
+results[is.valid.FIPS.ST, ] <- lookup.states[ match(as.numeric(x[is.valid.FIPS.ST]), as.numeric(lookup.states$FIPS.ST)), fields] 
 
 # FIND WHICH OF QUERY TERMS ARE VALID statename AND GET STATE DATA FOR THOSE
 upx <- toupper(x)
 is.valid.statename <- grepl('^[[:space:][:alpha:][:punct:]]*$', upx)
-is.valid.statename[is.valid.statename] <- upx[is.valid.statename] %in% toupper(lookup$statename)
-results[is.valid.statename, ] <- lookup[ match( upx[is.valid.statename], toupper(lookup$statename)), fields]
+is.valid.statename[is.valid.statename] <- upx[is.valid.statename] %in% toupper(lookup.states$statename)
+results[is.valid.statename, ] <- lookup.states[ match( upx[is.valid.statename], toupper(lookup.states$statename)), fields]
 
 # FIND WHICH OF QUERY TERMS ARE VALID ST (2-letter abbreviation) AND GET STATE DATA FOR THOSE
 upx <- toupper(x)
 is.valid.ST <- grepl('^[[:space:][:alpha:]]*$', upx)
-is.valid.ST[is.valid.ST] <- upx[is.valid.ST] %in% toupper(lookup$ST)
-results[is.valid.ST, ] <- lookup[ match( upx[is.valid.ST], toupper(lookup$ST)), fields]
+is.valid.ST[is.valid.ST] <- upx[is.valid.ST] %in% toupper(lookup.states$ST)
+results[is.valid.ST, ] <- lookup.states[ match( upx[is.valid.ST], toupper(lookup.states$ST)), fields]
 
 if (all(is.na(results[ , 1]))) {
   cat('Warning- No matches found.\n'); return(NA)
