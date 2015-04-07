@@ -1,7 +1,8 @@
 #' @title Get Census tract FIPS from block or block group FIPS
 #'
 #' @description Extract partial FIPS code from longer FIPS code
-#' @details Each fips passed to the function is a FIPS code (see \url{http://www.census.gov/geo/reference/ansi.html}.)
+#' @details For information on FIPS codes, see \url{http://www.census.gov/geo/reference/ansi.html},
+#'   and also see \url{https://www.census.gov/geo/reference/geoidentifiers.html}
 #' @param fips Vector of one or more elements, character class, 12 or 15 characters long (block group or block), required.
 #' @return Returns a vector of one or more character elements, same lengths as fips
 #' @template seealsoFIPS

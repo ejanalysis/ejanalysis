@@ -23,7 +23,9 @@ Can open a webpage. Returns vector of URL(s) as character
 DRAFT CODE TO see table webpage of BLOCK DATA VIA AFF WITHOUT NEEDING API KEY
 }
 \details{
-For links to AFF, see \url{http://factfinder2.census.gov/files/AFF_deep_linking_guide.pdf} \cr
+For information on FIPS codes, see \url{http://www.census.gov/geo/reference/ansi.html},
+  and also see \url{https://www.census.gov/geo/reference/geoidentifiers.html}. \cr\cr
+ For links to AFF, see \url{http://factfinder2.census.gov/files/AFF_deep_linking_guide.pdf} \cr
   e.g. to get 1 block census 2010 pop, for block fips 360610127001000 :  \url{http://factfinder2.census.gov/bkmk/table/1.0/en/DEC/10_SF1/P1/1000000US360610127001000} \cr
   e.g. to get 1 block census 2010 RACE/ETH/NHWA, for block fips 360610127002001 :  \url{http://factfinder2.census.gov/bkmk/table/1.0/en/DEC/10_PL/P2/1000000US360610127002001} \cr
   Notice the second one gets P2 from 10_PL not 10_SF1, because P2 in SF1 means something different !!! \cr

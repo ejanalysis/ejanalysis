@@ -22,7 +22,7 @@ Inputs can be tracts or block groups as in the relevant ACS summary files, possi
  For tracts, there are only 3 parts to placename (tract, county, state)  \cr
 	For block groups, there are 4 parts to placename (block group, tract, county, state) \cr
 	Note that County names are not unique -- the same County name may exist in 2+ States. \cr
-	also see http://www.census.gov/geo/reference/ansi.html  \cr
+	also see \url{http://www.census.gov/geo/reference/ansi.html}  \cr
 	See \url{http://www.census.gov/geo/reference/codes/files/national_county.txt} but file has moved
  Note old code was in GET COUNTY NAMES FROM NHGIS DATASET.R
 }

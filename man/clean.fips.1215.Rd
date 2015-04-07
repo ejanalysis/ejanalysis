@@ -16,12 +16,13 @@ Returns a vector of one or more character elements, same lengths as fips, NA if 
 Check if valid Census block group or block FIPS, warn if not, add missing leading zero if inferred.
 }
 \details{
-For information on FIPS codes, see \url{http://www.census.gov/geo/reference/ansi.html}
+For information on FIPS codes, see \url{http://www.census.gov/geo/reference/ansi.html},
+  and also see \url{https://www.census.gov/geo/reference/geoidentifiers.html}
 }
 \examples{
 samplefips <- c("011030001003", "011030001003001", 11030001003001, 35, 1, NA, 'invalidtext', '02')
-clean.fips.1215(samplefips)
-clean.fips.1215("011030001003001")
+  clean.fips.1215(samplefips)
+  clean.fips.1215("011030001003001")
 }
 \seealso{
 \code{\link{clean.fips.1215}}, \code{\link{get.fips.bg}}, \code{\link{get.fips.tract}}, \code{\link{get.fips.county}}, \code{\link{get.fips.st}} to get partial FIPS from longer FIPS, or

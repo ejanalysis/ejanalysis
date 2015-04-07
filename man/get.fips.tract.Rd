@@ -16,7 +16,8 @@ Returns a vector of one or more character elements, same lengths as fips
 Extract partial FIPS code from longer FIPS code
 }
 \details{
-Each fips passed to the function is a FIPS code (see \url{http://www.census.gov/geo/reference/ansi.html}.)
+For information on FIPS codes, see \url{http://www.census.gov/geo/reference/ansi.html},
+  and also see \url{https://www.census.gov/geo/reference/geoidentifiers.html}
 }
 \examples{
 samplefips <- c("011030001003", "011030001003001", 11030001003001, 35, 1, NA, 'invalidtext', '02')
