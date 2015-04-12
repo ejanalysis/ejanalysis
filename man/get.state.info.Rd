@@ -45,6 +45,7 @@ which has island areas but not US total and not leading zeroes on FIPS: \cr
 Note FIPS were also available here: \cr
  State: \url{http://www.census.gov/geo/reference/ansi_statetables.html}  \cr
  County: \url{http://www.census.gov/geo/www/codes/county/download.html}  \cr
+Also see \url{https://www.census.gov/geo/reference/state-area.html} for info on state area and internal point
 }
 \examples{
 #  x <- get.state.info(); str(x); print(''); head(x)
