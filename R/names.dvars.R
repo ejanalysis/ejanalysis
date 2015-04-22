@@ -1,6 +1,6 @@
 #' @name names.dvars
 #' @docType data
-#' @aliases names.dvars names.d names.d.subgroups demographic
+#' @aliases names.dvars names.d names.d.subgroups Dlist demographic-variables
 #' @title Fieldnames of demographic columns in ejanalysis data
 #' @description This data set provides variables that hold the colnames
 #'   of demographic fields in data.frames that may be used in the ejanalysis package
@@ -22,5 +22,6 @@
 #'  \item "names.d.svi6"
 #'  \item "names.d.svi6.bin"
 #'  \item "names.d.svi6.pctile"
+#'  #'  \item "Dlist" (this one is like names.d, but as a list, not a vector)
 #' }
 NULL

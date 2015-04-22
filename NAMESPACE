@@ -3,6 +3,7 @@
 export(RR)
 export(RR.cut.if.gone)
 export(RR.if.address.top.x)
+export(RR.means)
 export(assign.map.bins)
 export(assign.pctiles)
 export(assign.pctiles.alt2)

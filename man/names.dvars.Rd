@@ -2,7 +2,8 @@
 % Please edit documentation in R/names.dvars.R
 \docType{data}
 \name{names.dvars}
-\alias{demographic}
+\alias{Dlist}
+\alias{demographic-variables}
 \alias{names.d}
 \alias{names.d.subgroups}
 \alias{names.dvars}
@@ -21,6 +22,7 @@
  \item "names.d.svi6"
  \item "names.d.svi6.bin"
  \item "names.d.svi6.pctile"
+ #'  \item "Dlist" (this one is like names.d, but as a list, not a vector)
 }}
 \source{
 Names developed for this package. No external data source.

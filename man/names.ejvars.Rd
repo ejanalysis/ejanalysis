@@ -2,7 +2,7 @@
 % Please edit documentation in R/names.ejvars.R
 \docType{data}
 \name{names.ejvars}
-\alias{EJ}
+\alias{EJ-variable-names}
 \alias{names.ej}
 \alias{names.ejvars}
 \title{Fieldnames of environmental justice indicator columns in ejanalysis data}

@@ -2,7 +2,8 @@
 % Please edit documentation in R/names.evars.R
 \docType{data}
 \name{names.evars}
-\alias{environmental}
+\alias{Elist}
+\alias{environmental-variable-names}
 \alias{names.e}
 \alias{names.evars}
 \title{Fieldnames of environmental indicator columns in ejanalysis data}
@@ -11,6 +12,7 @@
  \item "names.e" (pm, o3, cancer, neuro, resp, dpm, pctpre1960, traffic.score, proximity.npl, proximity.rmp, proximity.tsdf, proximity.npdes)
  \item "names.e.bin"
  \item "names.e.pctile"
+ \item "Elist" (this one is like names.e, but as a list, not a vector)
 }}
 \source{
 Names developed for this package. No external data source.

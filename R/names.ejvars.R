@@ -1,6 +1,6 @@
 #' @name names.ejvars
 #' @docType data
-#' @aliases names.ejvars names.ej EJ
+#' @aliases names.ejvars names.ej EJ-variable-names
 #' @title Fieldnames of environmental justice indicator columns in ejanalysis data
 #' @description This data set provides variables that hold the colnames
 #'   of environmental indicator fields in data.frames that may be used in the ejanalysis package
