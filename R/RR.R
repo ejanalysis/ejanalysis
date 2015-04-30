@@ -9,12 +9,25 @@
 #'   Each e (for environmental indicator) or d (for demographic percentage) is specified as a vector over small places like Census blocks or block groups
 #'   or even individuals (ideally) but then d would be a dummy=1 for selected group and 0 for people not in selected group
 #'   *** note: this currently does not use rrf() & rrfv() but perhaps it would be faster if it did? but rrfv not tested for multiple demog groups***
-#'   BUT NOTE IF THIS REMOVES NA VALUES FOR one e factor and not for another, results used different places & people for different e factors ?
-#'   could NA values cause a problem here?
-#' @param e Vector or data.frame or matrix with 1 or more environmental indicator(s) or health risk level (e.g., PM2.5 concentration to which this person or place is exposed),
+#'   \cr\cr
+#'   ** NEED TO VERIFY/TEST THIS: REMOVES PLACES WITH NA in any one or more of the values used (e, d, pop, dref) in numerators and denominators.
+#'   \cr\cr
+#'   ** Note also that THIS REMOVES NA VALUES FOR one e factor and not for another,
+#'   so results can use different places & people for different e factors
+#' @param e Vector or data.frame or matrix with 1 or more environmental indicator(s) or health risk level
+#'   (e.g., PM2.5 concentration to which this person or place is exposed),
 #'   one row per Census unit and one column per indicator.
-#' @param d Vector or data.frame or matrix with 1 or more demog groups percentage (as fraction of 1, not 0-100!) of place that is selected demog group (e.g. percent Hispanic) (or d=1 or 0 if this is a vector of individuals)
-#' @param pop Vector of one row per location providing population count of place (or pop=1 if this is a vector of individuals), to convert d into a count since d is a fraction
+#' @param d Vector or data.frame or matrix with 1 or more demog groups percentage
+#'   (as fraction of 1, not 0-100!)
+#'   of place that is selected demog group (e.g. percent Hispanic)
+#'   (or d=1 or 0 per row if this is a vector of individuals)
+#' @param pop Vector of one row per location providing population count of place
+#'   (or pop=1 if this is a vector of individuals),
+#'   to convert d into a count since d is a fraction
+#' @param dref Optional vector specifying a reference group for RR calculation
+#'   by providing what percentage (as fraction of 1, not 0-100!) of place that is individuals in the reference group
+#'   (or dref= vector of ones and zeroes if this is a vector of individuals)
+#' @param na.rm Optional, logical, TRUE by default. Specify if NA values should be removed first.
 #' @return numeric results as vector or data.frame
 #' @template seealsoRR
 #' @examples
@@ -69,10 +82,12 @@
 #' -50L))
 #'
 #' RR(mydat$area, mydat$pcthisp, mydat$pop)
-#' # Avg Hispanic lives in a State that is 69 percent larger than that of avg. non-Hispanic
+#' # Avg Hispanic lives in a State that is 69 percent larger than
+#'   that of avg. non-Hispanic
 #'
 #' RR(mydat$pcthisp, mydat$pcthisp, mydat$pop)
-#' # Avg Hispanic lives in a State that has a much higher percent Hispanic than do non-Hispanics
+#' # Avg Hispanic lives in a State that has a much higher percent Hispanic than
+#'   do non-Hispanics
 #'
 #' #cbind(RR=RR(data.frame(d1=bg$pcthisp, d2=1-bg$pcthisp), bg$pcthisp, bg$pop))
 #' #RR(bg[ , names.e], bg$pctlowinc, bg$pop)
@@ -87,12 +102,16 @@ RR <- function(e, d, pop, dref, na.rm=TRUE) {
 
     if (is.vector(d)) {
       # for one e, one d:
-      (sum(pop * e *  d,     na.rm=na.rm) / sum(pop *  d,     na.rm=na.rm)) /
-      (sum(pop * e * (dref), na.rm=na.rm) / sum(pop * (dref), na.rm=na.rm))
+      #  **** put in +e-e  +d-d and  +dref-dref because I THINK WHERE e IS NA and pop and d are valid, this otherwise would remove those from numerator of group's risk but not from denominator!!!
+      (sum(pop * e *  d +dref-dref,     na.rm=na.rm) / sum(pop *  d     +e-e +dref-dref, na.rm=na.rm)) /
+      (sum(pop * e * (dref) +d-d, na.rm=na.rm) / sum(pop * (dref) +e-e +d-d, na.rm=na.rm))
+      #(sum(pop * e *  d,     na.rm=na.rm) / sum(pop *  d,     na.rm=na.rm)) /
+      #(sum(pop * e * (dref), na.rm=na.rm) / sum(pop * (dref), na.rm=na.rm))
     } else {
       # for one e, multiple d: vectorized version
-      (colSums(pop * e *  d,     na.rm=na.rm) / colSums(pop *  d,     na.rm=na.rm)) /
-      (colSums(pop * e * (dref), na.rm=na.rm) / colSums(pop * (dref), na.rm=na.rm))
+      #  **** put in +e-e  +d-d and  +dref-dref because I THINK WHERE e IS NA and pop and d are valid, this otherwise would remove those from numerator of group's risk but not from denominator!!!
+      (colSums(pop * e *  d +dref-dref,     na.rm=na.rm) / colSums(pop *  d     +e-e +dref-dref, na.rm=na.rm)) /
+      (colSums(pop * e * (dref) +d-d, na.rm=na.rm) / colSums(pop * (dref) +e-e +d-d, na.rm=na.rm))
     }
   }
 

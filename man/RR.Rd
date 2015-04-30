@@ -7,12 +7,24 @@
 RR(e, d, pop, dref, na.rm = TRUE)
 }
 \arguments{
-\item{e}{Vector or data.frame or matrix with 1 or more environmental indicator(s) or health risk level (e.g., PM2.5 concentration to which this person or place is exposed),
+\item{e}{Vector or data.frame or matrix with 1 or more environmental indicator(s) or health risk level
+(e.g., PM2.5 concentration to which this person or place is exposed),
 one row per Census unit and one column per indicator.}
 
-\item{d}{Vector or data.frame or matrix with 1 or more demog groups percentage (as fraction of 1, not 0-100!) of place that is selected demog group (e.g. percent Hispanic) (or d=1 or 0 if this is a vector of individuals)}
+\item{d}{Vector or data.frame or matrix with 1 or more demog groups percentage
+(as fraction of 1, not 0-100!)
+of place that is selected demog group (e.g. percent Hispanic)
+(or d=1 or 0 per row if this is a vector of individuals)}
 
-\item{pop}{Vector of one row per location providing population count of place (or pop=1 if this is a vector of individuals), to convert d into a count since d is a fraction}
+\item{pop}{Vector of one row per location providing population count of place
+(or pop=1 if this is a vector of individuals),
+to convert d into a count since d is a fraction}
+
+\item{dref}{Optional vector specifying a reference group for RR calculation
+by providing what percentage (as fraction of 1, not 0-100!) of place that is individuals in the reference group
+(or dref= vector of ones and zeroes if this is a vector of individuals)}
+
+\item{na.rm}{Optional, logical, TRUE by default. Specify if NA values should be removed first.}
 }
 \value{
 numeric results as vector or data.frame
@@ -30,8 +42,11 @@ This function requires, for each Census unit, demographic data on total populati
   Each e (for environmental indicator) or d (for demographic percentage) is specified as a vector over small places like Census blocks or block groups
   or even individuals (ideally) but then d would be a dummy=1 for selected group and 0 for people not in selected group
   *** note: this currently does not use rrf() & rrfv() but perhaps it would be faster if it did? but rrfv not tested for multiple demog groups***
-  BUT NOTE IF THIS REMOVES NA VALUES FOR one e factor and not for another, results used different places & people for different e factors ?
-  could NA values cause a problem here?
+  \cr\cr
+  ** NEED TO VERIFY/TEST THIS: REMOVES PLACES WITH NA in any one or more of the values used (e, d, pop, dref) in numerators and denominators.
+  \cr\cr
+  ** Note also that THIS REMOVES NA VALUES FOR one e factor and not for another,
+  so results can use different places & people for different e factors
 }
 \examples{
 mydat <- structure(list(state = structure(c(1L, 2L, 3L, 4L, 5L, 6L, 7L,
@@ -85,10 +100,12 @@ mydat <- structure(list(state = structure(c(1L, 2L, 3L, 4L, 5L, 6L, 7L,
 -50L))
 
 RR(mydat$area, mydat$pcthisp, mydat$pop)
-# Avg Hispanic lives in a State that is 69 percent larger than that of avg. non-Hispanic
+# Avg Hispanic lives in a State that is 69 percent larger than
+  that of avg. non-Hispanic
 
 RR(mydat$pcthisp, mydat$pcthisp, mydat$pop)
-# Avg Hispanic lives in a State that has a much higher percent Hispanic than do non-Hispanics
+# Avg Hispanic lives in a State that has a much higher percent Hispanic than
+  do non-Hispanics
 
 #cbind(RR=RR(data.frame(d1=bg$pcthisp, d2=1-bg$pcthisp), bg$pcthisp, bg$pop))
 #RR(bg[ , names.e], bg$pctlowinc, bg$pop)
