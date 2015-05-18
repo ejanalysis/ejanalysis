@@ -1,2 +1,2 @@
 # ejanalysis
-Environmental justice analysis tools
+[Environmental justice analysis tools](https://ejanalysis.github.io/ejanalysis/)
