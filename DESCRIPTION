@@ -23,4 +23,6 @@ Suggests:
   data.table
 Imports:
   sp
-URL: http://www.ejanalysis.com
+URL:
+  http://ejanalysis.github.io
+  http://www.ejanalysis.com/
