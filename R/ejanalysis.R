@@ -27,5 +27,8 @@
 #' \item \code{\link{get.county.info}}
 #' \item \code{\link{state.health.url}}
 #' }
+#' @references
 #'
+#' \code{\link{http://ejanalysis.github.io}} \cr
+#' \code{\link{http://www.ejanalysis.com/}} \cr
 NULL
