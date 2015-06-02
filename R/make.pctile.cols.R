@@ -14,7 +14,7 @@ make.pctile.cols <- function(values, weights=1, prefix='pctile.', as.df=TRUE, zo
 
   #  FUNCTION TO ASSIGN PCTILES CREATING MULTIPLE COLUMNS FOR MULTIPLE RAW DATA COLUMNS
 
-  pctile.df <- sapply(values, FUN=function(x) {assign.pctiles(x, weights, zone=zone) })
+  pctile.df <- sapply(values, FUN=function(x) {assign.pctiles(x, weights=weights, zone=zone) })
 	colnames(pctile.df) <- paste(prefix, colnames(pctile.df), sep="")
 	if (as.df) {pctile.df <- as.data.frame(pctile.df, stringsAsFactors=FALSE)}
 	return(pctile.df)
