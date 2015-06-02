@@ -61,7 +61,7 @@ assign.pctiles <- function(values, weights=NULL, zone=NULL, na.rm=TRUE) {
 
    # ****   this calculation by zone could be redone using aggregate, summarize, data.table functions etc. instead of a for loop:
 
-   exact.wtd.pctile <- vector(rep(NA, length(values)))
+   exact.wtd.pctile <- vector(length=rep(NA, length(values)))
 
    for (z in unique(zone)) {
 
