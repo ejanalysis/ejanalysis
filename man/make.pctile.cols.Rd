@@ -4,11 +4,11 @@
 \alias{make.pctile.cols}
 \title{Make columns of (weighted) percentiles from columns of values}
 \usage{
-make.pctile.cols(raw.data.frame, weights = 1, prefix = "pctile.",
-  as.df = TRUE, zone = NULL)
+make.pctile.cols(values, weights = 1, prefix = "pctile.", as.df = TRUE,
+  zone = NULL)
 }
 \arguments{
-\item{raw.data.frame}{Data.frame of values}
+\item{values}{Data.frame of values (or possibly matrix), one column at a time is analyzed using \code{\link{assign.pctiles}}}
 
 \item{weights}{Optional Numeric vector of weights to create weighted percentiles, such as population-weighted quantiles. Unweighted if not specified. Vector same length as number of rows in data.frame.}
 

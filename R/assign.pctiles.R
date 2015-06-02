@@ -3,12 +3,12 @@
 #' @description For the vector, look at the distribution of values across all rows in a given zone (e.g., places in zone),
 #' and find what percentile a given value is at.
 #' @details Relies on the \code{\link{wtd.Ecdf}} function.
-#' Could also add parameter like in rank(), na.last,
-#' defining na.rm but also where to rank NA values if included, etc.
-#' Default now is like na.last=NA, but like na.last='last' if na.rm=FALSE
-#' Could also add parameter like in rank(), ties.method, defining if ties get min, max, or mean of percentiles initially assigned to ties.
-#' Default for ties right now is like ties.method=max (which might not be what assign.pctiles() does in fact).
-#' @param x vector
+#'   Could also add parameter like in rank(), na.last,
+#'   defining na.rm but also where to rank NA values if included, etc.
+#'   Default now is like na.last=NA, but like na.last='last' if na.rm=FALSE
+#'   Could also add parameter like in rank(), ties.method, defining if ties get min, max, or mean of percentiles initially assigned to ties.
+#'   Default for ties right now is like ties.method=max (which might not be what assign.pctiles() does in fact).
+#' @param values vector, required, with numeric values. To do this with a matrix, see \code{\link{make.pctile.cols}}
 #' @param weights Optional, NULL by default (not fully tested), vector of weights for weighted percentiles (e.g., population weighted).
 #' @param na.rm NOT IMPLEMENTED HERE. Logical, optional, TRUE by default. Should NA values (missing data) be removed first to get percentile of those with valid data.
 #'   If FALSE, NA values are treated as being at the high percentiles.

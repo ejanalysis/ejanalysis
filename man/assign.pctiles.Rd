@@ -7,14 +7,14 @@
 assign.pctiles(values, weights = NULL, zone = NULL, na.rm = TRUE)
 }
 \arguments{
+\item{values}{vector, required, with numeric values. To do this with a matrix, see \code{\link{make.pctile.cols}}}
+
 \item{weights}{Optional, NULL by default (not fully tested), vector of weights for weighted percentiles (e.g., population weighted).}
 
 \item{zone}{Optional, NULL by default, defines subsets of rows, so a percentile is found among rows that are within a given zone only.}
 
 \item{na.rm}{NOT IMPLEMENTED HERE. Logical, optional, TRUE by default. Should NA values (missing data) be removed first to get percentile of those with valid data.
 If FALSE, NA values are treated as being at the high percentiles.}
-
-\item{x}{vector}
 }
 \value{
 Returns a numeric vector same size as x, but if zone is specified, provides percentile with given zone.
@@ -25,11 +25,11 @@ and find what percentile a given value is at.
 }
 \details{
 Relies on the \code{\link{wtd.Ecdf}} function.
-Could also add parameter like in rank(), na.last,
-defining na.rm but also where to rank NA values if included, etc.
-Default now is like na.last=NA, but like na.last='last' if na.rm=FALSE
-Could also add parameter like in rank(), ties.method, defining if ties get min, max, or mean of percentiles initially assigned to ties.
-Default for ties right now is like ties.method=max (which might not be what assign.pctiles() does in fact).
+  Could also add parameter like in rank(), na.last,
+  defining na.rm but also where to rank NA values if included, etc.
+  Default now is like na.last=NA, but like na.last='last' if na.rm=FALSE
+  Could also add parameter like in rank(), ties.method, defining if ties get min, max, or mean of percentiles initially assigned to ties.
+  Default for ties right now is like ties.method=max (which might not be what assign.pctiles() does in fact).
 }
 \examples{
 x <- c(30, 40, 50, 12,12,5,5,13,13,13,13,13,8,9,9,9,9,9,10:20,20,20,20,21:30); wts <- rep(c(2,3), length(x)/2)

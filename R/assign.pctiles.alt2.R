@@ -41,6 +41,10 @@
 #' @export
 assign.pctiles.alt2 <- function(x, weights=NULL, na.rm=TRUE, zone=NULL) {
 
+  if (!missing(zone)) {
+    warning('zone not implemented yet')
+  }
+
   # weights=NULL is untested.
 
 	#########
