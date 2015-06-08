@@ -24,7 +24,7 @@ The use of na.rm=TRUE in this function means it will always ignore NA values in 
 }
 \examples{
 set.seed(999)
-places <- data.frame(p1=runif(10, 0,1), p2=runif(10,0,1), p3=runif(10,0,1))
+places <- data.frame(p1=runif(10, 0,1), p2=c(NA, runif(9,0,1)), p3=runif(10,0,1))
 pctilecols=c('p1','p2', 'p3')
 x=flagged(places[ , pctilecols], 0.80)
 t(head(cbind(x, places)))
