@@ -27,7 +27,7 @@ url.census <- function(fips, censustable='P2', censusfile='DEC/10_PL', launch=TR
 
   fips <- clean.fips.1215(fips)
 
-  if (any(nchar(fips)!=15)) {warning('block fips must have 15 characters including leading zero if needed, and this does not work for a block group etc yet')}
+  if (any(nchar(fips)!=15)) {warning('fips must have 15 characters including leading zero if needed')}
 
   if (length(fips)==1) {
     myurl <- paste('http://factfinder2.census.gov/bkmk/table/1.0/en/', censusfile, '/', censustable, '/1000000US', fips, sep='')
