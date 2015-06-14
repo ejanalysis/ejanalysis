@@ -9,7 +9,7 @@ url.open <- function(myurl) {
 
   # also just see browseURL()
 
-  if (get.os()=='win') {
+  if (analyze.stuff::get.os()=='win') {
     shell.exec(myurl)
   } else {
     system( paste('open ', myurl, sep='') )

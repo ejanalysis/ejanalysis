@@ -24,14 +24,14 @@ clean.fips.1215 <- function(fips) {
       warning('NA values returned for NA values in input')
     }
 
-    # (try to use lead.zeroes() if wrong because a leading zero was dropped)
+    # (try to use analyze.stuff::lead.zeroes() if wrong because a leading zero was dropped)
     if (any(nchar(fips)==11)) {
       warning('added an inferred missing leading zero where fips was 11 rather than 12 characters long')
-      fips[nchar(fips)==11] <- lead.zeroes(fips[nchar(fips)==11], 12)
+      fips[nchar(fips)==11] <- analyze.stuff::lead.zeroes(fips[nchar(fips)==11], 12)
     }
     if (any(nchar(fips)==14)) {
       warning('added an inferred missing leading zero where fips was 14 rather than 15 characters long')
-      fips[nchar(fips)==14] <- lead.zeroes(fips[nchar(fips)==14], 15)
+      fips[nchar(fips)==14] <- analyze.stuff::lead.zeroes(fips[nchar(fips)==14], 15)
     }
 
   }

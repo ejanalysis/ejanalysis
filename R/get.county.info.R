@@ -54,19 +54,19 @@
 #' \url{https://www.census.gov/geo/reference/gtc/gtc_island.html} \cr
 #' Note this other possible list of abbreviations (not used) lacks US, PR, DC: \cr
 #' require(datasets); state.abb \cr
-#' Note another possible list of States, abbrev, FIPS 
+#' Note another possible list of States, abbrev, FIPS
 #' which has island areas but not US total and not leading zeroes on FIPS: \cr
 #' require(acs) \cr
 #' print(fips.state) \cr
-#' @param query Vector of search terms. 
-#'   Can be county's 5-digit FIPS code(s) (as numbers or strings with numbers), 
-#'   maybe also could be county name(s) (exactly matching formats here), along with 2-letter state abbrev (case-insensitive)? 
+#' @param query Vector of search terms.
+#'   Can be county's 5-digit FIPS code(s) (as numbers or strings with numbers),
+#'   maybe also could be county name(s) (exactly matching formats here), along with 2-letter state abbrev (case-insensitive)?
 #' @param fields Character string optional defaults to 'all' but can specify 'countyname' 'ST' and/or 'FIPS.COUNTY'
 #' @return Returns a data.frame or vector of results depending on fields selected.
 #'   Returns a data.frame (if query has 2+ elements), providing all or specified fields of information, covering matching counties,
-#'   or a vector of the same type of information for just one place (if only 1 query term, i.e., one element in the query vector is provided), 
+#'   or a vector of the same type of information for just one place (if only 1 query term, i.e., one element in the query vector is provided),
 #'   or NA if certain problems arise.
-#' If no query term, or fields not specified, then all information fields are returned: 
+#' If no query term, or fields not specified, then all information fields are returned:
 #' ST     countyname FIPS.COUNTY statename                fullname
 #' @template seealsoFIPS
 #' @examples
@@ -74,26 +74,26 @@
 #' get.county.info(c('05001','01005'), fields=c('countyname', 'ST'))
 #' @export
 get.county.info <- function(query, fields='all') {
-  
+
   if (!exists('lookup.county'))  {
-    
+
     # could Put the data into (at least local) memory here if not already available, but no?
-    # At least see if it is on disk in this folder already. 
-    
+    # At least see if it is on disk in this folder already.
+
     if (!(file.exists('countyinfo.txt'))) {
-      
+
       download.file( 'http://www2.census.gov/geo/docs/reference/codes/files/national_county.txt' , 'countyinfo.txt')
       #' As of 3/2015, list is here:      http://www2.census.gov/geo/docs/reference/codes/files/national_county.txt
-      #' Prior to that it had been here: 'http://www.census.gov/geo/reference/codes/files/national_county.txt' 
-      
+      #' Prior to that it had been here: 'http://www.census.gov/geo/reference/codes/files/national_county.txt'
+
     } else {
       x=read.csv('countyinfo.txt', as.is=TRUE)
       ##### State,State ANSI,County ANSI,County Name,ANSI Cl
       names(x) <- c('ST', 'FIPS.ST', 'FIPS.COUNTY.3', 'countyname', 'junk')
       x$junk <- NULL
-      x$FIPS.COUNTY.3 <- lead.zeroes(x$FIPS.COUNTY.3, 3)
-      x$FIPS.ST <- lead.zeroes(x$FIPS.ST, 2)
-      x$FIPS.COUNTY <- lead.zeroes(paste(x$FIPS.ST, x$FIPS.COUNTY.3, sep=''), 5)
+      x$FIPS.COUNTY.3 <- analyze.stuff::lead.zeroes(x$FIPS.COUNTY.3, 3)
+      x$FIPS.ST <- analyze.stuff::lead.zeroes(x$FIPS.ST, 2)
+      x$FIPS.COUNTY <- analyze.stuff::lead.zeroes(paste(x$FIPS.ST, x$FIPS.COUNTY.3, sep=''), 5)
       x$FIPS.COUNTY.3 <- NULL
       x$FIPS.ST <- NULL
       x$statename <- get.state.info(x$ST)[ , 'statename']
@@ -101,58 +101,58 @@ get.county.info <- function(query, fields='all') {
       lookup.county <- x
     }
   }
-  
+
   ######  Query & report results differently depending on nature of the query term if any:
-  
+
   # If no fields specified, return all fields.
   if (any(fields=='all')) {fields <- names(lookup.county)}
-  
+
   # If any bad fieldnames are specified, stop.
   if (any(!(fields %in% names(lookup.county)))) {
-    cat('Available field names:\n'); cat(names(lookup.county)); cat('\n'); 
+    cat('Available field names:\n'); cat(names(lookup.county)); cat('\n');
     stop('fields requested must all be among fields available')
   }
-  
+
   # If no query term specified, return entire table of data (or just specified fields).
   if (missing(query)) { return(lookup.county[ , fields]) }
-  
+
   # If query has any NA values, warn user.
   if (any(is.na(query))) {cat('Warning - some NA values in input query\n')}
-  
+
   ####### done checking overall type of input
-  
+
   x <- query
-  
+
   # If FIPS.ST is kept at NA, it will match the NA FIPS code that is associated with USA overall in the lookup table, so set it to zero.
-  # x[is.na(x)]  <- 0 
-  
+  # x[is.na(x)]  <- 0
+
   # prepopulate the output variable
   results <- matrix(NA, nrow=length(x), ncol=length(fields))
   results <- data.frame(results)
   names(results) <- fields
-  
+
   # remove leading and trailing blank spaces, in case those are present, so it will still match '   NY' for example
   x <- gsub('^\\s+|\\s+$', '', x)
-  
+
   # FIND WHICH OF QUERY TERMS ARE VALID FIPS.COUNTY AND GET DATA FOR THOSE
-  is.valid.FIPS.COUNTY <- grepl('^[0-9]*$', x) 
+  is.valid.FIPS.COUNTY <- grepl('^[0-9]*$', x)
   is.valid.FIPS.COUNTY[is.valid.FIPS.COUNTY] <- as.numeric(x[is.valid.FIPS.COUNTY]) %in% as.numeric(lookup.county$FIPS.COUNTY)
-  results[is.valid.FIPS.COUNTY, ] <- lookup.county[ match(as.numeric(x[is.valid.FIPS.COUNTY]), as.numeric(lookup.county$FIPS.COUNTY)), fields] 
-  
+  results[is.valid.FIPS.COUNTY, ] <- lookup.county[ match(as.numeric(x[is.valid.FIPS.COUNTY]), as.numeric(lookup.county$FIPS.COUNTY)), fields]
+
   # could add code here to accept countyname/ST or countyname/statename combo as input
-  
-  
+
+
   # FIND WHICH OF QUERY TERMS ARE VALID ST (2-letter abbreviation) AND GET STATE DATA FOR THOSE
   #  upx <- toupper(x)
   #  is.valid.ST <- grepl('^[[:space:][:alpha:]]*$', upx)
   #  is.valid.ST[is.valid.ST] <- upx[is.valid.ST] %in% toupper(lookup.states$ST)
   #  results[is.valid.ST, ] <- lookup.states[ match( upx[is.valid.ST], toupper(lookup.states$ST)), fields]
-  
+
   upx <- toupper(x)
   is.valid.countyname <- grepl('^[[:space:][:alpha:][:punct:]]*$', upx)
   is.valid.countyname[is.valid.countyname] <- upx[is.valid.countyname] %in% toupper(lookup.county$county)
   results[is.valid.countyname, ] <- lookup.county[ match( upx[is.valid.countyname], toupper(lookup.county$countyname)), fields]
-  
+
   # FIND WHICH OF QUERY TERMS ARE VALID statename AND GET DATA FOR THOSE - but note a state would return multiple rows / counties, not just one!
   upx <- toupper(x)
   is.valid.statename <- grepl('^[[:space:][:alpha:][:punct:]]*$', upx)
@@ -168,30 +168,30 @@ get.county.info <- function(query, fields='all') {
   # debugging:
   #print('hi') ; print(head(is.valid.statename,100)); print(head(upx,100)); print(str(upx[is.valid.statename])); print(all.counties.in.states); print(head(lookup.county))
   #
-  
+
   if (all(is.na(results[ , 1]))) {
     cat('Warning- No matches found.\n'); return(NA)
   }
-  
+
   results <- data.frame(QUERY=query, results, stringsAsFactors=FALSE)
-  
+
   results.extralines  <- rbind(results, all.counties.in.states)
-  
-  
+
+
   return(results)
-  
+
   ### OUTPUTS OF FUNCTION:
-  
+
   if (1==0) {
-    
+
     head(get.county.info())
-    
+
     #   ST     countyname FIPS.COUNTY statename                fullname
     #   1 AL Autauga County       01001   Alabama Autauga County, Alabama
     #   2 AL Baldwin County       01003   Alabama Baldwin County, Alabama
-    
+
     get.state.info()
-    
+
     #   FIPS.ST ST                   statename            ftpname REGION is.usa.plus.pr is.usa is.state is.contiguous.us is.island.areas
     #1     <NA> US               United States       UnitedStates     NA          FALSE  FALSE    FALSE            FALSE           FALSE
     #2       01 AL                     Alabama            Alabama      4           TRUE   TRUE     TRUE             TRUE           FALSE
@@ -251,6 +251,6 @@ get.county.info <- function(query, fields='all') {
     #56      72 PR                 Puerto Rico         PuertoRico      2           TRUE  FALSE    FALSE            FALSE            TRUE
     #57      74 UM U.S. Minor Outlying Islands               <NA>      9          FALSE  FALSE    FALSE            FALSE            TRUE
     #58      78 VI         U.S. Virgin Islands               <NA>      2          FALSE  FALSE    FALSE            FALSE            TRUE
-    
+
   }
 }

@@ -1,5 +1,5 @@
-#' @title See webpage with data on Census block(s)
-#' @description DRAFT CODE TO see table webpage of BLOCK DATA VIA AFF WITHOUT NEEDING API KEY
+#' @title See webpage with data on Census unit(s) from American Fact Finder
+#' @description DRAFT CODE to see webpage with table of Census Bureau data via AFF WITHOUT NEEDING API KEY
 #' @details For information on FIPS codes, see \url{http://www.census.gov/geo/reference/ansi.html},
 #'   and also see \url{https://www.census.gov/geo/reference/geoidentifiers.html}. \cr\cr
 #'  For links to AFF, see \url{http://factfinder2.census.gov/files/AFF_deep_linking_guide.pdf} \cr
@@ -16,15 +16,17 @@
 #' @param censusfile 'DEC/10_PL' by default
 #' @param launch TRUE by default, whether to open page in web browser
 #' @return Can open a webpage. Returns vector of URL(s) as character
-#' @seealso \code{\link[countyhealthrankings]{urls.countyhealthrankings}} (see \url{http://ejanalysis.github.io/countyhealthrankings})
+#' @seealso \code{\link{url.censusblock}} and \code{\link[countyhealthrankings]{urls.countyhealthrankings}} (see \url{http://ejanalysis.github.io/countyhealthrankings})
 #' @examples
 #'   myfips <- '360610127002001'
 #'   url.censusblock(myfips, launch=FALSE)
 #'   myfips <- c('360610127002001', '360610127002000')
-#'   url.censusblock(myfips, launch=FALSE)
+#'   url.census(myfips, launch=FALSE)
 #' @export
-url.censusblock <- function(fips, censustable='P2', censusfile='DEC/10_PL', launch=TRUE) {
+url.census <- function(fips, censustable='P2', censusfile='DEC/10_PL', launch=TRUE) {
+
   fips <- clean.fips.1215(fips)
+
   if (any(nchar(fips)!=15)) {warning('block fips must have 15 characters including leading zero if needed, and this does not work for a block group etc yet')}
 
   if (length(fips)==1) {

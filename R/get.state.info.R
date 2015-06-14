@@ -1,24 +1,24 @@
-#' @title Get information on state - **IN PROGRESS - CONVERTED PART OF IT TO data()
+#' @title Got information on state(s) **But now available as data(lookup.states) in proxistat package
 #' @description Look for information from proxistat package data in data(lookup.states) -- info on states, like name, FIPS, etc.
-#' @details FOR 1+ OR ALL STATES PLUS DC PLUS PR PLUS ISLAND AREAS (PLUS USA OVERALL FOR FTP URL USAGE):\cr\cr
-#'   EPA REGION, FIPS, NAME, ABBREVIATION FOR STATE(S); BASED ON ANY OF \cr\cr
-#'   state's FIPS, state's NAME, OR state's ABBREVIATION, (i.e.,  FIPS.ST, statename, or ST). \cr\cr
-#'   Also see data in packages \code{\link{[acs]}} and \code{\link{[choroplethr]}} \cr\cr
+#' @details For 1+ or all US States plus DC, PR, Island Areas (and USA overall for use in FTP URL):\cr\cr
+#'   EPA Region, FIPS, State name, abbreviation for State(s); based on any of these query methods: \cr\cr
+#'   State's FIPS, State's name, OR State's abbreviation, (i.e.,  FIPS.ST, statename, or ST). \cr\cr
+#'   Also see data in packages \pkg[acs] \code{\link{[acs]}} and \pkg[choroplethr] \code{\link{[choroplethr]}} \cr\cr
 #'   Also see \url{http://www.census.gov/geo/reference/docs/state.txt} and \url{http://www.census.gov/geo/reference/ansi.html} \cr
 #'     # Note on definitions of is.usa, is.contiguous.us, etc.:  \cr
 #' \url{https://www.census.gov/geo/reference/gtc/gtc_usa.html} \cr
 #' \url{https://www.census.gov/geo/reference/gtc/gtc_codes.html} \cr
 #' \url{https://www.census.gov/geo/reference/gtc/gtc_island.html} \cr
-#' \url{http://en.wikipedia.org/wiki/Contiguous_United_States} \cr
-#' Note this other possible list of abbreviations (not used) lacks US, PR, DC: \cr
-#' require(datasets); state.abb \cr
+#' \url{http://en.wikipedia.org/wiki/Contiguous_United_States} \cr\cr
+#' Also note this other possible list of abbreviations (not used) lacks US, PR, DC: \cr
+#' require(datasets); state.abb \cr\cr
 #' Note another possible list of States, abbrev, FIPS \cr
 #' which has island areas but not US total and not leading zeroes on FIPS: \cr
 #'   require(acs) \cr
-#'   print(fips.state) \cr
+#'   print(fips.state) \cr\cr
 #' Note FIPS were also available here: \cr
 #'  State: \url{http://www.census.gov/geo/reference/ansi_statetables.html}  \cr
-#'  County: \url{http://www.census.gov/geo/www/codes/county/download.html}  \cr
+#'  County: \url{http://www.census.gov/geo/www/codes/county/download.html}  \cr\cr
 #' Also see \url{https://www.census.gov/geo/reference/state-area.html} for info on state area and internal point
 #' @param query vector of 1+ elements, which can be \cr
 #'   state FIPS code(s) (as numbers or strings with numbers), \cr

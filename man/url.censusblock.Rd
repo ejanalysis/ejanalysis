@@ -42,6 +42,6 @@ myfips <- '360610127002001'
   url.censusblock(myfips, launch=FALSE)
 }
 \seealso{
-\code{\link{url.countyhealthrankings}}
+\code{\link[countyhealthrankings]{urls.countyhealthrankings}} (see \url{http://ejanalysis.github.io/countyhealthrankings})
 }
 

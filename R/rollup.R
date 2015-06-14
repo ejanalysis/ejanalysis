@@ -181,7 +181,7 @@ rollup <- function( x, by, wts=NULL, FUN, prefix, na.rm=TRUE) {
         # to roll up the by column, just use first value of by in each group (OR TRY USING unique(by) BUT NOT SURE OF SORT ORDER)
 
         # While debugging, print names of fields as they are summarized:
-        cat(lead.zeroes(i,3), '- using 1st element per subset for non numeric field: ', names(x)[i], '\n')
+        cat(analyze.stuff::lead.zeroes(i,3), '- using 1st element per subset for non numeric field: ', names(x)[i], '\n')
 
         rolled[ , i] <- as.vector(summarize(x[ , i], by=llist(by), FUN=function(y) y[1]) )[ , 2]
 
@@ -190,7 +190,7 @@ rollup <- function( x, by, wts=NULL, FUN, prefix, na.rm=TRUE) {
         # This seems to assume we want wtd.mean since it passes var and weight
 
         if (debugging) {
-          cat(lead.zeroes(i,3), '- summarizing ', names(x)[i], '\n')
+          cat(analyze.stuff::lead.zeroes(i,3), '- summarizing ', names(x)[i], '\n')
         }
 
         if (missing(FUN)) {
