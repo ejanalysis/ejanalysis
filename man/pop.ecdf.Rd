@@ -4,31 +4,34 @@
 \alias{pop.ecdf}
 \title{Draw an Ecdf plot comparing distributions of scores in selected demographic groups}
 \usage{
-pop.ecdf(scores, pcts, pops, allothers = TRUE, col = "red", main, weights,
-  subtitles = FALSE, ...)
+pop.ecdf(scores, pcts, pops, allothers = TRUE, col = "red", main = "",
+  weights, subtitles = FALSE, ...)
 }
 \arguments{
-\item{scores}{Numeric vector, required. Values to analyze.}
+\item{scores}{Numeric vector (or data.frame) required. Values to analyze.
+If data.frame, then each column is plotted in its own panel.}
 
-\item{pcts}{Numeric vector or data.frame, required. Same number of vector elements or data.frame
-rows as length of scores. Specifies the fraction of population that is in demographic group(s) of interest, one row per place.}
+\item{pcts}{Numeric vector (or data.frame), required. Same number of vector elements or data.frame
+rows as length of scores vector (not sure what happens if pcts and scores are both data.frames).
+Specifies the fraction of population that is in demographic group(s) of interest, one row per place, one column per group.}
 
-\item{pops}{***}
+\item{pops}{Vector used to define weights as pop*pcts, and if allothers=TRUE, for pop*(1-pcts) for nongroup}
 
-\item{allothers}{Logical value, optional, TRUE by default. ***}
+\item{allothers}{Logical value, optional, TRUE by default. Whether to plot a series for everyone else, using 1-pct}
 
-\item{col}{Optional, default is 'red' to signify line color red for key demographic group}
+\item{col}{Optional, default is 'red' to signify line color red for key demographic group.
+Can also be a vector of colors if pcts is a data.frame with one column per group, one color per group.}
 
-\item{main}{Required character specifying plot title}
+\item{main}{Optional character specifying plot title, default is none}
 
-\item{weights}{Vector of weights for weighted frequency distributions}
+\item{weights}{Not used currently. See \code{pops} parameter}
 
-\item{subtitles}{Logical FALSE by default}
+\item{subtitles}{Logical FALSE by default, which means extra info is not shown (see help on \code{\link[Hmisc]{Ecdf}})}
 
 \item{...}{other optional parameters to pass to Ecdf}
 }
 \value{
-Same as \code{\link[Hmisc]{Ecdf}} -- draws a plot
+draws a plot
 }
 \description{
 Draws a plot using \code{\link[Hmisc]{Ecdf}}, overlaying cumulative distribution functions,
@@ -59,7 +62,8 @@ pop.ecdf(bg$traffic.score, bg$VSI.eo, bg$pop, log='x', subtitles=FALSE,
          group=bg$REGION, allothers=FALSE,
          xlab='Traffic score (log scale)', ylab='\%ile of population', main='Distribution of scores by EPA Region')
 
-# Demog suscept (how to show vs others??), one panel per REGION
+# Demog suscept (how to show vs others??), one panel per ENVT FACTOR (ie per col in scores df)
+data('names.evars')
 pop.ecdf(bg[ , names.e], bg$VSI.eo, bg$pop, log='x', subtitles=FALSE,
          allothers=TRUE, ylab='\%ile of population', main='Distribution of scores by EPA Region')
 

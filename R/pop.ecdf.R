@@ -13,17 +13,20 @@
 #' compare multiple groups and/or multiple zones, like hisp vs others in us vs ca all on one graph\cr
 #' see \code{\link{Ecdf}} for options & try passing a data.frame instead of just vector\cr
 #' #' \cr\cr
-#' @param scores Numeric vector, required. Values to analyze.
-#' @param pcts Numeric vector or data.frame, required. Same number of vector elements or data.frame
-#'   rows as length of scores. Specifies the fraction of population that is in demographic group(s) of interest, one row per place.
-#' @param pops ***
-#' @param allothers Logical value, optional, TRUE by default. ***
-#' @param col Optional, default is 'red' to signify line color red for key demographic group
-#' @param main Required character specifying plot title
-#' @param weights Vector of weights for weighted frequency distributions
-#' @param subtitles Logical FALSE by default
+#' @param scores Numeric vector (or data.frame) required. Values to analyze.
+#'   If data.frame, then each column is plotted in its own panel.
+#' @param pcts Numeric vector (or data.frame), required. Same number of vector elements or data.frame
+#'   rows as length of scores vector (not sure what happens if pcts and scores are both data.frames).
+#'   Specifies the fraction of population that is in demographic group(s) of interest, one row per place, one column per group.
+#' @param pops Vector used to define weights as pop*pcts, and if allothers=TRUE, for pop*(1-pcts) for nongroup
+#' @param weights Not used currently. See \code{pops} parameter
+#' @param allothers Logical value, optional, TRUE by default. Whether to plot a series for everyone else, using 1-pct
+#' @param col Optional, default is 'red' to signify line color red for key demographic group.
+#'   Can also be a vector of colors if pcts is a data.frame with one column per group, one color per group.
+#' @param main Optional character specifying plot title, default is none
+#' @param subtitles Logical FALSE by default, which means extra info is not shown (see help on \code{\link[Hmisc]{Ecdf}})
 #' @param ... other optional parameters to pass to Ecdf
-#' @return Same as \code{\link[Hmisc]{Ecdf}} -- draws a plot
+#' @return draws a plot
 #' @seealso \code{\link[Hmisc]{Ecdf}} \code{\link{RR}}
 #' @examples
 #' ###
@@ -39,7 +42,8 @@
 #'          group=bg$REGION, allothers=FALSE,
 #'          xlab='Traffic score (log scale)', ylab='%ile of population', main='Distribution of scores by EPA Region')
 #'
-#' # Demog suscept (how to show vs others??), one panel per REGION
+#' # Demog suscept (how to show vs others??), one panel per ENVT FACTOR (ie per col in scores df)
+#' data('names.evars')
 #' pop.ecdf(bg[ , names.e], bg$VSI.eo, bg$pop, log='x', subtitles=FALSE,
 #'          allothers=TRUE, ylab='%ile of population', main='Distribution of scores by EPA Region')
 #'
@@ -60,7 +64,7 @@
 #'
 #' }
 #' @export
-pop.ecdf <- function(scores, pcts, pops, allothers=TRUE, col='red', main, weights, subtitles=FALSE, ...) {
+pop.ecdf <- function(scores, pcts, pops, allothers=TRUE, col='red', main='', weights, subtitles=FALSE, ...) {
 
 	# should add error checking here
 
@@ -70,16 +74,20 @@ pop.ecdf <- function(scores, pcts, pops, allothers=TRUE, col='red', main, weight
   #require(Hmisc)
 
   if (is.vector(pcts)) {
-    Ecdf(scores, weights=(pcts * pops), main=main, col=col, subtitles=subtitles, ...)
-    if (allothers) { Ecdf(scores, weights=((1 - pcts) * pops), add=TRUE, col='black', subtitles=FALSE, ...) }
+    Hmisc::Ecdf(scores, weights=(pcts * pops), main=main, col=col, subtitles=subtitles, ...)
+    if (allothers) { Hmisc::Ecdf(scores, weights=((1 - pcts) * pops), add=TRUE, col='black', subtitles=FALSE, ...) }
     # note can't draw subtitles (n, m) once for ref group and once for nonref group in same spot - the text would be overwritten and look wrong
   }
 
   if (is.data.frame(pcts)) {
-    # plot one cdf per col of df
-    # can't pass df to Ecdf because that tries to draw one cdf per panel, multiple panels
+    # plot one cdf per col of pcts (one per group)
+    # can't just pass df of pcts to Ecdf
     # can't use groups param in Ecdf, since that assumes each group is a unique set of rows, but we need different weighting for each group to be estimated
-    for (i in 1:length(scores[1,]))
-    Ecdf(scores, weights=(pcts * pops), main=main, col=col, subtitles=subtitles, ...)
+    if (length(col)!=length(pcts[1, ])) {col=rep(col,length(pcts[1,]))}
+
+    Hmisc::Ecdf(scores, weights=(pcts[,1] * pops), main=main, col=col[1], subtitles=subtitles, ...)
+    for (i in 2:length(pcts[1, ])) {
+      Hmisc::Ecdf(scores, weights=(pcts[i, ] * pops), add=TRUE, col=col[i], ...)
+    }
   }
 }

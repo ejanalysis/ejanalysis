@@ -1,0 +1,93 @@
+#' @title Draw PDF (overlays histograms) comparing distributions of scores in selected demographic groups
+#'
+#' @description
+#'  Draws a histogram plot using \code{\link[plotrix]{weighted.hist}}, overlaying distribution functions,
+#'  one for each subgroup specified.
+#'  Useful to compare 2 groups based on each groups entire pdf distribution of peoples scores,
+#'  using data from small places like census block groups, based on having for each place the pop total
+#'  and % of pop that is in each group or perhaps already have count in each group.
+#' @details
+#' Notes: \cr
+#' to compare zones, \cr
+#' compare demog groups, (see parameter called group)\cr
+#' compare multiple groups and/or multiple zones, like hisp vs others in us vs ca all on one graph\cr
+#' see \code{\link[plotrix]{weighted.hist}} for options \cr
+#' #' \cr\cr
+#' @param scores Numeric vector (not data.frame currently), required. Values to analyze.
+#' @param pcts Numeric vector or data.frame, required. Same number of vector elements or data.frame
+#'   rows as length of scores. Specifies the fraction of population that is in demographic group(s) of interest, one row per place, one group per column.
+#' @param pops Vector used to define weights as pop*pcts, and if allothers=TRUE, for pop*(1-pcts) for nongroup
+#' @param weights Not used currently (see \code{pop} parameter)
+#' @param allothers Logical value, optional, TRUE by default. Whether to plot a series for everyone else, using 1-pct
+#' @param col Optional, default is 'red' to signify line color red for key demographic group.
+#'   Can also be a vector of colors if pcts is a data.frame with one column per group, one color per group.
+#' @param main Required character specifying plot title
+#' @param ... other optional parameters to pass to weighted.hist()
+#' @return Draws a plot
+#' @seealso \code{\link{pop.ecdf}}, \code{\link[Hmisc]{Ecdf}}, and \code{\link{RR}}
+#' @examples
+#' ###
+#' \dontrun{
+#' # pop.cdf( 31:35, c(0.10, 0.10, 0.40, 0, 0.20), 1001:1005 )
+#' # pop.cdf(dat$Murder, dat$Population * (dat$Illiteracy/100))
+#' #
+#' # pop.cdf(places$pm, places$pctmin, places$pop)
+#' # pop.cdf(log10(places$traffic.score), places$pctmin, places$pop)
+#' # pop.cdf(places$cancer, places$pctmin, places$pop, allothers=FALSE); pop.cdf(places$cancer, places$pctlingiso, places$pop, col='green', allothers=FALSE, add=TRUE)
+#' # Demog suscept  for each REGION (can't see if use vs others)
+#' pop.cdf(bg$traffic.score, bg$VSI.eo, bg$pop, log='x', subtitles=FALSE,
+#'          group=bg$REGION, allothers=FALSE,
+#'          xlab='Traffic score (log scale)', ylab='frequency in population', main='Distribution of scores by EPA Region')
+#'
+#' # Demog suscept (how to show vs others??), one panel per ENVT FACTOR (ie per col in scores df)
+#' data('names.evars')
+#' # NOT
+#' pop.cdf(bg[ , names.e], bg$VSI.eo, bg$pop, log='x', subtitles=FALSE,
+#'          allothers=TRUE, ylab='frequency in population', main='Distribution of scores by EPA Region')
+#'
+#' # log scale is useful & so are these labels passed to function
+#' # in CA vs not CA
+#' pop.cdf(bg$traffic.score, bg$ST=='CA', bg$pop,
+#'          subtitles=FALSE,
+#'          log='x', ylab='frequency in population', xlab='Traffic scores (log scale)',
+#'          main='Distribution of scores in CA (red) vs rest of US')
+#'
+#' # Flagged vs not (all D, all zones)
+#' pop.ecdf(bg$traffic.score, bg$flagged, bg$pop, log='x')
+#'
+#' # D=Hispanics vs others, within CA zone only
+#' pop.ecdf(bg$traffic.score, bg$ST=='CA', bg$pop * bg$pcthisp, log='x')
+#' # Demog suscept vs others, within CA only
+#' pop.ecdf(bg$traffic.score, bg$ST=='CA', bg$pop * bg$VSI.eo, log='x')
+#'
+#' }
+#' @export
+pop.cdf <- function(scores, pcts, pops, allothers=TRUE, col='red', main, weights, ...) {
+
+  if (missing(main)) {main <- paste('Histogram of scores in selected group (', col, ') ', ifelse(allothers, 'vs. rest of the population',''), sep='')}
+  if (missing(pops)) {pops <- 1}
+  if (!missing(weights)) {warning('weights parameter is currently ignored, since pops*(1-pcts) is used as weights now')}
+
+  if (is.vector(pcts)) {
+    plotrix::weighted.hist(scores,       pcts * pops, freq=FALSE, col=col,  main=main, ...)
+    if (allothers) {
+      plotrix::weighted.hist(scores, (1 - pcts) * pops, freq=FALSE, add=TRUE, main=main, ...)
+    }
+  }
+
+  if (is.data.frame(pcts)) {
+    # plot one histo per col of df
+    # can't pass df to weighted.hist
+    if (length(col)!=length(pcts[1, ])) {col=rep(col,length(pcts[1,]))}
+
+    plotrix::weighted.hist(scores,       pcts[, 1] * pops, freq=FALSE, col=col[1], main=main, ...)
+    for (i in 2:length(pcts[1,])) {
+      plotrix::weighted.hist(scores,       pcts[ , i] * pops, freq=FALSE, col=col[i], add=TRUE, ...)
+    }
+  }
+
+
+
+  #plotrix::weighted.hist(bg$proximity.rmp, bg$pop * bg$pctmin,     xlim=c(0,1.8), freq=FALSE, breaks=c(0:18)/10 , col='red', main='pop hist for pctmin of RMP score')
+  #plotrix::weighted.hist(bg$proximity.rmp, bg$pop * (1-bg$pctmin), xlim=c(0,1.8), freq=FALSE, breaks=c(0:18)/10 , add=TRUE)
+}

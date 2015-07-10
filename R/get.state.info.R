@@ -3,7 +3,7 @@
 #' @details For 1+ or all US States plus DC, PR, Island Areas (and USA overall for use in FTP URL):\cr\cr
 #'   EPA Region, FIPS, State name, abbreviation for State(s); based on any of these query methods: \cr\cr
 #'   State's FIPS, State's name, OR State's abbreviation, (i.e.,  FIPS.ST, statename, or ST). \cr\cr
-#'   Also see data in packages \pkg[acs] \code{\link{[acs]}} and \pkg[choroplethr] \code{\link{[choroplethr]}} \cr\cr
+#'   Also see data in packages \pkg{acs} and \pkg{choroplethr} \cr\cr
 #'   Also see \url{http://www.census.gov/geo/reference/docs/state.txt} and \url{http://www.census.gov/geo/reference/ansi.html} \cr
 #'     # Note on definitions of is.usa, is.contiguous.us, etc.:  \cr
 #' \url{https://www.census.gov/geo/reference/gtc/gtc_usa.html} \cr
