@@ -78,14 +78,43 @@ pop.cdf <- function(scores, pcts, pops, allothers=TRUE, col='red', main, weights
   if (missing(pops)) {pops <- 1}
   if (!missing(weights)) {warning('weights parameter is currently ignored, since pops*(1-pcts) is used as weights now')}
 
-  if (is.vector(pcts)) {
-    plotrix::weighted.hist(scores,       pcts * pops, freq=FALSE, col=col,  main=main, ...)
-    if (allothers) {
-      plotrix::weighted.hist(scores, (1 - pcts) * pops, freq=FALSE, add=TRUE, main=main, ...)
+  if (length(dim(scores))!=0 & length(dim(pcts))!=0) {
+    stop('Scores or pcts must be a vector -- They cannot both be data.frames or have 2+ dimensions currently')
+    # could just say is.vector(scores) & ... but a list() is also a vector.
+  }
+
+
+  valids <- !is.na(scores)
+  if (length(dim(scores))!=0) {
+    # 2+ dimensions so !is.na creates an array index called valids
+
+    # This would skip the pop, pct, and scores for any place where ANY ONE of the scores is invalid:
+    # pops <- pops[rowMins(valids)]
+    # pcts <- pcts[rowMins(valids)]
+    # scores <- scores[rowMins(valids)]
+
+  } else {
+    # scores is just a vector, so valids is too
+    scores <- scores[valids]
+    pops   <- pops[valids]
+    if (length(dim(pcts))==0) {
+      #pcts is just a vector
+      pcts <- pcts[valids]
+    } else {
+      # scores is a vector but pcts is not (multiple groups for one score type)
+      pcts <- pcts[valids, ] # get rid of all groups in row (place) where scores invalid
     }
   }
 
-  if (is.data.frame(pcts)) {
+  # still need to handle case where multiple scores, one group
+
+
+  if (allothers) {
+    plotrix::weighted.hist(x=scores, w=      pcts  * pops, freq=FALSE, col=col,  main=main, xlim=range(scores), ...)
+    plotrix::weighted.hist(x=scores, w= (1 - pcts) * pops, freq=FALSE, add=TRUE, main=main, ...)
+  }
+
+  if (length(dim(pcts))==2) {
     # plot one histo per col of df
     # can't pass df to weighted.hist
     if (length(col)!=length(pcts[1, ])) {col=rep(col,length(pcts[1,]))}
