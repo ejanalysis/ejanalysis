@@ -48,9 +48,18 @@ see \code{\link[plotrix]{weighted.hist}} for options \cr
 ###
 \dontrun{
 # pop.cdf( 31:35, c(0.10, 0.10, 0.40, 0, 0.20), 1001:1005 )
-# pop.cdf(dat$Murder, dat$Population * (dat$Illiteracy/100))
+
+set.seed(99)
+pctminsim=c(runif(7000,0,1), pmin(rlnorm(5000, meanlog=log(0.30), sdlog=1.7), 4)/4)
+popsim= runif(12000, 500, 3000)
+esim= rlnorm(12000, log(10), log(1.15)) + rnorm(12000, 1, 0.5) * pctminsim - 1
+pop.cdf(esim, pctminsim, popsim, xlab='Tract air pollution levels',
+  main = 'Air pollution levels among minorities (red bars) vs rest of US pop.')
+# x1=wtd.mean(esim, weights = pctminsim * popsim)
+# x2=wtd.mean(esim, weights = (1-pctminsim) * popsim)
+
 #
-# pop.cdf(places$pm, places$pctmin, places$pop)
+# pop.cdf(bg$pm, bg$pctmin, bg$pop)
 # pop.cdf(log10(places$traffic.score), places$pctmin, places$pop)
 # pop.cdf(places$cancer, places$pctmin, places$pop, allothers=FALSE); pop.cdf(places$cancer, places$pctlingiso, places$pop, col='green', allothers=FALSE, add=TRUE)
 # Demog suscept  for each REGION (can't see if use vs others)
@@ -72,12 +81,12 @@ pop.cdf(bg$traffic.score, bg$ST=='CA', bg$pop,
          main='Distribution of scores in CA (red) vs rest of US')
 
 # Flagged vs not (all D, all zones)
-pop.ecdf(bg$traffic.score, bg$flagged, bg$pop, log='x')
+pop.cdf(bg$traffic.score, bg$flagged, bg$pop, log='x')
 
 # D=Hispanics vs others, within CA zone only
-pop.ecdf(bg$traffic.score, bg$ST=='CA', bg$pop * bg$pcthisp, log='x')
+pop.cdf(bg$traffic.score, bg$ST=='CA', bg$pop * bg$pcthisp, log='x')
 # Demog suscept vs others, within CA only
-pop.ecdf(bg$traffic.score, bg$ST=='CA', bg$pop * bg$VSI.eo, log='x')
+pop.cdf(bg$traffic.score, bg$ST=='CA', bg$pop * bg$VSI.eo, log='x')
 
 }
 }

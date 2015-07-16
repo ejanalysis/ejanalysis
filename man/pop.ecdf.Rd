@@ -51,12 +51,30 @@ see \code{\link{Ecdf}} for options & try passing a data.frame instead of just ve
 \examples{
 ###
 \dontrun{
-# pop.ecdf( 31:35, c(0.10, 0.10, 0.40, 0, 0.20), 1001:1005 )
-# pop.ecdf(dat$Murder, dat$Population * (dat$Illiteracy/100))
-#
-# pop.ecdf(places$pm, places$pctmin, places$pop)
-# pop.ecdf(log10(places$traffic.score), places$pctmin, places$pop)
-# pop.ecdf(places$cancer, places$pctmin, places$pop, allothers=FALSE); pop.ecdf(places$cancer, places$pctlingiso, places$pop, col='green', allothers=FALSE, add=TRUE)
+pop.ecdf( 31:35, c(0.10, 0.10, 0.40, 0, 0.20), 1001:1005 )
+
+set.seed(99)
+pctminsim=c(runif(7000,0,1), pmin(rlnorm(5000, meanlog=log(0.30), sdlog=1.7), 4)/4)
+popsim= runif(12000, 500, 3000)
+esim= rlnorm(12000, log(10), log(1.15)) + rnorm(12000, 1, 0.5) * pctminsim - 1
+pop.ecdf(esim, pctminsim, popsim, xlab='Tract air pollution levels (vertical lines are group means)',
+  main = 'Air pollution levels among minorities (red curve) vs rest of US pop.')
+abline(v=wtd.mean(esim, weights = pctminsim * popsim), col='red')
+abline(v=wtd.mean(esim, weights = (1-pctminsim) * popsim), col='black')
+
+pop.ecdf(bg$pm, bg$pctmin, 1000, xlab='Tract air pollution levels (vertical lines are group means)',
+main = 'PM2.5 levels among minorities (red curve) vs rest of US pop.')
+abline(v=wtd.mean(bg$pm, weights = bg$pctmin * bg$pop), col='red')
+abline(v=wtd.mean(bg$pm, weights = (1-bg$pctmin) * bg$pop), col='black')
+
+#pop.ecdf(dat$Murder, dat$Population * (dat$Illiteracy/100))
+pop.ecdf(bg$pm, bg$pctmin, bg$pop,
+  main = 'PM2.5 levels among minorities (red curve) vs rest of US population (vertical lines are group means)')
+abline(v=wtd.mean(bg$pm, weights = bg$pctmin * bg$pop), col='red')
+abline(v=wtd.mean(bg$pm, weights = (1-bg$pctmin) * bg$pop), col='black')
+
+pop.ecdf(log10(places$traffic.score), places$pctmin, places$pop)
+pop.ecdf(places$cancer, places$pctmin, places$pop, allothers=FALSE); pop.ecdf(places$cancer, places$pctlingiso, places$pop, col='green', allothers=FALSE, add=TRUE)
 # Demog suscept  for each REGION (can't see if use vs others)
 pop.ecdf(bg$traffic.score, bg$VSI.eo, bg$pop, log='x', subtitles=FALSE,
          group=bg$REGION, allothers=FALSE,
