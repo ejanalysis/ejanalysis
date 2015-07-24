@@ -19,7 +19,8 @@
     </section>
 
     <section class="main-content">
-      <h3>
+
+<h3>
 <a id="about-this-package" class="anchor" href="#about-this-package" aria-hidden="true"><span class="octicon octicon-link"></span></a>About this Package</h3>
 
 <p>Tools that simplify some basic tasks in using R for
@@ -28,11 +29,23 @@
   and local environmental indicators (e.g., an air quality index),
   with one row per spatial location (e.g., Census block group).</p>
 
-  <p>Key functions help to find relative risk or similar ratios of means in demographic groups, etc.
-  The analyze.stuff, proxistat, ejanalysis, and countyhealthrankings packages,
-  once made public can be installed from github using the devtools package:
-  devtools::install_github(c("ejanalysis/analyze.stuff", "ejanalysis/proxistat",
-  "ejanalysis/ejanalysis", "ejanalysis/countyhealthrankings"))</p>
+  <p>Key functions help to find relative risk or similar ratios of means in demographic groups, etc.</p>
+
+
+<p><a href="http://ejanalysis.github.io/ejanalysis/ejanalysis.pdf">Help documentation as pdf</a></p>
+
+<h3>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation and Related Packages</h3>
+
+<p>This and related packages, once each is made available as a public repository on GitHub, until available on cran, can be installed using the devtools package: </p>
+
+<div class="highlight highlight-r"><pre><span class="pl-k">if</span> (<span class="pl-k">!</span>require(<span class="pl-s"><span class="pl-pds">'</span>devtools<span class="pl-pds">'</span></span>)) install.packages(<span class="pl-s"><span class="pl-pds">'</span>devtools<span class="pl-pds">'</span></span>)
+<span class="pl-e">devtools</span><span class="pl-k">::</span>install_github(<span class="pl-s"><span class="pl-pds">"</span>ejanalysis/analyze.stuff<span class="pl-pds">"</span></span>)
+<span class="pl-e">devtools</span><span class="pl-k">::</span>install_github(<span class="pl-s"><span class="pl-pds">"</span>ejanalysis/countyhealthrankings<span class="pl-pds">"</span></span>)
+<span class="pl-e">devtools</span><span class="pl-k">::</span>install_github(<span class="pl-s"><span class="pl-pds">"</span>ejanalysis/UScensus2010blocks<span class="pl-pds">"</span></span>)
+<span class="pl-e">devtools</span><span class="pl-k">::</span>install_github(<span class="pl-s"><span class="pl-pds">"</span>ejanalysis/ACSdownload<span class="pl-pds">"</span></span>)
+<span class="pl-e">devtools</span><span class="pl-k">::</span>install_github(c(<span class="pl-s"><span class="pl-pds">"</span>ejanalysis/proxistat<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>ejanalysis/ejanalysis<span class="pl-pds">"</span></span>))
+<span class="pl-e">devtools</span><span class="pl-k">::</span>install_github(<span class="pl-s"><span class="pl-pds">"</span>ejanalysis/ejscreen<span class="pl-pds">"</span></span>)</pre></div>
 
       <footer class="site-footer">
         <span class="site-footer-owner">The <a href="https://github.com/ejanalysis/ejanalysis">ejanalysis</a> package is maintained as part of a group of <a href="http://ejanalysis.github.io/">packages related to EJ analysis</a>, by <a href="https://github.com/ejanalysis" class="user-mention">@ejanalysis</a>.</span>
