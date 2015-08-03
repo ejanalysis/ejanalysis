@@ -29,6 +29,6 @@
 #' }
 #' @references
 #'
-#' \code{\link{http://ejanalysis.github.io}} \cr
-#' \code{\link{http://www.ejanalysis.com/}} \cr
+#' \url{http://ejanalysis.github.io} \cr
+#' \url{http://www.ejanalysis.com/} \cr
 NULL
