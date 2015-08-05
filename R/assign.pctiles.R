@@ -2,7 +2,7 @@
 #'
 #' @description For the vector, look at the distribution of values across all rows in a given zone (e.g., places in zone),
 #' and find what percentile a given value is at.
-#' @details Relies on the \code{\link{wtd.Ecdf}} function.
+#' @details Relies on the \code{\link[Hmisc]{wtd.Ecdf}} function.
 #'   Could also add parameter like in rank(), na.last,
 #'   defining na.rm but also where to rank NA values if included, etc.
 #'   Default now is like na.last=NA, but like na.last='last' if na.rm=FALSE
@@ -46,7 +46,7 @@ assign.pctiles <- function(values, weights=NULL, zone=NULL, na.rm=TRUE) {
 
   if (is.null(zone)) {
 
-    wtd.Ecdf.results <- wtd.Ecdf(values, weights=weights, type='i/n', na.rm=TRUE)
+    wtd.Ecdf.results <- Hmisc::wtd.Ecdf(values, weights=weights, type='i/n', na.rm=TRUE)
 
     # If the first CDF estimate is greater than zero, a point (min(x),0) is placed at the beginning of the estimates.
     if (length(wtd.Ecdf.results$x) == 1+ length(unique(values)) ) { wtd.Ecdf.results$x <- wtd.Ecdf.results$x[-1]; wtd.Ecdf.results$ecdf <- wtd.Ecdf.results$ecdf[-1] }
@@ -73,7 +73,7 @@ assign.pctiles <- function(values, weights=NULL, zone=NULL, na.rm=TRUE) {
         exact.wtd.pctile[zone==z] <- NA
 
       } else {
-        wtd.Ecdf.results <- wtd.Ecdf(myvals, weights=mywts, type='i/n', na.rm=TRUE)
+        wtd.Ecdf.results <- Hmisc::wtd.Ecdf(myvals, weights=mywts, type='i/n', na.rm=TRUE)
         # If the first CDF estimate is greater than zero, a point (min(x),0) is placed at the beginning of the estimates.
 
         if (length(wtd.Ecdf.results$x) == 1+ length(unique(myvals)) ) { wtd.Ecdf.results$x <- wtd.Ecdf.results$x[-1]; wtd.Ecdf.results$ecdf <- wtd.Ecdf.results$ecdf[-1] }

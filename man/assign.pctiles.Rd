@@ -24,7 +24,7 @@ For the vector, look at the distribution of values across all rows in a given zo
 and find what percentile a given value is at.
 }
 \details{
-Relies on the \code{\link{wtd.Ecdf}} function.
+Relies on the \code{\link[Hmisc]{wtd.Ecdf}} function.
   Could also add parameter like in rank(), na.last,
   defining na.rm but also where to rank NA values if included, etc.
   Default now is like na.last=NA, but like na.last='last' if na.rm=FALSE
