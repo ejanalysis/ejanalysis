@@ -23,16 +23,16 @@ A data.frame (if query has 2+ elements), providing all or specified fields of in
      get.state.info()[1:2, ]\cr\cr
   statename FIPS.ST ST ftpname REGION is.usa.plus.pr is.usa is.state is.contiguous.us \cr
 1   Alabama      01 AL Alabama      4           TRUE   TRUE     TRUE             TRUE \cr
-2    Alaska      02 AK  Alaska     10           TRUE   TRUE     TRUE            FALSE \cr
-  \cr
+2    Alaska      02 AK  Alaska     10           TRUE   TRUE     TRUE            FALSE \cr \cr
+
   is.island.areas area.sqmi area.sqkm landarea.sqmi landarea.sqkm waterarea.sqmi waterarea.sqkm \cr
 1           FALSE     52420    135767         50645        131171           1775           4597 \cr
-2           FALSE    665384   1723337        570641       1477953          94743         245383 \cr
-  \cr
+2           FALSE    665384   1723337        570641       1477953          94743         245383 \cr \cr
+
   inland.sqmi inland.sqkm coastal.sqmi coastal.sqkm greatlakes.sqmi greatlakes.sqkm \cr
 1        1058        2740          517         1340               0               0 \cr
-2       19304       49997        26119        67647               0               0 \cr
-  \cr
+2       19304       49997        26119        67647               0               0 \cr \cr
+
   territorial.sqmi territorial.sqkm      lat        lon \cr
 1              199              516 32.73963  -86.84346 \cr
 2            49320           127739 63.34619 -152.83707 \cr

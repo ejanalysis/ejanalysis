@@ -46,7 +46,6 @@ to compare zones, \cr
 compare demog groups, (see parameter called group)\cr
 compare multiple groups and/or multiple zones, like hisp vs others in us vs ca all on one graph\cr
 see \code{\link{Ecdf}} for options & try passing a data.frame instead of just vector\cr
-#' \cr\cr
 }
 \examples{
 ###

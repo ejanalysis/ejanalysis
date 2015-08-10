@@ -46,8 +46,7 @@ Converted this to data rather than a function, so now can just say data(counties
 6      mobile                 01097                1097    alabama        AL                   01                  1 \cr
   county.names[county.names$county.fips.character=='02185',] \cr
    county.name county.fips.character county.fips.numeric state.name state.abb state.fips.character state.fips.numeric \cr
-88 north slope                 02185                2185     alaska        AK                   02                  2 \cr
- \cr
+88 north slope                 02185                2185     alaska        AK                   02                  2 \cr \cr
   > head(get.county.info()) \cr
   ST     countyname FIPS.COUNTY statename                fullname \cr
 1 AL Autauga County       01001   Alabama Autauga County, Alabama \cr
@@ -58,25 +57,24 @@ Converted this to data rather than a function, so now can just say data(counties
 6 AL Bullock County       01011   Alabama Bullock County, Alabama \cr
   get.county.info()[get.county.info()$FIPS.COUNTY=='02185',] \cr
    ST          countyname FIPS.COUNTY statename                    fullname \cr
-85 AK North Slope Borough       02185    Alaska North Slope Borough, Alaska \cr
-  \cr
+85 AK North Slope Borough       02185    Alaska North Slope Borough, Alaska \cr \cr
  State,State ANSI,County ANSI,County Name,ANSI Cl \cr
  AL,01,001,Autauga County,H1 \cr
- AL,01,003,Baldwin County,H1 \cr
- \cr\cr
-Also see: \cr
-\cr
-\url{http://www2.census.gov/geo/docs/reference/codes/files/national_county.txt} \cr
-\url{http://www.census.gov/geo/reference/ansi.html} \cr
-\url{http://www.census.gov/geo/reference/codes/files/national_county.txt} \cr
-\url{http://www.census.gov/geo/reference/docs/state.txt} for just state info \cr
-State: \url{http://www.census.gov/geo/reference/ansi_statetables.html}  \cr
-County: \url{http://www.census.gov/geo/www/codes/county/download.html}  \cr
-Note on definitions of is.usa, is.contiguous.us, etc.:  \cr
-\url{https://www.census.gov/geo/reference/gtc/gtc_usa.html} \cr
-\url{https://www.census.gov/geo/reference/gtc/gtc_codes.html} \cr
-\url{https://www.census.gov/geo/reference/gtc/gtc_island.html} \cr
-Note this other possible list of abbreviations (not used) lacks US, PR, DC: \cr
+ AL,01,003,Baldwin County,H1 \cr \cr
+Also see:
+\itemize{
+\item \url{http://www2.census.gov/geo/docs/reference/codes/files/national_county.txt}
+\item \url{http://www.census.gov/geo/reference/ansi.html}
+\item \url{http://www.census.gov/geo/reference/codes/files/national_county.txt}
+\item \url{http://www.census.gov/geo/reference/docs/state.txt} for just state info
+\item State: \url{http://www.census.gov/geo/reference/ansi_statetables.html}
+\item County: \url{http://www.census.gov/geo/www/codes/county/download.html}
+\item Note on definitions of is.usa, is.contiguous.us, etc.:
+\item \url{https://www.census.gov/geo/reference/gtc/gtc_usa.html}
+\item \url{https://www.census.gov/geo/reference/gtc/gtc_codes.html}
+\item \url{https://www.census.gov/geo/reference/gtc/gtc_island.html}
+}
+Note this other possible list of abbreviations (not used) lacks US, PR, DC:  \cr
 require(datasets); state.abb \cr
 Note another possible list of States, abbrev, FIPS
 which has island areas but not US total and not leading zeroes on FIPS: \cr

@@ -21,7 +21,6 @@ Key functions help to find relative risk or similar ratios of means in demograph
 }
 \details{
 Key functions include
-\cr
 \itemize{
 \item \code{\link{RR}}
 \item \code{\link{pop.ecdf}}

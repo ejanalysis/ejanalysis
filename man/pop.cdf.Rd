@@ -42,7 +42,6 @@ to compare zones, \cr
 compare demog groups, (see parameter called group)\cr
 compare multiple groups and/or multiple zones, like hisp vs others in us vs ca all on one graph\cr
 see \code{\link[plotrix]{weighted.hist}} for options \cr
-#' \cr\cr
 }
 \examples{
 ###

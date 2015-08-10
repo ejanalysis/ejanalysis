@@ -81,8 +81,7 @@ http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/nati
 # \url{http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/scope/state/ind/66/dist/23/char/87/time/14/viz/bar/fstate/21/locs/21/cmp/stcmp} \cr
 # url that it resolves to on website should be  \cr
 # \url{http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/scope/state/ind/66/dist/23/char/87/time/3/viz/bar/fstate/21/locs/21,52/cmp/stcmp} \cr
-#	URL scheme for linking to Resources for health data by state or by county: \cr
-\cr
+#	URL scheme for linking to Resources for health data by state or by county: \cr \cr
 #State-level data from SHADAC: \url{http://www.shadac.org/} \cr
 #State-level data from RWJF: \url{http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub.html} \cr
 ***** see entire US clickable map of states

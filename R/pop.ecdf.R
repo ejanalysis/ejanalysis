@@ -12,7 +12,6 @@
 #' compare demog groups, (see parameter called group)\cr
 #' compare multiple groups and/or multiple zones, like hisp vs others in us vs ca all on one graph\cr
 #' see \code{\link{Ecdf}} for options & try passing a data.frame instead of just vector\cr
-#' #' \cr\cr
 #' @param scores Numeric vector (or data.frame) required. Values to analyze.
 #'   If data.frame, then each column is plotted in its own panel.
 #' @param pcts Numeric vector (or data.frame), required. Same number of vector elements or data.frame

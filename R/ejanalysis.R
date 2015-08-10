@@ -17,7 +17,6 @@
 #' , etc.
 #' @details
 #' Key functions include
-#' \cr
 #' \itemize{
 #' \item \code{\link{RR}}
 #' \item \code{\link{pop.ecdf}}

@@ -12,7 +12,6 @@
 #' compare demog groups, (see parameter called group)\cr
 #' compare multiple groups and/or multiple zones, like hisp vs others in us vs ca all on one graph\cr
 #' see \code{\link[plotrix]{weighted.hist}} for options \cr
-#' #' \cr\cr
 #' @param scores Numeric vector (not data.frame currently), required. Values to analyze.
 #' @param pcts Numeric vector or data.frame, required. Same number of vector elements or data.frame
 #'   rows as length of scores. Specifies the fraction of population that is in demographic group(s) of interest, one row per place, one group per column.

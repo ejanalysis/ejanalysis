@@ -18,19 +18,18 @@
 #'   For example if demog=places$pctlowinc then true universe.us.demog=places$povknownratio which is the count for whom poverty ratio is known in each place, which is <= pop.
 #' @param type Specifies type of EJ Index. Default is type=1. Several formulas are available: \cr
 #' \itemize{
-#' For type=1,   ej.indexes = weights * env.df * (demog  - us.demog)  # us.demog could also be called d.avg.all \cr
-#'  (** note that na.rm is currently ignored for type=1) \cr
-#' For type=1.5, ej.indexes= weights * env.df * (demog  - d.avg.all.elsewhere) # for a place that is one of many this can be almost identical to type 1 \cr
-#' For type=2,   ej.indexes = weights * demog  * (env.df - e.avg.nond) \cr
-#' For type=2.5, ej.indexes = weights * demog  * (env.df - e.avg.nond.elsewhere ) # like type 1 but env and demog roles are swapped \cr
-#' For type=3,   ej.indexes = weights * ( (demog * env.df) - (d.avg.all           * e.avg.nond ) )   \cr
-#' For type=3.5, ej.indexes = weights * ( (demog * env.df) - (d.avg.all.elsewhere * e.avg.nond.elsewhere) )   \cr
-#' For type 4  , ej.indexes = weights * ( (demog - d.avg.all          ) * (env.df - e.avg.nond ) ) \cr
-#' For type=4.5, ej.indexes = weights * ( (demog - d.avg.all.elsewhere) * (env.df - e.avg.nond.elsewhere) ) \cr
-#' For type=5  , ej.indexes = weights * env.df * demog \cr
-#' For type=6,   ej.indexes = env.df * demog \cr
+#'  \item For type=1,   ej.indexes = weights * env.df * (demog  - us.demog)  # us.demog could also be called d.avg.all (** note that na.rm is currently ignored for type=1)
+#'  \item For type=1.5, ej.indexes= weights * env.df * (demog  - d.avg.all.elsewhere) # for a place that is one of many this can be almost identical to type 1 \cr
+#'  \item For type=2,   ej.indexes = weights * demog  * (env.df - e.avg.nond) \cr
+#'  \item For type=2.5, ej.indexes = weights * demog  * (env.df - e.avg.nond.elsewhere ) # like type 1 but env and demog roles are swapped \cr
+#'  \item For type=3,   ej.indexes = weights * ( (demog * env.df) - (d.avg.all           * e.avg.nond ) )   \cr
+#'  \item For type=3.5, ej.indexes = weights * ( (demog * env.df) - (d.avg.all.elsewhere * e.avg.nond.elsewhere) )   \cr
+#'  \item For type 4  , ej.indexes = weights * ( (demog - d.avg.all          ) * (env.df - e.avg.nond ) ) \cr
+#'  \item For type=4.5, ej.indexes = weights * ( (demog - d.avg.all.elsewhere) * (env.df - e.avg.nond.elsewhere) ) \cr
+#'  \item For type=5  , ej.indexes = weights * env.df * demog \cr
+#'  \item For type=6,   ej.indexes = env.df * demog \cr
 #' }
-#' \cr\cr where \cr
+#'  where
 #' \itemize{
 #'  \item us.demog = overall demog where avg person lives (pop wtd mean of demog). This may be almost exactly the same as d.avg.all.elsewhere \cr
 #'  \item d.avg.all           = overall value for d as fraction of entire population (including the one place being analyzed). \cr

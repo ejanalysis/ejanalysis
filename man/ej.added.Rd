@@ -37,7 +37,6 @@ p = population counts (vector of places) \cr
 d = demographic fraction that is in specified demographic group (vector of places) \cr
 For example, if e=cancer risk (individual risk) and p=pop and d=%lowincome, value returned is number of cases among lowincome individuals in excess of what it would be if their average risk was the same as that of nonlowincome individuals. \cr
 net excess vulnerable * E = net excess people-points \cr
- \cr
 vs can be 'avg' or 'nonD' (default) (not case sensitive),  \cr
 for, respectively, excess cases relative to risk scenario where  \cr
 avg d's e is set to that of avg person (all people including d and nonD), \cr
