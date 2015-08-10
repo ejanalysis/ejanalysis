@@ -4,7 +4,7 @@
 \alias{get.county.info}
 \title{Get info on US Counties}
 \usage{
-get.county.info(query, fields = "all")
+get.county.info(query, fields = "all", download = FALSE)
 }
 \arguments{
 \item{query}{Vector of search terms.
@@ -27,16 +27,16 @@ for 1 or more counties, 1 or more States plus DC, PR, Island Areas, and USA over
 Provides FIPS.COUNTY, countyname, fullname, ST based on COUNTYs FIPS (FIPS.COUNTY), or maybe countyname plus ST (STATE ABBREVIATION)
 }
 \details{
-*** May convert this to data rather than a function. \cr
-As of 3/2015, list is here: \url{http://www2.census.gov/geo/docs/reference/codes/files/national_county.txt} \cr
-help(county.names, package='choroplethr') \cr
-data(county.names) \cr
-compare that function to this one: \cr
-> length(county.names[,1]) \cr
-[1] 3142 \cr
-> length(get.county.info()[,1]) \cr
-[1] 3235 \cr
-> head(county.names) \cr
+Converted this to data rather than a function, so now can just say data(counties, package='proxistat') or x<- counties via lazy loading. \cr
+  Also, as of 3/2015, a list is here: \url{http://www2.census.gov/geo/docs/reference/codes/files/national_county.txt} \cr
+  help(county.names, package='choroplethr') \cr
+  data(county.names) \cr
+  compare that function to this one: \cr
+  > length(county.names[,1]) \cr
+  [1] 3142 \cr
+  > length(get.county.info()[,1]) \cr
+  [1] 3235 \cr
+  > head(county.names) \cr
   county.name county.fips.character county.fips.numeric state.name state.abb state.fips.character state.fips.numeric \cr
 1     autauga                 01001                1001    alabama        AL                   01                  1 \cr
 2      blount                 01009                1009    alabama        AL                   01                  1 \cr
@@ -44,11 +44,11 @@ compare that function to this one: \cr
 4  washington                 01129                1129    alabama        AL                   01                  1 \cr
 5    marshall                 01095                1095    alabama        AL                   01                  1 \cr
 6      mobile                 01097                1097    alabama        AL                   01                  1 \cr
-county.names[county.names$county.fips.character=='02185',] \cr
+  county.names[county.names$county.fips.character=='02185',] \cr
    county.name county.fips.character county.fips.numeric state.name state.abb state.fips.character state.fips.numeric \cr
 88 north slope                 02185                2185     alaska        AK                   02                  2 \cr
-\cr
-> head(get.county.info()) \cr
+ \cr
+  > head(get.county.info()) \cr
   ST     countyname FIPS.COUNTY statename                fullname \cr
 1 AL Autauga County       01001   Alabama Autauga County, Alabama \cr
 2 AL Baldwin County       01003   Alabama Baldwin County, Alabama \cr
@@ -56,17 +56,17 @@ county.names[county.names$county.fips.character=='02185',] \cr
 4 AL    Bibb County       01007   Alabama    Bibb County, Alabama \cr
 5 AL  Blount County       01009   Alabama  Blount County, Alabama \cr
 6 AL Bullock County       01011   Alabama Bullock County, Alabama \cr
-get.county.info()[get.county.info()$FIPS.COUNTY=='02185',] \cr
+  get.county.info()[get.county.info()$FIPS.COUNTY=='02185',] \cr
    ST          countyname FIPS.COUNTY statename                    fullname \cr
 85 AK North Slope Borough       02185    Alaska North Slope Borough, Alaska \cr
+  \cr
+ State,State ANSI,County ANSI,County Name,ANSI Cl \cr
+ AL,01,001,Autauga County,H1 \cr
+ AL,01,003,Baldwin County,H1 \cr
+ \cr\cr
+Also see: \cr
 \cr
-State,State ANSI,County ANSI,County Name,ANSI Cl \cr
-AL,01,001,Autauga County,H1 \cr
-AL,01,003,Baldwin County,H1 \cr
- \cr
-also see:
-\cr
-As of 3/2015, list is here: \url{http://www2.census.gov/geo/docs/reference/codes/files/national_county.txt} \cr
+\url{http://www2.census.gov/geo/docs/reference/codes/files/national_county.txt} \cr
 \url{http://www.census.gov/geo/reference/ansi.html} \cr
 \url{http://www.census.gov/geo/reference/codes/files/national_county.txt} \cr
 \url{http://www.census.gov/geo/reference/docs/state.txt} for just state info \cr
@@ -85,10 +85,10 @@ print(fips.state) \cr
 }
 \examples{
 x <- get.county.info(); str(x); print(''); head(x)
-get.county.info(c('05001','01005'), fields=c('countyname', 'ST'))
+  get.county.info(c('05001','01005'), fields=c('countyname', 'ST'))
 }
 \seealso{
-\code{\link{clean.fips.1215}}, \code{\link{get.fips.bg}}, \code{\link{get.fips.tract}}, \code{\link{get.fips.county}}, \code{\link{get.fips.st}} to get partial FIPS from longer FIPS, or
+\code{\link{clean.fips1215}}, \code{\link{get.fips.bg}}, \code{\link{get.fips.tract}}, \code{\link{get.fips.county}}, \code{\link{get.fips.st}} to get partial FIPS from longer FIPS, or
   \code{\link{get.name.county}}, \code{\link{get.name.state}} to extract name from longer Census name, or
   \code{\link{get.state.info}}, \code{\link{get.county.info}}, \code{\link{get.epa.region}}
   to look up info such as FIPS, state abbreviation, statename, countyname, or region based on FIPS or name.

@@ -12,8 +12,8 @@
 #'   # TO GET RACE/ETHNICITY CENSUS 2010 COUNTS ON TWO BLOCKS: \cr
 #'   # \url{http://factfinder2.census.gov/bkmk/table/1.0/en/DEC/10_PL/P2/1000000US360610127002001|1000000US360610127002000} \cr
 #' @param fips vector of FIPS
-#' @param censustable 'P2' by default but can be another table code
-#' @param censusfile 'DEC/10_PL' by default
+#' @param censustable 'P2' by default but can be another table code. e.g., see \url{http://factfinder.census.gov/faces/affhelp/jsf/pages/metadata.xhtml?lang=en&type=dataset&id=dataset.en.DEC_10_SF1}
+#' @param censusfile 'DEC/10_PL' by default. Also see 'DEC_10_SF1' for example.
 #' @param launch TRUE by default, whether to open page in web browser
 #' @return Can open a webpage. Returns vector of URL(s) as character
 #' @seealso \code{\link[countyhealthrankings]{urls.countyhealthrankings}} (see \url{http://ejanalysis.github.io/countyhealthrankings})
@@ -24,7 +24,7 @@
 #'   url.censusblock(myfips, launch=FALSE)
 #' @export
 url.censusblock <- function(fips, censustable='P2', censusfile='DEC/10_PL', launch=TRUE) {
-  fips <- clean.fips.1215(fips)
+  fips <- clean.fips1215(fips)
   if (any(nchar(fips)!=15)) {warning('block fips must have 15 characters including leading zero if needed, and this does not work for a block group etc yet')}
 
   if (length(fips)==1) {

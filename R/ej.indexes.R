@@ -58,7 +58,7 @@ ej.indexes <- function(env.df, demog, weights, us.demog, universe.us.demog, as.d
   if (missing(demog))   {stop('Error - must specify demog= vector for demographic group as fraction of population\n')}
   if (missing(weights)) {
     cat('Warning - did not specify weights= vector of population counts, so assumed all are equal\n')
-    weights <- rep(1, length(env.df))
+    weights <- rep(1, NROW(env.df))
   }
 
   if (!all(sapply(env.df, class) %in% c('numeric','integer') )) {stop('env.df must be a data.frame of numeric fields')}

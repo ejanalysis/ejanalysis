@@ -2,25 +2,27 @@
 % Please edit documentation in R/get.pctile.R
 \name{get.pctile}
 \alias{get.pctile}
-\title{Determine (weighted) percentile that 1 or more value are at}
+\title{Determine (Weighted) Percentiles}
 \usage{
-get.pctile(x, values, wts, or.tied = TRUE, na.rm = TRUE)
+get.pctile(x, values, wts = 1, or.tied = TRUE, na.rm = TRUE)
 }
 \arguments{
-\item{x}{}
+\item{x}{Vector of numeric values (the distribution within which percentiles are sought)}
 
-\item{values}{}
+\item{values}{Required vector of one or more numbers for which percentiles are sought.}
 
-\item{wts}{}
+\item{wts}{Optional weights, default is 1 (equal weighting). Useful to find for example what percent of people have an x score (at or) below a given value.}
 
-\item{or.tied}{}
+\item{or.tied}{Default is TRUE which means percentile represents what fraction have x at or below value, not just below value.}
 
-\item{na.rm}{Logical, optional, TRUE by default. Should NA values (missing data) be removed first to get percentile of those with valid data.}
+\item{na.rm}{Logical, optional, TRUE by default. Should NA values (missing data) be removed first to get percentile of those with valid (nonmissing) data.}
 }
 \description{
-Given a vector of numbers, and one or more values of interest,
-determine what percentile(s) the selected value(s) is/are at. In other words,
-what fraction of all of the values are smaller than (or tied with) the selected value(s) of interest?
+Given a vector of numbers (a dataset), and one or more specific values of interest,
+  determine at what percentile(s) are those selected values. In other words,
+  what fraction of all of the numbers (actually weighted based on cumulative sum of weights)
+  are smaller than (or tied with) the selected value(s) of interest?
+  Based on analyze.stuff::pct.above (\code{\link[analyze.stuff]{pct.above}})
 }
 \examples{
 get.pctile(89:95, 1:100)

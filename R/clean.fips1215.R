@@ -8,10 +8,10 @@
 #' @template seealsoFIPS
 #' @examples
 #'   samplefips <- c("011030001003", "011030001003001", 11030001003001, 35, 1, NA, 'invalidtext', '02')
-#'   clean.fips.1215(samplefips)
-#'   clean.fips.1215("011030001003001")
+#'   clean.fips1215(samplefips)
+#'   clean.fips1215("011030001003001")
 #' @export
-clean.fips.1215 <- function(fips) {
+clean.fips1215 <- function(fips) {
   # used by get.fips.bg, get.fips.county, etc.
   if (is.numeric(fips)) {fips <- as.character(fips)}
   # Check length of fips and if NA

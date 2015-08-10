@@ -10,9 +10,9 @@ url.census(fips, censustable = "P2", censusfile = "DEC/10_PL",
 \arguments{
 \item{fips}{vector of FIPS}
 
-\item{censustable}{'P2' by default but can be another table code}
+\item{censustable}{'P2' by default but can be another table code. e.g., see \url{http://factfinder.census.gov/faces/affhelp/jsf/pages/metadata.xhtml?lang=en&type=dataset&id=dataset.en.DEC_10_SF1}}
 
-\item{censusfile}{'DEC/10_PL' by default}
+\item{censusfile}{'DEC/10_PL' by default. Also see 'DEC_10_SF1' for example.}
 
 \item{launch}{TRUE by default, whether to open page in web browser}
 }
@@ -37,7 +37,7 @@ For information on FIPS codes, see \url{http://www.census.gov/geo/reference/ansi
 }
 \examples{
 myfips <- '360610127002001'
-  url.censusblock(myfips, launch=FALSE)
+  url.census(myfips, launch=FALSE)
   myfips <- c('360610127002001', '360610127002000')
   url.census(myfips, launch=FALSE)
 }

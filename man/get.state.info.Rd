@@ -2,7 +2,7 @@
 % Please edit documentation in R/get.state.info.R
 \name{get.state.info}
 \alias{get.state.info}
-\title{Got information on state(s) **But now available as data(lookup.states) in proxistat package}
+\title{Get information on U.S. State(s)}
 \usage{
 get.state.info(query, fields = "all")
 }
@@ -13,20 +13,36 @@ state name(s) (exactly matching formats here), or \cr
 2-letter state abbreviation(s) (case insensitive). \cr}
 
 \item{fields}{vector of 1+ character string names of the fields available here:
-FIPS.ST, ST, statename, ftpname, REGION, is.usa.plus.pr, is.usa, is.state, is.contiguous.us, is.island.areas}
+FIPS.ST, ST, statename, ftpname, REGION, is.usa.plus.pr, is.usa, is.state, is.contiguous.us, is.island.areas, and others (see below)}
 }
 \value{
 A data.frame (if query has 2+ elements), providing all or specified fields of information, covering matching states/dc/pr/island areas,
   a vector of the same type of information for just one place (if only 1 query term, i.e., one element in the query vector is provided),
   or NA if certain problems arise.\cr\cr
   If no query term, or fields not specified, then all information fields are returned: \cr
-  FIPS.ST, ST, statename, ftpname, (EPA) REGION, is.usa.plus.pr, is.usa, is.state, is.contiguous.us, is.island.areas
+     get.state.info()[1:2, ]\cr\cr
+  statename FIPS.ST ST ftpname REGION is.usa.plus.pr is.usa is.state is.contiguous.us \cr
+1   Alabama      01 AL Alabama      4           TRUE   TRUE     TRUE             TRUE \cr
+2    Alaska      02 AK  Alaska     10           TRUE   TRUE     TRUE            FALSE \cr
+  \cr
+  is.island.areas area.sqmi area.sqkm landarea.sqmi landarea.sqkm waterarea.sqmi waterarea.sqkm \cr
+1           FALSE     52420    135767         50645        131171           1775           4597 \cr
+2           FALSE    665384   1723337        570641       1477953          94743         245383 \cr
+  \cr
+  inland.sqmi inland.sqkm coastal.sqmi coastal.sqkm greatlakes.sqmi greatlakes.sqkm \cr
+1        1058        2740          517         1340               0               0 \cr
+2       19304       49997        26119        67647               0               0 \cr
+  \cr
+  territorial.sqmi territorial.sqkm      lat        lon \cr
+1              199              516 32.73963  -86.84346 \cr
+2            49320           127739 63.34619 -152.83707 \cr
 }
 \description{
-Look for information from proxistat package data in data(lookup.states) -- info on states, like name, FIPS, etc.
+Query information about States, from proxistat package data in data(lookup.states, package='proxistat')
 }
 \details{
-For 1+ or all US States plus DC, PR, Island Areas (and USA overall for use in FTP URL):\cr\cr
+See \pkg{proxistat} package for data source (\url{http://ejanalysis.github.io/proxistat/})
+  For 1+ or all US States plus DC, PR, Island Areas (and USA overall for use in FTP URL):\cr\cr
   EPA Region, FIPS, State name, abbreviation for State(s); based on any of these query methods: \cr\cr
   State's FIPS, State's name, OR State's abbreviation, (i.e.,  FIPS.ST, statename, or ST). \cr\cr
   Also see data in packages \pkg{acs} and \pkg{choroplethr} \cr\cr
@@ -48,7 +64,8 @@ Note FIPS were also available here: \cr
 Also see \url{https://www.census.gov/geo/reference/state-area.html} for info on state area and internal point
 }
 \examples{
-#  x <- get.state.info(); str(x); print(''); head(x)
+# data(lookup.states, package='proxistat')
+# x <- get.state.info(); str(x); cat('\\n'); x[ 1:2, ]
 # get.state.info(c('alaska','north carolina', 'montana', "hawaii"), fields=c('ST','statename','REGION'))
 # get.state.info('DC'); get.state.info('U.S. Virgin Islands'); get.state.info(4)
 # get.state.info(c('New york','alaska','North Carolina','MONTANA', 'typo'))
@@ -57,7 +74,7 @@ Also see \url{https://www.census.gov/geo/reference/state-area.html} for info on 
 # get.state.info(1:80)
 }
 \seealso{
-\code{\link{clean.fips.1215}}, \code{\link{get.fips.bg}}, \code{\link{get.fips.tract}}, \code{\link{get.fips.county}}, \code{\link{get.fips.st}} to get partial FIPS from longer FIPS, or
+\code{\link{clean.fips1215}}, \code{\link{get.fips.bg}}, \code{\link{get.fips.tract}}, \code{\link{get.fips.county}}, \code{\link{get.fips.st}} to get partial FIPS from longer FIPS, or
   \code{\link{get.name.county}}, \code{\link{get.name.state}} to extract name from longer Census name, or
   \code{\link{get.state.info}}, \code{\link{get.county.info}}, \code{\link{get.epa.region}}
   to look up info such as FIPS, state abbreviation, statename, countyname, or region based on FIPS or name.

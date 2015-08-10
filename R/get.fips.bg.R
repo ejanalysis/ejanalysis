@@ -11,6 +11,6 @@
 #' get.fips.bg(samplefips)
 #' @export
 get.fips.bg <- function(fips) {
-  fips <- clean.fips.1215(fips) # checks length, NAs, infers missing leading zero, warns
+  fips <- clean.fips1215(fips) # checks length, NAs, infers missing leading zero, warns
   return(as.character(substr(fips, 1, 12)))
 }
