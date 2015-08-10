@@ -48,7 +48,7 @@
 ej.indexes <- function(env.df, demog, weights, us.demog, universe.us.demog, as.df=TRUE, prefix="EJ.DISPARITY.", type=1, na.rm=FALSE) {
 
   # Check for missing or bad parameters
-  validtypes <- c(1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5)
+  validtypes <- c(1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 6)
   if (!(type %in% validtypes)) {stop('invalid value specified for type')}
 
   if (!is.data.frame(env.df) ) { env.df <- as.data.frame(env.df)}
