@@ -83,7 +83,7 @@ get.county.info <- function(query, fields='all', download=FALSE) {
       download.file( 'http://www2.census.gov/geo/docs/reference/codes/files/national_county.txt' , 'countyinfo.txt')
       #' As of 3/2015, list is here:      http://www2.census.gov/geo/docs/reference/codes/files/national_county.txt
       #' Prior to that it had been here: 'http://www.census.gov/geo/reference/codes/files/national_county.txt'
-      x=read.csv('countyinfo.txt', as.is=TRUE)
+      x=read.csv('countyinfo.txt', header=FALSE, as.is=TRUE)
       ##### State,State ANSI,County ANSI,County Name,ANSI Cl
       names(x) <- c('ST', 'FIPS.ST', 'FIPS.COUNTY.3', 'countyname', 'junk')
       x$junk <- NULL
