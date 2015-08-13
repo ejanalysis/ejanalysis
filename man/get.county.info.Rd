@@ -9,25 +9,26 @@ get.county.info(query, fields = "all", download = FALSE)
 \arguments{
 \item{query}{Vector of search terms.
 Can be county's 5-digit FIPS code(s) (as numbers or strings with numbers),
-maybe also could be county name(s) (exactly matching formats here), along with 2-letter state abbrev (case-insensitive)?}
+and also could be 'countyname, statename' (fullname, exactly matching formats in countiesall$fullname, but case insensitive).}
 
 \item{fields}{Character string optional defaults to 'all' but can specify 'countyname' 'ST' and/or 'FIPS.COUNTY'}
 }
 \value{
 Returns a data.frame or vector of results depending on fields selected.
-  Returns a data.frame (if query has 2+ elements), providing all or specified fields of information, covering matching counties,
-  or a vector of the same type of information for just one place (if only 1 query term, i.e., one element in the query vector is provided),
+  Returns a data.frame (if query has 2+ elements), 'QUERY' as first column, and then all or specified fields of information, covering matching counties,
   or NA if certain problems arise.
 If no query term, or fields not specified, then all information fields are returned:
-ST     countyname FIPS.COUNTY statename                fullname
+QUERY, ST, countyname, FIPS.COUNTY, statename, fullname
 }
 \description{
-Function that reports some or all of a table of data about US Counties (and maybe county equivalents)
-for 1 or more counties, 1 or more States plus DC, PR, Island Areas, and USA overall.
-Provides FIPS.COUNTY, countyname, fullname, ST based on COUNTYs FIPS (FIPS.COUNTY), or maybe countyname plus ST (STATE ABBREVIATION)
+Function that reports some or all of a table of data
+  about queried (or all) US Counties (and county equivalents)
+  for 1 or more counties. Query terms can be 5-digit FIPS, or 'countyname, statename' so
+  'Montgomery, MD' will not work. 'Montgomery County, Maryland' will work.
+  Requested fields can include any of these: "ST", "countyname", "FIPS.COUNTY", "statename", "fullname"
 }
 \details{
-Converted this to data rather than a function, so now can just say data(counties, package='proxistat') or x<- counties via lazy loading. \cr
+Converted basic data to data, so now can also say data(counties, package='proxistat') or x <- countiesall via lazy loading. \cr
   Also, as of 3/2015, a list is here: \url{http://www2.census.gov/geo/docs/reference/codes/files/national_county.txt} \cr
   help(county.names, package='choroplethr') \cr
   data(county.names) \cr
