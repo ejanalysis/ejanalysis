@@ -7,13 +7,21 @@
 rollup(x, by, wts = NULL, FUN, prefix, na.rm = TRUE)
 }
 \arguments{
-\item{INPUTS***}{xxxxxxx}
+\item{x}{Dataset}
+
+\item{wts}{Weights, default is unweighted}
+
+\item{FUN}{Default is weighted mean}
+
+\item{prefix}{Default is 'wtd.mean.'}
+
+\item{NA}{Default is TRUE}
 }
 \value{
-OUTPUTS*** xxxxxxx
+by Vector defining groups
 }
 \description{
-aggregate over zones - *** work in progress ***
+aggregate over zones - *** work in progress -- NOT DONE YET ***
 }
 \examples{
 # SLOW BUT SEEMS TO WORK SOMEWHAT SO FAR

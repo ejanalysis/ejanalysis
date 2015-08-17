@@ -1,7 +1,11 @@
 #' @title Aggregate multiple columns of values by group
-#' @description aggregate over zones - *** work in progress ***
-#' @param INPUTS*** xxxxxxx
-#' @return OUTPUTS*** xxxxxxx
+#' @description aggregate over zones - *** work in progress -- NOT DONE YET ***
+#' @param x Dataset
+#' @return by Vector defining groups
+#' @param wts Weights, default is unweighted
+#' @param FUN Default is weighted mean
+#' @param prefix Default is 'wtd.mean.'
+#' @param NA Default is TRUE
 #' @examples
 #' # SLOW BUT SEEMS TO WORK SOMEWHAT SO FAR
 #' # 1.Do rollup of most fields as wtd mean
@@ -54,36 +58,51 @@
 #' @export
 rollup <- function( x, by, wts=NULL, FUN, prefix, na.rm=TRUE) {
 
-	# ################################################################
-	# COMPARISON OF data.table vs Hmisc summarize() for weighted means of subsets of fields
-	# ################################################################
-	#
-	# ################################
-	# using data.table
-	# ################################
-	#
-	# require(data.table)
-	# mydata = data.table(bg, key='ST')
-	#
-	# x= mydata[, list(
-	#      pctlowinc = sum(pctlowinc * pop) / sum(pop),
-	#      pctmin    = sum(pctmin    * pop) / sum(pop)
-	#  ),
-	#  by = "REGION"
-	#  ]
-	#
-	# ################################
-	# using rollup() which uses summarize() from Hmisc
-	# ################################
-	#
-	# require(Hmisc)
-	# source('rollup.R')
-	#
-	# y= rollup(bg[,c('pctlowinc', 'pctmin')], by= bg$REGION, wts=bg$pop)
-	#
-	# #There were 12 warnings (use warnings() to see them)
-	# ################################################################
-
+  # ################################################################
+  # COMPARISON OF data.table vs Hmisc summarize() for weighted means of subsets of fields
+  # ################################################################
+  #
+  # ################################
+  # using data.table
+  # ################################
+  #
+  # require(data.table)
+  # mydata = data.table(bg, key='ST')
+  #
+  # x= mydata[, list(
+  #      pctlowinc = sum(pctlowinc * pop) / sum(pop),
+  #      pctmin    = sum(pctmin    * pop) / sum(pop)
+  #  ),
+  #  by = "REGION"
+  #  ]
+  #
+  ###################
+  # Function below adds a data.table method (not just data.frame method) to aggregate()
+  # so that when you pass a data.table to aggregate() now,
+  # it will use this function, not the default aggregate():
+  ###################
+  #
+  #     aggregate.data.table <- function(x, by, FUN=mean, ..., is.value=is.numeric) {
+  #       value_columns <- names(x)[which(sapply(x, is.value))]
+  #       x[,lapply(.SD,FUN,...),eval(substitute(by)),.SDcols=value_columns]
+  #     }
+  #
+  #     bgt <- data.table(bg, key='FIPS.TRACT')
+  #
+  #     x=aggregate(bgt, by=list(bg$FIPS.TRACT))
+  #   }
+  #
+  # ################################
+  # using rollup() which used summarize() from Hmisc
+  # ################################
+  #
+  # require(Hmisc)
+  # #source('rollup.R')
+  #
+  # y= rollup(bg[,c('pctlowinc', 'pctmin')], by= bg$REGION, wts=bg$pop)
+  #
+  # #There were 12 warnings (use warnings() to see them)
+  # ################################################################
 
   warning('WORK IN PROGRESS - E.G. NEED TO TEST TO VERIFY THIS CORRECTLY HANDLES NA VALUES IN FIELD AGGREGATED AND/OR WEIGHTS FIELD')
   debugging <- FALSE
@@ -150,13 +169,13 @@ rollup <- function( x, by, wts=NULL, FUN, prefix, na.rm=TRUE) {
     }
   }
 
- if (debugging) {
-      cat('names of x: ', names(x),'\n')
-      cat('length x: ',length(x),'\n')
-      cat(length(x[,1]),' rows in x\n')
-      cat(rowcount,' rows in x\n')
-      cat(length(unique(by)),' unique values or rows in rollup of x\n')
- }
+  if (debugging) {
+    cat('names of x: ', names(x),'\n')
+    cat('length x: ',length(x),'\n')
+    cat(length(x[,1]),' rows in x\n')
+    cat(rowcount,' rows in x\n')
+    cat(length(unique(by)),' unique values or rows in rollup of x\n')
+  }
 
   # preallocate memory, but not sure how this handles NAs
   rolled <- as.data.frame(matrix(nrow=length(unique(by)), ncol=length(x)), stringsAsFactors=FALSE)
@@ -212,45 +231,45 @@ rollup <- function( x, by, wts=NULL, FUN, prefix, na.rm=TRUE) {
     #names(rolled) <- c(names(by), )
   }
 
- if (debugging) {
-   # While debugging, print names of fields as they are summarized:
-   cat('mystatnames is ', mystatnames,'\n')
-   cat('names of rolled so far are: ', names(rolled), '\n')
- }
+  if (debugging) {
+    # While debugging, print names of fields as they are summarized:
+    cat('mystatnames is ', mystatnames,'\n')
+    cat('names of rolled so far are: ', names(rolled), '\n')
+  }
 
-names(rolled) <- mystatnames
-names(rolled) <- gsub(paste(prefix, 'wxtempname', sep=''), wtscolname, names(rolled))
+  names(rolled) <- mystatnames
+  names(rolled) <- gsub(paste(prefix, 'wxtempname', sep=''), wtscolname, names(rolled))
 
-if (debugging) {
+  if (debugging) {
 
-  cat('names of rolled now are: ', names(rolled), '\n')
-  cat('names of x are:', names(x),'\n')
-  cat('wtscolname is :',wtscolname,'\n')
-}
+    cat('names of rolled now are: ', names(rolled), '\n')
+    cat('names of x are:', names(x),'\n')
+    cat('wtscolname is :',wtscolname,'\n')
+  }
 
-# Actually, a sum of the weights is probably more useful than the weighted mean of the weights!
-rolled[ , wtscolname] <- (summarize(x[ , 'wxtempname'], by=llist(by), FUN=function(y) sum(y, na.rm=TRUE)))[ , 2]
+  # Actually, a sum of the weights is probably more useful than the weighted mean of the weights!
+  rolled[ , wtscolname] <- (summarize(x[ , 'wxtempname'], by=llist(by), FUN=function(y) sum(y, na.rm=TRUE)))[ , 2]
 
-if (debugging) {
-  # While debugging, print names of fields as they are summarized:
-  cat('names of rolled now', names(rolled),'\n')
-}
+  if (debugging) {
+    # While debugging, print names of fields as they are summarized:
+    cat('names of rolled now', names(rolled),'\n')
+  }
 
-# include the "by" and wts fields as the first two columns returned
-rolled$by <- as.vector(summarize(by, by=llist(by), FUN=function(y) y[1]) )
+  # include the "by" and wts fields as the first two columns returned
+  rolled$by <- as.vector(summarize(by, by=llist(by), FUN=function(y) y[1]) )
 
-if (debugging) {
-  # While debugging, print
-  cat('names of rolled now after added by col:', names(rolled),'\n')
-  cat(' wtscolname: ', wtscolname, '\n')
-  cat('names of rolled I tried to subset on: ', c('by', wtscolname, names(rolled[!(names(rolled) %in% c('by', wtscolname) )])),'\n')
-}
+  if (debugging) {
+    # While debugging, print
+    cat('names of rolled now after added by col:', names(rolled),'\n')
+    cat(' wtscolname: ', wtscolname, '\n')
+    cat('names of rolled I tried to subset on: ', c('by', wtscolname, names(rolled[!(names(rolled) %in% c('by', wtscolname) )])),'\n')
+  }
 
-rolled <- rolled[ , c('by', wtscolname, names(rolled[!(names(rolled) %in% c('by', wtscolname) )]))]
+  rolled <- rolled[ , c('by', wtscolname, names(rolled[!(names(rolled) %in% c('by', wtscolname) )]))]
 
-# it is the sum of the weights, so name that column to say so
-names(rolled) <- gsub(wtscolname, paste('sum.',wtscolname,sep=''), names(rolled) )
+  # it is the sum of the weights, so name that column to say so
+  names(rolled) <- gsub(wtscolname, paste('sum.',wtscolname,sep=''), names(rolled) )
 
-return(rolled)
+  return(rolled)
 
 }
