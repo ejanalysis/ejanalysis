@@ -102,6 +102,6 @@ pop.ecdf(bg$traffic.score, bg$ST=='CA', bg$pop * bg$VSI.eo, log='x')
 }
 }
 \seealso{
-\code{\link[Hmisc]{Ecdf}} \code{\link{RR}}
+\code{\link[Hmisc]{Ecdf}} \code{\link{RR}} \code{\link{pop.cdf}}   \code{\link{pop.cdf2}} \code{\link{pop.ecdf}}  \code{\link{pop.cdf.density}}
 }
 

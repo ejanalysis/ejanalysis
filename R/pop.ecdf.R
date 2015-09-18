@@ -26,7 +26,7 @@
 #' @param subtitles Logical FALSE by default, which means extra info is not shown (see help on \code{\link[Hmisc]{Ecdf}})
 #' @param ... other optional parameters to pass to Ecdf
 #' @return draws a plot
-#' @seealso \code{\link[Hmisc]{Ecdf}} \code{\link{RR}}
+#' @seealso \code{\link[Hmisc]{Ecdf}} \code{\link{RR}} \code{\link{pop.cdf}}   \code{\link{pop.cdf2}} \code{\link{pop.ecdf}}  \code{\link{pop.cdf.density}} 
 #' @examples
 #' ###
 #' \dontrun{

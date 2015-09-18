@@ -47,7 +47,7 @@ ej.added <- function(e, d, p, vs='nond', silent=TRUE) {
   nonv.cases <- e * nonv
 
   # US TOTALS OR POP MEANS
-  pop.Us=sum(p, na.rm=TRUE)
+  pop.US=sum(p, na.rm=TRUE)
   VSI.eo.US <- sum(v, na.rm=TRUE) / sum(p, na.rm=TRUE) # (treats d as % of all people, not just denominator that has only those for whom poverty status determined)
   v.cases.US <- sum(v.cases, na.rm=TRUE)
   nonv.cases.US <- sum(nonv.cases, na.rm=TRUE)
@@ -125,7 +125,7 @@ ej.added <- function(e, d, p, vs='nond', silent=TRUE) {
     cat('vs=',vs,'\n')
     cat('\n')
     print( round(t(cbind(VSI.eo.US,
-                pop.Us, v.e.US, nonv.e.US, all.e.US, excess.e.US, rr1, rr2,
+                pop.US, v.e.US, nonv.e.US, all.e.US, excess.e.US, rr1, rr2,
                 nonv.cases.US, v.cases.US, v.cases.if.no.ej.US, excess.cases.US, ej.index.US, ej.index.vs.nond.US
                  ) ), 2))
     cat('\n')
@@ -176,7 +176,7 @@ ej.added <- function(e, d, p, vs='nond', silent=TRUE) {
     #
     #   [,1]
     #   VSI.eo.US               0.38
-    #   pop.Us              10000.00
+    #   pop.US              10000.00
     #   v.e.US                  0.68
     #   nonv.e.US               0.47
     #   all.e.US                0.55
@@ -225,7 +225,7 @@ ej.added <- function(e, d, p, vs='nond', silent=TRUE) {
     #
     #   [,1]
     #   VSI.eo.US               0.38
-    #   pop.Us              10000.00
+    #   pop.US              10000.00
     #   v.e.US                  0.68
     #   nonv.e.US               0.47
     #   all.e.US                0.55
