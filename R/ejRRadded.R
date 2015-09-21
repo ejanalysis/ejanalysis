@@ -2,11 +2,11 @@
 #' @description Formulas for pop counts, pop demog pct, risk, cases, RR,
 #'  excess risk, excess cases (like EJ index sum),
 #'  and how those are different under 4 alt scenarios like E of D is set to that of dref.
-#' @param P population count per place
-#' @param D demographic group as fraction of P
-#' @param E environmental indicator (e.g., risk, exposure, or any local indicator, but if it is individual risk then number of cases can be calculated rather than just people-points)
+#' @param P Population count per place (default is 1)
+#' @param D Demographic group per place as fraction of P (default is 1)
+#' @param E Environmental indicator (e.g., risk, exposure, or any local indicator, but if it is individual risk then number of cases can be calculated rather than just people-points)
 #' @export
-ejRRadded   <- function(E,D,P, na.rm=TRUE, ...) {
+ejRRadded   <- function(E,D=1,P=1, na.rm=TRUE, n=5, ...) {
 
   if (1==0) {
 
@@ -243,7 +243,7 @@ ejRRadded   <- function(E,D,P, na.rm=TRUE, ...) {
           if.here.was.risk.dref.overall=x2,
           if.here.was.risk.dref.elsewhere=x3,
           if.here.was.zero=x4
-        ), 20
+        ), n
       )
     )
     print( summary(cbind(x1,x2,x3,x4)) )
@@ -309,4 +309,5 @@ ejRRadded   <- function(E,D,P, na.rm=TRUE, ...) {
 
   printstuff2()
 
+  return()
 }

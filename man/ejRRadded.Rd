@@ -4,14 +4,14 @@
 \alias{ejRRadded}
 \title{Formulas for local contributions to EJ metrics}
 \usage{
-ejRRadded(E, D, P, na.rm = TRUE, ...)
+ejRRadded(E, D = 1, P = 1, na.rm = TRUE, n = 5, ...)
 }
 \arguments{
-\item{E}{environmental indicator (e.g., risk, exposure, or any local indicator, but if it is individual risk then number of cases can be calculated rather than just people-points)}
+\item{E}{Environmental indicator (e.g., risk, exposure, or any local indicator, but if it is individual risk then number of cases can be calculated rather than just people-points)}
 
-\item{D}{demographic group as fraction of P}
+\item{D}{Demographic group per place as fraction of P (default is 1)}
 
-\item{P}{population count per place}
+\item{P}{Population count per place (default is 1)}
 }
 \description{
 Formulas for pop counts, pop demog pct, risk, cases, RR,
