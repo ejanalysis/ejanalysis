@@ -4,13 +4,18 @@
 #'
 #' @details
 #' WORK IN PROGRESS. **** e.g.,  presumes one setting for vs..... ******
-#' Directly calculate total number of excess people-points in a demographic subgroup, across all locations
-#' **** here by default defining "excess" as above what it would be if e in d group were same as e in nond group.**** \cr
+#' Directly calculate total number of excess people-points in a demographic subgroup,
+#' across all locations
+#' **** here by default defining "excess" as above
+#' what it would be if e in d group were same as e in nond group.**** \cr
 #' where people-points are e*p*d \cr
 #' e = environmental points or individual risk (vector of places) \cr
 #' p = population counts (vector of places) \cr
-#' d = demographic fraction that is in specified demographic group (vector of places) \cr
-#' For example, if e=cancer risk (individual risk) and p=pop and d=%lowincome, value returned is number of cases among lowincome individuals in excess of what it would be if their average risk was the same as that of nonlowincome individuals. \cr
+#' d = demographic fraction that is in specified demographic group (vector of places) \cr \cr
+#'
+#' For example, if e=cancer risk (individual risk) and p=pop and d=%lowincome,
+#' value returned is number of cases among lowincome individuals in excess of what it
+#' would be if their average risk was the same as that of nonlowincome individuals. \cr
 #' net excess vulnerable * E = net excess people-points \cr
 #' vs can be 'avg' or 'nonD' (default) (not case sensitive),  \cr
 #' for, respectively, excess cases relative to risk scenario where  \cr
