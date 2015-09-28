@@ -5,6 +5,10 @@
 #'  or if given a vector or single column of environmental indicators instead of data.frame, returns a vector or column.
 #'  Each "place" can be a Census unit such as a State, County, zip code, tract, block group, block, for example (or even by individual if person-level data are available).
 #'
+#'  Note: For 1.5, 3.5, 4.5 need vector d.avg.all.elsewhere. calculated in each of those.
+#'  *** But does not properly handle cases where us.demog or universe.us.demog specified because denominator is not same as pop
+#'  *** and need to fix for when  is.na(p) | is.na(demog) ****
+#'
 #' @param env.df Environmental indicators vector or numeric data.frame, one column per environmental factor, one row per place (e.g., block group).
 #' @param demog Demographic indicator(s) vector or data.frame, numeric fractions of population that is in specified demographic group (e.g., fraction below poverty line), one per place.
 #' @param us.demog Optional number specifying overal area-wide value for demog (e.g., US percent Hispanic). Default is to calculate it as weighted mean of demog,
@@ -51,7 +55,7 @@
 ej.indexes <- function(env.df, demog, weights, us.demog, universe.us.demog, as.df=TRUE, prefix="EJ.DISPARITY.", type=1, na.rm=FALSE) {
 
   # Check for missing or bad parameters
-  validtypes <- c(1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 6)
+  validtypes <- c(1, 1.5, 2, 2.1, 2.5, 3, 3.5, 4, 4.5, 5, 6)
   if (!(type %in% validtypes)) {stop('invalid value specified for type')}
 
   if (!is.data.frame(env.df) ) { env.df <- as.data.frame(env.df)}
@@ -96,6 +100,7 @@ ej.indexes <- function(env.df, demog, weights, us.demog, universe.us.demog, as.d
     cat(paste('Using calculated us.demog=', us.demog, ', based on all locations with valid demographics (which may be a bit different than those with valid envt scores)\n') )
   }
 
+
   if (length(us.demog) > 1) {stop('Error - if specified, us.demog must be a single number, fraction of overall pop that is in given demog group\n') }
   if (is.na(us.demog) || us.demog < 0 || us.demog > 1 || !is.numeric(us.demog) ) {stop('Error - if specified, us.demog must be a single number, fraction of overall pop that is in given demog group\n') }
 
@@ -128,6 +133,7 @@ ej.indexes <- function(env.df, demog, weights, us.demog, universe.us.demog, as.d
   # For type=6,   ej.indexes = env.df * demog
 
 
+
   if (type==1 | type==1.5) {
 
     # For type=1, ej.indexes = weights * env.df * (demog  - us.demog)  # us.demog could also be called d.avg.all
@@ -141,7 +147,11 @@ ej.indexes <- function(env.df, demog, weights, us.demog, universe.us.demog, as.d
       if (type==1) {
         d.ref <- us.demog  # has been provided or calculated already
       } else {
-        d.ref <- d.avg.all.elsewhere  # has been provided or calculated already
+        #d.avg.all.elsewhere <- d.avg.all.elsewhere.calc(p, demog)
+        wtd.d <- sum(d * p, na.rm=na.rm)
+        weights.d <- sum(p, na.rm=na.rm)
+        d.avg.all.elsewhere  <- (wtd.d - (d * p)) / (weights.d - p)
+        d.ref <- d.avg.all.elsewhere
       }
       return( p * e * (d - d.ref) )
     }

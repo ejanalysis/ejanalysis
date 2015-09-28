@@ -60,6 +60,10 @@ Create an index that combines environmental and demographic indicators for each 
 Creates one EJ index column for each environmental indicator column,
  or if given a vector or single column of environmental indicators instead of data.frame, returns a vector or column.
  Each "place" can be a Census unit such as a State, County, zip code, tract, block group, block, for example (or even by individual if person-level data are available).
+
+ Note: For 1.5, 3.5, 4.5 need vector d.avg.all.elsewhere. calculated in each of those.
+ *** But does not properly handle cases where us.demog or universe.us.demog specified because denominator is not same as pop
+ *** and need to fix for when  is.na(p) | is.na(demog) ****
 }
 \examples{
 statedat <- data.frame(state.x77)
