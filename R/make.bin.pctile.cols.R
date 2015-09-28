@@ -1,9 +1,9 @@
-#' @title Make columns of (weighted) percentiles and also bin numbers, from columns of values
+#' @title Weighted Percentiles and Bin Numbers for Each Column
 #'
 #' @description This function just combines \code{\link{make.pctile.cols}} and \code{\link{make.bin.cols}}.
-#' Takes a data.frame of values and returns a data.frame of percentiles,
+#' Takes a data.frame of values and returns a data.frame (or matrix) of percentiles,
 #' showing the percentile of a value within all values in its column, as well as bin numbers,
-#' showing what bin each falls into, based on specified cutoffs. \cr\cr
+#' showing what bin each falls into, based on specified cutoffs defining bins. \cr\cr
 #' ** Work in progress/ not fully tested, e.g., need to test if all code below works with both as.df=TRUE and as.df=FALSE
 #' @param raw.data.frame Data.frame of values
 #' @param weights Optional Numeric vector of weights to create weighted percentiles, such as population-weighted quantiles. Unweighted if not specified. Vector same length as number of rows in data.frame.
@@ -11,13 +11,15 @@
 #' @param prefix.bin Optional character element, default is 'bin.', provides text to paste to beginning of input data.frame column names to use as bin output column names.
 #' @param as.df Optional logical TRUE by default, in which case matrix results are converted to data.frame
 #' @param zone NULL by default, but if a vector is provided, it defines zones to group by, so percentiles are within a given zone only.
+#' @param cutpoints Default is 1:11. see \code{\link{make.bin.cols}}
+#' @param labels Default is c(0.00, 0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90,  0.95,  1.00). see \code{\link{make.bin.cols}}
 #' @return Returns a matrix or data.frame
 #' @template seePctiles
 #' @export
-make.bin.pctile.cols <- function(raw.data.frame, weights=1, zone=NULL, as.df=TRUE, prefix.bin='bin.', prefix.pctile='pctile.', ...) {
+make.bin.pctile.cols <- function(raw.data.frame, weights=1, zone=NULL, as.df=TRUE, prefix.bin='bin.', prefix.pctile='pctile.', cutpoints=c( (0:9)/10, 0.95, 1), labels=1:11) {
   #this.as.df <- as.df; this.weights <- weights # this is one way to pass those parameters to the next functions if they say as.df=this.as.df, etc.
-  pctile.df <- make.pctile.cols(raw.data.frame, weights=weights, zone=zone, as.df=as.df, prefix=prefix.pctile, ...)
-  bin.df    <- make.bin.cols(pctile.df, as.df=as.df, prefix=prefix.bin, ...)
+  pctile.df <- make.pctile.cols(raw.data.frame, weights=weights, zone=zone, as.df=as.df, prefix=prefix.pctile)
+  bin.df    <- make.bin.cols(pctile.df, as.df=as.df, prefix=prefix.bin, cutpoints=cutpoints, labels=labels)
 #  if (as.df) {
 #    pctile.df <- as.data.frame(pctile.df)
 #    bin.df    <- as.data.frame(bin.df)

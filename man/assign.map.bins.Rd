@@ -2,7 +2,7 @@
 % Please edit documentation in R/assign.map.bins.R
 \name{assign.map.bins}
 \alias{assign.map.bins}
-\title{Assign each place to a bin based on cutpoints}
+\title{Assign Each Row (Place) to a Bin Based on Cutpoints}
 \usage{
 assign.map.bins(pctiles.vector, cutpoints = c((0:9)/10, 0.95, 1),
   labels = 1:11)
@@ -18,7 +18,7 @@ assign.map.bins(pctiles.vector, cutpoints = c((0:9)/10, 0.95, 1),
 Returns a vector bin numbers.
 }
 \description{
-Takes a vector of values and returns a vector of bin numbers.
+Takes a vector (not matrix or df) of values and returns a vector of bin numbers.
 For creating color-coded maps (choropleths), assign each place (e.g., each row of a single column) to a bin.
 Each bin represents one map color, and is defined by cutoff values.
 }

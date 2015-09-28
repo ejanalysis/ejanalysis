@@ -16,26 +16,29 @@
 #'   This should be the actual denominator, or universe, that was used to create percent demog --
 #'   universe.us.demog if specified should be a vector that has the count, for each place, of the denominator for finding the US overall percent  and this may be slightly different than total population.
 #'   For example if demog=places$pctlowinc then true universe.us.demog=places$povknownratio which is the count for whom poverty ratio is known in each place, which is <= pop.
+#' @param prefix Optional character string used as first part of each colname in results. Default is "EJ.DISPARITY."
 #' @param type Specifies type of EJ Index. Default is type=1. Several formulas are available: \cr
 #' \itemize{
-#'  \item For type=1,   ej.indexes = weights * env.df * (demog  - us.demog)  # us.demog could also be called d.avg.all (** note that na.rm is currently ignored for type=1)
+#'  \item For type=1,   ej.indexes = weights * env.df * (demog  - us.demog)  ## This is the EJ Index in EJSCREEN 2015. Note: us.demog could also be called d.avg.all, and ** note that na.rm is currently ignored for type=1
 #'  \item For type=1.5, ej.indexes= weights * env.df * (demog  - d.avg.all.elsewhere) # for a place that is one of many this can be almost identical to type 1 \cr
+#'  \item For type=2.1, ej.indexes = weights * demog  * (env.df - e.avg.all)  # like type 1 but env and demog roles are swapped \cr
 #'  \item For type=2,   ej.indexes = weights * demog  * (env.df - e.avg.nond) \cr
-#'  \item For type=2.5, ej.indexes = weights * demog  * (env.df - e.avg.nond.elsewhere ) # like type 1 but env and demog roles are swapped \cr
+#'  \item For type=2.5, ej.indexes = weights * demog  * (env.df - e.avg.nond.elsewhere )  \cr
 #'  \item For type=3,   ej.indexes = weights * ( (demog * env.df) - (d.avg.all           * e.avg.nond ) )   \cr
 #'  \item For type=3.5, ej.indexes = weights * ( (demog * env.df) - (d.avg.all.elsewhere * e.avg.nond.elsewhere) )   \cr
 #'  \item For type 4  , ej.indexes = weights * ( (demog - d.avg.all          ) * (env.df - e.avg.nond ) ) \cr
 #'  \item For type=4.5, ej.indexes = weights * ( (demog - d.avg.all.elsewhere) * (env.df - e.avg.nond.elsewhere) ) \cr
-#'  \item For type=5  , ej.indexes = weights * env.df * demog \cr
-#'  \item For type=6,   ej.indexes = env.df * demog \cr
+#'  \item For type=5  , ej.indexes = weights * env.df * demog ## A "Population Risk" or "Burden" index = Number of cases among D group if e is individual risk, or just "people-points among D" if e is "points" \cr
+#'  \item For type=6,   ej.indexes = env.df * demog ## A "percent-based" indicator = percent in group D times envt indicator. \cr
 #' }
 #'  where
 #' \itemize{
 #'  \item us.demog = overall demog where avg person lives (pop wtd mean of demog). This may be almost exactly the same as d.avg.all.elsewhere \cr
-#'  \item d.avg.all           = overall value for d as fraction of entire population (including the one place being analyzed). \cr
-#'  \item d.avg.all.elsewhere = overall value for d as fraction of entire population other than the one place being analyzed. \cr
-#'  \item e.avg.nond =           avg environmental indicator value for average person who is not in the D-group, among all (including the one place being analyzed). \cr
-#'  \item e.avg.nond.elsewhere = avg environmental indicator value for average person who is not in the D-group, among all except in the one place being analyzed. \cr
+#'  \item d.avg.all            = overall value for d as fraction of entire population (including the one place being analyzed). \cr
+#'  \item d.avg.all.elsewhere  = overall value for d as fraction of entire population other than the one place being analyzed. \cr
+#'  \item e.avg.all            =  avg environmental indicator value for average person  \cr
+#'  \item e.avg.nond           =  avg environmental indicator value for average person who is not in the D-group, among all (including the one place being analyzed). This is typically the expected as opposed to observed value of e within group D, in the context of EJ analysis of disparity in e. \cr
+#'  \item e.avg.nond.elsewhere =  avg environmental indicator value for average person who is not in the D-group, among all except in the one place being analyzed. \cr
 #' }
 #' @return Returns a numeric data.frame (or matrix if as.df=FALSE) of EJ indexes, one per place per environmental indicator.
 #' @examples
@@ -110,8 +113,9 @@ ej.indexes <- function(env.df, demog, weights, us.demog, universe.us.demog, as.d
   # For type=1, ej.indexes = weights * env.df * (demog  - us.demog)  # us.demog could also be called d.avg.all
   # For type=1.5 ej.indexes= weights * env.df * (demog  - d.avg.all.elsewhere) # for a place that is one of many this can be almost identical to type 1
 
+  # For type=2.1, ej.indexes = weights * demog  * (env.df - e.avg.all)  # like type 1 but env and demog roles are swapped
   # For type=2,   ej.indexes = weights * demog  * (env.df - e.avg.nond)
-  # For type=2.5, ej.indexes = weights * demog  * (env.df - e.avg.nond.elsewhere ) # like type 1 but env and demog roles are swapped
+  # For type=2.5, ej.indexes = weights * demog  * (env.df - e.avg.nond.elsewhere )
 
   # For type=3,   ej.indexes = weights * ( (demog * env.df) - (d.avg.all           * e.avg.nond ) )
   # For type=3.5, ej.indexes = weights * ( (demog * env.df) - (d.avg.all.elsewhere * e.avg.nond.elsewhere) )
@@ -143,8 +147,9 @@ ej.indexes <- function(env.df, demog, weights, us.demog, universe.us.demog, as.d
     }
   }
 
-  if (type==2 | type==2.5) {
+  if (type==2.1 | type==2 | type==2.5) {
 
+    # For type=2.1, ej.indexes = weights * demog  * (env.df - e.avg.all)
     # For type=2,   ej.indexes = weights * demog  * (env.df - e.avg.nond)
     # For type=2.5, ej.indexes = weights * demog  * (env.df - e.avg.nond.elsewhere ) # like type 1 but env and demog roles are swapped
 
@@ -157,13 +162,19 @@ ej.indexes <- function(env.df, demog, weights, us.demog, universe.us.demog, as.d
       wtd.e <- sum(e * p * nond, na.rm=na.rm)
       weights.e <-  sum(p * nond, na.rm=na.rm)
 
+      if (type==2.1) {
+        e.avg.all  <- sum(e * p, na.rm=na.rm) / sum(p, na.rm=na.rm) # i.e. this is the pop wtd mean e value of all people
+        e.ref <- e.avg.all
+      }
       if (type==2) {
         e.avg.nond.everywhere <-  wtd.e                    /  weights.e                 # i.e. this is the pop wtd mean of nond
         e.ref <- e.avg.nond.everywhere
-      } else {
+      }
+      if (type==2.5) {
         e.avg.nond.elsewhere  <- (wtd.e - (e * p * nond) ) / (weights.e - (p * nond) )  # everywhere but this one place
         e.ref <- e.avg.nond.elsewhere
       }
+
       return( p * d * (e - e.ref) )
     }
   }
@@ -240,6 +251,7 @@ ej.indexes <- function(env.df, demog, weights, us.demog, universe.us.demog, as.d
 
   if (type==5) {
 
+    # A "Population Risk" or "Burden" index = Number of cases among D group if e is individual risk, or just "people-points among D" if e is "points"
     # For type=5  , ej.indexes = weights * env.df * demog
 
     ejfunction <- function(e, d, p, na.rm=TRUE) {
@@ -250,6 +262,7 @@ ej.indexes <- function(env.df, demog, weights, us.demog, universe.us.demog, as.d
 
   if (type==6) {
 
+    # A "Percent-based" index (percent demographics times envt indicator, ignoring pop count)
     # For type=6,   ej.indexes = env.df * demog
 
     ejfunction <- function(e, d, p, na.rm=TRUE) {

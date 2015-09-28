@@ -2,10 +2,11 @@
 % Please edit documentation in R/make.bin.pctile.cols.R
 \name{make.bin.pctile.cols}
 \alias{make.bin.pctile.cols}
-\title{Make columns of (weighted) percentiles and also bin numbers, from columns of values}
+\title{Weighted Percentiles and Bin Numbers for Each Column}
 \usage{
 make.bin.pctile.cols(raw.data.frame, weights = 1, zone = NULL,
-  as.df = TRUE, prefix.bin = "bin.", prefix.pctile = "pctile.", ...)
+  as.df = TRUE, prefix.bin = "bin.", prefix.pctile = "pctile.",
+  cutpoints = c((0:9)/10, 0.95, 1), labels = 1:11)
 }
 \arguments{
 \item{raw.data.frame}{Data.frame of values}
@@ -19,15 +20,19 @@ make.bin.pctile.cols(raw.data.frame, weights = 1, zone = NULL,
 \item{prefix.bin}{Optional character element, default is 'bin.', provides text to paste to beginning of input data.frame column names to use as bin output column names.}
 
 \item{prefix.pctile}{Optional character element, default is 'pctile.', provides text to paste to beginning of input data.frame column names to use as pctile output column names.}
+
+\item{cutpoints}{Default is 1:11. see \code{\link{make.bin.cols}}}
+
+\item{labels}{Default is c(0.00, 0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90,  0.95,  1.00). see \code{\link{make.bin.cols}}}
 }
 \value{
 Returns a matrix or data.frame
 }
 \description{
 This function just combines \code{\link{make.pctile.cols}} and \code{\link{make.bin.cols}}.
-Takes a data.frame of values and returns a data.frame of percentiles,
+Takes a data.frame of values and returns a data.frame (or matrix) of percentiles,
 showing the percentile of a value within all values in its column, as well as bin numbers,
-showing what bin each falls into, based on specified cutoffs. \cr\cr
+showing what bin each falls into, based on specified cutoffs defining bins. \cr\cr
 ** Work in progress/ not fully tested, e.g., need to test if all code below works with both as.df=TRUE and as.df=FALSE
 }
 \seealso{

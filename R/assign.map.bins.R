@@ -1,6 +1,6 @@
-#' @title Assign each place to a bin based on cutpoints
+#' @title Assign Each Row (Place) to a Bin Based on Cutpoints
 #'
-#' @description Takes a vector of values and returns a vector of bin numbers.
+#' @description Takes a vector (not matrix or df) of values and returns a vector of bin numbers.
 #' For creating color-coded maps (choropleths), assign each place (e.g., each row of a single column) to a bin.
 #' Each bin represents one map color, and is defined by cutoff values.
 #' @details

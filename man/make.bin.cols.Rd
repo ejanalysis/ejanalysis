@@ -2,13 +2,13 @@
 % Please edit documentation in R/make.bin.cols.R
 \name{make.bin.cols}
 \alias{make.bin.cols}
-\title{Create bin number columns based on multiple percentile columns}
+\title{Create a Bin Numbers Column for each Percentiles Column}
 \usage{
 make.bin.cols(pctile.df, as.df = TRUE, cutpoints = c((0:9)/10, 0.95, 1),
   labels = 1:11, prefix = "bin.")
 }
 \arguments{
-\item{pctile.df}{Data.frame, required. Typically percentiles as decimal fractions, 0 to 1, one per place.}
+\item{pctile.df}{Data.frame (or matrix or vector), required. Typically percentiles as decimal fractions, 0 to 1, one per place.}
 
 \item{as.df}{Logical value, optional, TRUE by default. Defines whether results are data.frame or matrix.}
 
@@ -19,11 +19,11 @@ make.bin.cols(pctile.df, as.df = TRUE, cutpoints = c((0:9)/10, 0.95, 1),
 \item{prefix}{Optional character element, ".bin" by default, pasted as prefix to each column name of pctile.df, and used as names of returned columns.}
 }
 \value{
-Returns a data.frame the same shape as pctile.df
+Returns a data.frame, matrix, or vector (depending on \code{as.df}) the same shape as pctile.df
 }
 \description{
-Simplifies creation of data.frame columns that specify map bins by bin number,
-  based on values (percentiles for example) and specified cutpoints.
+Simplifies creation of data.frame or matrix (or vector) with columns that specify bins by bin number,
+  based on values (percentiles for example) and specified cutpoints. Each bin is defined by cutpoints.
 }
 \details{
 This is one way to prepare data to be mapped in a series of choropleths, for example (color-coded maps).
