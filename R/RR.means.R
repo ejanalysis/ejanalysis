@@ -114,9 +114,32 @@ RR.means <- function(e, d, pop, dref, na.rm=TRUE) {
     # same for length(pop)
   }
 
+#   > RR.means(bg[, names.e], bg[, 'pctmin'], pop = bg$pop, na.rm = TRUE)
+#   pm o3 cancer neuro resp dpm pctpre1960 traffic.score proximity.npl proximity.rmp proximity.tsdf proximity.npdes
+#   [1,] x x x x x x x x x x x x
+#   [2,] x x x x x x x x x x x x
+
+#   > RR.means(bg[, 'pm'], bg[, names.d], pop = bg$pop, na.rm = TRUE)
+#           group not
+#   VSI.eo      x   x
+#   VSI.svi6    x   x
+#   pctmin      x   x
+#   pctlowinc   x   x
+#   pctlths     x   x
+#   pctlingiso  x   x
+#   pctunder5   x   x
+#   pctover64   x   x
+
+
   # handle multiple envt factors
   if ((is.data.frame(e) || is.matrix(e)) && length(e[ , 1]) > 1) {
-    myresults <- sapply(e, function(x) means.for.one.e(x, d, pop, dref))
+    myresults <- array(NA, dim=c(NCOL(e), NCOL(d), 2), dimnames = c('e', 'd', 'group.or.not'))
+    for (i in 1:NCOL(e)) {
+      warning('still debugging this')
+      myresults[ i, , ] <- sapply(e[ , i, drop=FALSE], function(x) means.for.one.e(x, d, pop, dref))
+    }
+
+    #myresults <- sapply(e, function(x) means.for.one.e(x, d, pop, dref))
     return(myresults)
   }
 
