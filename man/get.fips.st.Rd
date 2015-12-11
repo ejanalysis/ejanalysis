@@ -18,9 +18,10 @@ Extract partial FIPS code from longer FIPS code
 \details{
 For information on FIPS codes, see \url{http://www.census.gov/geo/reference/ansi.html},
   and also see \url{https://www.census.gov/geo/reference/geoidentifiers.html}
+  It does not check to see if the codes are valid other than counting how many characters each has.
 }
 \examples{
-samplefips <- c("011030001003", "011030001003001", 11030001003001, 35, 1, NA, 'invalidtext', '02')
+samplefips <- c("011030001003", "011030001003001", 02610, 11030001003001, 35, 1, NA, 'invalidtext', '02')
 get.fips.st(samplefips)
 }
 \seealso{

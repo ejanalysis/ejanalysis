@@ -1,29 +1,25 @@
-#'@title Merge table of Relative Risk results for some zones with table for USA overall
-#'@description xxx.
-#'@details xxx.
-#'Returns a xxx.
-#'xxx.
-#'
-#'@param xxx xxx/what/type/default.
-#'@param xxx xxx/what/type/default.
-#'@param xxx xxx/what/type/default.
-#'@param xxx xxx/what/type/default.
-#'@return Returns a xxx/type/what/size.
+#' @title Merge tables of Relative Risk results
+#' @description Merge table of Relative Risk results for some zones with table for USA overall
+#' @param rrs1 First table from RR.table()
+#' @param rrs2 Another table from RR.table()
+#' @param zones2 Zones in rrs2, as vector, default is dimnames(rrs2)[[3]]
+#' @return Returns a new array
 #' @template seealsoRR
 #' @keywords EJ
 #' @examples
-#' RRS.US  <- RR.table(mydat=bg, Enames=names.e, Dnames=c(names.d, names.d.subgroups.pct), popcolname='pop')
-#' RRS.ST  <- RR.table(mydat=bg, Enames=names.e, Dnames=c(names.d, names.d.subgroups.pct), popcolname='pop', Zcolname='ST')
-#' RRS <- RR.table.add(RRS.ST, RRS.US)
-#' RRS[ 'pctlowinc', , ]
-#' RRS[ , , 'CA']
-#' RRS[ , 'pm', ]
-#' RRS.REGION  <- RR.table(mydat=bg, Enames=names.e, Dnames=c(names.d, names.d.subgroups.pct), popcolname='pop', Zcolname='REGION')
-#' RRS2 <- RR.table.add(RRS, RRS.REGION)
-#' RRS2[ , , '8']
-#' @note Future work: xxx.
+#'  RRS.US  <- RR.table(mydat=bg, Enames=names.e, Dnames=c(names.d, names.d.subgroups.pct), popcolname='pop')
+#'  RRS.ST  <- RR.table(mydat=bg, Enames=names.e, Dnames=c(names.d, names.d.subgroups.pct), popcolname='pop', Zcolname='ST')
+#'  RRS <- RR.table.add(RRS.ST, RRS.US)
+#'  RRS[ 'pctlowinc', , ]
+#'  RRS[ , , 'CA']
+#'  RRS[ , 'pm', ]
+#'  RR.table.sort(RRS)
+#'
+#'  RRS.REGION  <- RR.table(mydat=bg, Enames=names.e, Dnames=c(names.d, names.d.subgroups.pct), popcolname='pop', Zcolname='REGION')
+#'  RRS2 <- RR.table.add(RRS, RRS.REGION)
+#'  RRS2[ , , '8']
 #' @export
-table.add <- function(rrs1, rrs2, zones2) {
+RR.table.add <- function(rrs1, rrs2, zones2) {
 
   ############################
   # MERGE ANY TABLE OF ZONES AND US TABLE *****

@@ -3,6 +3,7 @@
 #' @description Extract partial FIPS code from longer FIPS code
 #' @details For information on FIPS codes, see \url{http://www.census.gov/geo/reference/ansi.html},
 #'   and also see \url{https://www.census.gov/geo/reference/geoidentifiers.html}
+#'   It does not check to see if the codes are valid other than counting how many characters each has.
 #' @param fips Vector of one or more elements, character class, 12 or 15 characters long FIPS (block group or block), required.
 #' @return Returns a vector of one or more character elements, same lengths as fips
 #' @template seealsoFIPS
