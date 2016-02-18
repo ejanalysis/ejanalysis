@@ -25,38 +25,34 @@
 #' # states   <- rollup(bg[ , names.d], by=bg$ST, wts=bg$pop)
 #' # states2  <- rollup(bg[ , c('pm', 'o3')], by=bg$ST, wts=bg$pop)
 #'
-#' # SPECIFY WHICH FIELDS TO ROLLUP VIA WTD AVG AND WHICH TO DO VIA SUM OVER US/REGION/COUNTY/STATE/TRACT
+#' # COMPLETE EXAMPLE: SPECIFY FIELDS TO ROLLUP VIA WTD AVG AND WHICH TO DO VIA SUM OVER US/REGION/COUNTY/STATE/TRACT
 #'
-#' # source('myfunctions.R') # if not already available
 #' # load('bg ... plus race eth subgrps ACS0812.RData') # if not already working with it
-#'
-#' # Get the wtd.mean for all except pctile, bin (or raw EJ index?)
-#' #avgnames <- names(bg)
-#' #avgnames <- avgnames[!(grepl('^pctile.', avgnames))]
-#' #avgnames <- avgnames[!(grepl('^bin.', avgnames))]
-#' #avgnames <- avgnames[!(grepl('^EJ.', avgnames))]
-#'
-#' # Get the sum for all the raw counts, and area
-#' #sumnames <- c('area', 'pop', 'povknownratio', 'age25up', 'hhlds', 'builtunits', 'mins', 'lowinc', 'lths', 'lingiso', 'under5', 'over64', 'pre1960', 'VNI.eo', 'VNI.svi6', 'VDI.eo', 'VDI.svi6',
-#' #              'hisp', 'nhaa', 'nhaiana', 'nhba',  'nhmulti', 'nhnhpia', 'nhotheralone', 'nhwa', 'nonmins', sumnames)
-#' #sumnames <- c(sumnames, names(bg)[grepl('^EJ.', names(bg))] )
-#' #
-#' # Get the rollups of wtd.mean cols
-#' #us       <- rollup( bg[ , avgnames], wts=bg$pop )
-#' #regions  <- rollup( bg[ , avgnames], wts=bg$pop, by=bg$REGION)
-#' #states   <- rollup( bg[ , avgnames], wts=bg$pop, by=bg$FIPS.ST)
-#' #counties <- rollup( bg[ , avgnames], wts=bg$pop, by=bg$FIPS.COUNTY)
-#' #tracts   <- rollup( bg[ , avgnames], wts=bg$pop, by=bg$FIPS.TRACT)
-#' #
-#' # Get the rollups of summed cols
-#' #us <- cbind(us, rollup( bg[  ]))
-#' #
-#' #counties <- rollup(bg[ , c(names.e, names.d)], wts=bg$pop, by=bg$FIPS.COUNTY)
-#' # doesn't work yet to use rollup??
-#' # counties$pop <- rollup(bg$pop, by=bg$FIPS.COUNTY, FUN=function(x) sum(x, na.rm=TRUE))
-#' #counties$pop <- aggregate(bg$pop, by=list(bg$FIPS.COUNTY), FUN=function(x) sum(x, na.rm=TRUE))
+require(analyze.stuff)
+require(ejanalysis)
+require(ejscreen)
+data(names.evars); data(names.ejvars); data(names.d)
+# Available for rolling up by: 'FIPS', "FIPS.TRACT", "FIPS.COUNTY", "FIPS.ST", 'REGION'
+# Get the sum for all the raw counts, and area
+sumnames <- c('area', 'pop', 'povknownratio', 'age25up', 'hhlds', 'builtunits', 
+              'mins', 'lowinc', 'lths', 'lingiso', 'under5', 'over64', 'pre1960', 
+              'VNI.eo', 'VNI.svi6', 
+              'VDI.eo', 'VDI.svi6',
+              names.d.subgroups.count, 'nonmins')
+# Get the rollups of summed cols
+us       <- rollup( bg[ , sumnames], FUN=sum, prefix = '', by=1)
+regions  <- rollup( bg[ , sumnames], FUN=sum, prefix = '', by=bg$REGION)
+states   <- rollup( bg[ , sumnames], FUN=sum, prefix = '', by=bg$FIPS.ST)
+counties <- rollup( bg[ , sumnames], FUN=sum, prefix = '', by=bg$FIPS.COUNTY)
+tracts   <- rollup( bg[ , sumnames], FUN=sum, prefix = '', by=bg$FIPS.TRACT)
+# Get the wtd.mean for at least E 
+avgnames <- names.e
+
+
+#' 
+#' 
 #' @export
-rollup <- function( x, by, wts=NULL, FUN, prefix, na.rm=TRUE) {
+rollup <- function( x, by, wts=NULL, FUN, prefix='wtd.mean.', na.rm=TRUE) {
 
   # ################################################################
   # COMPARISON OF data.table vs Hmisc summarize() for weighted means of subsets of fields
@@ -108,9 +104,12 @@ rollup <- function( x, by, wts=NULL, FUN, prefix, na.rm=TRUE) {
   debugging <- FALSE
 
   if (missing(x))  {stop('missing input: x')}
-  if (missing(by)) {warning('missing parameter: by, providing one summary of all')}
 
-  rowcount <- length(as.matrix(x)[,1])
+  rowcount <- NROW(x)
+  if (missing(by)) {
+    warning('missing parameter: by, providing one summary of all')
+    by <- rep(1, rowcount)
+    }
 
   if (missing(FUN)) {
 
