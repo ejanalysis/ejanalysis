@@ -8,3 +8,5 @@
 .Rproj.user/
 .Rproj.user
 ejanalysis.Rproj
+
+*.history
