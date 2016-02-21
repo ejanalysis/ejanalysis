@@ -11,10 +11,12 @@
 #'   rollup.pct(a,b,zone)
 #' @export
 rollup.pct <- function(a, b, zone) {
-  require(data.table)
+  library(data.table)
+  warning('not fully tested and will be superseded by rollup() when that uses data.table')
   dat <- data.table::data.table(a=a, b=b, zone=zone, stringsAsFactors=FALSE)
-  return( dat[ , pct= sum(a) / sum(b), by=zone] )
+  return( dat[ , pct= sum(a) / sum(b), by= zone] )
 
+  
   # specific example without this function:
   # get bg dataset via   # load('')
   # require(data.table)

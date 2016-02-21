@@ -24,7 +24,7 @@ by Vector defining groups
 aggregate over zones - *** work in progress -- NOT DONE YET ***
 }
 \examples{
-# SLOW BUT SEEMS TO WORK SOMEWHAT SO FAR
+# a SLOW way BUT SEEMS TO WORK SOMEWHAT SO FAR:
 # 1.Do rollup of most fields as wtd mean
    #t2 <- rollup(bg[ , names.e], by=bg$FIPS.TRACT, wts=bg$pop)
    #names(t2) <- gsub('by', 'FIPS.TRACT', names(t2))
@@ -72,5 +72,8 @@ aggregate over zones - *** work in progress -- NOT DONE YET ***
 # doesn't work yet to use rollup??
 # counties$pop <- rollup(bg$pop, by=bg$FIPS.COUNTY, FUN=function(x) sum(x, na.rm=TRUE))
 #counties$pop <- aggregate(bg$pop, by=list(bg$FIPS.COUNTY), FUN=function(x) sum(x, na.rm=TRUE))
+}
+\seealso{
+\code{\link{wtd.colMeans}}
 }
 
