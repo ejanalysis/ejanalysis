@@ -32,7 +32,8 @@ Tries to interpret vector of one or more FIPS codes and/or names of geographies,
   and convert between them.
 }
 \examples{
-geofips(c('NY', 'Alabama', 1, 14, 'Montgomery County, Maryland', '01121', 1121, '060690006002', 60690006002, '011210118001025')
+geofips(c('NY', 'Alabama', 1, 14, 'Montgomery County, Maryland',
+    '01121', 1121, '060690006002', 60690006002, '011210118001025')
    geofips(c('01121', 'Montgomery County, Maryland'), c('state', 'fips.st')
 }
 \seealso{

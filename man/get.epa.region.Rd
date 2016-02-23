@@ -24,10 +24,10 @@ For EPA Regions, see \url{http://www2.epa.gov/aboutepa#pane-4} or \url{http://ww
 myregions <- get.epa.region() # to see full list
  myregions <- get.epa.region('DC') # for one state by 2-letter abbreviation
  myregions <- get.epa.region(c('AK', 'NY', 'PR')) # for a vector of 2-letter abbreviations
- myregions <- get.epa.region(c('alaska', 'new york', 'puerto rico')) # for a vector of state names
- myregions <- get.epa.region(c('04', '36', '72')) # for a vector of state FIPS codes as characters with leading zeroes
- myregions <- get.epa.region(c(4,36,72)) # for a vector of state FIPS codes as numeric with no leading zeroes
- myregions <- get.epa.region(c('NY', 'Ohio')) # CANNOT MIX WAYS OF DEFINING STATES - PICK ONE FORMAT
+ myregions <- get.epa.region(c('alaska', 'new york', 'puerto rico')) # vector of state names
+ myregions <- get.epa.region(c('04', '36', '72')) # FIPS codes, character with leading zero
+ myregions <- get.epa.region(c(4,36,72)) # state FIPS codes, numeric with no leading zeroes
+ myregions <- get.epa.region(c('NY', 'Ohio')) # CANNOT MIX WAYS TO DEFINE STATES- PICK 1 FORMAT
 }
 \seealso{
 \code{\link{clean.fips1215}}, \code{\link{get.fips.bg}}, \code{\link{get.fips.tract}}, \code{\link{get.fips.county}}, \code{\link{get.fips.st}} to get partial FIPS from longer FIPS, or

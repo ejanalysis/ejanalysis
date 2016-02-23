@@ -3,16 +3,17 @@
 #'   Use US Census block group FIPS codes to get more information about each block group's overall location, such as State and County name.
 #'   It does not check to see if the codes are valid other than counting how many characters each has.
 #' @param fips Vector of US Census block group FIPS codes (missing leading zeroes are added).
-#' @return Returns a data.frame with these fields: c('FIPS', 'FIPS.TRACT', 'FIPS.COUNTY', 'FIPS.ST', 'ST', 'countyname', 'statename', 'REGION') 
+#' @return Returns a data.frame with these fields: c('FIPS', 'FIPS.TRACT', 'FIPS.COUNTY', 'FIPS.ST', 'ST', 'countyname', 'statename', 'REGION')
 #'   where FIPS is the input fips, the next few are the first few characters of fips corresponding to tract, county, or state, ST is the 2-letter state abbreviation, statename is state name, countyname is county name, and REGION is USEPA Region 1-10.
 #' @examples
-#'  x=c("391670211002", "060730185143", "261079609003", 02, 02610, "400353734002", "371190030121", "250235022001", "550439609001", "060730170302")
+#'  x=c("391670211002", "060730185143", "261079609003", 02, 02610,
+#'   "400353734002", "371190030121", "250235022001", "550439609001", "060730170302")
 #'  get.fips.etc(x)
 #' @export
 get.fips.etc <- function(fips) {
   ##########################################################################################################
   # Make partial FIPS fields and county and ST and REGION info
-  # input should be a vector of block group fips codes 
+  # input should be a vector of block group fips codes
   ##########################################################################################################
   fips <- clean.fips(fips)
   x <- data.frame(FIPS=fips,

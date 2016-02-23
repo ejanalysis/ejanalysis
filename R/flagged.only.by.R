@@ -4,7 +4,7 @@
 #'This can find rows that meet only 1 of several criteria, for example.
 #'Returns a logical matrix or data.frame, with TRUE for each cell that meets the test.
 #'Can be used in EJ analysis in identifying places (rows) that were only flagged because one of the indicator(s) is at/above a cutoff, threshold value.
-#'For example, if there were four criteria to be met in flagging a location, this function identifies 
+#'For example, if there were four criteria to be met in flagging a location, this function identifies
 #'places that met only one of the criteria, and can show which one was met.
 #'
 #'@param x Data.frame or matrix of numbers to be compared to cutoff value.
@@ -19,9 +19,11 @@
 #'@examples
 #'out <- flagged.only.by(x<-data.frame(a=1:10, b=rep(7,10), c=7:16), cutoff=7)
 #'x; out # default is or.tied=FALSE
-#'out <- flagged.only.by(data.frame(a=1:10, b=rep(7,10), c=7:16), cutoff=7, or.tied=TRUE, below=TRUE)
+#'out <- flagged.only.by(data.frame(a=1:10, b=rep(7,10), c=7:16), cutoff=7,
+#' or.tied=TRUE, below=TRUE)
 #'out
-#'out <- flagged.only.by(data.frame(a=1:10, b=rep(7,10), c=7:16) )  # Compares each number in each row to the default cutoff.
+#'out <- flagged.only.by(data.frame(a=1:10, b=rep(7,10), c=7:16) )
+#'# Compares each number in each row to the default cutoff.
 #'out
 #'@note Future work: these functions could have wts, na.rm, & allow cutoffs or benchmarks as a vector (not just 1 number), & have benchnames.
 #'@export

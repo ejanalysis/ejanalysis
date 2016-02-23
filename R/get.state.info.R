@@ -52,11 +52,13 @@
 #' @examples
 #' # data(lookup.states, package='proxistat')
 #' # x <- get.state.info(); str(x); cat('\n'); x[ 1:2, ]
-#' # get.state.info(c('alaska','north carolina', 'montana', "hawaii"), fields=c('ST','statename','REGION'))
+#' # get.state.info(c('alaska','north carolina', 'montana', "hawaii"),
+#'  fields=c('ST','statename','REGION'))
 #' # get.state.info('DC'); get.state.info('U.S. Virgin Islands'); get.state.info(4)
 #' # get.state.info(c('New york','alaska','North Carolina','MONTANA', 'typo'))
 #' # get.state.info(c('ny','DC','AK','mt', 'PR'))
-#' # get.state.info( c(36, 36, 'ny', '  ny', 'ny  ', 'California', 'DC','AK','mt', 'PR', '02', 2, 'North carolina') )
+#' # get.state.info( c(36, 36, 'ny', '  ny', 'ny  ', 'California', 'DC','AK','mt', 'PR',
+#'  '02', 2, 'North carolina') )
 #' # get.state.info(1:80)
 #' @export
 get.state.info <- function(query, fields='all') {

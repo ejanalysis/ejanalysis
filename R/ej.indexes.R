@@ -47,9 +47,11 @@
 #' @return Returns a numeric data.frame (or matrix if as.df=FALSE) of EJ indexes, one per place per environmental indicator.
 #' @examples
 #'  statedat <- data.frame(state.x77)
-#'  hist(myej <- ej.indexes(env.df=statedat[ , c('Life.Exp', 'Frost')], demog=statedat$HS.Grad/100, weights=statedat$Population, prefix='EJtype1.', type=1 ))
+#'  hist(myej <- ej.indexes(env.df=statedat[ , c('Life.Exp', 'Frost')],
+#'   demog=statedat$HS.Grad/100, weights=statedat$Population, prefix='EJtype1.', type=1 ))
 #'  set.seed(999)
-#'  myej <- ej.indexes(env.df=rnorm(1000, 10, 3), demog=runif(1000, 0, 1), weights=runif(1000, 500, 5000))
+#'  myej <- ej.indexes(env.df=rnorm(1000, 10, 3), demog=runif(1000, 0, 1),
+#'   weights=runif(1000, 500, 5000))
 #'  myej
 #' @export
 ej.indexes <- function(env.df, demog, weights, us.demog, universe.us.demog, as.df=TRUE, prefix="EJ.DISPARITY.", type=1, na.rm=FALSE) {

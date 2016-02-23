@@ -7,15 +7,18 @@
 #' @template seealsoRR
 #' @keywords EJ
 #' @examples
-#'  RRS.US  <- RR.table(mydat=bg, Enames=names.e, Dnames=c(names.d, names.d.subgroups.pct), popcolname='pop')
-#'  RRS.ST  <- RR.table(mydat=bg, Enames=names.e, Dnames=c(names.d, names.d.subgroups.pct), popcolname='pop', Zcolname='ST')
+#'  RRS.US  <- RR.table(mydat=bg, Enames=names.e, Dnames=c(names.d, names.d.subgroups.pct),
+#'   popcolname='pop')
+#'  RRS.ST  <- RR.table(mydat=bg, Enames=names.e, Dnames=c(names.d, names.d.subgroups.pct),
+#'   popcolname='pop', Zcolname='ST')
 #'  RRS <- RR.table.add(RRS.ST, RRS.US)
 #'  RRS[ 'pctlowinc', , ]
 #'  RRS[ , , 'CA']
 #'  RRS[ , 'pm', ]
 #'  RR.table.sort(RRS)
 #'
-#'  RRS.REGION  <- RR.table(mydat=bg, Enames=names.e, Dnames=c(names.d, names.d.subgroups.pct), popcolname='pop', Zcolname='REGION')
+#'  RRS.REGION  <- RR.table(mydat=bg, Enames=names.e, Dnames=c(names.d, names.d.subgroups.pct),
+#'   popcolname='pop', Zcolname='REGION')
 #'  RRS2 <- RR.table.add(RRS, RRS.REGION)
 #'  RRS2[ , , '8']
 #' @export

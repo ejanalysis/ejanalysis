@@ -22,8 +22,10 @@ Sorted version of x array of 3 dimensions: RRS[Dnames, Enames, Zcolnames]
 Sort table of Relative Risk results by zone by group by envt risk factor
 }
 \examples{
-RRS.US  <- RR.table(mydat=bg, Enames=names.e, Dnames=c(names.d, names.d.subgroups.pct), popcolname='pop')
-RRS.ST  <- RR.table(mydat=bg, Enames=names.e, Dnames=c(names.d, names.d.subgroups.pct), popcolname='pop', Zcolname='ST')
+RRS.US  <- RR.table(mydat=bg, Enames=names.e, Dnames=c(names.d, names.d.subgroups.pct),
+ popcolname='pop')
+RRS.ST  <- RR.table(mydat=bg, Enames=names.e, Dnames=c(names.d, names.d.subgroups.pct),
+ popcolname='pop', Zcolname='ST')
 RRS <- RR.table.add(RRS.ST, RRS.US)
 RRS[ 'pctlowinc', , ]
 RRS[ , , 'CA']
@@ -31,7 +33,8 @@ RRS[ , 'pm', ]
 
 RR.table.sort(RRS)
 
-RRS.REGION  <- RR.table(mydat=bg, Enames=names.e, Dnames=c(names.d, names.d.subgroups.pct), popcolname='pop', Zcolname='REGION')
+RRS.REGION  <- RR.table(mydat=bg, Enames=names.e, Dnames=c(names.d, names.d.subgroups.pct),
+ popcolname='pop', Zcolname='REGION')
 RRS2 <- RR.table.add(RRS, RRS.REGION)
 RRS2[ , , '8']
 }

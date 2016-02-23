@@ -20,7 +20,8 @@
 #' @return Returns vector of same length as x, containing fips as character elements with any leading zeroes, and/or names of geographies.
 #' @seealso \code{\link[ejanalysis]{get.fips.st}} and related functions noted there, \code{\link[ejanalysis]{clean.fips}}, \code{\link[ejanalysis]{get.state.info}}
 #' @examples
-#'    geofips(c('NY', 'Alabama', 1, 14, 'Montgomery County, Maryland', '01121', 1121, '060690006002', 60690006002, '011210118001025')
+#'    geofips(c('NY', 'Alabama', 1, 14, 'Montgomery County, Maryland',
+#'     '01121', 1121, '060690006002', 60690006002, '011210118001025')
 #'    geofips(c('01121', 'Montgomery County, Maryland'), c('state', 'fips.st')
 #' @export
 geofips <- function(x, to) {

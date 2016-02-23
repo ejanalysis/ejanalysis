@@ -8,7 +8,8 @@
 #'   NA where input cannot be converted to county/tract/block group/block length code, as with state fips as input.
 #' @template seealsoFIPS
 #' @examples
-#' samplefips <- c("011030001003", "011030001003001", 02610, 11030001003001, 35, 1, NA, 'invalidtext', '02')
+#' samplefips <- c("011030001003", "011030001003001", 02610, 11030001003001, 35, 1,
+#'  NA, 'invalidtext', '02')
 #' get.fips.county(samplefips)
 #' @export
 get.fips.county <- function(fips) {

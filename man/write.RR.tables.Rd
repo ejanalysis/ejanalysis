@@ -22,7 +22,8 @@ This function breaks up a 3-dimensional table of RR values (e.g., by demographic
   Requires table in format provided by \code{\link{RR}} and related functions.
 }
 \examples{
-# RRS.REGION <- RR.table(mydat=bg, Enames=names.e, Dnames=c(names.d, names.d.subgroups.pct), popcolname='pop', Zcolname='REGION')
+# RRS.REGION <- RR.table(mydat=bg, Enames=names.e,
+  # Dnames=c(names.d, names.d.subgroups.pct), popcolname='pop', Zcolname='REGION')
   # write.RR.tables(RRS.REGION)
 }
 \seealso{

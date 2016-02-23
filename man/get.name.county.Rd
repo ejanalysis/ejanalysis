@@ -27,7 +27,8 @@ Inputs can be tracts or block groups as in the relevant ACS summary files, possi
  Note old code was in GET COUNTY NAMES FROM NHGIS DATASET.R
 }
 \examples{
-# Test data where some are block groups and some are tracts, as in file downloaded from Census FTP site for ACS 5-year Summary File:
+# Test data where some are block groups and some are tracts,
+# as in file downloaded from Census FTP site for ACS 5-year Summary File:
 
 testnames <- c(
   'Block Group 1, Census Tract 1, Aleutians East Borough, Alaska',

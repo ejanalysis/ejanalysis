@@ -23,7 +23,7 @@
 #' @param main Required character specifying plot title
 #' @param ... other optional parameters to pass to weighted.hist()
 #' @return Draws a plot
-#' @seealso \code{\link[Hmisc]{Ecdf}} \code{\link{RR}} \code{\link{pop.cdf}}   \code{\link{pop.cdf2}} \code{\link{pop.ecdf}}  \code{\link{pop.cdf.density}} 
+#' @seealso \code{\link[Hmisc]{Ecdf}} \code{\link{RR}} \code{\link{pop.cdf}}   \code{\link{pop.cdf2}} \code{\link{pop.ecdf}}  \code{\link{pop.cdf.density}}
 #' @examples
 #' ###
 #' \dontrun{
@@ -42,17 +42,20 @@
 #' #
 #' # pop.cdf(bg$pm, bg$pctmin, bg$pop)
 #' # pop.cdf(log10(places$traffic.score), places$pctmin, places$pop)
-#' # pop.cdf(places$cancer, places$pctmin, places$pop, allothers=FALSE); pop.cdf(places$cancer, places$pctlingiso, places$pop, col='green', allothers=FALSE, add=TRUE)
+#' # pop.cdf(places$cancer, places$pctmin, places$pop, allothers=FALSE)
+#' # pop.cdf(places$cancer, places$pctlingiso, places$pop, col='green', allothers=FALSE, add=TRUE)
 #' # Demog suscept  for each REGION (can't see if use vs others)
 #' pop.cdf(bg$traffic.score, bg$VSI.eo, bg$pop, log='x', subtitles=FALSE,
 #'          group=bg$REGION, allothers=FALSE,
-#'          xlab='Traffic score (log scale)', ylab='frequency in population', main='Distribution of scores by EPA Region')
+#'          xlab='Traffic score (log scale)', ylab='frequency in population',
+#'           main='Distribution of scores by EPA Region')
 #'
 #' # Demog suscept (how to show vs others??), one panel per ENVT FACTOR (ie per col in scores df)
 #' data('names.evars')
 #' # NOT
 #' pop.cdf(bg[ , names.e], bg$VSI.eo, bg$pop, log='x', subtitles=FALSE,
-#'          allothers=TRUE, ylab='frequency in population', main='Distribution of scores by EPA Region')
+#'          allothers=TRUE, ylab='frequency in population',
+#'           main='Distribution of scores by EPA Region')
 #'
 #' # log scale is useful & so are these labels passed to function
 #' # in CA vs not CA

@@ -16,13 +16,18 @@
 #' @return Returns a numeric vector same size as x, but if zone is specified, provides percentile with given zone.
 #' @template seePctiles
 #' @examples
-#' x <- c(30, 40, 50, 12,12,5,5,13,13,13,13,13,8,9,9,9,9,9,10:20,20,20,20,21:30); wts <- rep(c(2,3), length(x)/2)
+#' x <- c(30, 40, 50, 12,12,5,5,13,13,13,13,13,8,9,9,9,9,9,10:20,20,20,20,21:30)
+#' wts <- rep(c(2,3), length(x)/2)
 #' cbind(wts, x, PCTILE=assign.pctiles(x,wts))
 #'
-#' # PERCENTILE OF ALL, NOT JUST THOSE WITH VALID DATA, IF na.rm=FALSE, but then NA values preclude high percentiles:
-#' x <- c(NA, NA, NA, NA,NA,NA,NA,NA,NA,NA,13,13,8,9,9,9,9,9,10:20,20,20,20,21:30); wts <- rep(c(2,3), length(x)/2)
-#' cbind(wts, x, PCTILE.alt2=assign.pctiles.alt2(x, wts, na.rm=FALSE), pctile=assign.pctiles(x,wts))[order(x),]
-#' cbind(wts, x, PCTILE.alt2=assign.pctiles.alt2(x, wts, na.rm=TRUE), pctile=assign.pctiles(x,wts))[order(x),]
+#' # PERCENTILE OF ALL, NOT JUST THOSE WITH VALID DATA, IF na.rm=FALSE,
+#' # but then NA values preclude high percentiles:
+#' x <- c(NA, NA, NA, NA,NA,NA,NA,NA,NA,NA,13,13,8,9,9,9,9,9,10:20,20,20,20,21:30)
+#' wts <- rep(c(2,3), length(x)/2)
+#' cbind(wts, x, PCTILE.alt2=assign.pctiles.alt2(x, wts, na.rm=FALSE),
+#'  pctile=assign.pctiles(x,wts))[order(x),]
+#' cbind(wts, x, PCTILE.alt2=assign.pctiles.alt2(x, wts, na.rm=TRUE),
+#'  pctile=assign.pctiles(x,wts))[order(x),]
 #'
 #' V=9
 #' sum(wts[!is.na(x) & x <= V]) / sum(wts[!is.na(x)])
@@ -34,9 +39,12 @@
 #' # PCTILE% of all wts have V >= x (for non-NA x), so
 #' # 100% - PCTILE% of all wts have V < x  (for non-NA x).
 #'
-#' x <- c(32, NA, NA, NA,NA,NA,NA,NA,NA,NA,13,13,8,9,9,9,9,9,10:20,20,NA,20,21:30); wts <- rep(c(2,3), length(x)/2)
-#' cbind(wts, x, PCTILE.alt2=assign.pctiles.alt2(x, wts, na.rm=FALSE), pctile=assign.pctiles(x,wts))[order(x),]
-#' cbind(wts, x, PCTILE.alt2=assign.pctiles.alt2(x, wts, na.rm=TRUE), pctile=assign.pctiles(x,wts))[order(x),]
+#' x <- c(32, NA, NA, NA,NA,NA,NA,NA,NA,NA,13,13,8,9,9,9,9,9,10:20,20,NA,20,21:30)
+#' wts <- rep(c(2,3), length(x)/2)
+#' cbind(wts, x, PCTILE.alt2=assign.pctiles.alt2(x, wts, na.rm=FALSE),
+#'  pctile=assign.pctiles(x,wts))[order(x),]
+#' cbind(wts, x, PCTILE.alt2=assign.pctiles.alt2(x, wts, na.rm=TRUE),
+#'  pctile=assign.pctiles(x,wts))[order(x),]
 #' @export
 assign.pctiles <- function(values, weights=NULL, zone=NULL, na.rm=TRUE) {
 

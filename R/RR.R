@@ -84,11 +84,11 @@
 #'
 #' RR(mydat$area, mydat$pcthisp, mydat$pop)
 #' # Avg Hispanic lives in a State that is 69 percent larger than
-#'   that of avg. non-Hispanic
+#' #   that of avg. non-Hispanic
 #'
 #' RR(mydat$pcthisp, mydat$pcthisp, mydat$pop)
 #' # Avg Hispanic lives in a State that has a much higher percent Hispanic than
-#'   do non-Hispanics
+#'  # do non-Hispanics
 #'
 #' #cbind(RR=RR(data.frame(d1=bg$pcthisp, d2=1-bg$pcthisp), bg$pcthisp, bg$pop))
 #' #RR(bg[ , names.e], bg$pctlowinc, bg$pop)

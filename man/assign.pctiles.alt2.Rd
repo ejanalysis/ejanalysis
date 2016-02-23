@@ -33,13 +33,18 @@ Could also add parameter like in rank(), ties.method, defining if ties get min, 
 Default for ties right now is like ties.method=max (which might not be what assign.pctiles() does in fact).
 }
 \examples{
-x <- c(30, 40, 50, 12,12,5,5,13,13,13,13,13,8,9,9,9,9,9,10:20,20,20,20,21:30); weights <- rep(c(2,3), length(x)/2)
+x <- c(30, 40, 50, 12,12,5,5,13,13,13,13,13,8,9,9,9,9,9,10:20,20,20,20,21:30)
+weights <- rep(c(2,3), length(x)/2)
 cbind(weights, x, PCTILE=assign.pctiles.alt2(x,weights))
 
-# PERCENTILE OF ALL, NOT JUST THOSE WITH VALID DATA, IF na.rm=FALSE, but then NA values preclude high percentiles:
-x <- c(NA, NA, NA, NA,NA,NA,NA,NA,NA,NA,13,13,8,9,9,9,9,9,10:20,20,20,20,21:30); weights <- rep(c(2,3), length(x)/2)
-cbind(weights, x, PCTILE.alt2=assign.pctiles.alt2(x, weights, na.rm=FALSE), pctile=assign.pctiles(x,weights))[order(x),]
-cbind(weights, x, PCTILE.alt2=assign.pctiles.alt2(x, weights, na.rm=TRUE), pctile=assign.pctiles(x,weights))[order(x),]
+# PERCENTILE OF ALL, NOT JUST THOSE WITH VALID DATA, IF na.rm=FALSE,
+# but then NA values preclude high percentiles:
+x <- c(NA, NA, NA, NA,NA,NA,NA,NA,NA,NA,13,13,8,9,9,9,9,9,10:20,20,20,20,21:30)
+weights <- rep(c(2,3), length(x)/2)
+cbind(weights, x, PCTILE.alt2=assign.pctiles.alt2(x, weights, na.rm=FALSE),
+ pctile=assign.pctiles(x,weights))[order(x),]
+cbind(weights, x, PCTILE.alt2=assign.pctiles.alt2(x, weights, na.rm=TRUE),
+ pctile=assign.pctiles(x,weights))[order(x),]
 
 V=9
 sum(weights[!is.na(x) & x <= V]) / sum(weights[!is.na(x)])
@@ -51,9 +56,12 @@ sum(weights[!is.na(x) & x <= V]) / sum(weights[!is.na(x)])
 # PCTILE\% of all weights have V >= x (for non-NA x), so
 # 100\% - PCTILE\% of all weights have V < x  (for non-NA x).
 
-x <- c(32, NA, NA, NA,NA,NA,NA,NA,NA,NA,13,13,8,9,9,9,9,9,10:20,20,NA,20,21:30); weights <- rep(c(2,3), length(x)/2)
-cbind(weights, x, PCTILE.alt2=assign.pctiles.alt2(x, weights, na.rm=FALSE), pctile=assign.pctiles(x,weights))[order(x),]
-cbind(weights, x, PCTILE.alt2=assign.pctiles.alt2(x, weights, na.rm=TRUE), pctile=assign.pctiles(x,weights))[order(x),]
+x <- c(32, NA, NA, NA,NA,NA,NA,NA,NA,NA,13,13,8,9,9,9,9,9,10:20,20,NA,20,21:30)
+weights <- rep(c(2,3), length(x)/2)
+cbind(weights, x, PCTILE.alt2=assign.pctiles.alt2(x, weights, na.rm=FALSE),
+ pctile=assign.pctiles(x,weights))[order(x),]
+cbind(weights, x, PCTILE.alt2=assign.pctiles.alt2(x, weights, na.rm=TRUE),
+ pctile=assign.pctiles(x,weights))[order(x),]
 }
 \seealso{
 \code{\link{make.bin.pctile.cols}} to call functions below, converting columns of values to percentiles and then bins \cr

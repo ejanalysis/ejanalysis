@@ -8,7 +8,8 @@
 #' @return Returns a vector of one or more character elements, same lengths as fips
 #' @template seealsoFIPS
 #' @examples
-#' samplefips <- c("011030001003", "011030001003001", 02610, 11030001003001, 35, 1, NA, 'invalidtext', '02')
+#' samplefips <- c("011030001003", "011030001003001", 02610, 11030001003001, 35, 1,
+#'  NA, 'invalidtext', '02')
 #' get.fips.st(samplefips)
 #' @export
 get.fips.st <- function(fips) {

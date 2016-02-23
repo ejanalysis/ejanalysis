@@ -34,7 +34,8 @@ out <- flagged.by(x<-data.frame(a=1:10, b=rep(7,10), c=7:16), cutoff=7)
 x; out # default is or.tied=FALSE
 out <- flagged.by(data.frame(a=1:10, b=rep(7,10), c=7:16), cutoff=7, or.tied=TRUE, below=TRUE)
 out
-out <- flagged.by(data.frame(a=1:10, b=rep(7,10), c=7:16) )  # Compares each number in each row to the row's mean.
+out <- flagged.by(data.frame(a=1:10, b=rep(7,10), c=7:16) )
+# Compares each number in each row to the row's mean.
 out
 }
 \seealso{

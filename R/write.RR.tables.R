@@ -11,7 +11,8 @@
 #'   Format is one demographic group per row and one environmental indicator per column, plus max per row and max per column
 #' @template seealsoRR
 #' @examples
-#'   # RRS.REGION <- RR.table(mydat=bg, Enames=names.e, Dnames=c(names.d, names.d.subgroups.pct), popcolname='pop', Zcolname='REGION')
+#'   # RRS.REGION <- RR.table(mydat=bg, Enames=names.e,
+#'   # Dnames=c(names.d, names.d.subgroups.pct), popcolname='pop', Zcolname='REGION')
 #'   # write.RR.tables(RRS.REGION)
 #' @export
 write.RR.tables <- function(my.RR.table, folder=getwd()) {

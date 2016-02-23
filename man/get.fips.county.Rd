@@ -21,7 +21,8 @@ Each fips passed to the function is a FIPS code (see \url{http://www.census.gov/
   It does not check to see if the codes are valid other than counting how many characters each has.
 }
 \examples{
-samplefips <- c("011030001003", "011030001003001", 02610, 11030001003001, 35, 1, NA, 'invalidtext', '02')
+samplefips <- c("011030001003", "011030001003001", 02610, 11030001003001, 35, 1,
+ NA, 'invalidtext', '02')
 get.fips.county(samplefips)
 }
 \seealso{

@@ -34,8 +34,10 @@ Does not handle NA values well yet. Assumes you have weights for each and are co
 load("~/../../Dropbox/EJSCREEN/R analysis/bg 2015-04-22 Rnames plus subgroups.RData")
 # # to do this manually
 # require(plotrix)
-# weighted.hist(bg$proximity.rmp, bg$pop*bg$pctmin,main='pop hist for pctmin of RMP score', xlim=c(0,1.8),freq=FALSE,breaks=c(0:18)/10 , col='red')
-# weighted.hist(bg$proximity.rmp,bg$pop*(1-bg$pctmin), main='pop hist for pctmin of RMP score', xlim=c(0,1.8),freq=FALSE,breaks=c(0:18)/10 , add=TRUE)
+#weighted.hist(bg$proximity.rmp, bg$pop*bg$pctmin,
+# main='pop hist for pctmin of RMP score', xlim=c(0,1.8),freq=FALSE,breaks=c(0:18)/10,col='red')
+#weighted.hist(bg$proximity.rmp,bg$pop*(1-bg$pctmin),
+# main='pop hist for pctmin of RMP score', xlim=c(0,1.8),freq=FALSE,breaks=c(0:18)/10,add=TRUE)
 e <- bg$pm[!is.na(bg$pm)]
 dcount   <- bg$pop[!is.na(bg$pm)] * bg$pctmin[!is.na(bg$pm)]
 refcount <- bg$pop[!is.na(bg$pm)] * (1 - bg$pctmin[!is.na(bg$pm)])
@@ -44,9 +46,12 @@ etxt = 'PM2.5'
 dtxt = 'minorities'
 
 #pop.cdf2(e, dcount, refcount, etxt, dtxt, brks)
-pop.cdf2(e = e, dcount = dcount, refcount = refcount, etxt = etxt, dtxt = dtxt, brks = brks)
+pop.cdf2(e = e, dcount = dcount, refcount = refcount,
+ etxt = etxt, dtxt = dtxt, brks = brks)
 # *** BUT, why does it not look the same as ... *****
-pop.cdf(scores = e, pcts = bg$pctmin, pops = bg$pop, breaks = brks, main='PM2.5 distribution within each group (minority vs other)', ylab='Density (percentage of group population)')
+pop.cdf(scores = e, pcts = bg$pctmin, pops = bg$pop, breaks = brks,
+ main='PM2.5 distribution within each group (minority vs other)',
+  ylab='Density (percentage of group population)')
 }
 }
 \seealso{

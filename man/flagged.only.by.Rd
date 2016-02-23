@@ -35,9 +35,11 @@ Future work: these functions could have wts, na.rm, & allow cutoffs or benchmark
 \examples{
 out <- flagged.only.by(x<-data.frame(a=1:10, b=rep(7,10), c=7:16), cutoff=7)
 x; out # default is or.tied=FALSE
-out <- flagged.only.by(data.frame(a=1:10, b=rep(7,10), c=7:16), cutoff=7, or.tied=TRUE, below=TRUE)
+out <- flagged.only.by(data.frame(a=1:10, b=rep(7,10), c=7:16), cutoff=7,
+or.tied=TRUE, below=TRUE)
 out
-out <- flagged.only.by(data.frame(a=1:10, b=rep(7,10), c=7:16) )  # Compares each number in each row to the default cutoff.
+out <- flagged.only.by(data.frame(a=1:10, b=rep(7,10), c=7:16) )
+# Compares each number in each row to the default cutoff.
 out
 }
 \seealso{

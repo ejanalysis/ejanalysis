@@ -25,16 +25,10 @@ aggregate over zones - *** work in progress -- NOT DONE YET ***
 }
 \examples{
 # See ejscreen package function called ejscreen.rollup()
-# once that function is in that package, #'
-}
-\seealso{
-\code{\link{wtd.colMeans}}
-
-\code{\link[ejscreen]{ejscreen.rollup}}
-
-\dontrun{
-# draft of COMPLETE EXAMPLE - NOT TESTED:
-#  SPECIFY FIELDS TO ROLLUP VIA WTD AVG AND WHICH TO DO VIA SUM OVER US/REGION/COUNTY/STATE/TRACT
+  \dontrun{
+  # draft of COMPLETE EXAMPLE - NOT TESTED:
+# SPECIFY FIELDS TO ROLLUP VIA WTD AVG AND
+# WHICH TO DO VIA SUM OVER US/REGION/COUNTY/STATE/TRACT
 
 # load('bg ... plus race eth subgrps ACS0812.RData') # if not already working with it
 
@@ -61,13 +55,18 @@ tracts   <- rollup( bg[ , sumnames], FUN=sum, prefix = '', by=bg$FIPS.TRACT)
 # Get the rollups of wtd.mean cols (at least E cols)
 avgnames <- names.e
 us.avg       <- rollup( bg[ , avgnames], prefix = '', wts=bg$pop, by=1)
-regions.avg  <- rollup( bg[ , avgnames], prefix = '', wts=bg$pop, by=bg$REGION);      names(regions.avg)  <- gsub('by', 'REGION',  names(regions.avg))
-states.avg   <- rollup( bg[ , avgnames], prefix = '', wts=bg$pop, by=bg$FIPS.ST);     names(states.avg)   <- gsub('by', 'FIPS.ST', names(states.avg))
-counties.avg <- rollup( bg[ , avgnames], prefix = '', wts=bg$pop, by=bg$FIPS.COUNTY); names(counties.avg) <- gsub('by', 'FIPS.COUNTY', names(counties.avg))
-tracts.avg   <- rollup( bg[ , avgnames], prefix = '', wts=bg$pop, by=bg$FIPS.TRACT);  names(tracts.avg)   <- gsub('by', 'FIPS.TRACT',  names(tracts.avg))
+regions.avg  <- rollup( bg[ , avgnames], prefix = '', wts=bg$pop, by=bg$REGION)
+     names(regions.avg)  <- gsub('by', 'REGION',  names(regions.avg))
+states.avg   <- rollup( bg[ , avgnames], prefix = '', wts=bg$pop, by=bg$FIPS.ST)
+     names(states.avg)   <- gsub('by', 'FIPS.ST', names(states.avg))
+counties.avg <- rollup( bg[ , avgnames], prefix = '', wts=bg$pop, by=bg$FIPS.COUNTY)
+     names(counties.avg) <- gsub('by', 'FIPS.COUNTY', names(counties.avg))
+tracts.avg   <- rollup( bg[ , avgnames], prefix = '', wts=bg$pop, by=bg$FIPS.TRACT)
+     names(tracts.avg)   <- gsub('by', 'FIPS.TRACT',  names(tracts.avg))
 
 # Merge sum and mean types of cols
-############# us <- merge(us, us.avg, by=) # us <- cbind(us, us.avg, stringsAsFactors=FALSE)
+############
+# us <- cbind(us, us.avg, stringsAsFactors=FALSE) # check this
 regions  <- merge(regions, regions.avg, by='REGION')
 states   <- merge(states,   states.avg, by='FIPS.ST')
 counties <- merge(counties, counties.avg, by='FIPS.COUNTY')
@@ -82,7 +81,9 @@ tracts   <- merge(tracts,   tracts.avg, by='FIPS.TRACT')
 # 1.Do rollup of most fields as wtd mean
    t2 <- rollup(bg[ , names.e], by=bg$FIPS.TRACT, wts=bg$pop)
    names(t2) <- gsub('by', 'FIPS.TRACT', names(t2))
-# 2.Do rollup of pop and areas as sum not wtd.mean: # not sure aggregate preserves sort order that rollup created, so use merge to be sure they match up on fips:
+# 2.Do rollup of pop and areas as sum not wtd.mean:
+ # not sure aggregate preserves sort order that rollup created,
+ # so use merge to be sure they match up on fips:
    tractpop <- aggregate(bg[ , c('pop', 'area', 'sqmi', 'sqkm')], by=list(bg$FIPS.TRACT), sum)
    names(tractpop) <- c('FIPS.TRACT', c('pop', 'sqmi', 'sqkm'))
 # 3.Merge the wtd.mean fields and sum fields, sort results.
@@ -90,5 +91,8 @@ tracts   <- merge(tracts,   tracts.avg, by='FIPS.TRACT')
    rm(tractpop)
    t2 <- t2[ order(t2$FIPS.TRACT), ]
 }
+}
+\seealso{
+\code{\link{wtd.colMeans}} \code{\link[ejscreen]{ejscreen.rollup}}
 }
 

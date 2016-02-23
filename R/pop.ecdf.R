@@ -26,7 +26,7 @@
 #' @param subtitles Logical FALSE by default, which means extra info is not shown (see help on \code{\link[Hmisc]{Ecdf}})
 #' @param ... other optional parameters to pass to Ecdf
 #' @return draws a plot
-#' @seealso \code{\link[Hmisc]{Ecdf}} \code{\link{RR}} \code{\link{pop.cdf}}   \code{\link{pop.cdf2}} \code{\link{pop.ecdf}}  \code{\link{pop.cdf.density}} 
+#' @seealso \code{\link[Hmisc]{Ecdf}} \code{\link{RR}} \code{\link{pop.cdf}}   \code{\link{pop.cdf2}} \code{\link{pop.ecdf}}  \code{\link{pop.cdf.density}}
 #' @examples
 #' ###
 #' \dontrun{
@@ -36,33 +36,38 @@
 #' pctminsim=c(runif(7000,0,1), pmin(rlnorm(5000, meanlog=log(0.30), sdlog=1.7), 4)/4)
 #' popsim= runif(12000, 500, 3000)
 #' esim= rlnorm(12000, log(10), log(1.15)) + rnorm(12000, 1, 0.5) * pctminsim - 1
-#' pop.ecdf(esim, pctminsim, popsim, xlab='Tract air pollution levels (vertical lines are group means)',
+#' pop.ecdf(esim, pctminsim, popsim,
+#'  xlab='Tract air pollution levels (vertical lines are group means)',
 #'   main = 'Air pollution levels among minorities (red curve) vs rest of US pop.')
 #' abline(v=wtd.mean(esim, weights = pctminsim * popsim), col='red')
 #' abline(v=wtd.mean(esim, weights = (1-pctminsim) * popsim), col='black')
 #'
-#' pop.ecdf(bg$pm, bg$pctmin, 1000, xlab='Tract air pollution levels (vertical lines are group means)',
+#' pop.ecdf(bg$pm, bg$pctmin, 1000,
+#'  xlab='Tract air pollution levels (vertical lines are group means)',
 #' main = 'PM2.5 levels among minorities (red curve) vs rest of US pop.')
 #' abline(v=wtd.mean(bg$pm, weights = bg$pctmin * bg$pop), col='red')
 #' abline(v=wtd.mean(bg$pm, weights = (1-bg$pctmin) * bg$pop), col='black')
 #'
 #' #pop.ecdf(dat$Murder, dat$Population * (dat$Illiteracy/100))
 #' pop.ecdf(bg$pm, bg$pctmin, bg$pop,
-#'   main = 'PM2.5 levels among minorities (red curve) vs rest of US population (vertical lines are group means)')
+#'  main='PM2.5 levels among minorities (red curve) vs rest of pop (vertical lines=group means)')
 #' abline(v=wtd.mean(bg$pm, weights = bg$pctmin * bg$pop), col='red')
 #' abline(v=wtd.mean(bg$pm, weights = (1-bg$pctmin) * bg$pop), col='black')
 #'
 #' pop.ecdf(log10(places$traffic.score), places$pctmin, places$pop)
-#' pop.ecdf(places$cancer, places$pctmin, places$pop, allothers=FALSE); pop.ecdf(places$cancer, places$pctlingiso, places$pop, col='green', allothers=FALSE, add=TRUE)
+#' pop.ecdf(places$cancer, places$pctmin, places$pop, allothers=FALSE)
+#' pop.ecdf(places$cancer, places$pctlingiso, places$pop, col='green', allothers=FALSE, add=TRUE)
 #' # Demog suscept  for each REGION (can't see if use vs others)
 #' pop.ecdf(bg$traffic.score, bg$VSI.eo, bg$pop, log='x', subtitles=FALSE,
 #'          group=bg$REGION, allothers=FALSE,
-#'          xlab='Traffic score (log scale)', ylab='%ile of population', main='Distribution of scores by EPA Region')
+#'          xlab='Traffic score (log scale)', ylab='%ile of population',
+#'           main='Distribution of scores by EPA Region')
 #'
 #' # Demog suscept (how to show vs others??), one panel per ENVT FACTOR (ie per col in scores df)
 #' data('names.evars')
 #' pop.ecdf(bg[ , names.e], bg$VSI.eo, bg$pop, log='x', subtitles=FALSE,
-#'          allothers=TRUE, ylab='%ile of population', main='Distribution of scores by EPA Region')
+#'          allothers=TRUE, ylab='%ile of population',
+#'           main='Distribution of scores by EPA Region')
 #'
 #' # log scale is useful & so are these labels passed to function
 #' # in CA vs not CA
