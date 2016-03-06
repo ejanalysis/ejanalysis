@@ -1,4 +1,4 @@
-#' @title Weighted Percentiles and Bin Numbers for Each Column
+#' @title Weighted Percentiles and Bin Numbers for Each Column, by zone, such as percentiles within each State
 #'
 #' @description This function just combines \code{\link{make.pctile.cols}} and \code{\link{make.bin.cols}}.
 #' Takes a data.frame of values and returns a data.frame (or matrix) of percentiles,

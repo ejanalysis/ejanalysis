@@ -1,6 +1,7 @@
 #' @title Percentile and bin number fields, by zone, such as percentiles within each State
 #'
-#' @description Get weighted percentiles and bin numbers, by subset of rows (zone), for each column of data.
+#' @description May be obsolete- make.bin.pctile.cols() now has a zone parameter. 
+#'   Get weighted percentiles and bin numbers, by subset of rows (zone), for each column of data.
 #'   This can be used to calculate population-weighted percentiles within each State, for national data on Census block groups, for example.
 #' @param bg Data.frame of data field(s), weights (optional), and a unique ID (e.g., FIPS), one row per place if geographic data is used.
 #' @param zone Optional vector specifying subsets of rows (e.g. State name) within which percentiles are calculated

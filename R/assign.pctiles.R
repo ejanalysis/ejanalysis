@@ -47,61 +47,58 @@
 #'  pctile=assign.pctiles(x,wts))[order(x),]
 #' @export
 assign.pctiles <- function(values, weights=NULL, zone=NULL, na.rm=TRUE) {
-
+  
   #  FUNCTION TO ASSIGN THE EXACT WEIGHTED (or unweighted) PERCENTILE NUMBER TO EACH LOCATION'S RAW INDICATOR SCORE
   if (!missing(na.rm))	{warning('na.rm is not implemented yet')}
   #require(Hmisc)
-
+  
   if (is.null(zone)) {
-
+    
     wtd.Ecdf.results <- Hmisc::wtd.Ecdf(values, weights=weights, type='i/n', na.rm=TRUE)
-
+    
     # If the first CDF estimate is greater than zero, a point (min(x),0) is placed at the beginning of the estimates.
     if (length(wtd.Ecdf.results$x) == 1+ length(unique(values)) ) { wtd.Ecdf.results$x <- wtd.Ecdf.results$x[-1]; wtd.Ecdf.results$ecdf <- wtd.Ecdf.results$ecdf[-1] }
-
+    
     # This finds the rank of each value
     myindex <- findInterval(values, wtd.Ecdf.results$x)
     myindex[myindex==0] <- 1	# if for some reason the minimum value doesn't match, which has occurred in testing
-
+    
     exact.wtd.pctile <- wtd.Ecdf.results$ecdf[ myindex ]
-
+    
   }	else {
-
+    
     # ****   this calculation by zone could be redone using aggregate, summarize, data.table functions etc. instead of a for loop:
-
+    
     exact.wtd.pctile <- vector(length=length(values))
-
+    
     for (z in unique(zone)) {
-
+      
       myvals <- values[zone==z]
       mywts <- weights[zone==z]
       if (all(is.na(myvals)) | all(is.na(mywts))) {
         # add code here for when zone has no valid weights or no valid values due to missing values
-
+        
         exact.wtd.pctile[zone==z] <- NA
-
+        
       } else {
         wtd.Ecdf.results <- Hmisc::wtd.Ecdf(myvals, weights=mywts, type='i/n', na.rm=TRUE)
         # If the first CDF estimate is greater than zero, a point (min(x),0) is placed at the beginning of the estimates.
-
+        
         if (length(wtd.Ecdf.results$x) == 1+ length(unique(myvals)) ) { wtd.Ecdf.results$x <- wtd.Ecdf.results$x[-1]; wtd.Ecdf.results$ecdf <- wtd.Ecdf.results$ecdf[-1] }
-
+        
         # This finds the rank of each value
         myindex <- findInterval(myvals, wtd.Ecdf.results$x)
         myindex[myindex==0] <- 1	# if for some reason the minimum value doesn't match, which has occurred in testing
-
+        
         exact.wtd.pctile[zone==z] <- wtd.Ecdf.results$ecdf[ myindex ]
       }
     }
-
-
-
   }
   return(exact.wtd.pctile)
-
+  
   ###############################################################
   #	NOTES ON THIS FUNCTION
-
+  
   #	For documentation of wtd.Ecdf() from Hmisc package, see
   #	http://127.0.0.1:26624/library/Hmisc/html/wtd.stats.html
   #	wtd.Ecdf returns a list whose elements x and Ecdf correspond to unique sorted values of x.
