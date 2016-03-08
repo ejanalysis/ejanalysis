@@ -5,24 +5,24 @@ Version: 0.1.0
 Date: 2015-03-14
 Author: info@ejanalysis.com
 Maintainer: ejanalysis.com <info@ejanalysis.com>
-Description: Tools that simplify some basic tasks in
-  exploring and analyzing a dataset in a matrix or data.frame
-  that contains data on demographics (e.g., counts of residents in poverty)
-  and local environmental indicators (e.g., an air quality index),
-  with one row per spatial location (e.g., Census block group).
-  Key functions help to find relative risk or similar ratios of means in demographic groups, etc.
-  The analyze.stuff, proxistat, ejanalysis, and countyhealthrankings packages,
-  once made public can be installed from github using the devtools package:
-  devtools::install_github(c("ejanalysis/analyze.stuff", "ejanalysis/proxistat",
-  "ejanalysis/ejanalysis", "ejanalysis/countyhealthrankings"))
+Description: Tools that simplify some basic tasks in exploring and analyzing
+    a dataset in a matrix or data.frame that contains data on demographics
+    (e.g., counts of residents in poverty) and local environmental indicators
+    (e.g., an air quality index), with one row per spatial location (e.g., Census
+    block group). Key functions help to find relative risk or similar ratios of
+    means in demographic groups, etc. The analyze.stuff, proxistat, ejanalysis,
+    and countyhealthrankings packages, once made public can be installed from
+    github using the devtools package: devtools::install_github(c("ejanalysis/
+    analyze.stuff", "ejanalysis/proxistat", "ejanalysis/ejanalysis", "ejanalysis/
+    countyhealthrankings"))
 Depends:
-  R (>= 3.1.2)
+    R (>= 3.1.2)
 License: MIT + file LICENSE
 Suggests:
-  countyhealthrankings,
-  data.table
+    countyhealthrankings,
+    data.table
 Imports:
-  sp
-URL:
-  http://ejanalysis.github.io
-  http://www.ejanalysis.com/
+    sp
+URL: http://ejanalysis.github.io
+    http://www.ejanalysis.com/
+RoxygenNote: 5.0.1

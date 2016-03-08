@@ -71,11 +71,9 @@
 #' @examples
 #'   x <- get.county.info(); str(x); print(''); head(x)
 #'   get.county.info(c('05001','01005'), fields=c('countyname', 'ST'))
-#' @export
+#'   @export
 get.county.info <- function(query, fields='all', download=FALSE) {
-
   #if (!exists('lookup.county'))  {
-
     # could Put the data into (at least local) memory here if not already available, but no?
     # At least see if it is on disk in this folder already.
 

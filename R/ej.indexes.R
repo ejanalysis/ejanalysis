@@ -8,6 +8,7 @@
 #'  Note: For 1.5, 3.5, 4.5 need vector d.avg.all.elsewhere. calculated in each of those.
 #'  *** But does not properly handle cases where us.demog or universe.us.demog specified because denominator is not same as pop
 #'  *** and need to fix for when  is.na(p) | is.na(demog) ****
+#'  Type 2 however does handle NA values appropriately, meaning a result for a given col of env.df is set to NA for a given row (assuming na.rm=FALSE) if and only if NA is found in that row, in demog or weights or that one col of env.df.
 #'
 #' @param env.df Environmental indicators vector or numeric data.frame, one column per environmental factor, one row per place (e.g., block group).
 #' @param demog Demographic indicator(s) vector or data.frame, numeric fractions of population that is in specified demographic group (e.g., fraction below poverty line), one per place.
@@ -93,9 +94,12 @@ ej.indexes <- function(env.df, demog, weights, us.demog, universe.us.demog, as.d
       # so it is not quite the correct weighting if you do Hmisc::wtd.mean(VSI.eo, pop)
 
       us.demog <- Hmisc::wtd.mean(demog, weights, na.rm=TRUE) # NOTE THAT  na.rm=TRUE & might make that a parameter of ej.indexes() but unsure when that might be needed
+      # *** WHEN FINDING THE US AVG HERE, DO YOU WANT TO EXCLUDE PLACES THAT HAVE NA FOR POP? FOR SOME E? BECAUSE THOSE PLACES ARE LEFT OUT OF EJ INDEX CALC IF na.rm=TRUE IN OVERALL FUNCTION CALL.
     } else {
       # if universe.us.demog IS specified, then use it as the right denominator (that was used to create percent demog) & use it to find US percent demog
       us.demog <- Hmisc::wtd.mean(demog, universe.us.demog, na.rm=TRUE) # NOTE THAT  na.rm=TRUE & might make that a parameter of ej.indexes() but unsure when that might be needed
+      # *** WHEN FINDING THE US AVG HERE, DO YOU WANT TO EXCLUDE PLACES THAT HAVE NA FOR POP? FOR SOME E? BECAUSE THOSE PLACES ARE LEFT OUT OF EJ INDEX CALC IF na.rm=TRUE IN OVERALL FUNCTION CALL.
+
       cat('Using the specified universe.us.demog to find the overall percent  demog in all locations with valid demographics, which may be a bit different than those with valid envt scores\n')
     }
 
@@ -112,6 +116,19 @@ ej.indexes <- function(env.df, demog, weights, us.demog, universe.us.demog, as.d
   if (any(demog[!is.na(demog)] < 0) || any(demog[!is.na(demog)] > 1) || any(!is.numeric(demog[!is.na(demog)])) ) {stop('Error - if specified, demog must be a vector of numbers or NA values, for each place it is the fraction of pop that is in given demog group\n') }
   if (any(is.na(weights))) {cat('Warning - NA values in weights\n') }
   if (length(unique( length(demog), length(env.df[ , 1]), length(weights))) > 1) {cat('Warning - demog, weights, & 1st column of env.df are not all the same length!')}
+
+
+  ################################################
+  # *** EVEN IF na.rm = TRUE, CAN'T JUST REMOVE EVERY PLACE WHERE DEMOG OR WEIGHTS (POP) IS NA ! WE WANT TO RETURN NA VALUES THERE
+  ################################################
+  #
+  dpnotna <- (!is.na(demog) & !is.na(weights))
+  #   if (na.rm = TRUE) {
+  #     demog <- demog[dpnotna]
+  #     weights <- weights[dpnotna]
+  #     env.df <- env.df[dpnotna, ]
+  #   }
+
 
   ###################################
   # specify type of formula to use
@@ -143,16 +160,24 @@ ej.indexes <- function(env.df, demog, weights, us.demog, universe.us.demog, as.d
 
     ejfunction <- function(e, d, p, na.rm=TRUE) {
 
-      # Note: the type 1 formula will return NA when any value in the equation is NA, ignoring na.rm,
-      # so a block group EJ index for ENV1 would be NA if ENV1, weights, or demog is NA there.
-
       if (type==1) {
+        enotna <- !is.na(e)
         d.ref <- us.demog  # has been provided or calculated already
       } else {
         #d.avg.all.elsewhere <- d.avg.all.elsewhere.calc(p, demog)
-        wtd.d <- sum(d * p, na.rm=na.rm)
-        weights.d <- sum(p, na.rm=na.rm)
-        d.avg.all.elsewhere  <- (wtd.d - (d * p)) / (weights.d - p)
+
+
+        # *** REVIEW THE NA HANDLING HERE ****
+
+        # Note: the type 1 formula will return NA when any value in the equation is NA, ignoring na.rm, ????
+        # so a block group EJ index for ENV1 would be NA if ENV1, weights, or demog is NA there.
+
+        #
+        # BUT also COULD POSSIBLY WANT TO REMOVE FROM SUM THOSE WHERE E OR P OR D IS NA, IF na.rm=TRUE
+
+        wtd.d <- sum(d * p, na.rm=na.rm) # BUT also SHOULD REMOVE FROM SUM THOSE WHERE E IS NA, IF na.rm=TRUE
+        weights.d <- sum(p, na.rm=na.rm) # BUT also COULD POSSIBLY WANT TO REMOVE FROM SUM THOSE WHERE E or d IS NA, IF na.rm=TRUE
+        d.avg.all.elsewhere  <- (wtd.d - (d * p)) / (weights.d - p) # BUT also COULD POSSIBLY WANT TO REMOVE FROM SUM THOSE WHERE E OR P OR D IS NA, IF na.rm=TRUE
         d.ref <- d.avg.all.elsewhere
       }
       return( p * e * (d - d.ref) )
@@ -165,14 +190,29 @@ ej.indexes <- function(env.df, demog, weights, us.demog, universe.us.demog, as.d
     # For type=2,   ej.indexes = weights * demog  * (env.df - e.avg.nond)
     # For type=2.5, ej.indexes = weights * demog  * (env.df - e.avg.nond.elsewhere ) # like type 1 but env and demog roles are swapped
 
-    ejfunction <- function(e, d, p, na.rm=TRUE) {
+    ejfunction <- function(e, d, p, na.rm=TRUE) {   # ok that default is na.rm=TRUE, since value gets passed here
+
+      # # *** if na.rm=TRUE, THEN FOR CERTAIN CALCULATIONS only (like getting avg or reference E), EXCLUDE EVERY PLACE WHERE THIS E IS NA
+      enotna <- !is.na(e)
+      # if (na.rm == TRUE) {
+      #   d <- d[!is.na(e)]
+      #   p <- p[!is.na(e)]
+      #   e <- e[!is.na(e)]
+      # }
 
       # Ideally, most of these (those without e in them) would be done once, and don't need to do the calculation again for each environmental indicator,
       # but it may be cleaner to put them inside the function and that lets na.rm be specified when called:
       nond <- 1-d # d is fraction who are in d-group, and nond is 1-d or fraction that is not in d-group
 
-      wtd.e <- sum(e * p * nond, na.rm=na.rm)
-      weights.e <-  sum(p * nond, na.rm=na.rm)
+      wtd.e <- sum(e * p * nond, na.rm=na.rm)  # NA in this E will give NA as result if na.rm=FALSE
+      if (na.rm) {
+        weights.e <-  sum(p[enotna] * nond[enotna], na.rm=na.rm) # THIS HELPS GIVE THE WTD MEAN OF E AMONG ONLY PLACES WHERE THIS PARTICULAR E IS VALID (NOT NA)
+      } else {
+        weights.e <-  sum(p * nond, na.rm=na.rm) # THIS CALCULATES THE AVG OR REF E AS WTD MEAN OF E USING NUMERATOR EXCLUDING NA PLACES BUT DENOMINATOR INCLUDING THEM, WHICH WOULD BE VERY STRANGE
+      }
+
+
+      # NA HANDLING NOT YET FIXED FOR TYPE 2.1 AND 2.5 !*****
 
       if (type==2.1) {
         e.avg.all  <- sum(e * p, na.rm=na.rm) / sum(p, na.rm=na.rm) # i.e. this is the pop wtd mean e value of all people
