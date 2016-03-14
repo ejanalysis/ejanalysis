@@ -16,48 +16,48 @@
 #'   [1] 3235 \cr
 #'   > head(county.names) \cr
 #'   county.name county.fips.character county.fips.numeric state.name state.abb state.fips.character state.fips.numeric \cr
-#' 1     autauga                 01001                1001    alabama        AL                   01                  1 \cr
-#' 2      blount                 01009                1009    alabama        AL                   01                  1 \cr
-#' 3      monroe                 01099                1099    alabama        AL                   01                  1 \cr
-#' 4  washington                 01129                1129    alabama        AL                   01                  1 \cr
-#' 5    marshall                 01095                1095    alabama        AL                   01                  1 \cr
-#' 6      mobile                 01097                1097    alabama        AL                   01                  1 \cr
+#'   1     autauga                 01001                1001    alabama        AL                   01                  1 \cr
+#'   2      blount                 01009                1009    alabama        AL                   01                  1 \cr
+#'   3      monroe                 01099                1099    alabama        AL                   01                  1 \cr
+#'   4  washington                 01129                1129    alabama        AL                   01                  1 \cr
+#'   5    marshall                 01095                1095    alabama        AL                   01                  1 \cr
+#'   6      mobile                 01097                1097    alabama        AL                   01                  1 \cr
 #'   county.names[county.names$county.fips.character=='02185',] \cr
-#'    county.name county.fips.character county.fips.numeric state.name state.abb state.fips.character state.fips.numeric \cr
-#' 88 north slope                 02185                2185     alaska        AK                   02                  2 \cr \cr
+#'      county.name county.fips.character county.fips.numeric state.name state.abb state.fips.character state.fips.numeric \cr
+#'   88 north slope                 02185                2185     alaska        AK                   02                  2 \cr \cr
 #'   > head(get.county.info()) \cr
-#'   ST     countyname FIPS.COUNTY statename                fullname \cr
-#' 1 AL Autauga County       01001   Alabama Autauga County, Alabama \cr
-#' 2 AL Baldwin County       01003   Alabama Baldwin County, Alabama \cr
-#' 3 AL Barbour County       01005   Alabama Barbour County, Alabama \cr
-#' 4 AL    Bibb County       01007   Alabama    Bibb County, Alabama \cr
-#' 5 AL  Blount County       01009   Alabama  Blount County, Alabama \cr
-#' 6 AL Bullock County       01011   Alabama Bullock County, Alabama \cr
-#'   get.county.info()[get.county.info()$FIPS.COUNTY=='02185',] \cr
-#'    ST          countyname FIPS.COUNTY statename                    fullname \cr
-#' 85 AK North Slope Borough       02185    Alaska North Slope Borough, Alaska \cr \cr
-#'  State,State ANSI,County ANSI,County Name,ANSI Cl \cr
-#'  AL,01,001,Autauga County,H1 \cr
-#'  AL,01,003,Baldwin County,H1 \cr \cr
-#' Also see:
-#' \itemize{
-#' \item \url{http://www2.census.gov/geo/docs/reference/codes/files/national_county.txt}
-#' \item \url{http://www.census.gov/geo/reference/ansi.html}
-#' \item \url{http://www.census.gov/geo/reference/codes/files/national_county.txt}
-#' \item \url{http://www.census.gov/geo/reference/docs/state.txt} for just state info
-#' \item State: \url{http://www.census.gov/geo/reference/ansi_statetables.html}
-#' \item County: \url{http://www.census.gov/geo/www/codes/county/download.html}
-#' \item Note on definitions of is.usa, is.contiguous.us, etc.:
-#' \item \url{https://www.census.gov/geo/reference/gtc/gtc_usa.html}
-#' \item \url{https://www.census.gov/geo/reference/gtc/gtc_codes.html}
-#' \item \url{https://www.census.gov/geo/reference/gtc/gtc_island.html}
-#' }
-#' Note this other possible list of abbreviations (not used) lacks US, PR, DC:  \cr
-#' require(datasets); state.abb \cr
-#' Note another possible list of States, abbrev, FIPS
-#' which has island areas but not US total and not leading zeroes on FIPS: \cr
-#' require(acs) \cr
-#' print(fips.state) \cr
+#'     ST     countyname FIPS.COUNTY statename                fullname \cr
+#'   1 AL Autauga County       01001   Alabama Autauga County, Alabama \cr
+#'   2 AL Baldwin County       01003   Alabama Baldwin County, Alabama \cr
+#'   3 AL Barbour County       01005   Alabama Barbour County, Alabama \cr
+#'   4 AL    Bibb County       01007   Alabama    Bibb County, Alabama \cr
+#'   5 AL  Blount County       01009   Alabama  Blount County, Alabama \cr
+#'   6 AL Bullock County       01011   Alabama Bullock County, Alabama \cr
+#'     get.county.info()[get.county.info()$FIPS.COUNTY=='02185',] \cr
+#'      ST          countyname FIPS.COUNTY statename                    fullname \cr
+#'   85 AK North Slope Borough       02185    Alaska North Slope Borough, Alaska \cr \cr
+#'    State,State ANSI,County ANSI,County Name,ANSI Cl \cr
+#'    AL,01,001,Autauga County,H1 \cr
+#'    AL,01,003,Baldwin County,H1 \cr \cr
+#'   Also see:
+#'   \itemize{
+#'   \item \url{http://www2.census.gov/geo/docs/reference/codes/files/national_county.txt}
+#'   \item \url{http://www.census.gov/geo/reference/ansi.html}
+#'   \item \url{http://www.census.gov/geo/reference/codes/files/national_county.txt}
+#'   \item \url{http://www.census.gov/geo/reference/docs/state.txt} for just state info
+#'   \item State: \url{http://www.census.gov/geo/reference/ansi_statetables.html}
+#'   \item County: \url{http://www.census.gov/geo/www/codes/county/download.html}
+#'   \item Note on definitions of is.usa, is.contiguous.us, etc.:
+#'   \item \url{https://www.census.gov/geo/reference/gtc/gtc_usa.html}
+#'   \item \url{https://www.census.gov/geo/reference/gtc/gtc_codes.html}
+#'   \item \url{https://www.census.gov/geo/reference/gtc/gtc_island.html}
+#'   }
+#'   Note this other possible list of abbreviations (not used) lacks US, PR, DC:  \cr
+#'   require(datasets); state.abb \cr
+#'   Note another possible list of States, abbrev, FIPS
+#'   which has island areas but not US total and not leading zeroes on FIPS: \cr
+#'   require(acs) \cr
+#'   print(fips.state) \cr
 #' @param query Vector of search terms.
 #'   Can be county's 5-digit FIPS code(s) (as numbers or strings with numbers),
 #'   and also could be 'countyname, statename' (fullname, exactly matching formats in countiesall$fullname, but case insensitive).
@@ -65,45 +65,47 @@
 #' @return Returns a data.frame or vector of results depending on fields selected.
 #'   Returns a data.frame (if query has 2+ elements), 'QUERY' as first column, and then all or specified fields of information, covering matching counties,
 #'   or NA if certain problems arise.
-#' If no query term, or fields not specified, then all information fields are returned:
-#' QUERY, ST, countyname, FIPS.COUNTY, statename, fullname
+#'   If no query term, or fields not specified, then all information fields are returned:
+#'   QUERY, ST, countyname, FIPS.COUNTY, statename, fullname
 #' @template seealsoFIPS
 #' @examples
 #'   x <- get.county.info(); str(x); print(''); head(x)
 #'   get.county.info(c('05001','01005'), fields=c('countyname', 'ST'))
-#'   @export
-get.county.info <- function(query, fields='all', download=FALSE) {
+#'
+#' @export
+get.county.info <- function(query, fields = 'all', download = FALSE) {
+
   #if (!exists('lookup.county'))  {
-    # could Put the data into (at least local) memory here if not already available, but no?
-    # At least see if it is on disk in this folder already.
+  # could Put the data into (at least local) memory here if not already available, but no?
+  # At least see if it is on disk in this folder already.
 
-    if (download) {
+  if (download) {
 
-      download.file( 'http://www2.census.gov/geo/docs/reference/codes/files/national_county.txt' , 'countyinfo.txt')
-      #' As of 3/2015, list is here:      http://www2.census.gov/geo/docs/reference/codes/files/national_county.txt
-      #' Prior to that it had been here: 'http://www.census.gov/geo/reference/codes/files/national_county.txt'
-      x=read.csv('countyinfo.txt', header=FALSE, as.is=TRUE)
-      ##### State,State ANSI,County ANSI,County Name,ANSI Cl
-      names(x) <- c('ST', 'FIPS.ST', 'FIPS.COUNTY.3', 'countyname', 'junk')
-      x$junk <- NULL
-      x$FIPS.COUNTY.3 <- analyze.stuff::lead.zeroes(x$FIPS.COUNTY.3, 3)
-      x$FIPS.ST <- analyze.stuff::lead.zeroes(x$FIPS.ST, 2)
-      x$FIPS.COUNTY <- analyze.stuff::lead.zeroes(paste(x$FIPS.ST, x$FIPS.COUNTY.3, sep=''), 5)
-      x$FIPS.COUNTY.3 <- NULL
-      x$FIPS.ST <- NULL
+    download.file( 'http://www2.census.gov/geo/docs/reference/codes/files/national_county.txt' , 'countyinfo.txt')
+    #' As of 3/2015, list is here:      http://www2.census.gov/geo/docs/reference/codes/files/national_county.txt
+    #' Prior to that it had been here: 'http://www.census.gov/geo/reference/codes/files/national_county.txt'
+    x=read.csv('countyinfo.txt', header=FALSE, as.is=TRUE)
+    ##### State,State ANSI,County ANSI,County Name,ANSI Cl
+    names(x) <- c('ST', 'FIPS.ST', 'FIPS.COUNTY.3', 'countyname', 'junk')
+    x$junk <- NULL
+    x$FIPS.COUNTY.3 <- analyze.stuff::lead.zeroes(x$FIPS.COUNTY.3, 3)
+    x$FIPS.ST <- analyze.stuff::lead.zeroes(x$FIPS.ST, 2)
+    x$FIPS.COUNTY <- analyze.stuff::lead.zeroes(paste(x$FIPS.ST, x$FIPS.COUNTY.3, sep=''), 5)
+    x$FIPS.COUNTY.3 <- NULL
+    x$FIPS.ST <- NULL
 
-      # was doing this, which uses ejanalysis function get.state.info which in turn uses data(lookup.states, package='proxistat')
-      # x$statename <- ejanalysis::get.state.info(x$ST)[ , 'statename']
-      # now instead just do this, using proxistat but not ejanalysis pkg:
-      data(lookup.states, package='proxistat')
-      x$statename <- lookup.states[ match(x[ , 'ST'], lookup.states[ , 'ST']), 'statename']
+    # was doing this, which uses ejanalysis function get.state.info which in turn uses data(lookup.states, package='proxistat')
+    # x$statename <- ejanalysis::get.state.info(x$ST)[ , 'statename']
+    # now instead just do this, using proxistat but not ejanalysis pkg:
+    data(lookup.states, package='proxistat')
+    x$statename <- lookup.states[ match(x[ , 'ST'], lookup.states[ , 'ST']), 'statename']
 
-      x$fullname <- apply( x[ , c('countyname', 'statename')] , 1, function(myrow) paste(myrow[1], myrow[2], sep=', '))
-      lookup.county <- x
-    } else {
-      data(countiesall, package='proxistat')
-      lookup.county <- countiesall  # lazy load from data() in proxistat package
-   }
+    x$fullname <- apply( x[ , c('countyname', 'statename')] , 1, function(myrow) paste(myrow[1], myrow[2], sep=', '))
+    lookup.county <- x
+  } else {
+    data(countiesall, package='proxistat')
+    lookup.county <- countiesall  # lazy load from data() in proxistat package
+  }
   #}
 
   ######  Query & report results differently depending on nature of the query term if any:
@@ -158,21 +160,21 @@ get.county.info <- function(query, fields='all', download=FALSE) {
   #  is.valid.ST <- grepl('^[[:space:][:alpha:]]*$', upx)
   #  is.valid.ST[is.valid.ST] <- upx[is.valid.ST] %in% toupper(lookup.states$ST)
   #  results[is.valid.ST, ] <- lookup.states[ match( upx[is.valid.ST], toupper(lookup.states$ST)), fields]
-#
+  #
   # FIND WHICH OF QUERY TERMS ARE VALID statename AND GET DATA FOR THOSE
   # *** but note a state would return multiple rows / counties, not just one!
-#   upx <- toupper(x)
-#   is.valid.statename <- grepl('^[[:space:][:alpha:][:punct:]]*$', upx)
-#   is.valid.statename[is.valid.statename] <- upx[is.valid.statename] %in% toupper(lookup.county$statename)
-#   # the match() function finds only the first match, not all of the matches! must use grep or grepl here
-#   all.counties.in.states <- NULL
-#   if (sum(is.valid.statename) > 0) {
-#     for (i in 1:sum(is.valid.statename)) {
-#       thisone <- upx[is.valid.statename][i]
-#       all.counties.in.states <- rbind(all.counties.in.states, cbind(QUERY=query[is.valid.statename][i], lookup.county[ grepl(thisone, toupper(lookup.county$statename)) , fields]))
-#     }
-#     results[is.valid.statename]
-#   }
+  #   upx <- toupper(x)
+  #   is.valid.statename <- grepl('^[[:space:][:alpha:][:punct:]]*$', upx)
+  #   is.valid.statename[is.valid.statename] <- upx[is.valid.statename] %in% toupper(lookup.county$statename)
+  #   # the match() function finds only the first match, not all of the matches! must use grep or grepl here
+  #   all.counties.in.states <- NULL
+  #   if (sum(is.valid.statename) > 0) {
+  #     for (i in 1:sum(is.valid.statename)) {
+  #       thisone <- upx[is.valid.statename][i]
+  #       all.counties.in.states <- rbind(all.counties.in.states, cbind(QUERY=query[is.valid.statename][i], lookup.county[ grepl(thisone, toupper(lookup.county$statename)) , fields]))
+  #     }
+  #     results[is.valid.statename]
+  #   }
   #all.counties.in.states <- sapply(upx[is.valid.statename], function(thisone) {lookup.county[ grepl(thisone, toupper(lookup.county$statename)) , fields]})
   #
   # debugging:
@@ -263,4 +265,5 @@ get.county.info <- function(query, fields='all', download=FALSE) {
     #58      78 VI         U.S. Virgin Islands               <NA>      2          FALSE  FALSE    FALSE            FALSE            TRUE
 
   }
+
 }

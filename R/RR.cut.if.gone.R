@@ -14,7 +14,7 @@
 #'  mydat=data.frame(AQI=99:101, pctlowinc=c(0.20,0.30,0.40), pop=rep(1000,3))
 #'  RR(mydat$AQI, mydat$pctlowinc, mydat$pop)
 #'  RR.cut.if.gone(e=mydat$AQI, d=mydat$pctlowinc, pop=mydat$pop)
-#'  @export
+#' @export
 RR.cut.if.gone <- function(e, d, pop, dref, na.rm=TRUE) {
 
 #  contribution <- matrix()

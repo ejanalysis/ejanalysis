@@ -55,6 +55,6 @@ The Kolm-Pollak inequality index is provided by the package \pkg{ineq},
  ineq::Kolm(x)
  KolmPollak(x)
  KolmPollak(x, bigbadx = TRUE)
- @export
+
 }
 

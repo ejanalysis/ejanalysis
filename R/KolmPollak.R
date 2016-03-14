@@ -38,7 +38,8 @@
 #'  ineq::Kolm(x)
 #'  KolmPollak(x)
 #'  KolmPollak(x, bigbadx = TRUE)
-#'  @export
+#'
+#' @export
 KolmPollak <- function(x, parameter= 1, na.rm=TRUE, bigbadx=FALSE) {
 
   if (bigbadx) {x <- 0 - x}
