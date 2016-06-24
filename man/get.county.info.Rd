@@ -15,10 +15,10 @@ and also could be 'countyname, statename' (fullname, exactly matching formats in
 }
 \value{
 Returns a data.frame or vector of results depending on fields selected.
-  Returns a data.frame (if query has 2+ elements), 'QUERY' as first column, and then all or specified fields of information, covering matching counties,
-  or NA if certain problems arise.
-  If no query term, or fields not specified, then all information fields are returned:
-  QUERY, ST, countyname, FIPS.COUNTY, statename, fullname
+Returns a data.frame (if query has 2+ elements), 'QUERY' as first column, and then all or specified fields of information, covering matching counties,
+or NA if certain problems arise.
+If no query term, or fields not specified, then all information fields are returned:
+QUERY, ST, countyname, FIPS.COUNTY, statename, fullname
 }
 \description{
 Function that reports some or all of a table of data
@@ -81,16 +81,5 @@ Converted basic data to data, so now can also say data(counties, package='proxis
   which has island areas but not US total and not leading zeroes on FIPS: \cr
   require(acs) \cr
   print(fips.state) \cr
-}
-\examples{
-  x <- get.county.info(); str(x); print(''); head(x)
-  get.county.info(c('05001','01005'), fields=c('countyname', 'ST'))
-
-}
-\seealso{
-\code{\link{clean.fips1215}}, \code{\link{get.fips.bg}}, \code{\link{get.fips.tract}}, \code{\link{get.fips.county}}, \code{\link{get.fips.st}} to get partial FIPS from longer FIPS, or
-  \code{\link{get.name.county}}, \code{\link{get.name.state}} to extract name from longer Census name, or
-  \code{\link{get.state.info}}, \code{\link{get.county.info}}, \code{\link{get.epa.region}}
-  to look up info such as FIPS, state abbreviation, statename, countyname, or region based on FIPS or name.
 }
 

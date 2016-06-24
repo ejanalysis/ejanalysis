@@ -5,7 +5,7 @@
 #'   for 1 or more counties. Query terms can be 5-digit FIPS, or 'countyname, statename' so
 #'   'Montgomery, MD' will not work. 'Montgomery County, Maryland' will work.
 #'   Requested fields can include any of these: "ST", "countyname", "FIPS.COUNTY", "statename", "fullname"
-#' @details Converted basic data to data, so now can also say data(counties, package='proxistat') or x <- countiesall via lazy loading. \cr
+#' @details  Converted basic data to data, so now can also say data(counties, package='proxistat') or x <- countiesall via lazy loading. \cr
 #'   Also, as of 3/2015, a list is here: \url{http://www2.census.gov/geo/docs/reference/codes/files/national_county.txt} \cr
 #'   help(county.names, package='choroplethr') \cr
 #'   data(county.names) \cr
@@ -63,27 +63,18 @@
 #'   and also could be 'countyname, statename' (fullname, exactly matching formats in countiesall$fullname, but case insensitive).
 #' @param fields Character string optional defaults to 'all' but can specify 'countyname' 'ST' and/or 'FIPS.COUNTY'
 #' @return Returns a data.frame or vector of results depending on fields selected.
-#'   Returns a data.frame (if query has 2+ elements), 'QUERY' as first column, and then all or specified fields of information, covering matching counties,
-#'   or NA if certain problems arise.
-#'   If no query term, or fields not specified, then all information fields are returned:
-#'   QUERY, ST, countyname, FIPS.COUNTY, statename, fullname
-#' @template seealsoFIPS
-#' @examples
-#'   x <- get.county.info(); str(x); print(''); head(x)
-#'   get.county.info(c('05001','01005'), fields=c('countyname', 'ST'))
+#' Returns a data.frame (if query has 2+ elements), 'QUERY' as first column, and then all or specified fields of information, covering matching counties,
+#' or NA if certain problems arise.
+#' If no query term, or fields not specified, then all information fields are returned:
+#' QUERY, ST, countyname, FIPS.COUNTY, statename, fullname
 #'
 #' @export
 get.county.info <- function(query, fields = 'all', download = FALSE) {
 
-  #if (!exists('lookup.county'))  {
-  # could Put the data into (at least local) memory here if not already available, but no?
-  # At least see if it is on disk in this folder already.
-
   if (download) {
-
     download.file( 'http://www2.census.gov/geo/docs/reference/codes/files/national_county.txt' , 'countyinfo.txt')
-    #' As of 3/2015, list is here:      http://www2.census.gov/geo/docs/reference/codes/files/national_county.txt
-    #' Prior to that it had been here: 'http://www.census.gov/geo/reference/codes/files/national_county.txt'
+    # As of 3/2015, list is here:      http://www2.census.gov/geo/docs/reference/codes/files/national_county.txt
+    # Prior to that it had been here: 'http://www.census.gov/geo/reference/codes/files/national_county.txt'
     x=read.csv('countyinfo.txt', header=FALSE, as.is=TRUE)
     ##### State,State ANSI,County ANSI,County Name,ANSI Cl
     names(x) <- c('ST', 'FIPS.ST', 'FIPS.COUNTY.3', 'countyname', 'junk')
@@ -104,9 +95,9 @@ get.county.info <- function(query, fields = 'all', download = FALSE) {
     lookup.county <- x
   } else {
     data(countiesall, package='proxistat')
-    lookup.county <- countiesall  # lazy load from data() in proxistat package
+    lookup.county <- countiesall
+    # lazy load from data() in proxistat package
   }
-  #}
 
   ######  Query & report results differently depending on nature of the query term if any:
 
@@ -192,6 +183,7 @@ get.county.info <- function(query, fields = 'all', download = FALSE) {
 
   return(results)
 
+
   ### OUTPUTS OF FUNCTION:
 
   if (1==0) {
@@ -265,5 +257,4 @@ get.county.info <- function(query, fields = 'all', download = FALSE) {
     #58      78 VI         U.S. Virgin Islands               <NA>      2          FALSE  FALSE    FALSE            FALSE            TRUE
 
   }
-
 }
