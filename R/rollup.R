@@ -77,7 +77,7 @@
 #' }
 #'
 #' @export
-rollup <- function( x, by, wts=NULL, FUN, prefix='wtd.mean.', na.rm=TRUE) {
+rollup <- function( x, by, wts = NULL, FUN, prefix = 'wtd.mean.', na.rm = TRUE) {
 
   # ################################################################
   # COMPARISON OF data.table vs Hmisc summarize() for weighted means of subsets of fields
@@ -176,7 +176,7 @@ rollup <- function( x, by, wts=NULL, FUN, prefix='wtd.mean.', na.rm=TRUE) {
 
     wtd.mean.func <- function(y) {
       #print(str(y)); print(typeof(y)); print(dim(y)); print(length(dim(y))); print(dimnames(y)); print(is.null(dimnames(y)[1]))
-      return(Hmisc::wtd.mean(y[ , 1], y[ , 2], na.rm=na.rm))
+      return(Hmisc::wtd.mean(y[ , 1], y[ , 2], na.rm = na.rm))
     }
 
     myfun <- wtd.mean.func
@@ -188,7 +188,7 @@ rollup <- function( x, by, wts=NULL, FUN, prefix='wtd.mean.', na.rm=TRUE) {
 
   # if wts was specified as the name of a field in x, make sure wtscolname is set and weights is now the actual vector not just its name
 
-  if (length(wts)==1 & class(wts)=='character') {
+  if (length(wts) == 1 & class(wts) == 'character') {
     wtscolname <- wts
     #weights <- x[ , wtscolname]
 
@@ -241,7 +241,7 @@ rollup <- function( x, by, wts=NULL, FUN, prefix='wtd.mean.', na.rm=TRUE) {
   }
 
   # preallocate memory, but not sure how this handles NAs
-  rolled <- as.data.frame(matrix(nrow=length(unique(by)), ncol=length(x)), stringsAsFactors=FALSE)
+  rolled <- as.data.frame(matrix(nrow = length(unique(by)), ncol = length(x)), stringsAsFactors = FALSE)
 
   # It now is a data.frame, since it has a wts col, so do a rollup for each column other than wts,
   # but you don't really want the weights col if user didn't specify wts & their function doesn't use wts !
@@ -263,23 +263,23 @@ rollup <- function( x, by, wts=NULL, FUN, prefix='wtd.mean.', na.rm=TRUE) {
         # to roll up the by column, just use first value of by in each group (OR TRY USING unique(by) BUT NOT SURE OF SORT ORDER)
 
         # While debugging, print names of fields as they are summarized:
-        cat(analyze.stuff::lead.zeroes(i,3), '- using 1st element per subset for non numeric field: ', names(x)[i], '\n')
+        cat(analyze.stuff::lead.zeroes(i, 3), '- using 1st element per subset for non numeric field: ', names(x)[i], '\n')
 
-        rolled[ , i] <- as.vector(summarize(x[ , i], by=llist(by), FUN=function(y) y[1]) )[ , 2]
+        rolled[ , i] <- as.vector(summarize(x[ , i], by = llist(by), FUN = function(y) y[1]) )[ , 2]
 
       } else {
         # ************** if don't want wtd.mean, and don't need wts, this is not ideal: want to be able to write function of a vector, not necessarily a data.frame!
         # This seems to assume we want wtd.mean since it passes var and weight
 
         if (debugging) {
-          cat(analyze.stuff::lead.zeroes(i,3), '- summarizing ', names(x)[i], '\n')
+          cat(analyze.stuff::lead.zeroes(i, 3), '- summarizing ', names(x)[i], '\n')
         }
 
         if (missing(FUN)) {
-          rolled[ , i] <- (summarize(x[ , c(names(x)[i], 'wxtempname')], by=llist(by), FUN=myfun))[ , 2]
+          rolled[ , i] <- (summarize(x[ , c(names(x)[i], 'wxtempname')], by = llist(by), FUN = myfun))[ , 2]
         } else {
           # THIS ASSUMES A USER DEFINED FUNCTION DOES NOT USE THE WEIGHTS PARAMETER
-          rolled[ , i] <- (summarize(x[ , names(x)[i] ],         by=llist(by), FUN=myfun))[ , 2]
+          rolled[ , i] <- (summarize(x[ , names(x)[i] ],         by = llist(by), FUN = myfun))[ , 2]
         }
       }
       # x[ , i], match('wxtempname', names(x))  instead of names(x)[i], 'wxtempname')  ??
@@ -290,7 +290,7 @@ rollup <- function( x, by, wts=NULL, FUN, prefix='wtd.mean.', na.rm=TRUE) {
   } else {
     cat('you should not be here!\n')
     if (debugging) { cat('names(x)[i]: ','names(x)[i]','\n') }
-    rolled <- summarize(x[ , c(names(x)[i], 'wxtempname')], by=llist(by), FUN=myfun)
+    rolled <- summarize(x[ , c(names(x)[i], 'wxtempname')], by = llist(by), FUN = myfun)
     #names(rolled) <- c(names(by), )
   }
 
@@ -301,25 +301,25 @@ rollup <- function( x, by, wts=NULL, FUN, prefix='wtd.mean.', na.rm=TRUE) {
   }
 
   names(rolled) <- mystatnames
-  names(rolled) <- gsub(paste(prefix, 'wxtempname', sep=''), wtscolname, names(rolled))
+  names(rolled) <- gsub(paste(prefix, 'wxtempname', sep = ''), wtscolname, names(rolled))
 
   if (debugging) {
 
     cat('names of rolled now are: ', names(rolled), '\n')
     cat('names of x are:', names(x),'\n')
-    cat('wtscolname is :',wtscolname,'\n')
+    cat('wtscolname is :', wtscolname,'\n')
   }
 
   # Actually, a sum of the weights is probably more useful than the weighted mean of the weights!
-  rolled[ , wtscolname] <- (summarize(x[ , 'wxtempname'], by=llist(by), FUN=function(y) sum(y, na.rm=TRUE)))[ , 2]
+  rolled[ , wtscolname] <- (summarize(x[ , 'wxtempname'], by = llist(by), FUN = function(y) sum(y, na.rm=TRUE)))[ , 2]
 
   if (debugging) {
     # While debugging, print names of fields as they are summarized:
-    cat('names of rolled now', names(rolled),'\n')
+    cat('names of rolled now', names(rolled), '\n')
   }
 
   # include the "by" and wts fields as the first two columns returned
-  rolled$by <- as.vector(summarize(by, by=llist(by), FUN=function(y) y[1]) )
+  rolled$by <- as.vector(summarize(by, by = llist(by), FUN = function(y) y[1]) )
 
   if (debugging) {
     # While debugging, print
@@ -331,7 +331,7 @@ rollup <- function( x, by, wts=NULL, FUN, prefix='wtd.mean.', na.rm=TRUE) {
   rolled <- rolled[ , c('by', wtscolname, names(rolled[!(names(rolled) %in% c('by', wtscolname) )]))]
 
   # it is the sum of the weights, so name that column to say so
-  names(rolled) <- gsub(wtscolname, paste('sum.',wtscolname,sep=''), names(rolled) )
+  names(rolled) <- gsub(wtscolname, paste('sum.', wtscolname, sep = ''), names(rolled) )
 
   return(rolled)
 

@@ -121,7 +121,7 @@ get.state.info <- function(query, fields='all') {
   results[is.valid.ST, ] <- lookup.states[ match( upx[is.valid.ST], toupper(lookup.states$ST)), fields]
 
   if (all(is.na(results[ , 1]))) {
-    cat('Warning- No matches found.\n'); return(NA)
+    cat('Warning- No matches found for what should be state identifiers.\n'); return(NA)
   }
 
   #rownames(results) <- query  # This would not work if there were duplicates in the query vector, so create a column to show the query term

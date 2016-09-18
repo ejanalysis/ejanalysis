@@ -173,7 +173,7 @@ get.county.info <- function(query, fields = 'all', download = FALSE) {
   #
 
   if (all(is.na(results[ , 1]))) {
-    cat('Warning- No matches found.\n'); return(NA)
+    cat('Warning- No matches found for what should be county identifiers.\n'); return(NA)
   }
 
   results <- data.frame(QUERY=query, results, stringsAsFactors=FALSE)
