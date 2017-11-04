@@ -100,4 +100,3 @@ Cancer by race in arizona (defaults to 2008-2009):
  shell.exec(state.health.url('CA'))
 
 }
-

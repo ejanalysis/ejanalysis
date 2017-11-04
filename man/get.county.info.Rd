@@ -82,4 +82,3 @@ Converted basic data to data, so now can also say data(counties, package='proxis
   require(acs) \cr
   print(fips.state) \cr
 }
-

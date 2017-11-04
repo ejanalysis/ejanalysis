@@ -18,4 +18,3 @@ Formulas for pop counts, pop demog pct, risk, cases, RR,
  excess risk, excess cases (like EJ index sum),
  and how those are different under 4 alt scenarios like E of D is set to that of dref.
 }
-

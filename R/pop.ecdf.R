@@ -22,7 +22,7 @@
 #' @param allothers Logical value, optional, TRUE by default. Whether to plot a series for everyone else, using 1-pct
 #' @param col Optional, default is 'red' to signify line color red for key demographic group.
 #'   Can also be a vector of colors if pcts is a data.frame with one column per group, one color per group.
-#' @param main Optional character specifying plot title, default is none
+#' @param main Optional character specifying plot title. Default title notes colors of lines and if reference group used.
 #' @param subtitles Logical FALSE by default, which means extra info is not shown (see help on \code{\link[Hmisc]{Ecdf}})
 #' @param ... other optional parameters to pass to Ecdf
 #' @return draws a plot

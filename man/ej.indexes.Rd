@@ -75,4 +75,3 @@ Creates one EJ index column for each environmental indicator column,
   weights=runif(1000, 500, 5000))
  myej
 }
-

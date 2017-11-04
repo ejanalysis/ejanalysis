@@ -30,4 +30,3 @@ get.fips.bg(samplefips)
   \code{\link{get.state.info}}, \code{\link{get.county.info}}, \code{\link{get.epa.region}}
   to look up info such as FIPS, state abbreviation, statename, countyname, or region based on FIPS or name.
 }
-

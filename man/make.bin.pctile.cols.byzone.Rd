@@ -28,4 +28,3 @@ May be obsolete- make.bin.pctile.cols() now has a zone parameter.
   Get weighted percentiles and bin numbers, by subset of rows (zone), for each column of data.
   This can be used to calculate population-weighted percentiles within each State, for national data on Census block groups, for example.
 }
-

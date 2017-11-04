@@ -54,4 +54,3 @@ bin 11: 0.95<=PCTILE<=1.00  \cr
 \code{\link{write.wtd.pctiles.by.zone}} to save file that is lookup table of weighted percentiles for columns of a data.frame, for each geographic zone (subset of rows) \cr
 \code{\link{lookup.pctile}} to look up current approx weighted percentiles in a lookup table that is already in global memory \cr
 }
-

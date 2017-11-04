@@ -52,4 +52,3 @@ Merge table of Relative Risk results for some zones with table for USA overall
 }
 }
 \keyword{EJ}
-

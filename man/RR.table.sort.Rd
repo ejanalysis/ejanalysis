@@ -4,12 +4,14 @@
 \alias{RR.table.sort}
 \title{Sort table of Relative Risk results by zone by group by envt risk factor}
 \usage{
-RR.table.sort(x, decreasing = TRUE)
+RR.table.sort(x, margins = c(1, 2, 3), decreasing = TRUE)
 }
 \arguments{
 \item{x}{Array of RR values from \code{\link{RR}} in array of 3 dimensions: x[Dnames, Enames, Zcolnames]}
 
-\item{decreasing}{default is TRUE, defines how to sort second and third dimensions (envt risk and demog group)}
+\item{margins}{optional numeric vector of which dimensions to sort, default is all 3, so margins = c(1, 2, 3) by default}
+
+\item{decreasing}{default is TRUE, defines how to sort (note all specified dimensions are sorted the same way by this function)}
 }
 \value{
 Sorted version of x array of 3 dimensions: RRS[Dnames, Enames, Zcolnames]
@@ -31,7 +33,8 @@ RRS[ 'pctlowinc', , ]
 RRS[ , , 'CA']
 RRS[ , 'pm', ]
 
-RR.table.sort(RRS)
+RR.plot(RR.table.sort(RRS))
+RR.table.sort(RRS, 1)
 
 RRS.REGION  <- RR.table(mydat=bg, Enames=names.e, Dnames=c(names.d, names.d.subgroups.pct),
  popcolname='pop', Zcolname='REGION')
@@ -55,4 +58,3 @@ RRS2[ , , '8']
 }
 }
 \keyword{EJ}
-

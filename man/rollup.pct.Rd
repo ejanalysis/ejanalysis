@@ -25,4 +25,3 @@ Uses data.table package to quickly calculate
   pre1960=1:100; builtunits=rep(c(10, 100),50); zone=rep(c('NY','MA'),50)
   rollup.pct(a,b,zone)
 }
-

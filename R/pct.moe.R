@@ -15,7 +15,7 @@
 #' @param a.moe Margins of error for numerators, as a vector  (should be same length as a).
 #' @param b.moe Margins of error for denominators, as a vector (should be same length as a, or it is recycled).
 #' @return Returns margin(s) of error same shape as parameter a
-#' @seealso \code{\link{sum.moe}}
+#' @seealso \code{\link{sumoe}}
 #' @examples
 #' 	 x <- pct.moe(15, 100, 3, 10)
 #' @export

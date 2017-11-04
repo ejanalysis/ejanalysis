@@ -4,6 +4,7 @@
 \name{ejanalysis}
 \alias{ejanalysis}
 \alias{ejanalysis-package}
+\alias{ejanalysis-package}
 \title{Tools for Environmental Justice (EJ) Analysis}
 \description{
 This R package provides tools for environmental justice (EJ) analysis,
@@ -38,4 +39,3 @@ Key functions include
 \concept{
 justice EJ demographic
 }
-

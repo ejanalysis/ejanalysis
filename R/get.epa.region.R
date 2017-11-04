@@ -1,6 +1,6 @@
-#' @title Identify EPA Region for given state
+#' @title Identify EPA Region for given state (or FIPS)
 #'
-#' @description Identify US Environmental Protection Agency region(s) containing given state(s)
+#' @description Identify US Environmental Protection Agency region(s) containing given state(s) (or via FIPS)
 #' @details For EPA Regions, see \url{http://www2.epa.gov/aboutepa#pane-4} or \url{http://www2.epa.gov/aboutepa/visiting-regional-office}.
 #'   For information on FIPS codes, see \url{http://www.census.gov/geo/reference/ansi.html},
 #'   and also see \url{https://www.census.gov/geo/reference/geoidentifiers.html}
@@ -22,6 +22,7 @@ get.epa.region <- function(state) {
     return(get.state.info()[ , c('ST', 'statename', 'ST', 'REGION')])
     #stop('Missing state name(s), FIPS#(s), or abbreviation(s)\n')
   }
+
 
   return( get.state.info(state)$REGION )
 

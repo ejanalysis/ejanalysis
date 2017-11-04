@@ -29,4 +29,3 @@ As with RR function, calculates RR as ratio of means in one demographic group vs
  RR(mydat$AQI, mydat$pctlowinc, mydat$pop)
  RR.cut.if.gone(e=mydat$AQI, d=mydat$pctlowinc, pop=mydat$pop)
 }
-

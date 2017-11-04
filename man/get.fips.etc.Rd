@@ -22,4 +22,3 @@ Use US Census block group FIPS codes to get more information about each block gr
   "400353734002", "371190030121", "250235022001", "550439609001", "060730170302")
  get.fips.etc(x)
 }
-

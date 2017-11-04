@@ -51,4 +51,3 @@ or avg d's e is set to that of avg nonD person.
 x=data.frame(pop=rep(1000, 10), pct=0.05+6*(1:10)/100, e= (10*(1:10))/100 )
 y=ej.added(x$e, x$pct, x$pop, silent=FALSE)
 }
-

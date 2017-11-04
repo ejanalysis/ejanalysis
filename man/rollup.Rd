@@ -96,4 +96,3 @@ tracts   <- merge(tracts,   tracts.avg, by='FIPS.TRACT')
 \seealso{
 \code{\link{wtd.colMeans}} \code{\link[ejscreen]{ejscreen.rollup}}
 }
-

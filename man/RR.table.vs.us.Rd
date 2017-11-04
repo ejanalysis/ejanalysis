@@ -37,4 +37,3 @@ Takes zone-specific RRS values and divides each value by the corresponding value
 \item \code{\link{pop.ecdf}} to compare plots of cumulative frequency distribution of indicator values by group
 }
 }
-

@@ -128,4 +128,3 @@ RR(mydat$pcthisp, mydat$pcthisp, mydat$pop)
 \item \code{\link{pop.ecdf}} to compare plots of cumulative frequency distribution of indicator values by group
 }
 }
-

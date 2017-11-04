@@ -39,4 +39,3 @@ Tries to interpret vector of one or more FIPS codes and/or names of geographies,
 \seealso{
 \code{\link[ejanalysis]{get.fips.st}} and related functions noted there, \code{\link[ejanalysis]{clean.fips}}, \code{\link[ejanalysis]{get.state.info}}
 }
-

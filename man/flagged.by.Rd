@@ -48,4 +48,3 @@ flagged.only.by to find cells that are the only one in the row that is at/above/
 rows.above.count, rows.above.pct, rows.above.which
 }
 \keyword{EJ}
-

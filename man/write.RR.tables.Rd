@@ -42,4 +42,3 @@ This function breaks up a 3-dimensional table of RR values (e.g., by demographic
 \item \code{\link{pop.ecdf}} to compare plots of cumulative frequency distribution of indicator values by group
 }
 }
-
