@@ -4,14 +4,11 @@
 \name{bgtest}
 \alias{bgtest}
 \title{Test dataset for ejanalysis}
-\usage{
-data('bgtest', package = 'ejanalysis')
-}
 \description{
 This data set provides test data, with Environmental, Demographic, and EJ Index fields,
  one row per block group, covering a few states. This is roughly a subset of ejscreen data (see \pkg{ejscreen} package).
+ Can be used like this:  data('bgtest', package = 'ejanalysis')
 }
 \seealso{
 \code{\link[ejscreen]{names.dvars}} \pkg{ejscreen}
 }
-\keyword{datasets}

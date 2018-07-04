@@ -7,13 +7,11 @@
 \alias{environmental-variable-names}
 \alias{Elist}
 \title{Fieldnames of environmental indicator columns in ejscreen data}
-\usage{
-data('names.evars', package = 'ejscreen')
-}
 \description{
 This data set provides variables that hold the colnames
   of environmental indicator fields in data.frames that may be used in the ejscreen package
-  to make it easier to refer to them as a vector, e.g., mydf[ , names.e]
+  to make it easier to refer to them as a vector, e.g., mydf[ , names.e]\cr
+  data('names.evars', package = 'ejscreen')
 }
 \seealso{
 \code{\link[ejscreen]{names.evars}}

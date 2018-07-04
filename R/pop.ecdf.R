@@ -5,7 +5,7 @@
 #'  one for each subgroup specified.
 #'  Useful to compare 2 groups based on each groups entire pdf or cdf  distribution of peoples scores,
 #'  using data from small places like census block groups, based on having for each place the pop total
-#'  and % of pop that is in each group or perhaps already have count in each group.
+#'  and \% of pop that is in each group or perhaps already have count in each group.
 #' @details
 #' Notes: \cr
 #' to compare zones, \cr
@@ -17,7 +17,7 @@
 #' @param pcts Numeric vector (or data.frame), required. Same number of vector elements or data.frame
 #'   rows as length of scores vector (not sure what happens if pcts and scores are both data.frames).
 #'   Specifies the fraction of population that is in demographic group(s) of interest, one row per place, one column per group.
-#' @param pops Vector used to define weights as pop*pcts, and if allothers=TRUE, for pop*(1-pcts) for nongroup
+#' @param pops Vector used to define weights as \code{pop * pcts}, and if \code{allothers=TRUE}, for \code{pop * (1-pcts)} for nongroup
 #' @param weights Not used currently. See \code{pops} parameter
 #' @param allothers Logical value, optional, TRUE by default. Whether to plot a series for everyone else, using 1-pct
 #' @param col Optional, default is 'red' to signify line color red for key demographic group.

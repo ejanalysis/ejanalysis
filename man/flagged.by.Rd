@@ -4,12 +4,12 @@
 \alias{flagged.by}
 \title{flagged.by}
 \usage{
-flagged.by(...)
+flagged.by(x, cutoff, or.tied, below, ...)
 }
 \arguments{
 \item{x}{Data.frame or matrix of numbers to be compared to cutoff value.}
 
-\item{cutoff}{The numeric threshold or cutoff to which numbers are compared. Default is arithmetic mean of row. Usually one number, but can be a vector of same length as number of rows, in which case each row can use a different cutoff.}
+\item{cutoff}{Numeric. The threshold or cutoff to which numbers are compared. Default is arithmetic mean of row. Usually one number, but can be a vector of same length as number of rows, in which case each row can use a different cutoff.}
 
 \item{or.tied}{Logical. Default is FALSE, which means we check if number in x is greater than the cutoff (>). If TRUE, check if greater than or equal (>=).}
 
@@ -47,4 +47,3 @@ flagged.only.by to find cells that are the only one in the row that is at/above/
 
 rows.above.count, rows.above.pct, rows.above.which
 }
-\keyword{EJ}

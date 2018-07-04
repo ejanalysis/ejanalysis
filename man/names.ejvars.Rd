@@ -6,13 +6,11 @@
 \alias{names.ej}
 \alias{EJ-variable-names}
 \title{Fieldnames of EJ index columns in ejscreen data}
-\usage{
-data('names.ejvars', package = 'ejscreen')
-}
 \description{
 This data set provides variables that hold the colnames
   of environmental justice index fields in data.frames that may be used in the ejscreen package
-  to make it easier to refer to them as a vector, e.g., mydf[ , names.ej]
+  to make it easier to refer to them as a vector, e.g., mydf[ , names.ej] \cr
+  data('names.ejvars', package = 'ejscreen')
 }
 \seealso{
 \code{\link[ejscreen]{names.ejvars}}

@@ -23,11 +23,12 @@ To use some other reference group, just set dref = a fraction of 1 that is the s
 as a vector as long as the number of places (number of rows in e or d).
 e.g., for non-Hispanic White alone to be the reference group,
 if the bg data.frame has a field called pctnhwa, specify dref = bg$pctnhwa,
-and specify dlab = c('mean in this group', 'mean in reference group') for example.
-@param formulatype optional, default is 'manual', which is like sum(x * wts) / sum(wts) with na.rm=T,
- or formulatype can be 'Hmisc' to use \code{\link[Hmisc]{wtd.mean}} (Hmisc::wtd.mean), or 'base' to use \code{\link{weighted.mean}}}
+and specify dlab = c('mean in this group', 'mean in reference group') for example.}
 
 \item{dlab}{optional character vector of two names for columns of output, default is c('group', 'not'), where the second refers to the reference group used.}
+
+\item{formulatype}{Optional, default is 'manual', which is like sum(x * wts) / sum(wts) with na.rm=T,
+or formulatype can be 'Hmisc' to use \code{\link[Hmisc]{wtd.mean}} (Hmisc::wtd.mean), or 'base' to use \code{\link{weighted.mean}}}
 
 \item{na.rm}{optional, default is TRUE. No effect if formulatype = manual (default). Not really the right results when na.rm = FALSE anyway.}
 }

@@ -5,7 +5,6 @@
 #' @param zones2 Zones in rrs2, as vector, default is dimnames(rrs2)[[3]]
 #' @return Returns a new array
 #' @template seealsoRR
-#' @keywords EJ
 #' @examples
 #'  RRS.US  <- RR.table(mydat=bg, Enames=names.e, Dnames=c(names.d, names.d.subgroups.pct),
 #'   popcolname='pop')

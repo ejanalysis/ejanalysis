@@ -2,7 +2,7 @@
 #'
 #' @description
 #'  Draws a plot using relative risk information, one line per demographic group.
-#' @param RRS Table as from \code{\link{RRS}} function, of relative risk by demographic group, risk type, and zone (3 dimensions).
+#' @param rrs Table as from \code{\link{RRS}} function, of relative risk by demographic group, risk type, and zone (3 dimensions).
 #' @param dnames Demographic group names to be found as names of first dim of RRS. Optional, default is \code{\link[ejscreen]{names.d.subgroups}} and \code{\link[ejscreen]{names.d}} from the ejscreen dataset.
 #' @param enames Environmental factor or risk type names to be found as names of second dim of RRS. Optional, default is \code{\link[ejscreen]{names.e}} from ejscreen package.
 #' @param zone Zone name to be found among names for third dim of RRS. Default is "USA"
@@ -22,7 +22,7 @@
 #'   ###
 #' @export
 RR.plot <-
-  function(RRS,
+  function(rrs,
            dnames,
            enames,
            zone = 'USA',

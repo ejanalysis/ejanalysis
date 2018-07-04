@@ -4,11 +4,11 @@
 \alias{RR.table.view}
 \title{Just print Relative Risks (RR) info by demog group by risk type by zone}
 \usage{
-RR.table.view(RRS, d = dimnames(RRS)[[1]], e = dimnames(RRS)[[2]],
+RR.table.view(rrs, d = dimnames(RRS)[[1]], e = dimnames(RRS)[[2]],
   zone = dimnames(RRS)[[3]])
 }
 \arguments{
-\item{RRS}{A three dimensional array that is created by \code{\link{RR}} and has format like RRS[d, e, zone]}
+\item{rrs}{A three dimensional array that is created by \code{\link{RR}} and has format like RRS[d, e, zone]}
 
 \item{d}{Optional. Vector of names of demographic groups that must be subset of first dimension of RRS. Default is all.}
 

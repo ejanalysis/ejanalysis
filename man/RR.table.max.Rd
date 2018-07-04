@@ -40,4 +40,3 @@ See which Demographic group has highest RR for each Envt risk indicator,
 \item \code{\link{pop.ecdf}} to compare plots of cumulative frequency distribution of indicator values by group
 }
 }
-\keyword{EJ}

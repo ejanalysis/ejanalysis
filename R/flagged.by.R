@@ -5,7 +5,7 @@
 #' Can be used in EJ analysis as 1st step in identifying places (rows) where some indicator(s) is/are at/above a cutoff, threshold value.
 #'
 #' @param x Data.frame or matrix of numbers to be compared to cutoff value.
-#' @param cutoff The numeric threshold or cutoff to which numbers are compared. Default is arithmetic mean of row. Usually one number, but can be a vector of same length as number of rows, in which case each row can use a different cutoff.
+#' @param cutoff Numeric. The threshold or cutoff to which numbers are compared. Default is arithmetic mean of row. Usually one number, but can be a vector of same length as number of rows, in which case each row can use a different cutoff.
 #' @param or.tied Logical. Default is FALSE, which means we check if number in x is greater than the cutoff (>). If TRUE, check if greater than or equal (>=).
 #' @param below Logical. Default is FALSE. If TRUE, uses > or >= cutoff. If FALSE, uses < or <= cutoff.
 #' @return Returns a logical matrix the same size as x.
@@ -13,7 +13,6 @@
 #' @seealso cols.above.count or cols.above.pct to see, for each row, count or fraction of columns with numbers at/above/below cutoff.
 #' @seealso flagged.only.by to find cells that are the only one in the row that is at/above/below the cutoff.
 #' @seealso rows.above.count, rows.above.pct, rows.above.which
-#' @keywords EJ
 #' @examples
 #' out <- flagged.by(x<-data.frame(a=1:10, b=rep(7,10), c=7:16), cutoff=7)
 #' x; out # default is or.tied=FALSE
@@ -24,6 +23,6 @@
 #' out
 #' @note Future work: these functions could have wts, na.rm, & allow cutoffs or benchmarks as a vector (not just 1 number), & have benchnames.
 #' @export
-flagged.by <- function(...) {
-  cols.above.which(...)
+flagged.by <- function(x, cutoff, or.tied, below, ...) {
+  cols.above.which(x=x, cutoff=cutoff, or.tied=or.tied, ...)
 }

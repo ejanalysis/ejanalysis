@@ -23,7 +23,7 @@
 #'  e.g., for non-Hispanic White alone to be the reference group,
 #'  if the bg data.frame has a field called pctnhwa, specify dref = bg$pctnhwa,
 #'  and specify dlab = c('mean in this group', 'mean in reference group') for example.
-#'  @param formulatype optional, default is 'manual', which is like sum(x * wts) / sum(wts) with na.rm=T,
+#' @param formulatype Optional, default is 'manual', which is like sum(x * wts) / sum(wts) with na.rm=T,
 #'   or formulatype can be 'Hmisc' to use \code{\link[Hmisc]{wtd.mean}} (Hmisc::wtd.mean), or 'base' to use \code{\link{weighted.mean}}
 #' @param na.rm optional, default is TRUE. No effect if formulatype = manual (default). Not really the right results when na.rm = FALSE anyway.
 #' @return numeric results as array
@@ -148,8 +148,8 @@ RR.means <- function(e, d, pop, dref, dlab = c('group', 'not'), formulatype = 'm
       )
       }
       if (formulatype == 'base') {x <- cbind(
-        weighted.mean(e, w = d    * pop, na.rm = na.rm),
-        weighted.mean(e, w = dref * pop, na.rm = na.rm)
+        stats::weighted.mean(e, w = d    * pop, na.rm = na.rm),
+        stats::weighted.mean(e, w = dref * pop, na.rm = na.rm)
       )
       }
 
@@ -192,8 +192,8 @@ RR.means <- function(e, d, pop, dref, dlab = c('group', 'not'), formulatype = 'm
         for (i in 1:NCOL(d)) {
           # *** not tested for right format, and if dref is not just a vector
           x[ , i, ] <- cbind(
-            weighted.mean(e, w = d[ , i] * pop, na.rm = na.rm),
-            weighted.mean(e, w = dref * pop, na.rm = na.rm)
+            stats::weighted.mean(e, w = d[ , i] * pop, na.rm = na.rm),
+            stats::weighted.mean(e, w = dref * pop, na.rm = na.rm)
           )
         }
       }

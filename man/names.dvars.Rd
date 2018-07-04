@@ -8,13 +8,11 @@
 \alias{Dlist}
 \alias{demographic-variables}
 \title{Fieldnames of demographic columns in ejscreen data}
-\usage{
-data('names.dvars', package = 'ejscreen')
-}
 \description{
 This data set provides variables that hold the colnames
   of demographic fields in data.frames that may be used in the related ejscreen package
-  to make it easier to refer to them as a vector, e.g., mydf[ , names.e]
+  to make it easier to refer to them as a vector, e.g., mydf[ , names.e] \cr
+  data('names.dvars', package = 'ejscreen')
 }
 \seealso{
 \code{\link[ejscreen]{names.dvars}}

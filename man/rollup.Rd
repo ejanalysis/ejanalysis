@@ -9,19 +9,21 @@ rollup(x, by, wts = NULL, FUN, prefix = "wtd.mean.", na.rm = TRUE)
 \arguments{
 \item{x}{Dataset}
 
+\item{by}{No default. Vector that defines groups, for aggregating by group.}
+
 \item{wts}{Weights, default is unweighted}
 
 \item{FUN}{Default is weighted mean}
 
 \item{prefix}{Default is 'wtd.mean.'}
 
-\item{NA}{Default is TRUE}
+\item{na.rm}{Default is TRUE}
 }
 \value{
 by Vector defining groups
 }
 \description{
-aggregate over zones - *** work in progress -- NOT DONE YET ***
+aggregate over zones -  work in progress -- NOT DONE YET *** See source code for more notes.
 }
 \examples{
   # See ejscreen package function called ejscreen.rollup()

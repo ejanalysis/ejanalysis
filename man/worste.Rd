@@ -8,6 +8,8 @@ worste(rrs, d = "pctlowinc", e = "pm", zone = "USA", n = 10,
   digits = 2)
 }
 \arguments{
+\item{rrs}{Required. This has to be the output of one of the functions like \code{\link{RR.table}}}
+
 \item{d}{name of demographic field with percent (fraction) of population that is in each given demographic group, in dimnames(rrs)[[1]]}
 
 \item{e}{not used. e name of environmental risk factor in dimnames(rrs)[[2]]}
@@ -50,4 +52,3 @@ View one key part of table of Relative Risk results by zone by group by envt ris
 \item \code{\link{pop.ecdf}} to compare plots of cumulative frequency distribution of indicator values by group
 }
 }
-\keyword{EJ}

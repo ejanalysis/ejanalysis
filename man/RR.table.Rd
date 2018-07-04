@@ -19,6 +19,8 @@ RR.table(mydat, Enames, Dnames, popcolname, Zcolname, testing = FALSE,
 \item{Zcolname}{name of column with name of zone such as US State name}
 
 \item{testing}{default is FALSE}
+
+\item{digits}{Default is 4. How many significant digits to use.}
 }
 \value{
 Compiles RR values in array of 3 dimensions: RRS[Dnames, Enames, Zcolnames]
@@ -28,7 +30,8 @@ Compiles RR values in array of 3 dimensions: RRS[Dnames, Enames, Zcolnames]
   third dimension for which zone (e.g., which US State)
 }
 \description{
-Make table of Relative Risk results by zone by group by envt risk factor
+Make table of Relative Risk results by zone by group by envt risk factor.
+  See source code for notes on this work.
 }
 \examples{
 data(bgtest, package = 'ejanalysis')
@@ -61,4 +64,3 @@ RRS2[ , , '8']
 \item \code{\link{pop.ecdf}} to compare plots of cumulative frequency distribution of indicator values by group
 }
 }
-\keyword{EJ}

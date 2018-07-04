@@ -24,6 +24,8 @@ This should be the actual denominator, or universe, that was used to create perc
 universe.us.demog if specified should be a vector that has the count, for each place, of the denominator for finding the US overall percent  and this may be slightly different than total population.
 For example if demog=places$pctlowinc then true universe.us.demog=places$povknownratio which is the count for whom poverty ratio is known in each place, which is <= pop.}
 
+\item{as.df}{Default is TRUE.}
+
 \item{prefix}{Optional character string used as first part of each colname in results. Default is "EJ.DISPARITY."}
 
 \item{type}{Specifies type of EJ Index. Default is type=1. Several formulas are available: \cr
@@ -49,9 +51,11 @@ For example if demog=places$pctlowinc then true universe.us.demog=places$povknow
  \item e.avg.nond           =  avg environmental indicator value for average person who is not in the D-group, among all (including the one place being analyzed). This is typically the expected as opposed to observed value of e within group D, in the context of EJ analysis of disparity in e. \cr
  \item e.avg.nond.elsewhere =  avg environmental indicator value for average person who is not in the D-group, among all except in the one place being analyzed. \cr
 }}
+
+\item{na.rm}{Default is FALSE. NOTE: This is complicated but important. See notes in source code about handling NA values in various formulas here.}
 }
 \value{
-Returns a numeric data.frame (or matrix if as.df=FALSE) of EJ indexes, one per place per environmental indicator.
+Returns a numeric data.frame (or matrix if \code{as.df=FALSE}) of EJ indexes, one per place per environmental indicator.
 }
 \description{
 Create an index that combines environmental and demographic indicators for each Census unit (e.g., block group).
@@ -59,11 +63,11 @@ Create an index that combines environmental and demographic indicators for each 
 \details{
 Creates one EJ index column for each environmental indicator column,
  or if given a vector or single column of environmental indicators instead of data.frame, returns a vector or column.
- Each "place" can be a Census unit such as a State, County, zip code, tract, block group, block, for example (or even by individual if person-level data are available).
-
- Note: For 1.5, 3.5, 4.5 need vector d.avg.all.elsewhere. calculated in each of those.
- *** But does not properly handle cases where us.demog or universe.us.demog specified because denominator is not same as pop
- *** and need to fix for when  is.na(p) | is.na(demog) ****
+ Each "place" can be a Census unit such as a State, County, zip code, tract, block group, block, for example (or even by individual if person-level data are available).\cr
+\cr
+ Note: For 1.5, 3.5, 4.5 need vector d.avg.all.elsewhere. calculated in each of those.\cr
+ *** But does not properly handle cases where us.demog or universe.us.demog specified because denominator is not same as pop \cr
+ *** and need to fix for when  is.na(p) | is.na(demog) \cr
  Type 2 however does handle NA values appropriately, meaning a result for a given col of env.df is set to NA for a given row (assuming na.rm=FALSE) if and only if NA is found in that row, in demog or weights or that one col of env.df.
 }
 \examples{

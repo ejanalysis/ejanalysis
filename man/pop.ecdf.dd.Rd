@@ -9,30 +9,30 @@ pop.ecdf.dd(e, elab, mydf, dlabs = colnames(mydf), mywt = rep(1,
   log = "", ...)
 }
 \arguments{
-\item{e}{required numeric vector of scores (e.g., environmental indicator values) for places like block groups, one place per row}
+\item{e}{Required numeric vector of scores (e.g., environmental indicator values) for places like block groups, one place per row}
 
-\item{elab}{required character single element vector with text label for environmental score, used in xlab of plot}
+\item{elab}{Required character single element vector with text label for environmental score, used in xlab of plot}
 
-\item{mydf}{required data.frame where each row is a place and each column is the percent of place population that is in given demographic subgroup, one subgroup per column}
+\item{mydf}{Required data.frame where each row is a place and each column is the percent of place population that is in given demographic subgroup, one subgroup per column}
 
-\item{dlabs}{optional, charater vector that specifies text for legend, same length as number of columns in mydf}
+\item{dlabs}{Optional, charater vector that specifies text for legend, same length as number of columns in mydf}
 
-\item{mywt}{optional, default is unweighted, but normally would specify as the population counts for places analyzed}
+\item{mywt}{Optional, default is unweighted, but normally would specify as the population counts for places analyzed}
 
-\item{main}{optional title used at top of plot}
+\item{main}{Optional character specifying plot title at top of plot. Default title notes names of subgroups}
 
-\item{mycolors}{optional vector of colors as long as number of columns in mydf, specifies colors of lines}
+\item{mycolors}{Optional vector of colors as long as number of columns in mydf, specifies colors of lines}
 
-\item{refcolor}{optional color, default is 'black'}
+\item{refcolor}{Optional color, default is 'black'}
 
-\item{sorted}{optional logical, default is TRUE. Should the legend be sorted in order of population weighted mean values of e?}
+\item{sorted}{Optional logical, default is TRUE. Should the legend be sorted in order of population weighted mean values of e?}
 
-\item{...}{other optional parameters to pass to Ecdf}
+\item{log}{Default is ''. Passed to \code{\link{pop.ecdf}}}
 
-\item{main}{Optional character specifying plot title. Default title notes names of subgroups}
+\item{...}{Other optional parameters to pass to Ecdf}
 }
 \value{
-draws a plot
+Draws a plot
 }
 \description{
 Draws a plot using \code{\link[Hmisc]{Ecdf}}, overlaying cumulative distribution functions,

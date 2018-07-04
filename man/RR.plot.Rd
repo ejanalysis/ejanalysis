@@ -4,12 +4,12 @@
 \alias{RR.plot}
 \title{Draw lineplot comparing RR values by group}
 \usage{
-RR.plot(RRS, dnames, enames, zone = "USA", enames.nice, mycolors,
+RR.plot(rrs, dnames, enames, zone = "USA", enames.nice, mycolors,
   type = "b", maxchar = 15, cex.axis = 0.5, cex.legend = 0.8,
   sorted = TRUE, margins = c(1, 2, 3), decreasing = TRUE, ...)
 }
 \arguments{
-\item{RRS}{Table as from \code{\link{RRS}} function, of relative risk by demographic group, risk type, and zone (3 dimensions).}
+\item{rrs}{Table as from \code{\link{RRS}} function, of relative risk by demographic group, risk type, and zone (3 dimensions).}
 
 \item{dnames}{Demographic group names to be found as names of first dim of RRS. Optional, default is \code{\link[ejscreen]{names.d.subgroups}} and \code{\link[ejscreen]{names.d}} from the ejscreen dataset.}
 

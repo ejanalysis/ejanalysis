@@ -10,7 +10,6 @@
 #' @return The full x array, except only the first two elements of the specified dimension,
 #'   which should be the two elements with the max number and text saying which name is that max.
 #' @template seealsoRR
-#' @keywords EJ
 #' @export
 RR.table.max <- function(x, by = 1, digits = 3) {
 

@@ -1,10 +1,12 @@
 #' @title Table of Relative Risk results by zone by group by envt risk factor
-#' @description Make table of Relative Risk results by zone by group by envt risk factor
+#' @description Make table of Relative Risk results by zone by group by envt risk factor.
+#'   See source code for notes on this work.
 #' @param mydat Data.frame of input data, one row per geographic unit such as US Census block groups, or tracts.
 #' @param Enames names of columns with environmental risk factor data
 #' @param Dnames names of columns with percent (fraction) of population that is in each given demographic group
 #' @param popcolname name of column with total population count
 #' @param Zcolname name of column with name of zone such as US State name
+#' @param digits Default is 4. How many significant digits to use.
 #' @param testing default is FALSE
 #' @return Compiles RR values in array of 3 dimensions: RRS[Dnames, Enames, Zcolnames]
 #'   Returns a matrix with
@@ -12,7 +14,6 @@
 #'   one environmental risk indicator per column, and
 #'   third dimension for which zone (e.g., which US State)
 #' @template seealsoRR
-#' @keywords EJ
 #' @examples
 #' data(bgtest, package = 'ejanalysis')
 #' RRS.US  <- RR.table(mydat = bgtest, Enames = names.e, Dnames = c(names.d, names.d.subgroups.pct),

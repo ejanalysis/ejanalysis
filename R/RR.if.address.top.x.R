@@ -43,7 +43,7 @@ RR.if.address.top.x <- function(rank.by.df, e.df, d.pct, popcounts, d.pct.us, or
 
   if (missing(d.pct.us)) {
     warning('assumed that d.pct.us is popcounts-wtd mean of d.pct, which is not right if correct denominator for d.pct is not popcounts')
-    d.pct.us <- weighted.mean(d.pct, w=popcounts) # *** na.rm should be explicit and differs between Hmisc::wtd.mean and stats::weighted.mean
+    d.pct.us <- stats::weighted.mean(d.pct, w=popcounts) # *** na.rm should be explicit and differs between Hmisc::wtd.mean and stats::weighted.mean
   }
 
   rrs <- data.frame(matrix(NA, ncol=length(names(e.df)), nrow=length(mycuts)))

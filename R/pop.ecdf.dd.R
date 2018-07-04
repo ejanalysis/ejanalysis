@@ -7,18 +7,18 @@
 #'  using data from small places like census block groups, based on having for each place the pop total
 #'  and % of pop that is in each group.
 #'
-#' @param e required numeric vector of scores (e.g., environmental indicator values) for places like block groups, one place per row
-#' @param elab required character single element vector with text label for environmental score, used in xlab of plot
-#' @param mydf required data.frame where each row is a place and each column is the percent of place population that is in given demographic subgroup, one subgroup per column
-#' @param dlabs optional, charater vector that specifies text for legend, same length as number of columns in mydf
-#' @param mywt optional, default is unweighted, but normally would specify as the population counts for places analyzed
-#' @param main optional title used at top of plot
-#' @param mycolors optional vector of colors as long as number of columns in mydf, specifies colors of lines
-#' @param refcolor optional color, default is 'black'
-#' @param sorted optional logical, default is TRUE. Should the legend be sorted in order of population weighted mean values of e?
-#' @param main Optional character specifying plot title. Default title notes names of subgroups
-#' @param ... other optional parameters to pass to Ecdf
-#' @return draws a plot
+#' @param e Required numeric vector of scores (e.g., environmental indicator values) for places like block groups, one place per row
+#' @param elab Required character single element vector with text label for environmental score, used in xlab of plot
+#' @param mydf Required data.frame where each row is a place and each column is the percent of place population that is in given demographic subgroup, one subgroup per column
+#' @param dlabs Optional, charater vector that specifies text for legend, same length as number of columns in mydf
+#' @param mywt Optional, default is unweighted, but normally would specify as the population counts for places analyzed
+#' @param main Optional character specifying plot title at top of plot. Default title notes names of subgroups
+#' @param mycolors Optional vector of colors as long as number of columns in mydf, specifies colors of lines
+#' @param refcolor Optional color, default is 'black'
+#' @param sorted Optional logical, default is TRUE. Should the legend be sorted in order of population weighted mean values of e?
+#' @param log Default is ''. Passed to \code{\link{pop.ecdf}}
+#' @param ... Other optional parameters to pass to Ecdf
+#' @return Draws a plot
 #' @seealso \code{\link[Hmisc]{Ecdf}} \code{\link{RR}} \code{\link{pop.cdf}}   \code{\link{pop.cdf2}} \code{\link{pop.ecdf}}  \code{\link{pop.cdf.density}}
 #' @examples
 #' ###

@@ -1,11 +1,12 @@
 #' @title Aggregate multiple columns of values by group
-#' @description aggregate over zones - *** work in progress -- NOT DONE YET ***
+#' @description aggregate over zones -  work in progress -- NOT DONE YET *** See source code for more notes.
 #' @param x Dataset
 #' @return by Vector defining groups
 #' @param wts Weights, default is unweighted
 #' @param FUN Default is weighted mean
 #' @param prefix Default is 'wtd.mean.'
-#' @param NA Default is TRUE
+#' @param na.rm Default is TRUE
+#' @param by No default. Vector that defines groups, for aggregating by group.
 #' @seealso \code{\link{wtd.colMeans}} \code{\link[ejscreen]{ejscreen.rollup}}
 #' @examples
 #'   # See ejscreen package function called ejscreen.rollup()

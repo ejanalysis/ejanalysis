@@ -5,7 +5,7 @@
 #' @seealso \code{\link[ejscreen]{names.ejvars}}
 #' @description This data set provides variables that hold the colnames
 #'   of environmental justice index fields in data.frames that may be used in the ejscreen package
-#'   to make it easier to refer to them as a vector, e.g., mydf[ , names.ej]
-#' @usage data('names.ejvars', package = 'ejscreen')
+#'   to make it easier to refer to them as a vector, e.g., mydf[ , names.ej] \cr
+#'   data('names.ejvars', package = 'ejscreen')
 #' @keywords datasets
 NULL
