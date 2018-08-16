@@ -19,6 +19,8 @@ RR.table(mydat, Enames, Dnames, popcolname, Zcolname, testing = FALSE,
 \item{Zcolname}{name of column with name of zone such as US State name}
 
 \item{testing}{default is FALSE}
+
+\item{digits}{Default is 4. How many significant digits to use.}
 }
 \value{
 Compiles RR values in array of 3 dimensions: RRS[Dnames, Enames, Zcolnames]
@@ -28,18 +30,20 @@ Compiles RR values in array of 3 dimensions: RRS[Dnames, Enames, Zcolnames]
   third dimension for which zone (e.g., which US State)
 }
 \description{
-Make table of Relative Risk results by zone by group by envt risk factor
+Make table of Relative Risk results by zone by group by envt risk factor.
+  See source code for notes on this work.
 }
 \examples{
-RRS.US  <- RR.table(mydat=bg, Enames=names.e, Dnames=c(names.d, names.d.subgroups.pct),
- popcolname='pop')
-RRS.ST  <- RR.table(mydat=bg, Enames=names.e, Dnames=c(names.d, names.d.subgroups.pct),
- popcolname='pop', Zcolname='ST')
+data(bgtest, package = 'ejanalysis')
+RRS.US  <- RR.table(mydat = bgtest, Enames = names.e, Dnames = c(names.d, names.d.subgroups.pct),
+ popcolname = 'pop')
+RRS.ST  <- RR.table(mydat = bgtest, Enames = names.e, Dnames = c(names.d, names.d.subgroups.pct),
+ popcolname = 'pop', Zcolname = 'ST')
 RRS <- RR.table.add(RRS.ST, RRS.US)
-RRS[ 'pctlowinc', , ]
+RRS['pctlowinc', , ]
 RRS[ , , 'CA']
 RRS[ , 'pm', ]
-RRS.REGION  <- RR.table(mydat=bg, Enames=names.e, Dnames=c(names.d, names.d.subgroups.pct),
+RRS.REGION  <- RR.table(mydat = bgtest, Enames = names.e, Dnames = c(names.d, names.d.subgroups.pct),
  popcolname='pop', Zcolname='REGION')
 RRS2 <- RR.table.add(RRS, RRS.REGION)
 RRS2[ , , '8']
@@ -60,5 +64,3 @@ RRS2[ , , '8']
 \item \code{\link{pop.ecdf}} to compare plots of cumulative frequency distribution of indicator values by group
 }
 }
-\keyword{EJ}
-

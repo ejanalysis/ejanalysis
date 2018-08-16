@@ -7,9 +7,9 @@
 url.qf(fips = "", launch = TRUE)
 }
 \arguments{
-\item{launch}{TRUE by default, whether to open page in web browser (max=1st 3 URLs opened)}
+\item{fips}{Vector of numeric or character class, required. Can be state FIPs as number or character, for example.}
 
-\item{FIPS}{Vector of numeric or character class, required. Can be state FIPs as number or character, for example.}
+\item{launch}{TRUE by default, whether to open page in web browser (max=1st 3 URLs opened)}
 }
 \value{
 Returns table of FIPS, geographic scale, and URL
@@ -30,26 +30,26 @@ If FIPS is none of the above, return a default URL \cr\cr
 
 # NOTES:\cr
 #\cr
-# URL FORMATS FOR QUICKFACTS REPORT ON A COUNTY FROM CENSUS QUICKFACTS SITE:\cr
+# URL FORMATS FOR QUICKFACTS REPORT ON A COUNTY FROM CENSUS QUICKFACTS SITE: \cr
 #\cr
-#A WHOLE STATE:
-# \url{http://quickfacts.census.gov/qfd/states/01000.html}
-#
-#WHERE 01000 = STATE 2-DIGIT FIPS,  PLUS 3 ZEROES
-#
-#A SINGLE COUNTY:
-# e.g., url{http://quickfacts.census.gov/qfd/states/01/01005.html}
-#
-#URL =
-# http://quickfacts.census.gov/qfd/states/XX/YYYYY.html
-#
-#WHERE XX =	STATE 2-DIGIT FIPS
+#A WHOLE STATE: \cr
+# \url{http://quickfacts.census.gov/qfd/states/01000.html} \cr
+# \cr
+#WHERE 01000 = STATE 2-DIGIT FIPS,  PLUS 3 ZEROES \cr
+# \cr
+#A SINGLE COUNTY: \cr
+# e.g., url{http://quickfacts.census.gov/qfd/states/01/01005.html} \cr
+# \cr
+#URL = \cr
+# http://quickfacts.census.gov/qfd/states/XX/YYYYY.html \cr
+# \cr
+#WHERE XX =	STATE 2-DIGIT FIPS \cr
 #WHERE YYYYY = 	STATE 2-DIGIT FIPS AND COUNTY 3-DIGIT FIPS = 5 DIGITS TOTAL
 }
 \examples{
  url.qf( c( '011030001003001', '011030001003', '01103000100', '01005', 1,
    c(8:10), 99999) )
- \\donotrun{
+ \dontrun{
  url.qf( c( '011030001003001', '011030001003', '01103000100', '01005', 1,
    ejanalysis::get.state.info()[ , 'FIPS.ST'], 99999) )
  }
@@ -60,4 +60,3 @@ If FIPS is none of the above, return a default URL \cr\cr
   \code{\link{get.state.info}}, \code{\link{get.county.info}}, \code{\link{get.epa.region}}
   to look up info such as FIPS, state abbreviation, statename, countyname, or region based on FIPS or name.
 }
-

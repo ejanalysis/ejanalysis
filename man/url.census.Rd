@@ -44,4 +44,3 @@ For information on FIPS codes, see \url{http://www.census.gov/geo/reference/ansi
 \seealso{
 \code{\link{url.censusblock}} and \code{\link[countyhealthrankings]{urls.countyhealthrankings}} (see \url{http://ejanalysis.github.io/countyhealthrankings})
 }
-

@@ -34,4 +34,3 @@ The function just looks for where the specified value fits between values in the
 \seealso{
 \code{\link{write.pctiles}}, \code{\link{write.pctiles.by.zone}}, \code{\link{write.wtd.pctiles}}, and \code{\link{write.wtd.pctiles.by.zone}}
 }
-

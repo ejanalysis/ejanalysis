@@ -6,6 +6,7 @@
 #' @param FUN Default is weighted mean
 #' @param prefix Default is 'wtd.mean.'
 #' @param by No default. Vector that defines groups, for aggregating by group.
+#' @seealso \code{\link{wtd.colMeans}} \code{\link[ejscreen]{ejscreen.rollup}}
 #' @examples
 #'   # See ejscreen package function called ejscreen.rollup()
 #'   \dontrun{

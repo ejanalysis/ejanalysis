@@ -5,6 +5,9 @@
 #' @param P Population count per place (default is 1)
 #' @param D Demographic group per place as fraction of P (default is 1)
 #' @param E Environmental indicator (e.g., risk, exposure, or any local indicator, but if it is individual risk then number of cases can be calculated rather than just people-points)
+#' @param na.rm Default is TRUE.
+#' @param n Default is 5.
+#' @param ... NOT USED. Would pass additional parameters to other functions
 #' @export
 ejRRadded   <- function(E,D=1,P=1, na.rm=TRUE, n=5, ...) {
 
@@ -19,7 +22,7 @@ ejRRadded   <- function(E,D=1,P=1, na.rm=TRUE, n=5, ...) {
   #######################################################################################################################
   # **** This treats P as the full universe or denominator to use for D & d *****
   # ******* this does not handle zero as denominator in zone ****
-  # **** need to handle NA in E here... **************
+  # **** need to handle NA in E here. .. **************
   #######################################################################################################################
 
   #########
@@ -30,7 +33,7 @@ ejRRadded   <- function(E,D=1,P=1, na.rm=TRUE, n=5, ...) {
   count <- P
 
   # pop.overall
-  count.overall <- sumP <- sum(P, na.rm=na.rm)
+  count.overall <- sumP <- sum(P, na.rm = na.rm)
 
   # Dcount here
   count.D <- PD <- P * D
@@ -69,7 +72,7 @@ ejRRadded   <- function(E,D=1,P=1, na.rm=TRUE, n=5, ...) {
   # cases    # or "wtdE"
   #########
 
-  # cases here everybody      **** need to handle NA in E here... **************
+  # cases here everybody      **** need to handle NA in E here  **************
   cases <- PE <- P * E
   PE[is.na(PE)] <- 0
   cases[is.na(cases)] <- 0

@@ -4,7 +4,8 @@
 \alias{RR.means}
 \title{Relative Risk (RR) components - Means in demographic group and in rest of pop, based on Census data}
 \usage{
-RR.means(e, d, pop, dref, na.rm = TRUE)
+RR.means(e, d, pop, dref, dlab = c("group", "not"), formulatype = "manual",
+  na.rm = TRUE)
 }
 \arguments{
 \item{e}{Vector or data.frame or matrix with 1 or more environmental indicator(s) or health risk level (e.g., PM2.5 concentration to which this person or place is exposed),
@@ -13,9 +14,26 @@ one row per Census unit and one column per indicator.}
 \item{d}{Vector or data.frame or matrix with 1 or more demog groups percentage (as fraction of 1, not 0-100!) of place that is selected demog group (e.g. percent Hispanic) (or d=1 or 0 if this is a vector of individuals)}
 
 \item{pop}{Vector of one row per location providing population count of place (or pop=1 if this is a vector of individuals), to convert d into a count since d is a fraction}
+
+\item{dref}{optional specifies reference group, default is 1 - d, meaning all people who are not in given group,
+so each D group is compared to all non-D people. This is why dlab has the default it does.
+But dref can be used to specify a single reference group used for all D analyzed.
+For the reference group to be the entire overall population, use dref = 1, and say dlab = c('avg in group', 'avg overall') for example.
+To use some other reference group, just set dref = a fraction of 1 that is the share of local pop that is in the reference group,
+as a vector as long as the number of places (number of rows in e or d).
+e.g., for non-Hispanic White alone to be the reference group,
+if the bg data.frame has a field called pctnhwa, specify dref = bg$pctnhwa,
+and specify dlab = c('mean in this group', 'mean in reference group') for example.}
+
+\item{dlab}{optional character vector of two names for columns of output, default is c('group', 'not'), where the second refers to the reference group used.}
+
+\item{formulatype}{Optional, default is 'manual', which is like sum(x * wts) / sum(wts) with na.rm=T,
+or formulatype can be 'Hmisc' to use \code{\link[Hmisc]{wtd.mean}} (Hmisc::wtd.mean), or 'base' to use \code{\link{weighted.mean}}}
+
+\item{na.rm}{optional, default is TRUE. No effect if formulatype = manual (default). Not really the right results when na.rm = FALSE anyway.}
 }
 \value{
-numeric results as vector or data.frame
+numeric results as array
 }
 \description{
 Finds the mean indicator value in one demographic subgroup and mean in everyone else,
@@ -88,7 +106,9 @@ mydat <- structure(list(state = structure(c(1L, 2L, 3L, 4L, 5L, 6L, 7L,
 RR.means(mydat$area, mydat$pcthisp, mydat$pop)
 
 RR.means(mydat$pcthisp, mydat$pcthisp, mydat$pop)
+
 # CHECK FORMATS OF OUTPUTS: *** WORK IN PROGRESS
+
 #cbind(mymeans=RR.means(data.frame(d1=bg$pcthisp, d2=1-bg$pcthisp), bg$pcthisp, bg$pop))
 #RR.means(bg[ , names.e], bg$pctlowinc, bg$pop)
 #sapply(bg[ , names.d], function(z) RR.means(bg[ , names.e], z, bg$pop) )
@@ -109,4 +129,3 @@ RR.means(mydat$pcthisp, mydat$pcthisp, mydat$pop)
 \item \code{\link{pop.ecdf}} to compare plots of cumulative frequency distribution of indicator values by group
 }
 }
-

@@ -38,4 +38,3 @@ Assumes you have weights for each and are comparing values in one group vs anoth
 \seealso{
 \code{\link{pop.cdf}}   \code{\link{pop.cdf2}} \code{\link{pop.ecdf}}  \code{\link{pop.cdf.density}}
 }
-

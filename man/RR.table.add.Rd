@@ -51,5 +51,3 @@ Merge table of Relative Risk results for some zones with table for USA overall
 \item \code{\link{pop.ecdf}} to compare plots of cumulative frequency distribution of indicator values by group
 }
 }
-\keyword{EJ}
-

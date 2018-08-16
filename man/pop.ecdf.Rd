@@ -15,14 +15,14 @@ If data.frame, then each column is plotted in its own panel.}
 rows as length of scores vector (not sure what happens if pcts and scores are both data.frames).
 Specifies the fraction of population that is in demographic group(s) of interest, one row per place, one column per group.}
 
-\item{pops}{Vector used to define weights as pop*pcts, and if allothers=TRUE, for pop*(1-pcts) for nongroup}
+\item{pops}{Vector used to define weights as \code{pop * pcts}, and if \code{allothers=TRUE}, for \code{pop * (1-pcts)} for nongroup}
 
 \item{allothers}{Logical value, optional, TRUE by default. Whether to plot a series for everyone else, using 1-pct}
 
 \item{col}{Optional, default is 'red' to signify line color red for key demographic group.
 Can also be a vector of colors if pcts is a data.frame with one column per group, one color per group.}
 
-\item{main}{Optional character specifying plot title, default is none}
+\item{main}{Optional character specifying plot title. Default title notes colors of lines and if reference group used.}
 
 \item{weights}{Not used currently. See \code{pops} parameter}
 
@@ -38,7 +38,7 @@ Draws a plot using \code{\link[Hmisc]{Ecdf}}, overlaying cumulative distribution
  one for each subgroup specified.
  Useful to compare 2 groups based on each groups entire pdf or cdf  distribution of peoples scores,
  using data from small places like census block groups, based on having for each place the pop total
- and % of pop that is in each group or perhaps already have count in each group.
+ and \% of pop that is in each group or perhaps already have count in each group.
 }
 \details{
 Notes: \cr
@@ -109,4 +109,3 @@ pop.ecdf(bg$traffic.score, bg$ST=='CA', bg$pop * bg$VSI.eo, log='x')
 \seealso{
 \code{\link[Hmisc]{Ecdf}} \code{\link{RR}} \code{\link{pop.cdf}}   \code{\link{pop.cdf2}} \code{\link{pop.ecdf}}  \code{\link{pop.cdf.density}}
 }
-

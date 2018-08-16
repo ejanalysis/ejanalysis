@@ -63,4 +63,3 @@ The effects of one place on overall RR is related to an ej.index, which here is 
 \seealso{
 \code{\link{RR}} and \code{\link{RR.if.address.top.x}} and \code{\link{ej.indexes}} and \code{\link{ej.added}}
 }
-

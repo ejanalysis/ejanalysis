@@ -32,4 +32,3 @@ For information on FIPS codes, see \url{http://www.census.gov/geo/reference/ansi
  #(No example yet)
   @template seealsoFIPS
 }
-

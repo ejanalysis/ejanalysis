@@ -32,6 +32,5 @@ This is based on US Census Bureau recommendations for working with American Comm
 	 x <- pct.moe(15, 100, 3, 10)
 }
 \seealso{
-\code{\link{sum.moe}}
+\code{\link{sumoe}}
 }
-

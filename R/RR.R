@@ -122,7 +122,9 @@ RR <- function(e, d, pop, dref, na.rm=TRUE) {
 
   # handle single envt factor
   if ( is.vector(e) && length(e) > 1 ) {
-    return(RR.for.one.e(e, d, pop, dref))
+    x <- RR.for.one.e(e, d, pop, dref)
+    names(dimnames(x)) <- c('d', 'e')
+    return(x)
     # could warn if length(d)!=length(e) & neither is an integer multiple of the other
     # same for length(pop)
   }
@@ -130,6 +132,7 @@ RR <- function(e, d, pop, dref, na.rm=TRUE) {
   # handle multiple envt factors
   if ((is.data.frame(e) || is.matrix(e)) && length(e[ , 1]) > 1) {
     myresults <- sapply(e, function(x) RR.for.one.e(x, d, pop, dref))
+    names(dimnames(myresults)) <- c('d', 'e')
     return(myresults)
   }
 

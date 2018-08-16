@@ -20,7 +20,7 @@ rows as length of scores. Specifies the fraction of population that is in demogr
 \item{col}{Optional, default is 'red' to signify line color red for key demographic group.
 Can also be a vector of colors if pcts is a data.frame with one column per group, one color per group.}
 
-\item{main}{Required character specifying plot title}
+\item{main}{Optional character specifying plot title. Default title notes colors of lines and if reference group used.}
 
 \item{weights}{Not used currently (see \code{pop} parameter)}
 
@@ -93,4 +93,3 @@ pop.cdf(bg$traffic.score, bg$ST=='CA', bg$pop * bg$VSI.eo, log='x')
 \seealso{
 \code{\link[Hmisc]{Ecdf}} \code{\link{RR}} \code{\link{pop.cdf}}   \code{\link{pop.cdf2}} \code{\link{pop.ecdf}}  \code{\link{pop.cdf.density}}
 }
-

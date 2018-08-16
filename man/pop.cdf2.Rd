@@ -57,4 +57,3 @@ pop.cdf(scores = e, pcts = bg$pctmin, pops = bg$pop, breaks = brks,
 \seealso{
 \code{\link{pop.cdf}}   \code{\link{pop.cdf2}} \code{\link{pop.ecdf}}  \code{\link{pop.cdf.density}}
 }
-

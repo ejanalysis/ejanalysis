@@ -47,4 +47,3 @@ Probably obsolete given \code{\link{RR}}. Provides Relative Risk (RR) by demogra
 \item \code{\link{pop.ecdf}} to compare plots of cumulative frequency distribution of indicator values by group
 }
 }
-

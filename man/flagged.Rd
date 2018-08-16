@@ -30,4 +30,3 @@ x <- flagged(places[ , pctilecols], 0.80)
 a <- cbind(any.over.0.8=x, round(places,2))
 a[order(a[,1]),]
 }
-

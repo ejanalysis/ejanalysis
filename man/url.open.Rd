@@ -18,4 +18,3 @@ Just the same as \code{\link{browseURL}}
 \seealso{
 \code{\link{browseURL}}, and \code{\link{shell.exec}} which this uses
 }
-

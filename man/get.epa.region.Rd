@@ -2,7 +2,7 @@
 % Please edit documentation in R/get.epa.region.R
 \name{get.epa.region}
 \alias{get.epa.region}
-\title{Identify EPA Region for given state}
+\title{Identify EPA Region for given state (or FIPS)}
 \usage{
 get.epa.region(state)
 }
@@ -13,7 +13,7 @@ get.epa.region(state)
 Returns a vector of numbers, same length as state
 }
 \description{
-Identify US Environmental Protection Agency region(s) containing given state(s)
+Identify US Environmental Protection Agency region(s) containing given state(s) (or via FIPS)
 }
 \details{
 For EPA Regions, see \url{http://www2.epa.gov/aboutepa#pane-4} or \url{http://www2.epa.gov/aboutepa/visiting-regional-office}.
@@ -30,4 +30,3 @@ For EPA Regions, see \url{http://www2.epa.gov/aboutepa#pane-4} or \url{http://ww
  myregions <- get.epa.region(c('NY', 'Ohio')) # CANNOT MIX WAYS TO DEFINE STATES- PICK 1 FORMAT
  @template seealsoFIPS
 }
-

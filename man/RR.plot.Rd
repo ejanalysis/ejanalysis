@@ -4,28 +4,49 @@
 \alias{RR.plot}
 \title{Draw lineplot comparing RR values by group}
 \usage{
-RR.plot(RRS, d, e, zone = "NY")
+RR.plot(rrs, dnames, enames, zone = "USA", enames.nice, mycolors,
+  type = "b", maxchar = 15, cex.axis = 0.5, cex.legend = 0.8,
+  sorted = TRUE, margins = c(1, 2, 3), decreasing = TRUE, ...)
 }
 \arguments{
-\item{RRS}{Table as from \code{\link{RRS}} function, of relative risk by group, risk type, and zone (3 dimensions).}
+\item{rrs}{Table as from \code{\link{RRS}} function, of relative risk by demographic group, risk type, and zone (3 dimensions).}
 
-\item{d}{Demographic group names to be found as names of first dim of RRS}
+\item{dnames}{Demographic group names to be found as names of first dim of RRS. Optional, default is \code{\link[ejscreen]{names.d.subgroups}} and \code{\link[ejscreen]{names.d}} from the ejscreen dataset.}
 
-\item{e}{Environmental factor or risk type names to be found as names of second dim of RRS}
+\item{enames}{Environmental factor or risk type names to be found as names of second dim of RRS. Optional, default is \code{\link[ejscreen]{names.e}} from ejscreen package.}
 
-\item{zone}{Zone name to be found among names for third dim of RRS. Default is "NY"}
+\item{zone}{Zone name to be found among names for third dim of RRS. Default is "USA"}
+
+\item{enames.nice}{optional character vector of labels to use instead of enames on the plot, same length and order as enames}
+
+\item{mycolors}{optional vector of colors to use for the vector of dnames, default is from \code{\link{rainbow}}}
+
+\item{type}{optional as in \code{\link{plot}}, default is 'b' for both lines and points}
+
+\item{maxchar}{optional number, default 15. x axis labels are truncated to this length.}
+
+\item{cex.axis}{optional default 0.5, size of enames lables on x axis}
+
+\item{cex.legend}{optional default 0.8, size of dnames in legend}
+
+\item{sorted}{optional logical, default is TRUE. Whether to sort before plotting.}
+
+\item{margins}{optional numeric vector, default is c(1, 2, 3). Specifies which dimensions to sort if sorted is TRUE.}
+
+\item{decreasing}{optional logical, default is TRUE. How to sort if sorted is TRUE. All sorted dimensions get sorted the same way.}
+
+\item{...}{optional additional parameters to pass to \code{\link{plot}}}
 }
 \value{
-draws a plot
+draws a line plot
 }
 \description{
-Draws a plot using relative risk information, one line per group
+Draws a plot using relative risk information, one line per demographic group.
 }
 \examples{
 #
   ###
 }
 \seealso{
-\code{\link{RR}}
+\code{\link{RR.table}}
 }
-

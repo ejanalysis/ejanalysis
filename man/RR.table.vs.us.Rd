@@ -4,10 +4,10 @@
 \alias{RR.table.vs.us}
 \title{Relative Risks (RR) in zones as ratios to US values}
 \usage{
-RR.table.vs.us(RRS, d, e, zone)
+RR.table.vs.us(rrs, d, e, zone)
 }
 \arguments{
-\item{RRS}{A three dimensional array that is created by \code{\link{RR}} and has format like RRS[d, e, zone] but where zone must include the name USA}
+\item{rrs}{A three dimensional array that is created by \code{\link{RR}} and has format like RRS[d, e, zone] but where zone must include the name USA}
 
 \item{d}{Vector of names of demographic groups that must be subset of first dimension of RRS}
 
@@ -37,4 +37,3 @@ Takes zone-specific RRS values and divides each value by the corresponding value
 \item \code{\link{pop.ecdf}} to compare plots of cumulative frequency distribution of indicator values by group
 }
 }
-
