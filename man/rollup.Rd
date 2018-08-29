@@ -16,12 +16,14 @@ rollup(x, by, wts = NULL, FUN, prefix = "wtd.mean.", na.rm = TRUE)
 \item{FUN}{Default is weighted mean}
 
 \item{prefix}{Default is 'wtd.mean.'}
+
+\item{na.rm}{Default is TRUE, passed to \code{\link[Hmisc]{wtd.mean}}}
 }
 \value{
 by Vector defining groups
 }
 \description{
-aggregate over zones - *** work in progress -- NOT DONE YET *** see source code for notes on data.table and speed
+aggregate over zones - !!! work in progress -- NOT DONE YET !!! see source code for notes on data.table and speed
 }
 \examples{
   # See ejscreen package function called ejscreen.rollup()

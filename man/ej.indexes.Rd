@@ -30,7 +30,7 @@ For example if demog=places$pctlowinc then true universe.us.demog=places$povknow
 
 \item{type}{Specifies type of EJ Index. Default is type=1. Several formulas are available: \cr
 \itemize{
- \item For type=1,   ej.indexes = weights * env.df * (demog  - us.demog)  ## This is the EJ Index in EJSCREEN 2015. Note: us.demog could also be called d.avg.all, and ** note that na.rm is currently ignored for type=1
+ \item For type=1,   ej.indexes = weights * env.df * (demog  - us.demog)  ## This is the EJ Index in EJSCREEN 2015. Note: us.demog could also be called d.avg.all, and note that na.rm is currently ignored for type=1
  \item For type=1.5, ej.indexes= weights * env.df * (demog  - d.avg.all.elsewhere) # for a place that is one of many this can be almost identical to type 1 \cr
  \item For type=2.1, ej.indexes = weights * demog  * (env.df - e.avg.all)  # like type 1 but env and demog roles are swapped \cr
  \item For type=2,   ej.indexes = weights * demog  * (env.df - e.avg.nond) \cr
@@ -66,8 +66,8 @@ Creates one EJ index column for each environmental indicator column,
  Each "place" can be a Census unit such as a State, County, zip code, tract, block group, block, for example (or even by individual if person-level data are available).\cr
 \cr
  Note: For 1.5, 3.5, 4.5 need vector d.avg.all.elsewhere. calculated in each of those.\cr
- *** But does not properly handle cases where us.demog or universe.us.demog specified because denominator is not same as pop \cr
- *** and need to fix for when  is.na(p) | is.na(demog) \cr
+ * But does not properly handle cases where us.demog or universe.us.demog specified because denominator is not same as pop \cr
+ * and need to fix for when  is.na(p) | is.na(demog) \cr
  Type 2 however does handle NA values appropriately, meaning a result for a given col of env.df is set to NA for a given row (assuming na.rm=FALSE) if and only if NA is found in that row, in demog or weights or that one col of env.df.
 }
 \examples{

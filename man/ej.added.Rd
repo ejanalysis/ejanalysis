@@ -28,12 +28,12 @@ US total sum of net excess vulnerable * E = net excess people-points
 and contribution of one place = what the EJ Index intends to indicate
 }
 \details{
-WORK IN PROGRESS. **** e.g.,  presumes one setting for vs..... ******
+WORK IN PROGRESS. ! e.g.,  presumes one setting for vs..... ***
 Directly calculate total number of excess people-points in a demographic subgroup,
 across all locations
 **** here by default defining "excess" as above
 what it would be if e in d group were same as e in nond group.**** \cr
-where people-points are e*p*d \cr
+where people-points are e * p * d \cr
 e = environmental points or individual risk (vector of places) \cr
 p = population counts (vector of places) \cr
 d = demographic fraction that is in specified demographic group (vector of places) \cr \cr
@@ -48,6 +48,6 @@ avg d's e is set to that of avg person (all people including d and nonD), \cr
 or avg d's e is set to that of avg nonD person.
 }
 \examples{
-x=data.frame(pop=rep(1000, 10), pct=0.05+6*(1:10)/100, e= (10*(1:10))/100 )
+x=data.frame(pop=rep(1000, 10), pct=0.05+6 * (1:10)/100, e= (10 * (1:10))/100 )
 y=ej.added(x$e, x$pct, x$pop, silent=FALSE)
 }
