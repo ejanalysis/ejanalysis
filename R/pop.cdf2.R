@@ -29,7 +29,7 @@
 #' #pop.cdf2(e, dcount, refcount, etxt, dtxt, brks)
 #' pop.cdf2(e = e, dcount = dcount, refcount = refcount,
 #'  etxt = etxt, dtxt = dtxt, brks = brks)
-#' # *** BUT, why does it not look the same as ... *****
+#' #  BUT, why does it not look the same as ... !!!
 #' pop.cdf(scores = e, pcts = bg$pctmin, pops = bg$pop, breaks = brks,
 #'  main='PM2.5 distribution within each group (minority vs other)',
 #'   ylab='Density (percentage of group population)')

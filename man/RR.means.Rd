@@ -4,8 +4,8 @@
 \alias{RR.means}
 \title{Relative Risk (RR) components - Means in demographic group and in rest of pop, based on Census data}
 \usage{
-RR.means(e, d, pop, dref, dlab = c("group", "not"), formulatype = "manual",
-  na.rm = TRUE)
+RR.means(e, d, pop, dref, dlab = c("group", "not"),
+  formulatype = "manual", na.rm = TRUE)
 }
 \arguments{
 \item{e}{Vector or data.frame or matrix with 1 or more environmental indicator(s) or health risk level (e.g., PM2.5 concentration to which this person or place is exposed),

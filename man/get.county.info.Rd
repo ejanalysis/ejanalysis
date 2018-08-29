@@ -12,6 +12,8 @@ Can be county's 5-digit FIPS code(s) (as numbers or strings with numbers),
 and also could be 'countyname, statename' (fullname, exactly matching formats in countiesall$fullname, but case insensitive).}
 
 \item{fields}{Character string optional defaults to 'all' but can specify 'countyname' 'ST' and/or 'FIPS.COUNTY'}
+
+\item{download}{default is FALSE. If TRUE, download file from census website to local working directory, save as countyinfo.txt}
 }
 \value{
 Returns a data.frame or vector of results depending on fields selected.

@@ -4,7 +4,6 @@
 \name{ejanalysis}
 \alias{ejanalysis}
 \alias{ejanalysis-package}
-\alias{ejanalysis-package}
 \title{Tools for Environmental Justice (EJ) Analysis}
 \description{
 This R package provides tools for environmental justice (EJ) analysis,
@@ -36,6 +35,4 @@ Key functions include
 \url{http://ejanalysis.github.io} \cr
 \url{http://www.ejanalysis.com/} \cr
 }
-\concept{
-justice EJ demographic
-}
+\concept{justice EJ demographic}

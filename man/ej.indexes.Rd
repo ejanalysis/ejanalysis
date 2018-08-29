@@ -4,8 +4,8 @@
 \alias{ej.indexes}
 \title{Calculate environmental justice (EJ) index for each place}
 \usage{
-ej.indexes(env.df, demog, weights, us.demog, universe.us.demog, as.df = TRUE,
-  prefix = "EJ.DISPARITY.", type = 1, na.rm = FALSE)
+ej.indexes(env.df, demog, weights, us.demog, universe.us.demog,
+  as.df = TRUE, prefix = "EJ.DISPARITY.", type = 1, na.rm = FALSE)
 }
 \arguments{
 \item{env.df}{Environmental indicators vector or numeric data.frame, one column per environmental factor, one row per place (e.g., block group).}

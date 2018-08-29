@@ -4,8 +4,8 @@
 \alias{make.pctile.cols.alt2}
 \title{Alternative way to make columns of (weighted) percentiles from columns of values}
 \usage{
-make.pctile.cols.alt2(raw.data.frame, weights, as.df = TRUE, na.rm = TRUE,
-  zone = NULL)
+make.pctile.cols.alt2(raw.data.frame, weights, as.df = TRUE,
+  prefix = "pctile.", na.rm = TRUE, zone = NULL)
 }
 \arguments{
 \item{raw.data.frame}{Data.frame of values}
@@ -14,9 +14,11 @@ make.pctile.cols.alt2(raw.data.frame, weights, as.df = TRUE, na.rm = TRUE,
 
 \item{as.df}{Optional logical TRUE by default, in which case matrix results are converted to data.frame}
 
-\item{zone}{NULL by default, but if a vector is provided, it defines zones to group by, so percentiles are within a given zone only.}
-
 \item{prefix}{Optional character element, default is 'pctile.', provides text to paste to beginning of input data.frame column names to use as output column names.}
+
+\item{na.rm}{Default is TRUE. Passed to \link{\code{assign.pctiles.alt2}}}
+
+\item{zone}{NULL by default, but if a vector is provided, it defines zones to group by, so percentiles are within a given zone only.}
 }
 \value{
 Returns a matrix or data.frame

@@ -25,8 +25,10 @@ and find what percentile a given value is at.
 }
 \details{
 Relies on the \code{\link[Hmisc]{wtd.Ecdf}} function.
+  COULD BE RECODED TO BE FASTER USING data.table package *** see notes in \code{\link{rollup.pct}} and \code{\link{rollup}}
   Could also add parameter like in rank(), na.last,
   defining na.rm but also where to rank NA values if included, etc.
+
   Default now is like na.last=NA, but like na.last='last' if na.rm=FALSE
   Could also add parameter like in rank(), ties.method, defining if ties get min, max, or mean of percentiles initially assigned to ties.
   Default for ties right now is like ties.method=max (which might not be what assign.pctiles() does in fact).

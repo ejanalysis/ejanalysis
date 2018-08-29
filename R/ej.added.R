@@ -3,12 +3,12 @@
 #' and contribution of one place = what the EJ Index intends to indicate
 #'
 #' @details
-#' WORK IN PROGRESS. **** e.g.,  presumes one setting for vs..... ******
+#' WORK IN PROGRESS. ! e.g.,  presumes one setting for vs..... ***
 #' Directly calculate total number of excess people-points in a demographic subgroup,
 #' across all locations
 #' **** here by default defining "excess" as above
 #' what it would be if e in d group were same as e in nond group.**** \cr
-#' where people-points are e*p*d \cr
+#' where people-points are e * p * d \cr
 #' e = environmental points or individual risk (vector of places) \cr
 #' p = population counts (vector of places) \cr
 #' d = demographic fraction that is in specified demographic group (vector of places) \cr \cr
@@ -31,7 +31,7 @@
 #' @param silent Optional, TRUE by default, in which case more details are printed.
 #' @return Returns numeric vector
 #' @examples
-#' x=data.frame(pop=rep(1000, 10), pct=0.05+6*(1:10)/100, e= (10*(1:10))/100 )
+#' x=data.frame(pop=rep(1000, 10), pct=0.05+6 * (1:10)/100, e= (10 * (1:10))/100 )
 #' y=ej.added(x$e, x$pct, x$pop, silent=FALSE)
 #' @export
 ej.added <- function(e, d, p, vs='nond', silent=TRUE) {
@@ -39,30 +39,30 @@ ej.added <- function(e, d, p, vs='nond', silent=TRUE) {
   if (!(tolower(vs) %in% c('avg', 'nond'))) {stop('vs must be avg or nonD')}
 
   valid <- !(is.na(e) | is.na(p) | is.na(d))
-  if (any(!valid)) {warning(paste(length(e)-sum(valid), 'inputs are NA (for e,p,d,or some combination of them) and NA is returned for those & they are excluded from calculations'))}
+  if (any(!valid)) {warning(paste(length(e) - sum(valid), 'inputs are NA (for e,p,d,or some combination of them) and NA is returned for those & they are excluded from calculations'))}
   e <- e[valid]
   p <- p[valid]
   d <- d[valid]
 
   v <- p * d
-  nonv <- p * (1-d)
+  nonv <- p * (1 - d)
 
   # for cancer, divide these cases by 7e7 to get annual cases actually, since per million per 70 year lifetime)
   v.cases <- e * v
   nonv.cases <- e * nonv
 
   # US TOTALS OR POP MEANS
-  pop.US=sum(p, na.rm=TRUE)
-  VSI.eo.US <- sum(v, na.rm=TRUE) / sum(p, na.rm=TRUE) # (treats d as % of all people, not just denominator that has only those for whom poverty status determined)
-  v.cases.US <- sum(v.cases, na.rm=TRUE)
-  nonv.cases.US <- sum(nonv.cases, na.rm=TRUE)
+  pop.US <- sum(p, na.rm = TRUE)
+  VSI.eo.US <- sum(v, na.rm = TRUE) / sum(p, na.rm = TRUE) # (treats d as % of all people, not just denominator that has only those for whom poverty status determined)
+  v.cases.US <- sum(v.cases, na.rm = TRUE)
+  nonv.cases.US <- sum(nonv.cases, na.rm = TRUE)
 
-  nonv.e.US <- Hmisc::wtd.mean(e, weights=nonv, na.rm=TRUE)
-  v.e.US <-    Hmisc::wtd.mean(e, weights=v, na.rm=TRUE)
-  all.e.US <-  Hmisc::wtd.mean(e, weights=p, na.rm=TRUE)
-  #nonv.e.US <- nonv.cases.US / sum(nonv, na.rm=TRUE) # wtd avg of e, wtd by count of nonv
-  #v.e.US <-       v.cases.US / sum(v,    na.rm=TRUE)
-  #all.e.US <-  (v.cases.US + nonv.cases.US) / sum(v, na.rm=TRUE)
+  nonv.e.US <- Hmisc::wtd.mean(e, weights = nonv, na.rm = TRUE)
+  v.e.US <-    Hmisc::wtd.mean(e, weights = v, na.rm = TRUE)
+  all.e.US <-  Hmisc::wtd.mean(e, weights = p, na.rm = TRUE)
+  #nonv.e.US <- nonv.cases.US / sum(nonv, na.rm = TRUE) # wtd avg of e, wtd by count of nonv
+  #v.e.US <-       v.cases.US / sum(v,    na.rm = TRUE)
+  #all.e.US <-  (v.cases.US + nonv.cases.US) / sum(v, na.rm = TRUE)
 
   # EJ INDEX
   ej.index <- e * p * (d - VSI.eo.US)  # EJ INDEX AS IN screening for 2014, appears to be vs avg e, not vs nonD's e.
@@ -71,13 +71,13 @@ ej.added <- function(e, d, p, vs='nond', silent=TRUE) {
   ej.index.vs.nond.US <- sum(ej.index.vs.nond)
 
   # USE SELECTED REFERENCE GROUP - vs avg or nond:
-  if (tolower(vs)=='avg') {
+  if (tolower(vs) == 'avg') {
     v.e.if.no.ej <- all.e.US # just for the v people, suppose every location's e were same as the (original) US avg, which would be higher than the nonV pop's avg., assuming v's e is > nonv's e overall.
     excess.e.US <- v.e.US - all.e.US
-    rr1 <- v.e.US/ all.e.US
+    rr1 <- v.e.US / all.e.US
   }
 
-  if (tolower(vs)=='nond') {
+  if (tolower(vs) == 'nond') {
     v.e.if.no.ej <- nonv.e.US # just for the v people, suppose every location's e were same as the nonv pop's US avg.
     excess.e.US <- v.e.US - nonv.e.US
     # CAN DIRECTLY CALCULATE V CASES IF THEY HAD THE SAME NUMBER OF CASES AS NONV, BUT SCALED TO REFLECT THEIR SHARE OF POPULATION.
@@ -85,13 +85,16 @@ ej.added <- function(e, d, p, vs='nond', silent=TRUE) {
     #
     # THIS MAY BE SLIGHTLY MISLEADING OR UNREALISTIC SINCE IT ASSUMES NONV RISK IS AS-IS UNCHANGED
     # WHILE V RISK IS SOMEHOW REDUCED:
-    v.cases.if.no.ej.US2 <- ( VSI.eo.US / (1-VSI.eo.US)) * ( nonv.cases.US )
-    v.cases.if.no.ej.US3 <- ( sum(v, na.rm=TRUE)/sum(nonv, na.rm=TRUE) ) * ( nonv.cases.US )   # is another way to get this
-    rr1 <- v.e.US/ nonv.e.US
+
+    # DEFINED BUT NOT USED
+    v.cases.if.no.ej.US2 <- (VSI.eo.US / (1 - VSI.eo.US)) * (nonv.cases.US)
+    # DEFINED BUT NOT USED
+    v.cases.if.no.ej.US3 <- (sum(v, na.rm = TRUE)/sum(nonv, na.rm = TRUE)) * (nonv.cases.US)   # is another way to get this
+    rr1 <- v.e.US / nonv.e.US
   }
 
   # US OVERALL
-  v.cases.if.no.ej.US <- sum(v.e.if.no.ej * v, na.rm=TRUE)
+  v.cases.if.no.ej.US <- sum(v.e.if.no.ej * v, na.rm = TRUE)
   excess.cases.US <- v.cases.US - v.cases.if.no.ej.US
   rr2 <- v.cases.US / v.cases.if.no.ej.US
 
@@ -106,13 +109,13 @@ ej.added <- function(e, d, p, vs='nond', silent=TRUE) {
   v.cases.if.ex0.US <- v.cases.US - v.cases # a vector of US totals, where each is for place x having e=0
   p.0ifna <- ifelse(is.na(p), 0, p)
   v.0ifna <- ifelse(is.na(v), 0, v)
-  VSI.eo.US.ex0 <- (sum(v,na.rm=TRUE) - v.0ifna) / (sum(p,na.rm=TRUE) - p.0ifna)  # a vector of US totals
+  VSI.eo.US.ex0 <- (sum(v,na.rm = TRUE) - v.0ifna) / (sum(p,na.rm = TRUE) - p.0ifna)  # a vector of US totals
 
 
   # **** but this presumes one setting for vs..... ******
   # **** but this presumes one setting for vs..... ******
   # **** but this presumes one setting for vs..... ******
-  v.cases.if.no.ej.and.ex0.US <- (VSI.eo.US.ex0/(1-VSI.eo.US.ex0)) * nonv.cases.US.ex0  # a vector of US totals
+  v.cases.if.no.ej.and.ex0.US <- (VSI.eo.US.ex0 / (1 - VSI.eo.US.ex0)) * nonv.cases.US.ex0  # a vector of US totals
   # **** but this presumes one setting for vs..... ******
   # **** but this presumes one setting for vs..... ******
   # **** but this presumes one setting for vs..... ******
@@ -126,7 +129,7 @@ ej.added <- function(e, d, p, vs='nond', silent=TRUE) {
   excess.cases.added.NA.included[valid] <- excess.cases.added
   excess.cases.added.NA.included[!valid] <- NA
 
-  if (silent==FALSE) {
+  if (silent == FALSE) {
     cat('vs=',vs,'\n')
     cat('\n')
     print( round(t(cbind(VSI.eo.US,
@@ -134,30 +137,30 @@ ej.added <- function(e, d, p, vs='nond', silent=TRUE) {
                 nonv.cases.US, v.cases.US, v.cases.if.no.ej.US, excess.cases.US, ej.index.US, ej.index.vs.nond.US
                  ) ), 2))
     cat('\n')
-    print( head(cbind(e=e,
-      p=p,d=d,v=v, VSI.eo.US.ex0,
-      v.cases, v.cases.if.ex0.US, v.cases.US, velsewhere=v.cases.US-v.cases, ej.index, ej.index.vs.nond,
+    print( head(cbind(e = e,
+      p = p, d = d,v = v, VSI.eo.US.ex0,
+      v.cases, v.cases.if.ex0.US, v.cases.US, velsewhere = v.cases.US - v.cases, ej.index, ej.index.vs.nond,
       v.cases.if.no.ej.and.ex0.US, nonv.cases.US.ex0, excess.cases.US.if.ex0,
-      contrib=v.cases.if.no.ej.US- v.cases.if.no.ej.and.ex0.US, excess.cases.added), 10 ) )
+      contrib = v.cases.if.no.ej.US - v.cases.if.no.ej.and.ex0.US, excess.cases.added), 10 ) )
     cat('\n')
     cat('excess.cases.added.NA.included: \n'); print(head(excess.cases.added.NA.included, 10))
   }
 
   return(excess.cases.added.NA.included)
 
-  if (1==0) {
+  if (1 == 0) {
 
     # examples:
 
-    mydat <- data.frame(traffic.score=rnorm(n = 100, mean=500, sd=100), VSI.eo=runif(n = 100, min = 0, max=1), pop=1000)
+    mydat <- data.frame(traffic.score = rnorm(n = 100, mean = 500, sd = 100), VSI.eo = runif(n = 100, min = 0, max = 1), pop = 1000)
     e <- mydat$traffic.score
     p <- mydat$pop
     d <- mydat$VSI.eo
     # Must specify names.e, names.ej here also for example to work
 
-    for (i in 1:12) {print(excess.cases(mydat[, names.e[i]],  d, p)  / sum(p * d * mydat[,names.e[i]], na.rm=TRUE ) )}
-    mydatv=mydat[ !is.na(rowSums(mydat[,names.e])), c('pop','VSI.eo',names.e)]
-    for (i in 1:12) {print(excess.cases(mydatv[, names.e[i]],  mydatv$VSI.eo, mydatv$pop)  / sum(mydatv$pop * mydatv$VSI.eo * mydatv[,names.e[i]],na.rm=TRUE ) )}
+    for (i in 1:12) {print(excess.cases(mydat[ , names.e[i]],  d, p) / sum(p * d * mydat[,names.e[i]], na.rm = TRUE))}
+    mydatv <- mydat[ !is.na(rowSums(mydat[,names.e])), c('pop','VSI.eo',names.e)]
+    for (i in 1:12) {print(excess.cases(mydatv[, names.e[i]],  mydatv$VSI.eo, mydatv$pop) / sum(mydatv$pop * mydatv$VSI.eo * mydatv[,names.e[i]],na.rm = TRUE ) )}
     for (i in 1:12) {print(RR(mydatv[, names.e[i]], mydatv$VSI.eo, mydatv$pop)   )}
 
     ####
@@ -165,10 +168,10 @@ ej.added <- function(e, d, p, vs='nond', silent=TRUE) {
     plotd <- function(n) {
       x = ej.added(mydat[,names.e[n] ], mydat$VSI.eo,mydat$pop)
       # These differ but shouldn't really differ???
-      lims=quantile(x,probs=c(0.01,0.99),na.rm=TRUE)
+      lims = quantile(x,probs = c(0.01,0.99),na.rm = TRUE)
       plot(x, mydat[,names.ej[n]], pch='.', main='comparison of manual calc of excess cases added to EJ Index', xlab='manually calculated contribution of mydat to excess cases among v', ylab='EJ Index', xlim=lims, ylim=lims)
-      abline(h=quantile(mydat[,names.ej[n]],probs=c(0.8,.9,.95),na.rm=TRUE))
-      abline(v=quantile(x,probs=c(0.8,.9,.95),na.rm=TRUE))
+      abline(h = quantile(mydat[,names.ej[n]],probs = c(0.8,.9,.95),na.rm = TRUE))
+      abline(v = quantile(x,probs = c(0.8,.9,.95),na.rm = TRUE))
     }
     plotd(2)
 

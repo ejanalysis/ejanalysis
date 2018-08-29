@@ -8,6 +8,7 @@
 #' @param cutoff Numeric. The threshold or cutoff to which numbers are compared. Default is arithmetic mean of row. Usually one number, but can be a vector of same length as number of rows, in which case each row can use a different cutoff.
 #' @param or.tied Logical. Default is FALSE, which means we check if number in x is greater than the cutoff (>). If TRUE, check if greater than or equal (>=).
 #' @param below Logical. Default is FALSE. If TRUE, uses > or >= cutoff. If FALSE, uses < or <= cutoff.
+#' @param ... optional additional parameters to pass to \code{\link[analyze.stuff]{cols.above.which}}
 #' @return Returns a logical matrix the same size as x.
 #' @seealso cols.above.which,  another name for the exact same function.
 #' @seealso cols.above.count or cols.above.pct to see, for each row, count or fraction of columns with numbers at/above/below cutoff.
