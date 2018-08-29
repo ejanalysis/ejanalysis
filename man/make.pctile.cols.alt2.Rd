@@ -16,7 +16,7 @@ make.pctile.cols.alt2(raw.data.frame, weights, as.df = TRUE,
 
 \item{prefix}{Optional character element, default is 'pctile.', provides text to paste to beginning of input data.frame column names to use as output column names.}
 
-\item{na.rm}{Default is TRUE. Passed to \link{\code{assign.pctiles.alt2}}}
+\item{na.rm}{Default is TRUE. Passed to \code{\link{assign.pctiles.alt2}}}
 
 \item{zone}{NULL by default, but if a vector is provided, it defines zones to group by, so percentiles are within a given zone only.}
 }
