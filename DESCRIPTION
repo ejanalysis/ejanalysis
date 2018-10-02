@@ -1,28 +1,29 @@
 Package: ejanalysis
-Type: Package
-Title: Tools for Environmental Justice Analysis
-Version: 0.1.0
-Date: 2015-03-14
-Author: info@ejanalysis.com
-Maintainer: ejanalysis.com <info@ejanalysis.com>
+Title: Tools for Environmental Justice (EJ) Analysis
+Version: 0.1.1
 Description: Tools that simplify some basic tasks in exploring and analyzing
     a dataset in a matrix or data.frame that contains data on demographics
     (e.g., counts of residents in poverty) and local environmental indicators
     (e.g., an air quality index), with one row per spatial location (e.g., Census
     block group). Key functions help to find relative risk or similar ratios of
-    means in demographic groups, etc. The analyze.stuff, proxistat, ejanalysis,
-    and countyhealthrankings packages, once made public can be installed from
-    github using the devtools package: devtools::install_github(c("ejanalysis/
-    analyze.stuff", "ejanalysis/proxistat", "ejanalysis/ejanalysis", "ejanalysis/
-    countyhealthrankings"))
-Depends:
-    R (>= 3.1.2)
-License: MIT + file LICENSE
+    means in demographic groups, etc.
+    For any imported/suggested packages not on CRAN, see http://ejanalysis.github.io
 Suggests:
-    countyhealthrankings,
-    data.table
+  countyhealthrankings,
+  sp
 Imports:
-    sp
-URL: http://ejanalysis.github.io
-    http://www.ejanalysis.com/
+  analyze.stuff,
+  data.table,
+  Hmisc
+URL: http://ejanalysis.github.io, https://github.com/ejanalysis/ejanalysis, http://www.ejanalysis.com/
+BugReports: https://github.com/ejanalysis/ejanalysis/issues
+Date: 2018-09-01
+Depends: R (>= 3.1.0)
 RoxygenNote: 6.1.0
+License: MIT + file LICENSE
+Repository: GitHub
+Author: info@ejanalysis.com
+Maintainer: info@ejanalysis.com <info@ejanalysis.com>
+NeedsCompilation: no
+LazyData: true
+Encoding: UTF-8
