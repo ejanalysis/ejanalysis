@@ -120,9 +120,9 @@ ej.indexes <- function(env.df, demog, weights, us.demog, universe.us.demog, as.d
   if (length(unique( length(demog), length(env.df[ , 1]), length(weights))) > 1) {cat('Warning - demog, weights, & 1st column of env.df are not all the same length!')}
 
 
-  ################################################
+  ############################################### #
   # *** EVEN IF na.rm = TRUE, CAN'T JUST REMOVE EVERY PLACE WHERE DEMOG OR WEIGHTS (POP) IS NA ! WE WANT TO RETURN NA VALUES THERE
-  ################################################
+  ############################################### #
   #
   dpnotna <- (!is.na(demog) & !is.na(weights))
   #   if (na.rm = TRUE) {
@@ -132,9 +132,9 @@ ej.indexes <- function(env.df, demog, weights, us.demog, universe.us.demog, as.d
   #   }
 
 
-  ###################################
+  ################################## #
   # specify type of formula to use
-  ###################################
+  ################################## #
 
   # For type=1, ej.indexes = weights * env.df * (demog  - us.demog)  # us.demog could also be called d.avg.all
   # For type=1.5 ej.indexes= weights * env.df * (demog  - d.avg.all.elsewhere) # for a place that is one of many this can be almost identical to type 1
@@ -326,9 +326,9 @@ ej.indexes <- function(env.df, demog, weights, us.demog, universe.us.demog, as.d
   }
 
 
-  ###################################
+  ################################## #
   # calculate results
-  ###################################
+  ################################## #
 
   if (length(env.df) > 1) {
     # If a data.frame (multiple columns) was passed to this function
@@ -340,9 +340,9 @@ ej.indexes <- function(env.df, demog, weights, us.demog, universe.us.demog, as.d
     ej <- ejfunction(e=env.df, p=weights, d=demog, na.rm=na.rm)
   }
 
-  ###################################
+  ################################## #
   # format output
-  ###################################
+  ################################## #
 
   if (as.df) {
     ej <- as.data.frame(ej, stringsAsFactors=FALSE)

@@ -58,9 +58,9 @@ if (1==0) {
 #> length(places$FIPS)
 #[1] 277596
 
-#############################################################################
+############################################################################ #
 # checking the work
-#############################################################################
+############################################################################ #
 
 #	view the county names extracted, particularly those which don't have the word "County" in them, to check this
 # cbind(sort(table(placenames.bg$county[!grepl("County", placenames.bg$county)])))
@@ -76,9 +76,9 @@ length(unique(paste(placenames.bg$county,placenames.bg$state,sep="")))	# can the
 length(unique(places$FIPS.COUNTY))
 # 3221
 
-#############################################################################
+############################################################################ #
 # JUST DOUBLE CHECK TO ENSURE A 1 TO 1 CORRESPONDENCE BETWEEN FIPS.COUNTY AND COUNTY NAME AS EXTRACTED
-#############################################################################
+############################################################################ #
 
 x = aggregate(places$FIPS.COUNTY[places$sumlevel==150], by=list( paste(placenames.bg$county,placenames.bg$state,sep="")   ), function(x) length(unique(x)) )
 names(x) = c("countystate", "count.unique.FIPS.COUNTY")
@@ -97,9 +97,9 @@ x[order(x$count.unique.NAMES),] # sort by number of matches
 # OK - EXACT 1 TO 1 MATCHES.
  rm(x)
 
-#############################################################################
+############################################################################ #
 #	NOW ADD THOSE COUNTY NAMES TO THE PLACES DATASET
-#############################################################################
+############################################################################ #
 
 places$County[places$sumlevel==150] = as.character(placenames.bg$county)
 places$State[places$sumlevel==150] =  as.character(placenames.bg$state)

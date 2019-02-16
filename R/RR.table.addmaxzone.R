@@ -1,8 +1,8 @@
 RR.table.addmaxzone <- function(x) {
 
-  ######################
+  ##################### #
   # Add max.zone slices
-  ######################
+  ##################### #
 
   RRTEMP <- array(0, dim(RRS) + c(0, 0, 1))
   dimnames(RRTEMP) <- list(

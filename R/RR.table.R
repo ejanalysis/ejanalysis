@@ -36,10 +36,10 @@ RR.table <- function(mydat, Enames, Dnames, popcolname, Zcolname, testing=FALSE,
   # one Envt factor per column,
   # and 3d dimension is for each zone (e.g. each state)
 
-  ############################
+  ########################### #
 
   # TO DO LIST FOR  RR.table() :
-  ############################
+  ########################### #
 
   # FIX THESE:
 
@@ -63,9 +63,9 @@ RR.table <- function(mydat, Enames, Dnames, popcolname, Zcolname, testing=FALSE,
   # so you can specify States as zones and it will add the entire US as a zone?
   #   THAT NOW CAN BE DONE VIA RR.table.add()
 
-  ##########################
+  ######################### #
   # - to do summary stats: **********
-  ##########################
+  ######################### #
 
   # - what E has the highest RRs "usually" or at least "most often"  (which E has max RR for the most Ds in given zone,
   #  then for the most zones for given D, then overall= which E has more max RRs of all D-Z combos?)?,
@@ -110,7 +110,7 @@ RR.table <- function(mydat, Enames, Dnames, popcolname, Zcolname, testing=FALSE,
   #  for each E, what is the Demog group that has the worst RR, & then
   #  for each D, what is the E with worst RR, etc.
 
-  ###############
+  ############## #
 
   if (!missing(Zcolname)) {
     if (length(Zcolname) > 1) {stop('Zcolname must be a single character string')}

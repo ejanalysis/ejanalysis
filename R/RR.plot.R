@@ -19,7 +19,7 @@
 #' @return draws a line plot
 #' @seealso \code{\link{RR.table}}
 #' @examples #
-#'   ###
+#'   ## #
 #' @export
 RR.plot <-
   function(rrs,

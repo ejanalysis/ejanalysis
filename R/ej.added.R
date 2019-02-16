@@ -99,11 +99,11 @@ ej.added <- function(e, d, p, vs='nond', silent=TRUE) {
   rr2 <- v.cases.US / v.cases.if.no.ej.US
 
 
-  ##############
+  ############# #
   # We found the US totals, but now figure out manually the contribution of each place to that...
   # Calculate vector of US totals, where nth is the total if nth place has e set to 0.
   # For each of these variables:
-  ##############
+  ############# #
 
   nonv.cases.US.ex0 <- nonv.cases.US - nonv.cases # a vector of US totals, where each is for place x having e=0
   v.cases.if.ex0.US <- v.cases.US - v.cases # a vector of US totals, where each is for place x having e=0
@@ -163,7 +163,7 @@ ej.added <- function(e, d, p, vs='nond', silent=TRUE) {
     for (i in 1:12) {print(excess.cases(mydatv[, names.e[i]],  mydatv$VSI.eo, mydatv$pop) / sum(mydatv$pop * mydatv$VSI.eo * mydatv[,names.e[i]],na.rm = TRUE ) )}
     for (i in 1:12) {print(RR(mydatv[, names.e[i]], mydatv$VSI.eo, mydatv$pop)   )}
 
-    ####
+    ### #
 
     plotd <- function(n) {
       x = ej.added(mydat[,names.e[n] ], mydat$VSI.eo,mydat$pop)
@@ -175,7 +175,7 @@ ej.added <- function(e, d, p, vs='nond', silent=TRUE) {
     }
     plotd(2)
 
-    ####
+    ### #
 
         #   > # example
     #     > x=data.frame(pop=rep(1000, 10), pct=0.05+6*(1:10)/100, e= (10*(1:10))/100 )

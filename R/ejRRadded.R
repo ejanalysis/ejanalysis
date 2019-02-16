@@ -19,15 +19,15 @@ ejRRadded   <- function(E,D=1,P=1, na.rm=TRUE, n=5, ...) {
     na.rm=TRUE
   }
 
-  #######################################################################################################################
+  ###################################################################################################################### #
   # **** This treats P as the full universe or denominator to use for D & d *****
   # ******* this does not handle zero as denominator in zone ****
   # **** need to handle NA in E here. .. **************
-  #######################################################################################################################
+  ###################################################################################################################### #
 
-  #########
+  ######## #
   # People (population counts)
-  #########
+  ######## #
 
   # pop here
   count <- P
@@ -51,10 +51,10 @@ ejRRadded   <- function(E,D=1,P=1, na.rm=TRUE, n=5, ...) {
   # dcount.overall
   count.dref.overall <- sumPd <- sum(Pd)
 
-  #########
+  ######## #
   # percentage of population
   # (again, P must be proper universe)
-  #########
+  ######## #
 
   # Dpct here
   pct.D <- D
@@ -68,9 +68,9 @@ ejRRadded   <- function(E,D=1,P=1, na.rm=TRUE, n=5, ...) {
   # dpct.overall
   pct.dref.overall <- sumPd / sumP
 
-  #########
+  ######## #
   # cases    # or "wtdE"
-  #########
+  ######## #
 
   # cases here everybody      **** need to handle NA in E here  **************
   cases <- PE <- P * E
@@ -100,9 +100,9 @@ ejRRadded   <- function(E,D=1,P=1, na.rm=TRUE, n=5, ...) {
   # D cases overall
   cases.D.overall <- sumPDE <- sum(PDE)
 
-  ########
+  ####### #
   # E (individual risk)
-  #########
+  ######## #
 
   risk <- E
   risk.D <- E
@@ -119,21 +119,21 @@ ejRRadded   <- function(E,D=1,P=1, na.rm=TRUE, n=5, ...) {
   # riskodds <- risk / (1-risk) ???
   # riskodds.overall <- ???
 
-  ########
+  ####### #
   # Excess risk (has implicit goal)
-  #########
+  ######## #
 
   risk.excess.overall <- risk.D.overall - risk.dref.overall
 
-  ########
+  ####### #
   # Excess cases (has implicit goal)
-  #########
+  ######## #
 
   cases.excess.overall <- risk.excess.overall * count.D.overall
 
-  ########
+  ####### #
   # RR
-  #########
+  ######## #
 
   #RR.overall <- (sumPDE / sumPD) / (sumPdE / sumPd)
   RR.overall <- (risk.D.overall) / (risk.dref.overall)
@@ -141,17 +141,17 @@ ejRRadded   <- function(E,D=1,P=1, na.rm=TRUE, n=5, ...) {
   # OR
   #OR.overall <-
 
-  ################################################
+  ############################################### #
   # ALTERNATIVE SCENARIOS, AND THEN CONTRIBUTION BECAUSE NOT AT THAT SCENARIO:
-  ################################################
+  ############################################### #
 
   #  if.here.was.zero means if E was zero and also P was zero !!! i.e. If nobody lived here at all! Not just if E = 0
 
   egoal.v <- 0   # can be used to provide scenarios where local E is cut to zero
 
-  ########
+  ####### #
   # cases in other scenarios
-  ########
+  ####### #
 
   # THESE  WORK EVEN IF egoal.v IS A VECTOR
   cases.D.here.if.here.was.egoal <- count.D * egoal.v  #  = PD * egoal.v
@@ -168,9 +168,9 @@ ejRRadded   <- function(E,D=1,P=1, na.rm=TRUE, n=5, ...) {
   cases.D.overall.if.here.was.zero            <- cases.D.overall - cases.D + (0 * count.D) # = sumPDE - PDE
   cases.dref.overall.if.here.was.zero          <- cases.dref.overall - cases.dref + (0 * count.dref)  # = sumPdE - PdE
 
-  ########
+  ####### #
   # risk in other scenarios
-  ########
+  ####### #
 
   risk.D.overall.if.here.was.egoal.vector    <- (cases.D.overall.if.here.was.egoal.vector / (count.D.overall) )
   risk.dref.overall.if.here.was.egoal.vector <- (cases.dref.overall.if.here.was.egoal.vector / (count.dref.overall) )
@@ -184,9 +184,9 @@ ejRRadded   <- function(E,D=1,P=1, na.rm=TRUE, n=5, ...) {
   risk.D.overall.if.here.was.zero    <- (cases.D.overall.if.here.was.zero / (count.D.overall - count.D) )           # i.e. if local pop was zero
   risk.dref.overall.if.here.was.zero <- (cases.dref.overall.if.here.was.zero / (count.dref.overall - count.dref ) ) # i.e. if local pop was zero
 
-  ########
+  ####### #
   # RR in other scenarios   *** these use different versions of variables: but can use risk. variables above now that they exist ***
-  ########
+  ####### #
 
   RR.if.here.was.egoal <- (
     risk.D.overall.if.here.was.egoal.vector /
@@ -212,9 +212,9 @@ ejRRadded   <- function(E,D=1,P=1, na.rm=TRUE, n=5, ...) {
     ((sumPdE - PdE) / (sumPd - Pd))
 
 
-  ########
+  ####### #
   # excess risk in other scenarios
-  ########
+  ####### #
   #risk.excess.overall <- risk.D.overall - risk.dref.overall
 
   risk.excess.if.here.was.egoal.vector <- risk.D.overall.if.here.was.egoal.vector - risk.dref.overall
@@ -222,18 +222,18 @@ ejRRadded   <- function(E,D=1,P=1, na.rm=TRUE, n=5, ...) {
   risk.excess.if.here.was.risk.dref.elsewhere <- risk.D.overall.if.here.was.risk.dref.elsewhere - risk.dref.overall
   risk.excess.if.here.was.zero <- risk.D.overall.if.here.was.zero - risk.dref.overall
 
-  ########
+  ####### #
   # excess cases in other scenarios  # **** need to check if these are correct and vectorize right: ****
-  ########
+  ####### #
 
   cases.excess.if.here.was.egoal.vector <- risk.excess.if.here.was.egoal.vector * count.D.overall
   cases.excess.if.here.was.risk.dref.overall  <- risk.excess.if.here.was.risk.dref.overall * count.D.overall
   cases.excess.if.here.was.risk.dref.elsewhere <- risk.excess.if.here.was.risk.dref.elsewhere * count.D.overall
   cases.excess.if.here.was.zero <- risk.excess.if.here.was.zero * count.D.overall
 
-  ################################################
+  ############################################### #
   # print some results for now
-  ################################################
+  ############################################### #
 
   printstuff <- function(xname, x0,x1,x2,x3,x4){
     cat('\n',
@@ -286,13 +286,13 @@ ejRRadded   <- function(E,D=1,P=1, na.rm=TRUE, n=5, ...) {
 
   xname='cases D overall now'
   x0=cases.D.overall
-  x1=cases.D.overall.if.here.was.egoal.vector     ###
-  x2=cases.D.overall.if.here.was.risk.dref.overall  ###
-  x3=cases.D.overall.if.here.was.risk.dref.elsewhere  ###
-  x4=cases.D.overall.if.here.was.zero  ###
+  x1=cases.D.overall.if.here.was.egoal.vector     ## #
+  x2=cases.D.overall.if.here.was.risk.dref.overall  ## #
+  x3=cases.D.overall.if.here.was.risk.dref.elsewhere  ## #
+  x4=cases.D.overall.if.here.was.zero  ## #
     printstuff(xname,x0,x1,x2,x3,x4)
 
-  ###############
+  ############## #
 
   printstuff2 <-  function() {
     cat('\n')

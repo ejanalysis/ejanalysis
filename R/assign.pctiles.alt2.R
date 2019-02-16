@@ -55,9 +55,9 @@ assign.pctiles.alt2 <- function(x, weights=NULL, na.rm=TRUE, zone=NULL) {
 
   # weights=NULL is untested.
 
-	#########
+	######## #
 	# assign percentile as cumulative sum of (the weights ranked by the value x)
-	#########
+	######## #
 
 	i <- order(x)
 	original <- order((1:length(x))[i])
@@ -71,9 +71,9 @@ assign.pctiles.alt2 <- function(x, weights=NULL, na.rm=TRUE, zone=NULL) {
 
 	#print(cbind(x,weights,weights.pct))
 
-	#########
+	######## #
 	# fix ties via aggregate()
-	#########
+	######## #
 
 	# aggregate applied to all x can be slow, since it calculates max for every nontied as well, but it works
 	# aggregate gives only sorted list of unique x values, so need to expand to x length, via match (or merge could work too)
@@ -84,7 +84,7 @@ assign.pctiles.alt2 <- function(x, weights=NULL, na.rm=TRUE, zone=NULL) {
 	return(pctiles2[original])
 }
 
-###############################################
+############################################## #
 if (1==0) {
 
 	#	NOTE: THIS IS HOW rank() WORKS (from R help):

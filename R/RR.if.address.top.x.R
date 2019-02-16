@@ -37,7 +37,7 @@
 #'   }
 #' @seealso \code{\link{RR}} and \code{\link{RR.if.address.top.x}} and \code{\link{ej.indexes}} and \code{\link{ej.added}}
 #' @examples
-#'  ###
+#'  ## #
 #' @export
 RR.if.address.top.x <- function(rank.by.df, e.df, d.pct, popcounts, d.pct.us, or.tied=TRUE, if.multiply.e.by=0, zones=NULL, mycuts=c(50,80,90:100), silent=TRUE) {
 

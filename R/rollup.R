@@ -50,7 +50,7 @@
 #'      names(tracts.avg)   <- gsub('by', 'FIPS.TRACT',  names(tracts.avg))
 #'
 #' # Merge sum and mean types of cols
-#' ############
+#' ########### #
 #' # us <- cbind(us, us.avg, stringsAsFactors=FALSE) # check this
 #' regions  <- merge(regions, regions.avg, by='REGION')
 #' states   <- merge(states,   states.avg, by='FIPS.ST')
@@ -80,13 +80,13 @@
 #' @export
 rollup <- function(x, by, wts = NULL, FUN, prefix = 'wtd.mean.', na.rm = TRUE) {
 
-  # ################################################################
+  # ############################################################### #
   # COMPARISON OF data.table vs Hmisc summarize() for weighted means of subsets of fields
-  # ################################################################
+  # ############################################################### #
   #
-  # ################################
+  # ############################### #
   # using data.table
-  # ################################
+  # ############################### #
   #
   # require(data.table)
   #   # convert to data.table format for speed:
@@ -106,7 +106,7 @@ rollup <- function(x, by, wts = NULL, FUN, prefix = 'wtd.mean.', na.rm = TRUE) {
   #     BUT that can be done via ejscreen.acs.calc or ejscreen.create after the rollup of sums of counts
   #
   #   # ... NEWER CODE:
-  #   ###############################
+  #   ############################## #
   #   # for fast rollup:  apply a function to every column, or some of them
   #   # Also see slam::rollup
   #
@@ -122,7 +122,7 @@ rollup <- function(x, by, wts = NULL, FUN, prefix = 'wtd.mean.', na.rm = TRUE) {
   #   setDF(tracts.sum)
   #   setDF(bg)
   #
-  #   ###############################
+  #   ############################## #
   #
   #   # careful:
   #   # > bg.dt[ 'blah', .N, nomatch=0]
@@ -134,11 +134,11 @@ rollup <- function(x, by, wts = NULL, FUN, prefix = 'wtd.mean.', na.rm = TRUE) {
   # also, to get min of each subgroup using data.table:
   #  x[ , .SD[which.max(EJ.DISPARITY.eo.pm)], by=FIPS.COUNTY][]
   #
-  ###################
+  ################## #
   # Function below adds a data.table method (not just data.frame method) to aggregate()
   # so that when you pass a data.table to aggregate() now,
   # it will use this function, not the default aggregate():
-  ###################
+  ################## #
   #
   #     aggregate.data.table <- function(x, by, FUN=mean, ..., is.value=is.numeric) {
   #       value_columns <- names(x)[which(sapply(x, is.value))]
@@ -150,9 +150,9 @@ rollup <- function(x, by, wts = NULL, FUN, prefix = 'wtd.mean.', na.rm = TRUE) {
   #     x=aggregate(bgt, by=list(bg$FIPS.TRACT))
   #   }
   #
-  # ################################
+  # ############################### #
   # using rollup() which used summarize() from Hmisc
-  # ################################
+  # ############################### #
   #
   # require(Hmisc)
   # #source('rollup.R')
@@ -160,7 +160,7 @@ rollup <- function(x, by, wts = NULL, FUN, prefix = 'wtd.mean.', na.rm = TRUE) {
   # y= rollup(bg[,c('pctlowinc', 'pctmin')], by= bg$REGION, wts=bg$pop)
   #
   # #There were 12 warnings (use warnings() to see them)
-  # ################################################################
+  # ############################################################### #
 
   warning('WORK IN PROGRESS - E.G. NEED TO TEST TO VERIFY THIS CORRECTLY HANDLES NA VALUES IN FIELD AGGREGATED AND/OR WEIGHTS FIELD')
   debugging <- FALSE

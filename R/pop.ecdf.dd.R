@@ -21,7 +21,7 @@
 #' @return Draws a plot
 #' @seealso \code{\link[Hmisc]{Ecdf}} \code{\link{RR}} \code{\link{pop.cdf}}   \code{\link{pop.cdf2}} \code{\link{pop.ecdf}}  \code{\link{pop.cdf.density}}
 #' @examples
-#' ###
+#' ## #
 #' \dontrun{
 #' set.seed(99)
 #' pctminsim=c(runif(7000,0,1), pmin(rlnorm(5000, meanlog=log(0.30), sdlog=1.7), 4)/4)

@@ -28,7 +28,7 @@
 #' @return draws a plot
 #' @seealso \code{\link[Hmisc]{Ecdf}} \code{\link{RR}} \code{\link{pop.cdf}}   \code{\link{pop.cdf2}} \code{\link{pop.ecdf}}  \code{\link{pop.cdf.density}}
 #' @examples
-#' ###
+#' ## #
 #' \dontrun{
 #' pop.ecdf( 31:35, c(0.10, 0.10, 0.40, 0, 0.20), 1001:1005 )
 #'

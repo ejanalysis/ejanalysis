@@ -23,9 +23,9 @@
 #' @export
 RR.table.add <- function(rrs1, rrs2, zones2) {
 
-  ############################
+  ########################### #
   # MERGE ANY TABLE OF ZONES AND US TABLE *****
-  ############################
+  ########################### #
   # Function to merge set of Relative Risk tables as 3D array from RR.table() with one or more such tables
   # e.g., for the overall area (aggregate of those places), also from RR.table()
 

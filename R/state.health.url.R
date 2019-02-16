@@ -108,7 +108,7 @@ state.health.url <- function(ST=NA, scope="state", ind=66, dist=23, char=87, tim
   "49", "50", "51", "52")), .Names = c("state.name", "state.abb",
   "fstate"), row.names = c(NA, 52L), class = "data.frame")
 
-  #########
+  ######## #
   # basic error checking of parameters
 
   # specify the state using fstate, but set it based on ST if that was specified (& ignore fstate specified).
@@ -165,7 +165,7 @@ state.health.url <- function(ST=NA, scope="state", ind=66, dist=23, char=87, tim
   return(my.url)
 }
 
-#############################
+############################ #
 
 # LIFE EXPECTANCY DATASET FOR ONE STATE AS DOWNLOADED AS CSV:
 #Life expectancy at birth: number of years that a newborn is expected to live if current mortality rates continue to apply

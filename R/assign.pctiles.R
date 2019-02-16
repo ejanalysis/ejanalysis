@@ -98,7 +98,7 @@ assign.pctiles <- function(values, weights=NULL, zone=NULL, na.rm=TRUE) {
   }
   return(exact.wtd.pctile)
 
-  ###############################################################
+  ############################################################## #
   #	NOTES ON THIS FUNCTION
 
   #	For documentation of wtd.Ecdf() from Hmisc package, see
