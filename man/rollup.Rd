@@ -67,7 +67,7 @@ tracts.avg   <- rollup( bg[ , avgnames], prefix = '', wts=bg$pop, by=bg$FIPS.TRA
      names(tracts.avg)   <- gsub('by', 'FIPS.TRACT',  names(tracts.avg))
 
 # Merge sum and mean types of cols
-############
+########### #
 # us <- cbind(us, us.avg, stringsAsFactors=FALSE) # check this
 regions  <- merge(regions, regions.avg, by='REGION')
 states   <- merge(states,   states.avg, by='FIPS.ST')

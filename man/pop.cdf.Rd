@@ -44,7 +44,7 @@ compare multiple groups and/or multiple zones, like hisp vs others in us vs ca a
 see \code{\link[plotrix]{weighted.hist}} for options \cr
 }
 \examples{
-###
+## #
 \dontrun{
 # pop.cdf( 31:35, c(0.10, 0.10, 0.40, 0, 0.20), 1001:1005 )
 

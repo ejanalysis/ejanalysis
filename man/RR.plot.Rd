@@ -45,7 +45,7 @@ Draws a plot using relative risk information, one line per demographic group.
 }
 \examples{
 #
-  ###
+  ## #
 }
 \seealso{
 \code{\link{RR.table}}

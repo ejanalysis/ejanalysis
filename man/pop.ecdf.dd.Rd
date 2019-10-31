@@ -42,7 +42,7 @@ Draws a plot using \code{\link[Hmisc]{Ecdf}}, overlaying cumulative distribution
  and % of pop that is in each group.
 }
 \examples{
-###
+## #
 \dontrun{
 set.seed(99)
 pctminsim=c(runif(7000,0,1), pmin(rlnorm(5000, meanlog=log(0.30), sdlog=1.7), 4)/4)

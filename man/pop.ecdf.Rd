@@ -48,7 +48,7 @@ compare multiple groups and/or multiple zones, like hisp vs others in us vs ca a
 see \code{\link{Ecdf}} for options & try passing a data.frame instead of just vector\cr
 }
 \examples{
-###
+## #
 \dontrun{
 pop.ecdf( 31:35, c(0.10, 0.10, 0.40, 0, 0.20), 1001:1005 )
 
