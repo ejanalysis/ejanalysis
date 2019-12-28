@@ -4,8 +4,7 @@
 \alias{url.census}
 \title{See webpage with data on Census unit(s) from American Fact Finder}
 \usage{
-url.census(fips, censustable = "P2", censusfile = "DEC/10_PL",
-  launch = TRUE)
+url.census(fips, censustable = "P2", censusfile = "DEC/10_PL", launch = TRUE)
 }
 \arguments{
 \item{fips}{vector of FIPS}

@@ -4,8 +4,17 @@
 \alias{pop.ecdf}
 \title{Draw an Ecdf plot comparing distributions of scores in selected demographic groups}
 \usage{
-pop.ecdf(scores, pcts, pops, allothers = TRUE, col = "red",
-  main = "", weights, subtitles = FALSE, ...)
+pop.ecdf(
+  scores,
+  pcts,
+  pops,
+  allothers = TRUE,
+  col = "red",
+  main = "",
+  weights,
+  subtitles = FALSE,
+  ...
+)
 }
 \arguments{
 \item{scores}{Numeric vector (or data.frame) required. Values to analyze.

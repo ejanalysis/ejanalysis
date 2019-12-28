@@ -10,7 +10,7 @@
 #' @return Creates a plot
 #' @seealso \code{\link{pop.cdf}}   \code{\link{pop.cdf2}} \code{\link{pop.ecdf}}  \code{\link{pop.cdf.density}}
 #' @examples
-#' \donotrun{
+#' \dontrun{
 #' # can get a dataset for examples
 #' load("~/../../Dropbox/EJSCREEN/R analysis/bg 2015-04-22 Rnames plus subgroups.RData")
 #' # # to do this manually

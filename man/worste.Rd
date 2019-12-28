@@ -4,8 +4,7 @@
 \alias{worste}
 \title{Environmental indicators with worst RR}
 \usage{
-worste(rrs, d = "pctlowinc", e = "pm", zone = "USA", n = 10,
-  digits = 2)
+worste(rrs, d = "pctlowinc", e = "pm", zone = "USA", n = 10, digits = 2)
 }
 \arguments{
 \item{rrs}{Required. This has to be the output of one of the functions like \code{\link{RR.table}}}

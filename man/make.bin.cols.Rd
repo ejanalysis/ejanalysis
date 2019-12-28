@@ -4,8 +4,13 @@
 \alias{make.bin.cols}
 \title{Create a Bin Numbers Column for each Percentiles Column}
 \usage{
-make.bin.cols(pctile.df, as.df = TRUE, cutpoints = c((0:9)/10, 0.95,
-  1), labels = 1:11, prefix = "bin.")
+make.bin.cols(
+  pctile.df,
+  as.df = TRUE,
+  cutpoints = c((0:9)/10, 0.95, 1),
+  labels = 1:11,
+  prefix = "bin."
+)
 }
 \arguments{
 \item{pctile.df}{Data.frame (or matrix or vector), required. Typically percentiles as decimal fractions, 0 to 1, one per place.}

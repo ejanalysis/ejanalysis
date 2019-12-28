@@ -4,9 +4,19 @@
 \alias{pop.ecdf.dd}
 \title{Draw an Ecdf plot showing the distribution of scores in each demographic subgroup}
 \usage{
-pop.ecdf.dd(e, elab, mydf, dlabs = colnames(mydf), mywt = rep(1,
-  NROW(mydf)), main, mycolors, refcolor = "black", sorted = TRUE,
-  log = "", ...)
+pop.ecdf.dd(
+  e,
+  elab,
+  mydf,
+  dlabs = colnames(mydf),
+  mywt = rep(1, NROW(mydf)),
+  main,
+  mycolors,
+  refcolor = "black",
+  sorted = TRUE,
+  log = "",
+  ...
+)
 }
 \arguments{
 \item{e}{Required numeric vector of scores (e.g., environmental indicator values) for places like block groups, one place per row}

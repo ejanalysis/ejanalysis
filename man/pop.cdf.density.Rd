@@ -31,8 +31,8 @@ Use plot(density()) to see overlay of two distribution functions.
 Assumes you have weights for each and are comparing values in one group vs another.
 }
 \examples{
-\\donotrun{
-  pop.cdf.density(e = e, dcount = dcount, refcount = refcount, etxt = etxt, dtxt = dtxt, 
+\dontrun{
+  pop.cdf.density(e = e, dcount = dcount, refcount = refcount, etxt = etxt, dtxt = dtxt,
 }
 }
 \seealso{

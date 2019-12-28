@@ -4,8 +4,15 @@
 \alias{RR.table}
 \title{Table of Relative Risk results by zone by group by envt risk factor}
 \usage{
-RR.table(mydat, Enames, Dnames, popcolname, Zcolname, testing = FALSE,
-  digits = 4)
+RR.table(
+  mydat,
+  Enames,
+  Dnames,
+  popcolname,
+  Zcolname,
+  testing = FALSE,
+  digits = 4
+)
 }
 \arguments{
 \item{mydat}{Data.frame of input data, one row per geographic unit such as US Census block groups, or tracts.}

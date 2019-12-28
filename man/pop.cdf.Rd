@@ -4,8 +4,7 @@
 \alias{pop.cdf}
 \title{Draw PDF (overlays histograms) comparing distributions of scores in selected demographic groups}
 \usage{
-pop.cdf(scores, pcts, pops, allothers = TRUE, col = "red", main,
-  weights, ...)
+pop.cdf(scores, pcts, pops, allothers = TRUE, col = "red", main, weights, ...)
 }
 \arguments{
 \item{scores}{Numeric vector (not data.frame currently), required. Values to analyze.}

@@ -4,9 +4,17 @@
 \alias{RR.plotbar}
 \title{Draw barplot comparing mean score in a group vs reference group}
 \usage{
-RR.plotbar(x, dname, ename, dlab = dname, elab = ename,
-  reflab = paste("Non-", dlab, sep = ""), cex.names = 1.9,
-  cex.axis = 1.5, ...)
+RR.plotbar(
+  x,
+  dname,
+  ename,
+  dlab = dname,
+  elab = ename,
+  reflab = paste("Non-", dlab, sep = ""),
+  cex.names = 1.9,
+  cex.axis = 1.5,
+  ...
+)
 }
 \arguments{
 \item{x}{Results of \code{\link{RR.means}} function, mean indicator score or risk by demographic group}

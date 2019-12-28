@@ -4,8 +4,12 @@
 \alias{RR.table.view}
 \title{Just print Relative Risks (RR) info by demog group by risk type by zone}
 \usage{
-RR.table.view(rrs, d = dimnames(RRS)[[1]], e = dimnames(RRS)[[2]],
-  zone = dimnames(RRS)[[3]])
+RR.table.view(
+  rrs,
+  d = dimnames(RRS)[[1]],
+  e = dimnames(RRS)[[2]],
+  zone = dimnames(RRS)[[3]]
+)
 }
 \arguments{
 \item{rrs}{A three dimensional array that is created by \code{\link{RR}} and has format like RRS[d, e, zone]}

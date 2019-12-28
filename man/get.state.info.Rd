@@ -65,7 +65,7 @@ Also see \url{https://www.census.gov/geo/reference/state-area.html} for info on 
 }
 \examples{
 # data(lookup.states, package='proxistat')
-# x <- get.state.info(); str(x); cat('\\n'); x[ 1:2, ]
+# x <- get.state.info(); str(x); cat('\n'); x[ 1:2, ]
 # get.state.info(c('alaska','north carolina', 'montana', "hawaii"),
  fields=c('ST','statename','REGION'))
 # get.state.info('DC'); get.state.info('U.S. Virgin Islands'); get.state.info(4)

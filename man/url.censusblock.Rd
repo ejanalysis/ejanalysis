@@ -4,8 +4,12 @@
 \alias{url.censusblock}
 \title{See webpage with data on Census block(s)}
 \usage{
-url.censusblock(fips, censustable = "P2", censusfile = "DEC/10_PL",
-  launch = TRUE)
+url.censusblock(
+  fips,
+  censustable = "P2",
+  censusfile = "DEC/10_PL",
+  launch = TRUE
+)
 }
 \arguments{
 \item{fips}{vector of FIPS}

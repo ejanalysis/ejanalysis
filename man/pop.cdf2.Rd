@@ -29,7 +29,7 @@ Use plotrix::weighted.hist to see overlay of two weighted histograms.
 Does not handle NA values well yet. Assumes you have weights for each and are comparing values in one group vs another.
 }
 \examples{
-\\donotrun{
+\dontrun{
 # can get a dataset for examples
 load("~/../../Dropbox/EJSCREEN/R analysis/bg 2015-04-22 Rnames plus subgroups.RData")
 # # to do this manually

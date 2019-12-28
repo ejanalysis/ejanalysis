@@ -4,9 +4,16 @@
 \alias{make.bin.pctile.cols}
 \title{Weighted Percentiles and Bin Numbers for Each Column, by zone, such as percentiles within each State}
 \usage{
-make.bin.pctile.cols(raw.data.frame, weights = 1, zone = NULL,
-  as.df = TRUE, prefix.bin = "bin.", prefix.pctile = "pctile.",
-  cutpoints = c((0:9)/10, 0.95, 1), labels = 1:11)
+make.bin.pctile.cols(
+  raw.data.frame,
+  weights = 1,
+  zone = NULL,
+  as.df = TRUE,
+  prefix.bin = "bin.",
+  prefix.pctile = "pctile.",
+  cutpoints = c((0:9)/10, 0.95, 1),
+  labels = 1:11
+)
 }
 \arguments{
 \item{raw.data.frame}{Data.frame of values}

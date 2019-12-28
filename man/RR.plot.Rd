@@ -4,9 +4,22 @@
 \alias{RR.plot}
 \title{Draw lineplot comparing RR values by group}
 \usage{
-RR.plot(rrs, dnames, enames, zone = "USA", enames.nice, mycolors,
-  type = "b", maxchar = 15, cex.axis = 0.5, cex.legend = 0.8,
-  sorted = TRUE, margins = c(1, 2, 3), decreasing = TRUE, ...)
+RR.plot(
+  rrs,
+  dnames,
+  enames,
+  zone = "USA",
+  enames.nice,
+  mycolors,
+  type = "b",
+  maxchar = 15,
+  cex.axis = 0.5,
+  cex.legend = 0.8,
+  sorted = TRUE,
+  margins = c(1, 2, 3),
+  decreasing = TRUE,
+  ...
+)
 }
 \arguments{
 \item{rrs}{Table as from \code{\link{RRS}} function, of relative risk by demographic group, risk type, and zone (3 dimensions).}

@@ -4,8 +4,14 @@
 \alias{make.bin.pctile.cols.byzone}
 \title{Percentile and bin number fields, by zone, such as percentiles within each State}
 \usage{
-make.bin.pctile.cols.byzone(bg, zone, wtsvarname, keyvarname = "FIPS",
-  datavarnames = gsub(keyvarname, "", names(bg)), ...)
+make.bin.pctile.cols.byzone(
+  bg,
+  zone,
+  wtsvarname,
+  keyvarname = "FIPS",
+  datavarnames = gsub(keyvarname, "", names(bg)),
+  ...
+)
 }
 \arguments{
 \item{bg}{Data.frame of data field(s), weights (optional), and a unique ID (e.g., FIPS), one row per place if geographic data is used.}

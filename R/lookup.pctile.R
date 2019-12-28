@@ -23,7 +23,7 @@
 #'     lookup = data.frame(PCTILE = 0:100,
 #'     myvar = 10*(0:100),
 #'     REGION = 'USA', stringsAsFactors = FALSE), varname.in.lookup.table = 'myvar')
-#'   \dontrun {
+#'   \dontrun{
 #'     library(ejscreen)
 #'     bg <- bg19[sample(1:NROW(bg19), 100), ]
 #'     state.pctile.pm <- lookup.pctile(myvector = bg$pm, varname.in.lookup.table = 'pm',

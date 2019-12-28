@@ -4,8 +4,14 @@
 \alias{make.pctile.cols.alt2}
 \title{Alternative way to make columns of (weighted) percentiles from columns of values}
 \usage{
-make.pctile.cols.alt2(raw.data.frame, weights, as.df = TRUE,
-  prefix = "pctile.", na.rm = TRUE, zone = NULL)
+make.pctile.cols.alt2(
+  raw.data.frame,
+  weights,
+  as.df = TRUE,
+  prefix = "pctile.",
+  na.rm = TRUE,
+  zone = NULL
+)
 }
 \arguments{
 \item{raw.data.frame}{Data.frame of values}

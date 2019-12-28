@@ -4,9 +4,19 @@
 \alias{state.health.url}
 \title{Get URL(s) with State health indicator data from RWJF - ** url scheme obsolete now so needs to be redone}
 \usage{
-state.health.url(ST = NA, scope = "state", ind = 66, dist = 23,
-  char = 87, time = 3, viz = "bar", fstate = NA, locs = NA,
-  cmp = "stcmp", open.browser = FALSE)
+state.health.url(
+  ST = NA,
+  scope = "state",
+  ind = 66,
+  dist = 23,
+  char = 87,
+  time = 3,
+  viz = "bar",
+  fstate = NA,
+  locs = NA,
+  cmp = "stcmp",
+  open.browser = FALSE
+)
 }
 \arguments{
 \item{ST}{State abbreviation, FIPS code, or name as character vector}

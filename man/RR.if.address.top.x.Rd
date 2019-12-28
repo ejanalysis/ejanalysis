@@ -4,9 +4,18 @@
 \alias{RR.if.address.top.x}
 \title{Analyze how much RR would change if top-ranked places were addressed - ** NOT WORKING/ IN PROGRESS}
 \usage{
-RR.if.address.top.x(rank.by.df, e.df, d.pct, popcounts, d.pct.us,
-  or.tied = TRUE, if.multiply.e.by = 0, zones = NULL,
-  mycuts = c(50, 80, 90:100), silent = TRUE)
+RR.if.address.top.x(
+  rank.by.df,
+  e.df,
+  d.pct,
+  popcounts,
+  d.pct.us,
+  or.tied = TRUE,
+  if.multiply.e.by = 0,
+  zones = NULL,
+  mycuts = c(50, 80, 90:100),
+  silent = TRUE
+)
 }
 \arguments{
 \item{rank.by.df}{Data.frame of indicators to rank places by, when defining top places}

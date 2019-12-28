@@ -4,8 +4,11 @@
 \alias{assign.map.bins}
 \title{Assign Each Row (Place) to a Bin Based on Cutpoints}
 \usage{
-assign.map.bins(pctiles.vector, cutpoints = c((0:9)/10, 0.95, 1),
-  labels = 1:11)
+assign.map.bins(
+  pctiles.vector,
+  cutpoints = c((0:9)/10, 0.95, 1),
+  labels = 1:11
+)
 }
 \arguments{
 \item{pctiles.vector}{Vector of percentiles as decimal fractions, 0 to 1, one per place.}

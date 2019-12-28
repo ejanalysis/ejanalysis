@@ -13,7 +13,7 @@ lookup.pctile(myvector, varname.in.lookup.table, lookup, zone)
 
 \item{lookup}{Either lookup must be specified, or a lookup table called us must already be in memory. This is the lookup table data.frame with a PCTILE column and column whose name is the value of varname.in.lookup.table.}
 
-\item{zone}{Character element, optional. If specified, must appear in a column called REGION within the lookup table. For example, it could be 'NY' for New York State.}
+\item{zone}{Character element (or vector as long as myvector), optional. If specified, must appear in a column called REGION within the lookup table. For example, it could be 'NY' for New York State.}
 }
 \value{
 By default, returns numeric vector length of myvector.
@@ -27,9 +27,27 @@ This function accepts lookup table (or uses one called us if that is in memory),
 and finds the number in the PCTILE column that corresponds to where a specified value (in myvector)
 appears in the column called varname.in.lookup.table.
 The function just looks for where the specified value fits between values in the lookup table and returns the approximate percentile as found in the PCTILE column.
+If the value is between the cutpoints listed as percentiles 89 and 90, it returns 89, for example.
+If the value is exactly equal to the cutpoint listed as percentile 90, it returns percentile 90.
+If the value is less than the cutpoint listed as percentile 0, which should be the minimum value in the dataset,
+it still returns 0 as the percentile, but with a warning that the value checked was less than the minimum in the dataset.
 }
 \examples{
-# places.etc$new.pctile.pm <- lookup.pctile(places.etc$countymean, "PM25")
+  lookup.pctile(myvector = c(-99, 0, 500, 801, 949.9, 1000, 99999),
+    lookup = data.frame(PCTILE = 0:100,
+    myvar = 10*(0:100),
+    REGION = 'USA', stringsAsFactors = FALSE), varname.in.lookup.table = 'myvar')
+  \dontrun{
+    library(ejscreen)
+    bg <- bg19[sample(1:NROW(bg19), 100), ]
+    state.pctile.pm <- lookup.pctile(myvector = bg$pm, varname.in.lookup.table = 'pm',
+       lookup = lookupStates19, zone = bg$ST)
+    plot(state.pctile.pm, bg$pctile.pm, pch = '.')
+    text(state.pctile.pm, bg$pctile.pm, labels = paste(bg$ST, round(bg$pm,1)), cex = 0.8)
+    abline(0,1)
+    lookupStates19[lookupStates19$PCTILE == 'mean', c('REGION', 'pm')]
+    lookupUSA19[lookupUSA19$PCTILE == 'mean', c('REGION', 'pm')]
+  }
 }
 \seealso{
 \code{\link{write.pctiles}}, \code{\link{write.pctiles.by.zone}}, \code{\link{write.wtd.pctiles}}, and \code{\link{write.wtd.pctiles.by.zone}}
