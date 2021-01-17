@@ -6,9 +6,9 @@
 \usage{
 RR.table(
   mydat,
-  Enames,
-  Dnames,
-  popcolname,
+  Enames = names.e[names.e \%in\% names(mydat)],
+  Dnames = names.d[names.d \%in\% names(mydat)],
+  popcolname = "pop",
   Zcolname,
   testing = FALSE,
   digits = 4
@@ -17,11 +17,11 @@ RR.table(
 \arguments{
 \item{mydat}{Data.frame of input data, one row per geographic unit such as US Census block groups, or tracts.}
 
-\item{Enames}{names of columns with environmental risk factor data}
+\item{Enames}{names of columns with environmental risk factor data, default is names.e from ejscreen package}
 
-\item{Dnames}{names of columns with percent (fraction) of population that is in each given demographic group}
+\item{Dnames}{names of columns with percent (fraction) of population that is in each given demographic group, default is names.d from ejscreen package}
 
-\item{popcolname}{name of column with total population count}
+\item{popcolname}{name of column with total population count, default is pop}
 
 \item{Zcolname}{name of column with name of zone such as US State name}
 

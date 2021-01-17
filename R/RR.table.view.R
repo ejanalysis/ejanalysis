@@ -13,6 +13,6 @@
 #' @return prints RRS[d, e, zone]
 #' @template seealsoRR
 #' @export
-RR.table.view <- function(rrs, d = dimnames(RRS)[[1]], e = dimnames(RRS)[[2]], zone = dimnames(RRS)[[3]]) {
-  print( RRS[d, e, zone] )
+RR.table.view <- function(x, d = dimnames(x)[[1]], e = dimnames(x)[[2]], zone = dimnames(x)[[3]]) {
+  print(x[d, e, zone] )
 }

@@ -7,6 +7,6 @@
 #' @return numeric results same shape as RRS[d, e, zone]
 #' @template seealsoRR
 #' @export
-RR.table.vs.us <- function(rrs, d, e, zone) {
-  round(RRS[d, e, zone] / RRS[d, e, 'USA'], 2)
+RR.table.vs.us <- function(x, d=names.d[names.d %in% names(x)], e=names.e[names.e %in% names(x)], zone=names(x[1,1,])) {
+  round(x[d, e, zone] / x[d, e, 'USA'], 2)
 }

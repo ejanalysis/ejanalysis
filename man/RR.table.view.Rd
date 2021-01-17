@@ -5,20 +5,20 @@
 \title{Just print Relative Risks (RR) info by demog group by risk type by zone}
 \usage{
 RR.table.view(
-  rrs,
-  d = dimnames(RRS)[[1]],
-  e = dimnames(RRS)[[2]],
-  zone = dimnames(RRS)[[3]]
+  x,
+  d = dimnames(x)[[1]],
+  e = dimnames(x)[[2]],
+  zone = dimnames(x)[[3]]
 )
 }
 \arguments{
-\item{rrs}{A three dimensional array that is created by \code{\link{RR}} and has format like RRS[d, e, zone]}
-
 \item{d}{Optional. Vector of names of demographic groups that must be subset of first dimension of RRS. Default is all.}
 
 \item{e}{Optional. Vector of names of environmental risk indicators that must be subset of second dimension of RRS. Default is all.}
 
 \item{zone}{Optional. Vector of zone names that must be subset of names of third dimension of RRS. Default is all.}
+
+\item{rrs}{A three dimensional array that is created by \code{\link{RR}} and has format like RRS[d, e, zone]}
 }
 \value{
 prints RRS[d, e, zone]

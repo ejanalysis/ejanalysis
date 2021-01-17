@@ -25,8 +25,10 @@ QUERY, ST, countyname, FIPS.COUNTY, statename, fullname
 \description{
 Function that reports some or all of a table of data
   about queried (or all) US Counties (and county equivalents)
-  for 1 or more counties. Query terms can be 5-digit FIPS, or 'countyname, statename' so
+  for 1 or more counties. Query terms can be 5-digit FIPS,
+  or 'countyname, statename', or just statename or just 2-letter state abbrev.
   'Montgomery, MD' will not work. 'Montgomery County, Maryland' will work.
+
   Requested fields can include any of these: "ST", "countyname", "FIPS.COUNTY", "statename", "fullname"
 }
 \details{
@@ -83,4 +85,12 @@ Converted basic data to data, so now can also say data(counties, package='proxis
   which has island areas but not US total and not leading zeroes on FIPS: \cr
   require(acs) \cr
   print(fips.state) \cr
+}
+\examples{
+ testdata <- c('01001', 1001, '1001', "Montgomery County, Maryland", "Montgomery County, MD", 'montgomery county, maryland', "Montgomery County MD", "MontgomeryCountyMD", "Montgomery County", "NY")
+ testonlystates <- c('NY', 'NJ')
+ get.county.info(testdata)
+ get.county.info(testonlystates)
+ get.county.info(c('New Jersey'))
+
 }

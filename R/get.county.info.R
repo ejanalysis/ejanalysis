@@ -2,8 +2,10 @@
 #'
 #' @description Function that reports some or all of a table of data
 #'   about queried (or all) US Counties (and county equivalents)
-#'   for 1 or more counties. Query terms can be 5-digit FIPS, or 'countyname, statename' so
+#'   for 1 or more counties. Query terms can be 5-digit FIPS,
+#'   or 'countyname, statename', or just statename or just 2-letter state abbrev.
 #'   'Montgomery, MD' will not work. 'Montgomery County, Maryland' will work.
+#'
 #'   Requested fields can include any of these: "ST", "countyname", "FIPS.COUNTY", "statename", "fullname"
 #' @details  Converted basic data to data, so now can also say data(counties, package='proxistat') or x <- countiesall via lazy loading. \cr
 #'   Also, as of 3/2015, a list is here: \url{http://www2.census.gov/geo/docs/reference/codes/files/national_county.txt} \cr
@@ -69,6 +71,13 @@
 #' If no query term, or fields not specified, then all information fields are returned:
 #' QUERY, ST, countyname, FIPS.COUNTY, statename, fullname
 #'
+#' @examples
+#'  testdata <- c('01001', 1001, '1001', "Montgomery County, Maryland", "Montgomery County, MD", 'montgomery county, maryland', "Montgomery County MD", "MontgomeryCountyMD", "Montgomery County", "NY")
+#'  testonlystates <- c('NY', 'NJ')
+#'  get.county.info(testdata)
+#'  get.county.info(testonlystates)
+#'  get.county.info(c('New Jersey'))
+#'
 #' @export
 get.county.info <- function(query, fields = 'all', download = FALSE) {
 
@@ -95,9 +104,9 @@ get.county.info <- function(query, fields = 'all', download = FALSE) {
     x$fullname <- apply( x[ , c('countyname', 'statename')] , 1, function(myrow) paste(myrow[1], myrow[2], sep=', '))
     lookup.county <- x
   } else {
+    # but lazy load from data() in proxistat package is  a better way
     data(countiesall, package='proxistat')
     lookup.county <- countiesall
-    # lazy load from data() in proxistat package
   }
 
   ######  Query & report results differently depending on nature of the query term if any:
@@ -129,73 +138,128 @@ get.county.info <- function(query, fields = 'all', download = FALSE) {
   results <- data.frame(results)
   names(results) <- fields
 
-  # remove leading and trailing blank spaces, in case those are present, so it will still match '   NY' for example
-  x <- gsub('^\\s+|\\s+$', '', x)
-
   # FIND WHICH OF QUERY TERMS ARE VALID FIPS.COUNTY AND GET DATA FOR THOSE
   is.valid.FIPS.COUNTY <- grepl('^[0-9]*$', x) # verify it is numeric as character
   is.valid.FIPS.COUNTY[is.valid.FIPS.COUNTY] <- as.numeric(x[is.valid.FIPS.COUNTY]) %in% as.numeric(lookup.county$FIPS.COUNTY)
   results[is.valid.FIPS.COUNTY, ] <- lookup.county[ match(as.numeric(x[is.valid.FIPS.COUNTY]), as.numeric(lookup.county$FIPS.COUNTY)), fields]
 
+  # now that FIPS are handled, look for text queries
+  # testdata <- c('01001', 1001, '1001', "Montgomery County, Maryland", "Montgomery County, MD", 'montgomery county, maryland', "Montgomery County MD", "MontgomeryCountyMD", "Montgomery County" )
+  # get.county.info(testdata)
+
+  # remove leading and trailing blank spaces, in case those are present, so it will still match '   NY' for example
+  x <- gsub('^\\s+|\\s+$', '', x)  # or could use trimws() ?
+
+  # might as well allow matching even if the comma and or any spaces are is missing
+  nocomma <- function(z) gsub(pattern = ',', '', z)
+  nospace <- function(z) gsub(pattern = ' ', '', z)
+  x <- nocomma(nospace(x))
+
+  # make it case-insensitive
+  upx <- toupper(x)
+
   # FIND WHICH OF QUERY TERMS ARE VALID countyname, statename pair. Note they are not unique without statename as well!
   # Also see code in other functions that tries to parse that. (urls.countyhealthrankings()?)
   #  only "St. Croix County, Wisconsin" etc will work
-  # Montgomery, MD will not work. Montgomery County, Maryland will work.
-  upx <- toupper(x)
+  # Montgomery, MD will not work right here. Montgomery County, Maryland will work.
   is.valid.countyname <- grepl('^[[:space:][:alpha:][:punct:]]*$', upx) # verify just spaces alpha or punctuation like .
-  is.valid.countyname[is.valid.countyname] <- upx[is.valid.countyname] %in% toupper(lookup.county$fullname)
-  results[is.valid.countyname, ] <- lookup.county[ match( upx[is.valid.countyname], toupper(lookup.county$fullname)), fields]
+  fullnamelookup <- nocomma(nospace(toupper(lookup.county$fullname)))
+  is.valid.countyname[is.valid.countyname] <- upx[is.valid.countyname] %in% fullnamelookup
+  results[is.valid.countyname, ] <- lookup.county[ match( upx[is.valid.countyname], fullnamelookup), fields]
+
+  # FIND WHICH OF QUERY TERMS ARE VALID countyname, ST (2-letter abbreviation) pair, AND GET DATA FOR THOSE
+  countySTlookup <- paste(lookup.county$countyname, ', ', lookup.county$ST, sep = '')
+  countySTlookup <- nocomma(nospace(toupper(countySTlookup)))
+  is.valid.countyST <- upx %in% countySTlookup
+  results[is.valid.countyST, ] <- lookup.county[ match(upx[is.valid.countyST], countySTlookup), fields]
+
+  ############################################################### #
+
+  ####### COULD MERGE ST AND statename code so it will accept a mix like c('NY', 'Alabama')
 
 
-  # COULD FIND WHICH OF QUERY TERMS ARE VALID ST (2-letter abbreviation) AND GET STATE DATA FOR THOSE
-  #  upx <- toupper(x)
-  #  is.valid.ST <- grepl('^[[:space:][:alpha:]]*$', upx)
-  #  is.valid.ST[is.valid.ST] <- upx[is.valid.ST] %in% toupper(lookup.states$ST)
-  #  results[is.valid.ST, ] <- lookup.states[ match( upx[is.valid.ST], toupper(lookup.states$ST)), fields]
+  # work in progress here...
+
+
+
+  statenamelookup <- nocomma(nospace(toupper(lookup.county$statename)))
+  is.valid.statename <- upx %in% statenamelookup
+  is.valid.ST <- upx %in% (ejanalysis::get.state.info()$ST)
+  if (any(is.valid.ST | is.valid.statename)) {
+
+
+    #  ST
+    #
+    # # FIND WHICH OF QUERY TERMS ARE VALID ST (2-letter abbreviation) - BUT NO SINGLE COUNTY SPECIFIED - AND GET STATE DATA FOR THOSE
+    # BUT THIS ONLY MAKES SENSE AND IS EASY TO HANDLE and is allowed here IF THE QUERY IS FOR ONE OR MORE ENTIRE STATES, NOT A MIX OF FULL STATES AND INDIVIDUAL COUNTIES
+    # *** note a state will return multiple rows / counties, not just one!
+    #
+    if (all(is.valid.ST | is.valid.statename)) {
+
+      #  convert all to standardized ST
+
+      upx <- get.state.info(upx)$ST
+      blah <- data.frame(QUERY = query, upx = upx, stringsAsFactors = FALSE)
+      results <- merge(lookup.county, blah, by.x = 'ST', by.y = 'upx' )
+      # BUT THE SORT ORDER WILL DIFFER FROM ORIGINAL QUERY !!! *************** BUT WANT SAME IN CASE WANT STATE MAP WITH ON VALUE PER WHOLE STATE
+      results <- results[ , c('QUERY', fields)]
+      return(results)
+
+      # obsolete... soon...
+      #
+      # if (all(is.valid.ST)) {
+      #   results <- data.frame(lookup.county[lookup.county$ST %in% upx, fields], stringsAsFactors = FALSE)
+      #   # presumes ST is in fields which it actually may not be: could fix that when I get a chance
+      #   foundstatename <- lookup.county[lookup.county$ST %in% upx, 'statename']
+      #   results <- data.frame(QUERY = foundstatename, results, stringsAsFactors = FALSE)
+      #   return(results) # stops here since format is different than if each query element returns one county
+    } else {
+      # mix of states and counties - not good
+      warning('All or none of queried places must be a full state abbreviation like NY or statename like New York - if others are individual counties, the full state queries will be ignored')
+
+    }
+
+  }
   #
-  # FIND WHICH OF QUERY TERMS ARE VALID statename AND GET DATA FOR THOSE
-  # *** but note a state would return multiple rows / counties, not just one!
-  #   upx <- toupper(x)
-  #   is.valid.statename <- grepl('^[[:space:][:alpha:][:punct:]]*$', upx)
-  #   is.valid.statename[is.valid.statename] <- upx[is.valid.statename] %in% toupper(lookup.county$statename)
-  #   # the match() function finds only the first match, not all of the matches! must use grep or grepl here
-  #   all.counties.in.states <- NULL
-  #   if (sum(is.valid.statename) > 0) {
-  #     for (i in 1:sum(is.valid.statename)) {
-  #       thisone <- upx[is.valid.statename][i]
-  #       all.counties.in.states <- rbind(all.counties.in.states, cbind(QUERY=query[is.valid.statename][i], lookup.county[ grepl(thisone, toupper(lookup.county$statename)) , fields]))
+  #   #  statename
+  #   #
+  #   # FIND WHICH OF QUERY TERMS ARE VALID statename - BUT NO SINGLE COUNTY SPECIFIED - AND GET DATA FOR THOSE
+  #   # BUT THIS ONLY MAKES SENSE AND IS EASY TO HANDLE and is allowed here IF THE QUERY IS FOR ONE OR MORE ENTIRE STATES, NOT A MIX OF FULL STATES AND INDIVIDUAL COUNTIES
+  #   # *** note a state will return multiple rows / counties, not just one!
+  #   statenamelookup <- nocomma(nospace(toupper(lookup.county$statename)))
+  #   is.valid.statename <- upx %in% statenamelookup
+  #   if (any(is.valid.statename)) {
+  #
+  #     if (all(is.valid.statename)) {
+  #       results <- data.frame(lookup.county[statenamelookup %in% upx, fields], stringsAsFactors = FALSE)
+  #       # presumes ST is in fields which it actually may not be: could fix that when I get a chance
+  #       foundST <- lookup.county[statenamelookup %in% upx, 'ST']
+  #       results <- data.frame(QUERY = foundST, results, stringsAsFactors = FALSE)
+  #       return(results) # stops here since format is different than if each query element returns one county
+  #     } else {
+  #       warning('All or none of queried places must be a full state abbreviation like NY or statename like New York - if others are individual counties, the full state queries will be ignored')
   #     }
-  #     results[is.valid.statename]
   #   }
-  #all.counties.in.states <- sapply(upx[is.valid.statename], function(thisone) {lookup.county[ grepl(thisone, toupper(lookup.county$statename)) , fields]})
-  #
-  # debugging:
-  #print('hi') ; print(head(is.valid.statename,100)); print(head(upx,100)); print(str(upx[is.valid.statename])); print(all.counties.in.states); print(head(lookup.county))
-  #
+  ############################################################### #
 
   if (all(is.na(results[ , 1]))) {
-    cat('Warning- No matches found for what should be county identifiers.\n'); return(NA)
+    cat('Warning- No matches found for what should be county or state identifiers.\n'); return(NA)
   }
 
-  results <- data.frame(QUERY=query, results, stringsAsFactors=FALSE)
-
-  #results.extralines  <- rbind(results, all.counties.in.states)
-
-
+  results <- data.frame(QUERY = query, results, stringsAsFactors = FALSE)
   return(results)
-
 
   ### OUTPUTS OF FUNCTION:
 
-  if (1==0) {
+  if (1 == 0) {
 
-    head(get.county.info())
+    #    head(get.county.info())
 
     #   ST     countyname FIPS.COUNTY statename                fullname
     #   1 AL Autauga County       01001   Alabama Autauga County, Alabama
     #   2 AL Baldwin County       01003   Alabama Baldwin County, Alabama
 
-    get.state.info()
+    #     get.state.info()
 
     #   FIPS.ST ST                   statename            ftpname REGION is.usa.plus.pr is.usa is.state is.contiguous.us is.island.areas
     #1     <NA> US               United States       UnitedStates     NA          FALSE  FALSE    FALSE            FALSE           FALSE

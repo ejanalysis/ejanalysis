@@ -94,7 +94,7 @@ get.state.info <- function(query, fields='all') {
   x[is.na(x)]  <- 0
 
   # prepopulate the output variable
-  results <- matrix(NA, nrow=length(x), ncol=length(fields))
+  results <- matrix(NA, nrow = length(x), ncol = length(fields))
   results <- data.frame(results)
   names(results) <- fields
 
@@ -108,24 +108,27 @@ get.state.info <- function(query, fields='all') {
   # as.numeric('NY') would fail
   results[is.valid.FIPS.ST, ] <- lookup.states[ match(as.numeric(x[is.valid.FIPS.ST]), as.numeric(lookup.states$FIPS.ST)), fields]
 
+  nocomma <- function(z) gsub(pattern = ',', '', z)
+  nospace <- function(z) gsub(pattern = ' ', '', z)
+  upx <- nocomma(nospace(toupper(x)))
+
   # FIND WHICH OF QUERY TERMS ARE VALID statename AND GET STATE DATA FOR THOSE
-  upx <- toupper(x)
+
   is.valid.statename <- grepl('^[[:space:][:alpha:][:punct:]]*$', upx)
-  is.valid.statename[is.valid.statename] <- upx[is.valid.statename] %in% toupper(lookup.states$statename)
-  results[is.valid.statename, ] <- lookup.states[ match( upx[is.valid.statename], toupper(lookup.states$statename)), fields]
+  is.valid.statename[is.valid.statename] <- upx[is.valid.statename] %in% nocomma(nospace(toupper(lookup.states$statename)))
+  results[is.valid.statename, ] <- lookup.states[ match( upx[is.valid.statename], nocomma(nospace(toupper(lookup.states$statename)))), fields]
 
   # FIND WHICH OF QUERY TERMS ARE VALID ST (2-letter abbreviation) AND GET STATE DATA FOR THOSE
-  upx <- toupper(x)
   is.valid.ST <- grepl('^[[:space:][:alpha:]]*$', upx)
-  is.valid.ST[is.valid.ST] <- upx[is.valid.ST] %in% toupper(lookup.states$ST)
-  results[is.valid.ST, ] <- lookup.states[ match( upx[is.valid.ST], toupper(lookup.states$ST)), fields]
+  is.valid.ST[is.valid.ST] <- upx[is.valid.ST] %in% nocomma(nospace(toupper(lookup.states$ST)))
+  results[is.valid.ST, ] <- lookup.states[ match( upx[is.valid.ST], nocomma(nospace(toupper(lookup.states$ST)))), fields]
 
   if (all(is.na(results[ , 1]))) {
     cat('Warning- No matches found for what should be state identifiers.\n'); return(NA)
   }
 
   #rownames(results) <- query  # This would not work if there were duplicates in the query vector, so create a column to show the query term
-  results <- data.frame(QUERY=query, results, stringsAsFactors=FALSE)
+  results <- data.frame(QUERY = query, results, stringsAsFactors = FALSE)
 
   return(results)
 }

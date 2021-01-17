@@ -4,16 +4,21 @@
 \alias{RR.table.vs.us}
 \title{Relative Risks (RR) in zones as ratios to US values}
 \usage{
-RR.table.vs.us(rrs, d, e, zone)
+RR.table.vs.us(
+  x,
+  d = names.d[names.d \%in\% names(x)],
+  e = names.e[names.e \%in\% names(x)],
+  zone = names(x[1, 1, ])
+)
 }
 \arguments{
-\item{rrs}{A three dimensional array that is created by \code{\link{RR}} and has format like RRS[d, e, zone] but where zone must include the name USA}
-
 \item{d}{Vector of names of demographic groups that must be subset of first dimension of RRS}
 
 \item{e}{Vector of names of environmental risk indicators that must be subset of second dimension of RRS}
 
 \item{zone}{Vector of zone names that must be subset of names of third dimension of RRS}
+
+\item{rrs}{A three dimensional array that is created by \code{\link{RR}} and has format like RRS[d, e, zone] but where zone must include the name USA}
 }
 \value{
 numeric results same shape as RRS[d, e, zone]

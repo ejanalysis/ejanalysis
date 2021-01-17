@@ -36,6 +36,7 @@ RR.plot <-
            margins = c(1, 2, 3),
            decreasing = TRUE,
            ...) {
+    RRS <- rrs
     if (missing(dnames)) {
       try(data(names.dvars, names.e.nice, package = 'ejscreen'))
       if (!exists('names.e.nice')) {

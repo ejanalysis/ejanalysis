@@ -1,5 +1,7 @@
 RR.table.addmaxzone <- function(x) {
 
+  RRS <- x
+
   ##################### #
   # Add max.zone slices
   ##################### #

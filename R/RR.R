@@ -8,12 +8,13 @@
 #'   The result is a ratio of means for two demographic groups, or for each of several groups and indicators.
 #'   Each e (for environmental indicator) or d (for demographic percentage) is specified as a vector over small places like Census blocks or block groups
 #'   or even individuals (ideally) but then d would be a dummy=1 for selected group and 0 for people not in selected group
-#'   *** note: this currently does not use rrf() & rrfv() but perhaps it would be faster if it did? but rrfv not tested for multiple demog groups*** \cr
+#'
+#'   note: this currently does not use rrf() & rrfv() but perhaps it would be faster if it did? but rrfv not tested for multiple demog groups \cr
 #'
 #'
-#'   ** NEED TO VERIFY/TEST THIS: REMOVES PLACES WITH NA in any one or more of the values used (e, d, pop, dref) in numerators and denominators. \cr
+#'    NEED TO VERIFY/TEST THIS: REMOVES PLACES WITH NA in any one or more of the values used (e, d, pop, dref) in numerators and denominators. \cr
 #'
-#'   ** Note also that THIS REMOVES NA VALUES FOR one e factor and not for another,
+#'    Note also that THIS REMOVES NA VALUES FOR one e factor and not for another,
 #'   so results can use different places & people for different e factors
 #' @param e Vector or data.frame or matrix with 1 or more environmental indicator(s) or health risk level
 #'   (e.g., PM2.5 concentration to which this person or place is exposed),
