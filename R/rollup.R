@@ -266,7 +266,7 @@ rollup <- function(x, by, wts = NULL, FUN, prefix = 'wtd.mean.', na.rm = TRUE) {
         # While debugging, print names of fields as they are summarized:
         cat(analyze.stuff::lead.zeroes(i, 3), '- using 1st element per subset for non numeric field: ', names(x)[i], '\n')
 
-        rolled[ , i] <- as.vector(Hmisc::summarize(x[ , i], by = llist(by), FUN = function(y) y[1]) )[ , 2]
+        rolled[ , i] <- as.vector(Hmisc::summarize(x[ , i], by = list(by), FUN = function(y) y[1]) )[ , 2]
 
       } else {
         # ************** if don't want wtd.mean, and don't need wts, this is not ideal: want to be able to write function of a vector, not necessarily a data.frame!
@@ -277,10 +277,10 @@ rollup <- function(x, by, wts = NULL, FUN, prefix = 'wtd.mean.', na.rm = TRUE) {
         }
 
         if (missing(FUN)) {
-          rolled[ , i] <- (Hmisc::summarize(x[ , c(names(x)[i], 'wxtempname')], by = llist(by), FUN = myfun))[ , 2]
+          rolled[ , i] <- (Hmisc::summarize(x[ , c(names(x)[i], 'wxtempname')], by = list(by), FUN = myfun))[ , 2]
         } else {
           # THIS ASSUMES A USER DEFINED FUNCTION DOES NOT USE THE WEIGHTS PARAMETER
-          rolled[ , i] <- (Hmisc::summarize(x[ , names(x)[i] ],         by = llist(by), FUN = myfun))[ , 2]
+          rolled[ , i] <- (Hmisc::summarize(x[ , names(x)[i] ],         by = list(by), FUN = myfun))[ , 2]
         }
       }
       # x[ , i], match('wxtempname', names(x))  instead of names(x)[i], 'wxtempname')  ??
@@ -291,7 +291,7 @@ rollup <- function(x, by, wts = NULL, FUN, prefix = 'wtd.mean.', na.rm = TRUE) {
   } else {
     cat('you should not be here!\n')
     if (debugging) { cat('names(x)[i]: ','names(x)[i]','\n') }
-    rolled <- Hmisc::summarize(x[ , c(names(x)[i], 'wxtempname')], by = llist(by), FUN = myfun)
+    rolled <- Hmisc::summarize(x[ , c(names(x)[i], 'wxtempname')], by = list(by), FUN = myfun)
     #names(rolled) <- c(names(by), )
   }
 
@@ -312,7 +312,7 @@ rollup <- function(x, by, wts = NULL, FUN, prefix = 'wtd.mean.', na.rm = TRUE) {
   }
 
   # Actually, a sum of the weights is probably more useful than the weighted mean of the weights!
-  rolled[ , wtscolname] <- (Hmisc::summarize(x[ , 'wxtempname'], by = llist(by), FUN = function(y) sum(y, na.rm = TRUE)))[ , 2]
+  rolled[ , wtscolname] <- (Hmisc::summarize(x[ , 'wxtempname'], by = list(by), FUN = function(y) sum(y, na.rm = TRUE)))[ , 2]
 
   if (debugging) {
     # While debugging, print names of fields as they are summarized:
@@ -320,7 +320,7 @@ rollup <- function(x, by, wts = NULL, FUN, prefix = 'wtd.mean.', na.rm = TRUE) {
   }
 
   # include the "by" and wts fields as the first two columns returned
-  rolled$by <- as.vector(Hmisc::summarize(by, by = llist(by), FUN = function(y) y[1]) )
+  rolled$by <- as.vector(Hmisc::summarize(by, by = list(by), FUN = function(y) y[1]) )
 
   if (debugging) {
     # While debugging, print

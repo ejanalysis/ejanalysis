@@ -22,7 +22,7 @@ RR.plot(
 )
 }
 \arguments{
-\item{rrs}{Table as from \code{\link{RRS}} function, of relative risk by demographic group, risk type, and zone (3 dimensions).}
+\item{rrs}{Table as from \code{\link{RR.table}} function, of relative risk by demographic group, risk type, and zone (3 dimensions).}
 
 \item{dnames}{Demographic group names to be found as names of first dim of RRS. Optional, default is \code{\link[ejscreen]{names.d.subgroups}} and \code{\link[ejscreen]{names.d}} from the ejscreen dataset.}
 
