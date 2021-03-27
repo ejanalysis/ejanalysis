@@ -6,7 +6,7 @@
 #' @param FUN Default is weighted mean
 #' @param prefix Default is 'wtd.mean.'
 #' @param by No default. Vector that defines groups, for aggregating by group.
-#' @param na.rm Default is TRUE, passed to \code{\link[Hmisc]{wtd.mean}}
+#' @param na.rm Default is TRUE, NOT USED IF FUN IS DEFINED BY CALL TO THIS FUNCTION. passed to \code{\link[Hmisc]{wtd.mean}}
 #' @seealso \code{\link{wtd.colMeans}} \code{\link[ejscreen]{ejscreen.rollup}}
 #' @examples
 #'   # See ejscreen package function called ejscreen.rollup()
@@ -31,34 +31,38 @@
 #'               'VDI.eo', 'VDI.svi6',
 #'               names.d.subgroups.count, 'nonmins')
 #' # Get the rollups of summed cols
-#' us       <- rollup( bg[ , sumnames], FUN=sum, prefix = '', by=1)
-#' regions  <- rollup( bg[ , sumnames], FUN=sum, prefix = '', by=bg$REGION)
-#' states   <- rollup( bg[ , sumnames], FUN=sum, prefix = '', by=bg$FIPS.ST)
-#' counties <- rollup( bg[ , sumnames], FUN=sum, prefix = '', by=bg$FIPS.COUNTY)
-#' tracts   <- rollup( bg[ , sumnames], FUN=sum, prefix = '', by=bg$FIPS.TRACT)
+#' us       <- rollup( bg[ , sumnames], FUN=function(z) sum(z, na.rm = TRUE), prefix = '')
+#' regions  <- rollup( bg[ , sumnames], FUN=function(z) sum(z, na.rm = TRUE), prefix = '', by=bg$REGION)
+#' names(regions)[1] <- 'REGION'
+#' states   <- rollup( bg[ , sumnames], FUN=function(z) sum(z, na.rm = TRUE), prefix = '', by=bg$FIPS.ST)
+#' names(states)[1] <- 'FIPS.ST'
+#' counties <- rollup( bg[ , sumnames], FUN=function(z) sum(z, na.rm = TRUE), prefix = '', by=bg$FIPS.COUNTY)
+#' names(counties)[1] <- 'FIPS.COUNTY'
+#' tracts   <- rollup( bg[ , sumnames], FUN=function(z) sum(z, na.rm = TRUE), prefix = '', by=bg$FIPS.TRACT)
+#' names(tracts)[1] <- 'FIPS.TRACT'
 #'
 #' # Get the rollups of wtd.mean cols (at least E cols)
 #' avgnames <- names.e
-#' us.avg       <- rollup( bg[ , avgnames], prefix = '', wts=bg$pop, by=1)
+#' us.avg       <- rollup( bg[ , avgnames], prefix = '', wts=bg$pop)
 #' regions.avg  <- rollup( bg[ , avgnames], prefix = '', wts=bg$pop, by=bg$REGION)
-#'      names(regions.avg)  <- gsub('by', 'REGION',  names(regions.avg))
+#' names(regions.avg)  <- gsub('by', 'REGION',  names(regions.avg))
 #' states.avg   <- rollup( bg[ , avgnames], prefix = '', wts=bg$pop, by=bg$FIPS.ST)
-#'      names(states.avg)   <- gsub('by', 'FIPS.ST', names(states.avg))
+#' names(states.avg)   <- gsub('by', 'FIPS.ST', names(states.avg))
 #' counties.avg <- rollup( bg[ , avgnames], prefix = '', wts=bg$pop, by=bg$FIPS.COUNTY)
-#'      names(counties.avg) <- gsub('by', 'FIPS.COUNTY', names(counties.avg))
+#' names(counties.avg) <- gsub('by', 'FIPS.COUNTY', names(counties.avg))
 #' tracts.avg   <- rollup( bg[ , avgnames], prefix = '', wts=bg$pop, by=bg$FIPS.TRACT)
-#'      names(tracts.avg)   <- gsub('by', 'FIPS.TRACT',  names(tracts.avg))
+#' names(tracts.avg)   <- gsub('by', 'FIPS.TRACT',  names(tracts.avg))
 #'
 #' # Merge sum and mean types of cols
-#' ########### #
-#' # us <- cbind(us, us.avg, stringsAsFactors=FALSE) # check this
+#' us <- cbind(us, us.avg, stringsAsFactors=FALSE)
 #' regions  <- merge(regions, regions.avg, by='REGION')
 #' states   <- merge(states,   states.avg, by='FIPS.ST')
 #' counties <- merge(counties, counties.avg, by='FIPS.COUNTY')
 #' tracts   <- merge(tracts,   tracts.avg, by='FIPS.TRACT')
 #'
-#' # Now calculate the derived fields like pct demog fields, EJ indexes, pctiles, bins, etc.
-#' # See ejscreen package ejscreen.create()
+#'# Now calculate the derived fields like pct demog fields, EJ indexes, pctiles, bins, etc.
+#' See ejscreen::ejscreen.acs.calc()
+#'
 #' }
 #'
 #' \dontrun{
@@ -78,7 +82,7 @@
 #' }
 #'
 #' @export
-rollup <- function(x, by, wts = NULL, FUN, prefix = 'wtd.mean.', na.rm = TRUE) {
+rollup <- function(x, by=NULL, wts = NULL, FUN, prefix = 'wtd.mean.', na.rm = TRUE) {
 
   # ############################################################### #
   # COMPARISON OF data.table vs Hmisc summarize() for weighted means of subsets of fields
@@ -109,7 +113,7 @@ rollup <- function(x, by, wts = NULL, FUN, prefix = 'wtd.mean.', na.rm = TRUE) {
   #   ############################## #
   #   # for fast rollup:  apply a function to every column, or some of them
   #   # Also see slam::rollup
-  #
+  #   ### setDT(bg)
   #   regions.sum  <- bg[, lapply(.SD, sum), by=REGION, .SDcols = c("pop","mins","lowinc")]
   #   states.sum   <- bg[, lapply(.SD, sum), by=FIPS.ST, .SDcols = c("pop","mins","lowinc")]
   #   counties.sum <- bg[, lapply(.SD, sum), by=FIPS.COUNTY, .SDcols = c("pop","mins","lowinc")]
@@ -266,7 +270,7 @@ rollup <- function(x, by, wts = NULL, FUN, prefix = 'wtd.mean.', na.rm = TRUE) {
         # While debugging, print names of fields as they are summarized:
         cat(analyze.stuff::lead.zeroes(i, 3), '- using 1st element per subset for non numeric field: ', names(x)[i], '\n')
 
-        rolled[ , i] <- as.vector(Hmisc::summarize(x[ , i], by = list(by), FUN = function(y) y[1]) )[ , 2]
+        rolled[ , i] <- as.vector(Hmisc::summarize(x[ , i], by = by, FUN = function(y) y[1]) )[ , 2]
 
       } else {
         # ************** if don't want wtd.mean, and don't need wts, this is not ideal: want to be able to write function of a vector, not necessarily a data.frame!
@@ -277,10 +281,10 @@ rollup <- function(x, by, wts = NULL, FUN, prefix = 'wtd.mean.', na.rm = TRUE) {
         }
 
         if (missing(FUN)) {
-          rolled[ , i] <- (Hmisc::summarize(x[ , c(names(x)[i], 'wxtempname')], by = list(by), FUN = myfun))[ , 2]
+          rolled[ , i] <- (Hmisc::summarize(x[ , c(names(x)[i], 'wxtempname')], by = by, FUN = myfun))[ , 2]
         } else {
           # THIS ASSUMES A USER DEFINED FUNCTION DOES NOT USE THE WEIGHTS PARAMETER
-          rolled[ , i] <- (Hmisc::summarize(x[ , names(x)[i] ],         by = list(by), FUN = myfun))[ , 2]
+          rolled[ , i] <- (Hmisc::summarize(x[ , names(x)[i] ],  by = by, FUN = myfun))[ , 2]
         }
       }
       # x[ , i], match('wxtempname', names(x))  instead of names(x)[i], 'wxtempname')  ??
@@ -291,7 +295,7 @@ rollup <- function(x, by, wts = NULL, FUN, prefix = 'wtd.mean.', na.rm = TRUE) {
   } else {
     cat('you should not be here!\n')
     if (debugging) { cat('names(x)[i]: ','names(x)[i]','\n') }
-    rolled <- Hmisc::summarize(x[ , c(names(x)[i], 'wxtempname')], by = list(by), FUN = myfun)
+    rolled <- Hmisc::summarize(x[ , c(names(x)[i], 'wxtempname')], by = (by), FUN = myfun)[ , 2]
     #names(rolled) <- c(names(by), )
   }
 
@@ -312,7 +316,7 @@ rollup <- function(x, by, wts = NULL, FUN, prefix = 'wtd.mean.', na.rm = TRUE) {
   }
 
   # Actually, a sum of the weights is probably more useful than the weighted mean of the weights!
-  rolled[ , wtscolname] <- (Hmisc::summarize(x[ , 'wxtempname'], by = list(by), FUN = function(y) sum(y, na.rm = TRUE)))[ , 2]
+  rolled[ , wtscolname] <- (Hmisc::summarize(x[ , 'wxtempname'], by = by, FUN = function(y) sum(y, na.rm = TRUE)))[ , 2]
 
   if (debugging) {
     # While debugging, print names of fields as they are summarized:
@@ -320,7 +324,7 @@ rollup <- function(x, by, wts = NULL, FUN, prefix = 'wtd.mean.', na.rm = TRUE) {
   }
 
   # include the "by" and wts fields as the first two columns returned
-  rolled$by <- as.vector(Hmisc::summarize(by, by = list(by), FUN = function(y) y[1]) )
+  rolled$by  <-  Hmisc::summarize(X = by, by = by, FUN = function(y) y[1])
 
   if (debugging) {
     # While debugging, print
