@@ -32,17 +32,44 @@ RR.table.sort <- function(x, margins = c(1, 2, 3), decreasing = TRUE) {
   # sorts by col and by row to show highest RR values at top left
 
   if (1 %in% margins) {
-    # sort D indicators by max.E max.zone
-    x <- x[order(x[ , 'max.E', 'max.zone'], decreasing = TRUE), , ]
+    if ('max.zone' %in% dimnames(x)$zone) {
+      # sort D indicators by max.E max.zone
+      x <- x[order(x[ , 'max.E', 'max.zone'], decreasing = TRUE), , ]
+    } else {
+      if ('USA' %in% dimnames(x)$zone) {
+        # sort D indicators by max.E max.zone
+        x <- x[order(x[ , 'max.E', 'USA'], decreasing = TRUE), , ]
+      } else {
+        if (NROW(x[1,1,]) == 1) {
+          # not sure which zone to use when sorting D but assume want to use the one existing zone if only 1
+          x <- x[ , order(x[, 'max.E', 1], decreasing = TRUE), ]
+        }
+      }
+    }
   }
   if (2 %in% margins) {
-    # sort E indicators by max.D max.zone
-    x <- x[ , order(x['max.D', , 'max.zone'], decreasing = TRUE), ]
+    if ('max.zone' %in% dimnames(x)$zone) {
+      # sort E indicators by max.D max.zone
+      x <- x[ , order(x['max.D', , 'max.zone'], decreasing = TRUE), ]
+    } else {
+        if ('USA' %in% dimnames(x)$zone) {
+          x <- x[ , order(x['max.D', , 'USA'], decreasing = TRUE), ]
+        } else {
+          if (NROW(x[1,1,]) == 1) {
+            # not sure which zone to use when sorting E but assume want to use the one existing zone if only 1
+            x <- x[ , order(x['max.D', , 1], decreasing = TRUE), ]
+          }
+        }
+      }
   }
+
   if (3 %in% margins) {
+    # assumes max.E and max.D are names found here
     # sort zones by max.E max.D
+    if (!('max.D' %in% dimnames(x)[2]) & ('max.E' %in% dimnames(x)[3])) {warning('max.E and max.D as names both expected but not seen here')}
     x <- x[ , ,order(x['max.D', 'max.E', ], decreasing = TRUE)]
   }
+
   return(x)
 }
 
