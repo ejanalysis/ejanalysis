@@ -30,14 +30,23 @@
 RR.table.sort <- function(x, margins = c(1, 2, 3), decreasing = TRUE) {
   # Takes one table, a 3-D slice of results of RR(), and
   # sorts by col and by row to show highest RR values at top left
+  if ('max.zone' %in% dimnames(RRS.US)[3]) {
+    keyzone <- 'max.zone'
+  } else {
+    if ('USA' %in% dimnames(RRS.US)[3]) {
+      keyzone <- 'USA'
+    } else {
+      keyzone <- '' # not sure what to use in this case
+    }
+  }
 
   if (1 %in% margins) {
     # sort D indicators by max.E max.zone
-    x <- x[order(x[ , 'max.E', 'max.zone'], decreasing = TRUE), , ]
+    x <- x[order(x[ , 'max.E', keyzone], decreasing = TRUE), , ]
   }
   if (2 %in% margins) {
     # sort E indicators by max.D max.zone
-    x <- x[ , order(x['max.D', , 'max.zone'], decreasing = TRUE), ]
+    x <- x[ , order(x['max.D', , keyzone], decreasing = TRUE), ]
   }
   if (3 %in% margins) {
     # sort zones by max.E max.D

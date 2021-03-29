@@ -19,7 +19,7 @@ pop.cdf.density(e, dcount, refcount, etxt, dtxt, brks = 10, ...)
 
 \item{brks}{Default is 10. Passed as breaks param to plot function}
 
-\item{...}{other parameters passed to \code{density}}
+\item{...}{other parameters passed to \code{plot} # used to pass to density() but this is more useful}
 }
 \value{
 Creates a plot
