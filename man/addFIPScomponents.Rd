@@ -2,10 +2,7 @@
 % Please edit documentation in R/addFIPScomponents.R
 \name{addFIPScomponents}
 \alias{addFIPScomponents}
-\title{Add col for each component of longer FIPS
- 
- Given a data.frame with FIPS col that is the full state county tract blockgroup FIPS 
- returns the data.frame with extra columns up front, with components of FIPS.}
+\title{Add col for each component of longer FIPS}
 \usage{
 addFIPScomponents(bg)
 }
@@ -13,12 +10,10 @@ addFIPScomponents(bg)
 \item{bg}{Data.frame with a character column called FIPS}
 }
 \value{
-Returns the whole data.frame with new columns in front: 
+Returns the whole data.frame with new columns in front:
   'FIPS', 'FIPS.TRACT', 'FIPS.COUNTY', 'FIPS.ST', 'ST', 'statename', 'REGION'
 }
 \description{
-Add col for each component of longer FIPS
- 
- Given a data.frame with FIPS col that is the full state county tract blockgroup FIPS 
+Given a data.frame with FIPS col that is the full state county tract blockgroup FIPS
  returns the data.frame with extra columns up front, with components of FIPS.
 }

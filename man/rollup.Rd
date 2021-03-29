@@ -4,7 +4,7 @@
 \alias{rollup}
 \title{Aggregate multiple columns of values by group}
 \usage{
-rollup(x, by, wts = NULL, FUN, prefix = "wtd.mean.", na.rm = TRUE)
+rollup(x, by = NULL, wts = NULL, FUN, prefix = "wtd.mean.", na.rm = TRUE)
 }
 \arguments{
 \item{x}{Dataset}
@@ -17,7 +17,7 @@ rollup(x, by, wts = NULL, FUN, prefix = "wtd.mean.", na.rm = TRUE)
 
 \item{prefix}{Default is 'wtd.mean.'}
 
-\item{na.rm}{Default is TRUE, passed to \code{\link[Hmisc]{wtd.mean}}}
+\item{na.rm}{Default is TRUE, NOT USED IF FUN IS DEFINED BY CALL TO THIS FUNCTION. passed to \code{\link[Hmisc]{wtd.mean}}}
 }
 \value{
 by Vector defining groups
@@ -48,34 +48,38 @@ sumnames <- c('area', 'pop', 'povknownratio', 'age25up', 'hhlds', 'builtunits',
               'VDI.eo', 'VDI.svi6',
               names.d.subgroups.count, 'nonmins')
 # Get the rollups of summed cols
-us       <- rollup( bg[ , sumnames], FUN=sum, prefix = '', by=1)
-regions  <- rollup( bg[ , sumnames], FUN=sum, prefix = '', by=bg$REGION)
-states   <- rollup( bg[ , sumnames], FUN=sum, prefix = '', by=bg$FIPS.ST)
-counties <- rollup( bg[ , sumnames], FUN=sum, prefix = '', by=bg$FIPS.COUNTY)
-tracts   <- rollup( bg[ , sumnames], FUN=sum, prefix = '', by=bg$FIPS.TRACT)
+us       <- rollup( bg[ , sumnames], FUN=function(z) sum(z, na.rm = TRUE), prefix = '')
+regions  <- rollup( bg[ , sumnames], FUN=function(z) sum(z, na.rm = TRUE), prefix = '', by=bg$REGION)
+names(regions)[1] <- 'REGION'
+states   <- rollup( bg[ , sumnames], FUN=function(z) sum(z, na.rm = TRUE), prefix = '', by=bg$FIPS.ST)
+names(states)[1] <- 'FIPS.ST'
+counties <- rollup( bg[ , sumnames], FUN=function(z) sum(z, na.rm = TRUE), prefix = '', by=bg$FIPS.COUNTY)
+names(counties)[1] <- 'FIPS.COUNTY'
+tracts   <- rollup( bg[ , sumnames], FUN=function(z) sum(z, na.rm = TRUE), prefix = '', by=bg$FIPS.TRACT)
+names(tracts)[1] <- 'FIPS.TRACT'
 
 # Get the rollups of wtd.mean cols (at least E cols)
 avgnames <- names.e
-us.avg       <- rollup( bg[ , avgnames], prefix = '', wts=bg$pop, by=1)
+us.avg       <- rollup( bg[ , avgnames], prefix = '', wts=bg$pop)
 regions.avg  <- rollup( bg[ , avgnames], prefix = '', wts=bg$pop, by=bg$REGION)
-     names(regions.avg)  <- gsub('by', 'REGION',  names(regions.avg))
+names(regions.avg)  <- gsub('by', 'REGION',  names(regions.avg))
 states.avg   <- rollup( bg[ , avgnames], prefix = '', wts=bg$pop, by=bg$FIPS.ST)
-     names(states.avg)   <- gsub('by', 'FIPS.ST', names(states.avg))
+names(states.avg)   <- gsub('by', 'FIPS.ST', names(states.avg))
 counties.avg <- rollup( bg[ , avgnames], prefix = '', wts=bg$pop, by=bg$FIPS.COUNTY)
-     names(counties.avg) <- gsub('by', 'FIPS.COUNTY', names(counties.avg))
+names(counties.avg) <- gsub('by', 'FIPS.COUNTY', names(counties.avg))
 tracts.avg   <- rollup( bg[ , avgnames], prefix = '', wts=bg$pop, by=bg$FIPS.TRACT)
-     names(tracts.avg)   <- gsub('by', 'FIPS.TRACT',  names(tracts.avg))
+names(tracts.avg)   <- gsub('by', 'FIPS.TRACT',  names(tracts.avg))
 
 # Merge sum and mean types of cols
-########### #
-# us <- cbind(us, us.avg, stringsAsFactors=FALSE) # check this
+us <- cbind(us, us.avg, stringsAsFactors=FALSE)
 regions  <- merge(regions, regions.avg, by='REGION')
 states   <- merge(states,   states.avg, by='FIPS.ST')
 counties <- merge(counties, counties.avg, by='FIPS.COUNTY')
 tracts   <- merge(tracts,   tracts.avg, by='FIPS.TRACT')
 
 # Now calculate the derived fields like pct demog fields, EJ indexes, pctiles, bins, etc.
-# See ejscreen package ejscreen.create()
+See ejscreen::ejscreen.acs.calc()
+
 }
 
 \dontrun{
