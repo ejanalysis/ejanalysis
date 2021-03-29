@@ -7,7 +7,7 @@
 #' @param etxt Character string to name e in graph
 #' @param dtxt Character string to name d in graph
 #' @param brks Default is 10. Passed as breaks param to plot function
-#' @param ... other parameters passed to \code{density}
+#' @param ... other parameters passed to \code{plot} # used to pass to density() but this is more useful
 #' @return Creates a plot
 #' @seealso \code{\link{pop.cdf}}   \code{\link{pop.cdf2}} \code{\link{pop.ecdf}}  \code{\link{pop.cdf.density}}
 #' @examples
@@ -17,7 +17,11 @@
 #' }
 #' @export
 pop.cdf.density <- function(e, dcount, refcount, etxt, dtxt, brks=10, ...) {
-  plot(density(e, weights=refcount/sum(refcount,na.rm=TRUE), ...), col='gray', ylab='Density (percentage of group population)',
+  # remove places where e is NA
+  ok <- !is.na(e)
+  e=e[ok]; dcount=dcount[ok]; refcount=refcount[ok]
+
+  plot(density(e, weights=refcount/sum(refcount,na.rm=TRUE)), ..., col='gray', ylab='Density (percentage of group population)',
        xlab=etxt, breaks=brks,
        main=paste(etxt, " distribution within each group
                   (blue=", dtxt, ", gray=reference group)", sep=''))
