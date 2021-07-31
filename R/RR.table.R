@@ -22,14 +22,14 @@
 #'  popcolname = 'pop', Zcolname = 'ST')
 #' RRS <- RR.table.add(RRS.ST, RRS.US)
 #' RRS['pctlowinc', , ]
-#' RRS[ , , 'CA']
+#' RRS[ , , 'CA']  # RRS[,,'PR']
 #' RRS[ , 'pm', ]
 #' RRS.REGION  <- RR.table(mydat = bgtest, Enames = names.e, Dnames = c(names.d, names.d.subgroups.pct),
 #'  popcolname='pop', Zcolname='REGION')
 #' RRS2 <- RR.table.add(RRS, RRS.REGION)
 #' RRS2[ , , '8']
 #' @export
-RR.table <- function(mydat, Enames=names.e[names.e %in% names(mydat)], Dnames=names.d[names.d %in% names(mydat)], popcolname='pop', Zcolname, testing=FALSE, digits=4) {
+RR.table <- function(mydat, Enames=ejscreen::names.e[ejscreen::names.e %in% names(mydat)], Dnames=ejscreen::names.d[ejscreen::names.d %in% names(mydat)], popcolname='pop', Zcolname, testing=FALSE, digits=4) {
 
   # Compile RR values in array of 3 dimensions: RRS[Dnames, Enames, Zcolnames]
   # one Demog group per row,
@@ -127,8 +127,9 @@ RR.table <- function(mydat, Enames=names.e[names.e %in% names(mydat)], Dnames=na
 
   for (myzone.i in 1:length(Znames)) {
 
-    # RIGHT NOW THIS WILL NOT HANDLE A CASE WHERE A GIVEN DEMOG GROUP HAS NA FOR
-    # THE ENTIRE COUNTY OR STATE? IS THAT EVEN POSSIBLE?
+    # RIGHT NOW THIS WILL NOT HANDLE A CASE LIKE PR, PUERTO RICO,
+    # WHERE A GIVEN DEMOG GROUP LIKE pcthisp HAS NA FOR
+    # THE ENTIRE COUNTY OR STATE?
 
     if (!missing(Zcolname)) {
       inzone <- (mydat[ , Zcolname] == Znames[myzone.i])
@@ -136,12 +137,13 @@ RR.table <- function(mydat, Enames=names.e[names.e %in% names(mydat)], Dnames=na
       inzone <- rep(TRUE, length(mydat[ , popcolname]))
     }
 
-    # Note: This uses na.rm in one max but not other, to handle states where some E is missing always,
+    # Note: ***** This used  na.rm in one max but not other,
+    # to handle states where some E is missing always,
     # but still show max RR of the E's with valid data
 
     x <- RR(mydat[inzone , Enames], mydat[inzone, Dnames], mydat[inzone, popcolname])
     z <- round(rbind(myzone.max = analyze.stuff::colMaxs(x, na.rm = FALSE), x), digits)
-    # requires analyze.stuff pkg
+
     x <- cbind(myzone.max = analyze.stuff::rowMaxs(z, na.rm = TRUE), z)
     # rownames(x)[1] <- paste(Znames[myzone.i], '.maxD', sep = '')
     # colnames(x)[length(colnames(x))] <- paste(Znames[myzone.i], '.maxE', sep = '')
@@ -150,7 +152,7 @@ RR.table <- function(mydat, Enames=names.e[names.e %in% names(mydat)], Dnames=na
 
   dimnames(RRS) <- list(d = c('max.D', Dnames), e = c('max.E', Enames), zone = Znames)
 
-  # RRS <- RR.table.addmaxzone(RRS)
+  RRS <- RR.table.addmaxzone(RRS)
 
   return(RRS)
 }

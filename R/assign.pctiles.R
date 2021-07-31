@@ -56,7 +56,7 @@ assign.pctiles <- function(values, weights=NULL, zone=NULL, na.rm=TRUE) {
 
   if (is.null(zone)) {
 
-    wtd.Ecdf.results <- Hmisc::wtd.Ecdf(values, weights=weights, type='i/n', na.rm=TRUE)
+    wtd.Ecdf.results <- Hmisc::wtd.Ecdf(values, weights=weights, normwt = FALSE, type='i/n', na.rm=TRUE)
 
     # If the first CDF estimate is greater than zero, a point (min(x),0) is placed at the beginning of the estimates.
     if (length(wtd.Ecdf.results$x) == 1+ length(unique(values)) ) { wtd.Ecdf.results$x <- wtd.Ecdf.results$x[-1]; wtd.Ecdf.results$ecdf <- wtd.Ecdf.results$ecdf[-1] }
@@ -83,7 +83,7 @@ assign.pctiles <- function(values, weights=NULL, zone=NULL, na.rm=TRUE) {
         exact.wtd.pctile[zone==z] <- NA
 
       } else {
-        wtd.Ecdf.results <- Hmisc::wtd.Ecdf(myvals, weights=mywts, type='i/n', na.rm=TRUE)
+        wtd.Ecdf.results <- Hmisc::wtd.Ecdf(myvals, weights=mywts, normwt = FALSE, type='i/n', na.rm=TRUE)
         # If the first CDF estimate is greater than zero, a point (min(x),0) is placed at the beginning of the estimates.
 
         if (length(wtd.Ecdf.results$x) == 1+ length(unique(myvals)) ) { wtd.Ecdf.results$x <- wtd.Ecdf.results$x[-1]; wtd.Ecdf.results$ecdf <- wtd.Ecdf.results$ecdf[-1] }

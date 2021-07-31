@@ -28,7 +28,9 @@ For information on FIPS codes, see \url{http://www.census.gov/geo/reference/ansi
  If FIPS provided is 13 digits long, it is a mistake and return NA.\cr
  If FIPS provided is 14 OR 15 digits long, assume it is a block.
 }
-\examples{
- #(No example yet)
-  @template seealsoFIPS
+\seealso{
+\code{\link{clean.fips1215}}, \code{\link{get.fips.bg}}, \code{\link{get.fips.tract}}, \code{\link{get.fips.county}}, \code{\link{get.fips.st}} to get partial FIPS from longer FIPS, or
+  \code{\link{get.name.county}}, \code{\link{get.name.state}} to extract name from longer Census name, or
+  \code{\link{get.state.info}}, \code{\link{get.county.info}}, \code{\link{get.epa.region}}
+  to look up info such as FIPS, state abbreviation, statename, countyname, or region based on FIPS or name.
 }

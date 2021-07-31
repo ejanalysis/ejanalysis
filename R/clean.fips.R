@@ -14,8 +14,7 @@
 #'  If FIPS provided is 14 OR 15 digits long, assume it is a block.
 #' @param fips Vector of numeric or character class, required. Can be state FIPs as number or character, for example.
 #' @return Returns vector of FIPS (all characters from 2-digit State code onwards as appropriate) as character with leading zeroes
-#' @examples  #(No example yet)
-#'   @template seealsoFIPS
+#' @template seealsoFIPS
 #' @export
 clean.fips <- function(fips) {
 

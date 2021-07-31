@@ -6,8 +6,8 @@
 \usage{
 RR.table(
   mydat,
-  Enames = names.e[names.e \%in\% names(mydat)],
-  Dnames = names.d[names.d \%in\% names(mydat)],
+  Enames = ejscreen::names.e[ejscreen::names.e \%in\% names(mydat)],
+  Dnames = ejscreen::names.d[ejscreen::names.d \%in\% names(mydat)],
   popcolname = "pop",
   Zcolname,
   testing = FALSE,
@@ -48,7 +48,7 @@ RRS.ST  <- RR.table(mydat = bgtest, Enames = names.e, Dnames = c(names.d, names.
  popcolname = 'pop', Zcolname = 'ST')
 RRS <- RR.table.add(RRS.ST, RRS.US)
 RRS['pctlowinc', , ]
-RRS[ , , 'CA']
+RRS[ , , 'CA']  # RRS[,,'PR']
 RRS[ , 'pm', ]
 RRS.REGION  <- RR.table(mydat = bgtest, Enames = names.e, Dnames = c(names.d, names.d.subgroups.pct),
  popcolname='pop', Zcolname='REGION')
