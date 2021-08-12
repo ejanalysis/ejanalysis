@@ -1,4 +1,11 @@
-RR.table.addmaxzone <- function(x) {
+#' Add to an existing RR.table the max relative risk value from any zone in the table
+#'
+#' @param x A table of relative risk values from RR.table()
+#' @param testing If TRUE, print extra info to terminal
+#'
+#' @export
+#'
+RR.table.addmaxzone <- function(x, testing=FALSE) {
 
   RRS <- x
 
