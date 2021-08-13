@@ -152,7 +152,7 @@ RR.table <- function(mydat, Enames=ejscreen::names.e[ejscreen::names.e %in% name
 
   dimnames(RRS) <- list(d = c('max.D', Dnames), e = c('max.E', Enames), zone = Znames)
 
-  RRS <- RR.table.addmaxzone(RRS)
+  RRS <- RR.table.addmaxzone(RRS, testing = testing)
 
   return(RRS)
 }

@@ -1,4 +1,5 @@
 #' Add to an existing RR.table the max relative risk value from any zone in the table
+#'  This function adds RR values from the max zone but RR.table already does this.
 #'
 #' @param x A table of relative risk values from RR.table()
 #' @param testing If TRUE, print extra info to terminal
@@ -13,11 +14,13 @@ RR.table.addmaxzone <- function(x, testing=FALSE) {
   # Add max.zone slices
   ##################### #
 
+  Znames <- unlist(dimnames(RRS)[3])
+
   RRTEMP <- array(0, dim(RRS) + c(0, 0, 1))
   dimnames(RRTEMP) <- list(
     unlist(dimnames(RRS)[1]),
     unlist(dimnames(RRS)[2]),
-    c('max.zone', unlist(dimnames(RRS)[3]))
+    c('max.zone', Znames)
   )
   if (testing) {
     print('structure of RRTEMP currently is this: '); print(str(RRTEMP))

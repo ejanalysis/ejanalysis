@@ -5,7 +5,7 @@
 #' @param filename prefix to use for filename to be saved locally
 #' @param zone.vector names of states or regions, for example. same length as wts, or rows in mydf
 #' @examples
-#'   \donotrun{
+#'   \dontrun{
 #'   write.wtd.pctiles(bg20[ , names.e], wts = bg20$pop, filename = 'envt-data', zone.vector = bg20$REGION)
 #'   }
 #'

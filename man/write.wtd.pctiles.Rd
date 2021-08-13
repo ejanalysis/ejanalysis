@@ -17,7 +17,7 @@ write.wtd.pctiles(mydf, wts, filename)
 create lookup table as file of pop-weighted percentiles, mean, std.dev
 }
 \examples{
-  \donotrun{
+  \dontrun{
   write.wtd.pctiles(bg20[ , names.e], wts = bg20$pop, filename = 'envt-data')
   }
 

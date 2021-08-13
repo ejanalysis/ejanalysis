@@ -19,7 +19,7 @@ write.wtd.pctiles.by.zone(mydf, wts, filename, zone.vector)
 create lookup table as file of pop-weighted percentiles, mean, sd by state or region
 }
 \examples{
-  \donotrun{
+  \dontrun{
   write.wtd.pctiles(bg20[ , names.e], wts = bg20$pop, filename = 'envt-data', zone.vector = bg20$REGION)
   }
 
