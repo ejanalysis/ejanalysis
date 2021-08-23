@@ -4,7 +4,7 @@
 #' @param wts vector of numbers such as population counts as weights, as long as nrow(mydf)
 #' @param filename prefix to use for filename to be saved locally
 #' @param missingcode optional value to be treated as NA
-#' @folder optional path to directory for file to be saved
+#' @param folder optional path to directory for file to be saved
 #' @examples
 #'   \dontrun{
 #'   write.wtd.pctiles(bg20[ , names.e], wts = bg20$pop, filename = 'envt-data')

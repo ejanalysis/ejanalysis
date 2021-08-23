@@ -11,6 +11,8 @@ write.wtd.pctiles(mydf, wts, folder = getwd(), filename, missingcode = NA)
 
 \item{wts}{vector of numbers such as population counts as weights, as long as nrow(mydf)}
 
+\item{folder}{optional path to directory for file to be saved}
+
 \item{filename}{prefix to use for filename to be saved locally}
 
 \item{missingcode}{optional value to be treated as NA}

@@ -1,6 +1,13 @@
+#' create lookup table as file of percentiles, mean, sd by state or region
+#'
+#' @param mydf data.frame with numeric data. Each column will be examined to calculate mean, sd, and percentiles, for each zone.
+#' @param filename prefix to use for filename to be saved locally
+#' @param zone.vector names of states or regions, for example. same length as wts, or rows in mydf
+#' @seealso \link{write.wtd.pctiles.by.zone}
+#' @export
 write.pctiles.by.zone <- function(mydf, filename, zone.vector) {
 
-  # FUNCTIONS TO SHOW percentile STATS STRATIFIED BY REGION (OR STATE), 
+  # FUNCTIONS TO SHOW percentile STATS STRATIFIED BY REGION (OR STATE),
   #	SAVING A FILE OF STATS FOR EACH REGION OR STATE
   #  LIKE A SET OF LOOKUP TABLES
 
