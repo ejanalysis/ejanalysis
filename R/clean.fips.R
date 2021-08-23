@@ -70,7 +70,7 @@ clean.fips <- function(fips) {
   FIPS[stateportioninvalid] <- NA
   if (any(stateportioninvalid)) {warning('Some fips had invalid 2-digit state code (or NA) after any missing zeroes added')}
 
-  # set to NA if 5+digits and the county fips portion is invalid
+  # set to NA if 5+digits and the county fips portion is invalid (but get.county.info has to get updated when new counties get new fips)
   countyfipsall <- get.county.info()$FIPS.COUNTY
   countyportioninvalid <- (nchar(FIPS) >= 5) & !(substr(FIPS, 1, 5) %in% countyfipsall)
   FIPS[countyportioninvalid]  <- NA
