@@ -16,7 +16,7 @@
 #' @return Returns a matrix or data.frame
 #' @template seePctiles
 #' @export
-make.bin.pctile.cols <- function(raw.data.frame, weights=1, zone=NULL, as.df=TRUE, prefix.bin='bin.', prefix.pctile='pctile.', cutpoints=c( (0:9)/10, 0.95, 1), labels=1:11) {
+make.bin.pctile.cols <- function(raw.data.frame, weights=NULL, zone=NULL, as.df=TRUE, prefix.bin='bin.', prefix.pctile='pctile.', cutpoints=c( (0:9)/10, 0.95, 1), labels=1:11) {
   #this.as.df <- as.df; this.weights <- weights # this is one way to pass those parameters to the next functions if they say as.df=this.as.df, etc.
   pctile.df <- make.pctile.cols(raw.data.frame, weights=weights, zone=zone, as.df=as.df, prefix=prefix.pctile)
   bin.df    <- make.bin.cols(pctile.df, as.df=as.df, prefix=prefix.bin, cutpoints=cutpoints, labels=labels)
