@@ -6,7 +6,7 @@
 \usage{
 make.bin.pctile.cols(
   raw.data.frame,
-  weights = 1,
+  weights = NULL,
   zone = NULL,
   as.df = TRUE,
   prefix.bin = "bin.",
