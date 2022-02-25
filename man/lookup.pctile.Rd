@@ -37,6 +37,19 @@ it still returns 0 as the percentile, but with a warning that the value checked 
     lookup = data.frame(PCTILE = 0:100,
     myvar = 10*(0:100),
     REGION = 'USA', stringsAsFactors = FALSE), varname.in.lookup.table = 'myvar')
+ \dontrun{
+   What is environmental score at given percentile?
+ ejanalysis::lookup.pctile(40,'cancer',lookupUSA)
+ # [1] 84
+ ejanalysis::lookup.pctile(40,'cancer',lookupStates,'WV')
+ # [1] 93
+ #    What is percentile of given environmental score?
+ ejscreen::lookupUSA[lookupUSA$PCTILE=='84' ,'cancer']
+ # [1] 39.83055
+ ejscreen::lookupStates[lookupStates$PCTILE=='84' & lookupStates$REGION =='WV','cancer']
+ # [1] 33.36371
+ # also see ejanalysis::assign.pctiles
+ }
   \dontrun{
     library(ejscreen)
     bg <- bg19[sample(1:NROW(bg19), 100), ]
