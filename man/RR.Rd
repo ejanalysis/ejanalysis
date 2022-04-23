@@ -51,7 +51,7 @@ This function requires, for each Census unit, demographic data on total populati
   so results can use different places & people for different e factors
 }
 \examples{
-mydat <- structure(list(state = structure(c(1L, 2L, 3L, 4L, 5L, 6L, 7L,
+bg <- structure(list(state = structure(c(1L, 2L, 3L, 4L, 5L, 6L, 7L,
 8L, 10L, 11L, 12L, 13L, 14L, 15L, 16L, 17L, 18L, 19L, 20L, 21L,
 22L, 23L, 24L, 25L, 26L, 27L, 28L, 29L, 30L, 31L, 32L, 33L, 34L,
 35L, 36L, 37L, 38L, 39L, 41L, 42L, 43L, 44L, 45L, 46L, 47L, 48L,
@@ -101,15 +101,15 @@ mydat <- structure(list(state = structure(c(1L, 2L, 3L, 4L, 5L, 6L, 7L,
 "pcthisp", "pop", "murder", "area", "temp"), class = "data.frame", row.names = c(NA,
 -50L))
 
-RR(mydat$area, mydat$pcthisp, mydat$pop)
 # Avg Hispanic lives in a State that is 69 percent larger than
 #   that of avg. non-Hispanic
 
-RR(mydat$pcthisp, mydat$pcthisp, mydat$pop)
-# Avg Hispanic lives in a State that has a much higher percent Hispanic than
- # do non-Hispanics
+RR(bg$pcthisp, bg$pcthisp, bg$pop)
+# Avg Hispanic persons local percent Hispanic (their blockgroup) is 4x as everyone elses on avg,
+  but avg low income persons local percent low income is only 1.8x as high as everyone elses.
+# cbind(RR=RR(e=data.frame(local_pct_hispanic=bg$pcthisp, local_pct_lowincome=bg$pctlowinc),
+# d= cbind(Ratio_of_avg_among_hispanics_to_avg_among_nonhispanics=bg$pcthisp, avg_among_lowinc_vs_rest_of_pop=bg$pctlowinc), bg$pop))
 
-#cbind(RR=RR(data.frame(d1=bg$pcthisp, d2=1-bg$pcthisp), bg$pcthisp, bg$pop))
 #RR(bg[ , names.e], bg$pctlowinc, bg$pop)
 #sapply(bg[ , names.d], function(z) RR(bg[ , names.e], z, bg$pop) )
 }

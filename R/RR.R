@@ -33,7 +33,7 @@
 #' @return numeric results as vector or data.frame
 #' @template seealsoRR
 #' @examples
-#' mydat <- structure(list(state = structure(c(1L, 2L, 3L, 4L, 5L, 6L, 7L,
+#' bg <- structure(list(state = structure(c(1L, 2L, 3L, 4L, 5L, 6L, 7L,
 #' 8L, 10L, 11L, 12L, 13L, 14L, 15L, 16L, 17L, 18L, 19L, 20L, 21L,
 #' 22L, 23L, 24L, 25L, 26L, 27L, 28L, 29L, 30L, 31L, 32L, 33L, 34L,
 #' 35L, 36L, 37L, 38L, 39L, 41L, 42L, 43L, 44L, 45L, 46L, 47L, 48L,
@@ -83,48 +83,67 @@
 #' "pcthisp", "pop", "murder", "area", "temp"), class = "data.frame", row.names = c(NA,
 #' -50L))
 #'
-#' RR(mydat$area, mydat$pcthisp, mydat$pop)
+# RR(bg$area, bg$pcthisp, bg$pop)
 #' # Avg Hispanic lives in a State that is 69 percent larger than
 #' #   that of avg. non-Hispanic
 #'
-#' RR(mydat$pcthisp, mydat$pcthisp, mydat$pop)
-#' # Avg Hispanic lives in a State that has a much higher percent Hispanic than
-#'  # do non-Hispanics
+#' RR(bg$pcthisp, bg$pcthisp, bg$pop)
+#' # Avg Hispanic persons local percent Hispanic (their blockgroup) is 4x as everyone elses on avg,
+#'   but avg low income persons local percent low income is only 1.8x as high as everyone elses.
+#' # cbind(RR=RR(e=data.frame(local_pct_hispanic=bg$pcthisp, local_pct_lowincome=bg$pctlowinc),
+#' # d= cbind(Ratio_of_avg_among_hispanics_to_avg_among_nonhispanics=bg$pcthisp, avg_among_lowinc_vs_rest_of_pop=bg$pctlowinc), bg$pop))
 #'
-#' #cbind(RR=RR(data.frame(d1=bg$pcthisp, d2=1-bg$pcthisp), bg$pcthisp, bg$pop))
 #' #RR(bg[ , names.e], bg$pctlowinc, bg$pop)
 #' #sapply(bg[ , names.d], function(z) RR(bg[ , names.e], z, bg$pop) )
 #' @export
 RR <- function(e, d, pop, dref, na.rm=TRUE) {
 
-  RR.for.one.e <- function(e, d, pop, dref) {
+    RR.for.one.e <- function(e, d, pop, dref, na.rm=TRUE) {
 
     # for one envt factor,
     # for 1+ demog groups
 
+    if (missing(e) || missing(d) || missing(pop)) { stop('Missing e, d, &/or pop argument')}
+    if (any(d > 1, na.rm=TRUE)) {stop('d must be fractions < 1, not 0-100')}
+    if (missing(dref)) {dref <- 1 - d} # if reference groups percents not specified, it is assumed to be everyone other than d
+
     if (is.vector(d)) {
       # for one e, one d:
       #  **** put in +e-e  +d-d and  +dref-dref because I THINK WHERE e IS NA and pop and d are valid, this otherwise would remove those from numerator of group's risk but not from denominator!!!
-      (sum(pop * e *  d +dref-dref,     na.rm=na.rm) / sum(pop *  d     +e-e +dref-dref, na.rm=na.rm)) /
-      (sum(pop * e * (dref) +d-d, na.rm=na.rm) / sum(pop * (dref) +e-e +d-d, na.rm=na.rm))
+      (  sum(pop * e *  d +dref-dref, na.rm=na.rm) / sum(pop *  d     +e-e +dref-dref, na.rm=na.rm)) /
+        (sum(pop * e * (dref) +d-d,   na.rm=na.rm) / sum(pop * (dref) +e-e +d-d,       na.rm=na.rm))
+      # weighted.mean function in base should give same result but have not confirmed true for strange cases like NA values etc.
+      # weighted.mean(e, pop * d +dref-dref, na.rm=na.rm) / weighted.mean(e, pop * d   +e-e +dref-dref, na.rm=na.rm)
       #(sum(pop * e *  d,     na.rm=na.rm) / sum(pop *  d,     na.rm=na.rm)) /
       #(sum(pop * e * (dref), na.rm=na.rm) / sum(pop * (dref), na.rm=na.rm))
     } else {
-      # for one e, multiple d: vectorized version
+      # for one e, multiple d: vectorized version  ( but also see analyze.stuff::wtd.colMeans()  )
       #  **** put in +e-e  +d-d and  +dref-dref because I THINK WHERE e IS NA and pop and d are valid, this otherwise would remove those from numerator of group's risk but not from denominator!!!
-      (colSums(pop * e *  d +dref-dref,     na.rm=na.rm) / colSums(pop *  d     +e-e +dref-dref, na.rm=na.rm)) /
-      (colSums(pop * e * (dref) +d-d, na.rm=na.rm) / colSums(pop * (dref) +e-e +d-d, na.rm=na.rm))
+      (  colSums(pop * e *  d +dref-dref, na.rm=na.rm) / colSums(pop *  d     +e-e +dref-dref, na.rm=na.rm)) /
+        (colSums(pop * e * (dref) +d-d,   na.rm=na.rm) / colSums(pop * (dref) +e-e +d-d,       na.rm=na.rm))
     }
   }
 
   if (missing(e) || missing(d) || missing(pop)) { stop('Missing e, d, &/or pop argument')}
   if (any(d > 1, na.rm=TRUE)) {stop('d must be fractions < 1, not 0-100')}
-  if (missing(dref)) {dref <- 1 - d} # if reference groups percents not specified, it is assumed to be everyone other than d
+  if (missing(dref)) {dref <- 1 - d} # if reference groups percents not specified, it is assumed to be everyone other than d...
+  # If dref is everyone including the d group, that dilutes the RR (as when people compare demographics here to the US average overall.)
+  # That makes a big difference if "here" is a large fraction of "overall."
+
+  #browser() # **********************************************
 
   # handle single envt factor
   if ( is.vector(e) && length(e) > 1 ) {
-    x <- RR.for.one.e(e, d, pop, dref)
-    names(dimnames(x)) <- c('d', 'e')
+    # 1 E
+    x <- RR.for.one.e(e=e, d=d, pop=pop, dref=dref)
+    if (NCOL(d) > 1) {
+      # 1 E but multiple D
+      x=array(x, dim = NCOL(d), dimnames = list(d=names(x)))
+    } else {
+      # # 1 E and 1 D
+       # no dimnames
+    }
+
     return(x)
     # could warn if length(d)!=length(e) & neither is an integer multiple of the other
     # same for length(pop)
@@ -133,7 +152,14 @@ RR <- function(e, d, pop, dref, na.rm=TRUE) {
   # handle multiple envt factors
   if ((is.data.frame(e) || is.matrix(e)) && length(e[ , 1]) > 1) {
     myresults <- sapply(e, function(x) RR.for.one.e(x, d, pop, dref))
-    names(dimnames(myresults)) <- c('d', 'e')
+if (NCOL(d) > 1) {
+  # multiple E multiple D
+  names(dimnames(myresults)) <- c('d', 'e') #
+
+} else {
+  # multiple E but 1 D
+  myresults=array(myresults, dim = NCOL(e), dimnames = list(e=names(myresults)))
+}
     return(myresults)
   }
 
