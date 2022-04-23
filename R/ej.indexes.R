@@ -8,35 +8,45 @@
 #'  Note: For 1.5, 3.5, 4.5 need vector d.avg.all.elsewhere. calculated in each of those.\cr
 #'  * But does not properly handle cases where us.demog or universe.us.demog specified because denominator is not same as pop \cr
 #'  * and need to fix for when  is.na(p) | is.na(demog) \cr
-#'  Type 2 however does handle NA values appropriately, meaning a result for a given col of env.df is set to NA for a given row (assuming na.rm=FALSE) if and only if NA is found in that row, in demog or weights or that one col of env.df.
+#'  Type 2 however does handle NA values appropriately, meaning a result for a given col of env.df is set to NA for a given row \cr
+#'   (assuming na.rm=FALSE) if and only if NA is found in that row, in demog or weights or that one col of env.df.
 #'
 #' @param env.df Environmental indicators vector or numeric data.frame, one column per environmental factor, one row per place (e.g., block group).
-#' @param demog Demographic indicator(s) vector or data.frame, numeric fractions of population that is in specified demographic group (e.g., fraction below poverty line), one per place.
-#' @param us.demog Optional number specifying overal area-wide value for demog (e.g., US percent Hispanic). Default is to calculate it as weighted mean of demog,
+#' @param demog Demographic indicator(s) vector or data.frame, numeric fractions of population that is in specified demographic group
+#'    (e.g., fraction below poverty line), one per place.
+#' @param us.demog Optional overall area-wide value for demog percentage share of population as fraction 0 to 1
+#'   (e.g., US Demographic Indicator).
+#'   The correct value to use for EJScreen 2.0, for example, is
+#'   with(ejscreen::bg21, ( sum(mins)/sum(pop)  +  sum(lowinc)/sum(povknownratio) ) / 2)
+#'   Default is to approximate it as weighted mean of demog,
 #'   where the weights are universe.us.demog if specified, or else just 'weights'.
 #'   If the weights are population counts and demog is percent Hispanic, for example, us.demog is the percent  of US population that is Hispanic.
 #' @param weights Optional, and default is equal weighting. If us.demog and universe.us.demog are not specified, weights are used to find
 #'   weighted mean of demog to use as area-wide overall average (e.g., population-weighted average percent Hispanic, for all block groups in USA). One weight per place.
 #' @param universe.us.demog Optional numeric vector. If specified and us.demog not specified, used instead of weights to get weighted mean of demog to find area-wide demog.
 #'   This should be the actual denominator, or universe, that was used to create percent demog --
-#'   universe.us.demog if specified should be a vector that has the count, for each place, of the denominator for finding the US overall percent  and this may be slightly different than total population.
+#'   universe.us.demog if specified should be a vector that has the count, for each place, of the denominator for finding the US overall percent
+#'   and this may be slightly different than total population.
 #'   For example if demog=places$pctlowinc then true universe.us.demog=places$povknownratio which is the count for whom poverty ratio is known in each place, which is <= pop.
 #' @param as.df Default is TRUE.
 #' @param na.rm Default is FALSE. NOTE: This is complicated but important. See notes in source code about handling NA values in various formulas here.
 #' @param prefix Optional character string used as first part of each colname in results. Default is "EJ.DISPARITY."
 #' @param type Specifies type of EJ Index. Default is type=1. Several formulas are available: \cr
 #' \itemize{
-#'  \item For type=1,   ej.indexes = weights * env.df * (demog  - us.demog)  ## This is the EJ Index in EJSCREEN 2015. Note: us.demog could also be called d.avg.all, and note that na.rm is currently ignored for type=1
-#'  \item For type=1.5, ej.indexes= weights * env.df * (demog  - d.avg.all.elsewhere) # for a place that is one of many this can be almost identical to type 1 \cr
+#'  \item For type=1,   ej.indexes = weights * env.df * (demog  - us.demog)  ## This is the EJ Index in EJScreen from 2015-2022. Note: us.demog could also be called d.avg.all, and note that na.rm is currently ignored for type=1
+#'  \item For type=1.5, ej.indexes = weights * env.df * (demog  - d.avg.all.elsewhere) # for a place that is one of many this can be almost identical to type 1 \cr
 #'  \item For type=2.1, ej.indexes = weights * demog  * (env.df - e.avg.all)  # like type 1 but env and demog roles are swapped \cr
 #'  \item For type=2,   ej.indexes = weights * demog  * (env.df - e.avg.nond) \cr
 #'  \item For type=2.5, ej.indexes = weights * demog  * (env.df - e.avg.nond.elsewhere )  \cr
-#'  \item For type=3,   ej.indexes = weights * ( (demog * env.df) - (d.avg.all           * e.avg.nond ) )   \cr
-#'  \item For type=3.5, ej.indexes = weights * ( (demog * env.df) - (d.avg.all.elsewhere * e.avg.nond.elsewhere) )   \cr
-#'  \item For type 4  , ej.indexes = weights * ( (demog - d.avg.all          ) * (env.df - e.avg.nond ) ) \cr
-#'  \item For type=4.5, ej.indexes = weights * ( (demog - d.avg.all.elsewhere) * (env.df - e.avg.nond.elsewhere) ) \cr
+#'  \item For type=3,   ej.indexes = weights * ((demog * env.df) - (d.avg.all           * e.avg.nond ) )   \cr
+#'  \item For type=3.5, ej.indexes = weights * ((demog * env.df) - (d.avg.all.elsewhere * e.avg.nond.elsewhere) )   \cr
+#'  \item For type 4  , ej.indexes = weights * ((demog - d.avg.all          ) * (env.df - e.avg.nond ) ) \cr
+#'  \item For type=4.5, ej.indexes = weights * ((demog - d.avg.all.elsewhere) * (env.df - e.avg.nond.elsewhere) ) \cr
+#'
 #'  \item For type=5  , ej.indexes = weights * env.df * demog ## A "Population Risk" or "Burden" index = Number of cases among D group if e is individual risk, or just "people-points among D" if e is "points" \cr
-#'  \item For type=6,   ej.indexes = env.df * demog ## A "percent-based" indicator = percent in group D times envt indicator. \cr
+#'
+#'  \item For type=6,   ej.indexes = env.df *  demog ## A "unweighted" simple product of Envt x percent_D. A "percent-based" indicator = percent in group D times envt indicator  \cr
+#'  \item For type=7,   ej.indexes = env.df * (demog  - us.demog) # Like type 1 or EJScreen 2.0, but without the pop count in the formula  \cr
 #' }
 #'  where
 #' \itemize{
@@ -60,7 +70,7 @@
 ej.indexes <- function(env.df, demog, weights, us.demog, universe.us.demog, as.df=TRUE, prefix="EJ.DISPARITY.", type=1, na.rm=FALSE) {
 
   # Check for missing or bad parameters
-  validtypes <- c(1, 1.5, 2, 2.1, 2.5, 3, 3.5, 4, 4.5, 5, 6)
+  validtypes <- c(1, 1.5, 2, 2.1, 2.5, 3, 3.5, 4, 4.5, 5, 6, 7)
   if (!(type %in% validtypes)) {stop('invalid value specified for type')}
 
   if (!is.data.frame(env.df) ) { env.df <- as.data.frame(env.df)}
@@ -99,7 +109,8 @@ ej.indexes <- function(env.df, demog, weights, us.demog, universe.us.demog, as.d
       # *** WHEN FINDING THE US AVG HERE, DO YOU WANT TO EXCLUDE PLACES THAT HAVE NA FOR POP? FOR SOME E? BECAUSE THOSE PLACES ARE LEFT OUT OF EJ INDEX CALC IF na.rm=TRUE IN OVERALL FUNCTION CALL.
     } else {
       # if universe.us.demog IS specified, then use it as the right denominator (that was used to create percent demog) & use it to find US percent demog
-      us.demog <- Hmisc::wtd.mean(demog, universe.us.demog, na.rm=TRUE) # NOTE THAT  na.rm=TRUE & might make that a parameter of ej.indexes() but unsure when that might be needed
+      # usavgexact = ( sum(bg$mins)/sum(bg$pop)  +  sum(bg$lowinc)/sum(bg$povknownratio) ) / 2
+      us.demog <- weighted.mean(demog, universe.us.demog, na.rm=TRUE) # NOTE THAT  na.rm=TRUE & might make that a parameter of ej.indexes() but unsure when that might be needed
       # *** WHEN FINDING THE US AVG HERE, DO YOU WANT TO EXCLUDE PLACES THAT HAVE NA FOR POP? FOR SOME E? BECAUSE THOSE PLACES ARE LEFT OUT OF EJ INDEX CALC IF na.rm=TRUE IN OVERALL FUNCTION CALL.
 
       cat('Using the specified universe.us.demog to find the overall percent  demog in all locations with valid demographics, which may be a bit different than those with valid envt scores\n')
@@ -153,7 +164,7 @@ ej.indexes <- function(env.df, demog, weights, us.demog, universe.us.demog, as.d
 
   # For type=6,   ej.indexes = env.df * demog
 
-
+# for type=7,   ej.indexes = env.df * (demog  - us.demog)
 
   if (type==1 | type==1.5) {
 
@@ -182,6 +193,7 @@ ej.indexes <- function(env.df, demog, weights, us.demog, universe.us.demog, as.d
         d.avg.all.elsewhere  <- (wtd.d - (d * p)) / (weights.d - p) # BUT also COULD POSSIBLY WANT TO REMOVE FROM SUM THOSE WHERE E OR P OR D IS NA, IF na.rm=TRUE
         d.ref <- d.avg.all.elsewhere
       }
+
       return( p * e * (d - d.ref) )
     }
   }
@@ -325,7 +337,19 @@ ej.indexes <- function(env.df, demog, weights, us.demog, universe.us.demog, as.d
     }
   }
 
+  if (type==7) {
 
+    #
+    #  ej.indexes = env.df * (demog  - us.demog)
+
+    ejfunction <- function(e, d, p, na.rm=TRUE) {
+      enotna <- !is.na(e)
+      d.ref <- us.demog  # has been provided or calculated already
+
+      return( e * (d - d.ref) )
+
+    }
+  }
   ################################## #
   # calculate results
   ################################## #
