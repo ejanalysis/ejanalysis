@@ -40,7 +40,7 @@ RR.table.sort <- function(x, margins = c(1, 2, 3), decreasing = TRUE) {
   #     keyzone <- '' # not sure what to use in this case
   #   }
   # }
-
+browser()
   if (1 %in% margins) {
     if ('max.zone' %in% dimnames(x)$zone) {
       # sort D indicators by max.E max.zone

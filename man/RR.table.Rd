@@ -30,7 +30,7 @@ RR.table(
 \item{digits}{Default is 4. How many significant digits to use.}
 }
 \value{
-Compiles RR values in array of 3 dimensions: RRS[Dnames, Enames, Zcolnames]
+Compiles RR values in array of 3 dimensions: \code{RRS[Dnames, Enames, Zcolnames]}
   Returns a matrix with
   one demographic group per row,
   one environmental risk indicator per column, and
@@ -41,6 +41,9 @@ Make table of Relative Risk results by zone by group by envt risk factor.
   See source code for notes on this work.
 }
 \examples{
+    # (This is very slow right now)
+    # Ratios <- ejanalysis::RR.table(bg21plus, Enames = names.e, Dnames = c(names.d, names.d.subgroups), popcolname = 'pop', digits = 2)
+    # MeansByGroup_and_Ratios <- ejanalysis::RR.means(subset(bg21plus, select=names.e), subset(bg21plus, select = c(names.d, names.d.subgroups)), bg21plus$pop)
 data(bgtest, package = 'ejanalysis')
 RRS.US  <- RR.table(mydat = bgtest, Enames = names.e, Dnames = c(names.d, names.d.subgroups.pct),
  popcolname = 'pop')

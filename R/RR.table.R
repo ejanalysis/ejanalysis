@@ -8,13 +8,16 @@
 #' @param Zcolname name of column with name of zone such as US State name
 #' @param digits Default is 4. How many significant digits to use.
 #' @param testing default is FALSE
-#' @return Compiles RR values in array of 3 dimensions: RRS[Dnames, Enames, Zcolnames]
+#' @return Compiles RR values in array of 3 dimensions: \code{RRS[Dnames, Enames, Zcolnames]}
 #'   Returns a matrix with
 #'   one demographic group per row,
 #'   one environmental risk indicator per column, and
 #'   third dimension for which zone (e.g., which US State)
 #' @template seealsoRR
 #' @examples
+#'     # (This is very slow right now)
+#'     # Ratios <- ejanalysis::RR.table(bg21plus, Enames = names.e, Dnames = c(names.d, names.d.subgroups), popcolname = 'pop', digits = 2)
+#'     # MeansByGroup_and_Ratios <- ejanalysis::RR.means(subset(bg21plus, select=names.e), subset(bg21plus, select = c(names.d, names.d.subgroups)), bg21plus$pop)
 #' data(bgtest, package = 'ejanalysis')
 #' RRS.US  <- RR.table(mydat = bgtest, Enames = names.e, Dnames = c(names.d, names.d.subgroups.pct),
 #'  popcolname = 'pop')
