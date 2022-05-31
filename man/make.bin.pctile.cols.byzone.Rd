@@ -2,7 +2,7 @@
 % Please edit documentation in R/make.bin.pctile.cols.byzone.R
 \name{make.bin.pctile.cols.byzone}
 \alias{make.bin.pctile.cols.byzone}
-\title{Percentile and bin number fields, by zone, such as percentiles within each State}
+\title{May be obsolete- Percentile and bin number fields, by zone, such as percentiles within each State}
 \usage{
 make.bin.pctile.cols.byzone(
   bg,
@@ -30,7 +30,7 @@ make.bin.pctile.cols.byzone(
 Returns a data.frame with one percentiles field and one bin numbers field for each of the datavarnames
 }
 \description{
-May be obsolete- make.bin.pctile.cols() now has a zone parameter. 
+May be obsolete- just uses make.bin.pctile.cols() which now has a zone parameter.
   Get weighted percentiles and bin numbers, by subset of rows (zone), for each column of data.
   This can be used to calculate population-weighted percentiles within each State, for national data on Census block groups, for example.
 }

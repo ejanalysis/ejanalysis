@@ -14,7 +14,9 @@ write.pctiles.by.zone(mydf, filename, zone.vector)
 \item{zone.vector}{names of states or regions, for example. same length as wts, or rows in mydf}
 }
 \description{
-create lookup table as file of percentiles, mean, sd by state or region
+Given a data.frame, for each column in the data.frame,
+  this function just returns percentiles, mean, and standard deviation.
+  Also saves that as a csv file.
 }
 \seealso{
 \link{write.wtd.pctiles.by.zone}

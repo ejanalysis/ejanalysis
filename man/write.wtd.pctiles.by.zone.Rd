@@ -20,7 +20,13 @@ create lookup table as file of pop-weighted percentiles, mean, sd by state or re
 }
 \examples{
   \dontrun{
-  write.wtd.pctiles(bg20[ , names.e], wts = bg20$pop, filename = 'envt-data', zone.vector = bg20$REGION)
+  bg = ejscreen::bg21
+  pctilevariables <- c(names.e, names.d, names.ej)
+   ejanalysis::write.wtd.pctiles(mydf = bg[ , pctilevariables], wts = bg$pop, filename =  'lookupUSA')
+   ejanalysis::write.wtd.pctiles.by.zone(mydf = bg[ , pctilevariables], wts = bg$pop,
+                                   zone.vector = bg$REGION, filename =  'lookupRegions')
+   ejanalysis::write.wtd.pctiles.by.zone(mydf = bg[ , pctilevariables], wts = bg$pop,
+                                   zone.vector = bg$ST,     filename =  'lookupStates')
   }
 
 }

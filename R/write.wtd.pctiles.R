@@ -1,4 +1,4 @@
-#' create lookup table as file of pop-weighted percentiles, mean, std.dev
+#' @title create lookup table as file of pop-weighted percentiles, mean, std.dev
 #'
 #' @param mydf data.frame with numeric data. Each column will be examined to calculate mean, sd, and percentiles
 #' @param wts vector of numbers such as population counts as weights, as long as nrow(mydf)

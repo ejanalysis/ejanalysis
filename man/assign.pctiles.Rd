@@ -30,8 +30,10 @@ Relies on the \code{\link[Hmisc]{wtd.Ecdf}} function.
   defining na.rm but also where to rank NA values if included, etc.
 
   Default now is like na.last=NA, but like na.last='last' if na.rm=FALSE
-  Could also add parameter like in rank(), ties.method, defining if ties get min, max, or mean of percentiles initially assigned to ties.
-  Default for ties right now is like ties.method=max (which might not be what assign.pctiles() does in fact).
+
+  ****Could also add parameter like in rank(), ties.method, defining if ties get min, max, or mean of percentiles initially assigned to ties.
+  Default for ties up to mid2022 was like ties.method=max ?
+  But EJScreen will redefine percentiles to set tied values at lower end of that group, min
 }
 \examples{
 x <- c(30, 40, 50, 12,12,5,5,13,13,13,13,13,8,9,9,9,9,9,10:20,20,20,20,21:30)

@@ -1,4 +1,5 @@
 #' @title Write csv file lookup table - percentiles, mean, standard deviation
+#'
 #' @description Given a data.frame, for each column in the data.frame,
 #'   this function just returns percentiles, mean, and standard deviation.
 #'   Also saves that as a csv file.

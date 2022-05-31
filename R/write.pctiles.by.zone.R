@@ -1,5 +1,8 @@
-#' create lookup table as file of percentiles, mean, sd by state or region
+#' @title create lookup table as file of percentiles, mean, sd by state or region
 #'
+#' @description Given a data.frame, for each column in the data.frame,
+#'   this function just returns percentiles, mean, and standard deviation.
+#'   Also saves that as a csv file.
 #' @param mydf data.frame with numeric data. Each column will be examined to calculate mean, sd, and percentiles, for each zone.
 #' @param filename prefix to use for filename to be saved locally
 #' @param zone.vector names of states or regions, for example. same length as wts, or rows in mydf
