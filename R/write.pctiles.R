@@ -8,10 +8,6 @@
 #' @return A data.frame with percentiles, mean, and standard deviation. Same number of columns as x had.
 #' @export
 write.pctiles <- function(x, filename) {
-  r <- data.frame(sapply(mydf, function(x) pctiles.exact(x)))
-  r <- rbind(r, t(data.frame(mean = sapply(mydf, function(x) mean(x, na.rm = TRUE)))))
-  r <- rbind(r, t(data.frame(std.dev = sapply(mydf, function(x) sd(x, na.rm = TRUE)))))
-  r
-  write.csv(r, file = paste(filename, ".csv", sep = ""))
-  return(r)
+
+  write.wtd.pctiles.by.zone(x, filename = filename)
 }

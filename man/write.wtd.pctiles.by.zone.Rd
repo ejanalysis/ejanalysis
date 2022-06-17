@@ -2,21 +2,35 @@
 % Please edit documentation in R/write.wtd.pctiles.by.zone.R
 \name{write.wtd.pctiles.by.zone}
 \alias{write.wtd.pctiles.by.zone}
-\title{create lookup table as file of pop-weighted percentiles, mean, sd by state or region}
+\title{create lookup table as file of pop-weighted or unwtd percentiles, mean, sd for US or by state or region}
 \usage{
-write.wtd.pctiles.by.zone(mydf, wts, filename, zone.vector)
+write.wtd.pctiles.by.zone(
+  mydf,
+  wts = NULL,
+  filename,
+  zone.vector = NULL,
+  zoneOverallName = "USA"
+)
 }
 \arguments{
 \item{mydf}{data.frame with numeric data. Each column will be examined to calculate mean, sd, and percentiles, for each zone.}
 
-\item{wts}{vector of numbers such as population counts as weights, as long as nrow(mydf)}
+\item{wts}{optional vector of numbers such as population counts as weights, as long as nrow(mydf)}
 
 \item{filename}{prefix to use for filename to be saved locally}
 
-\item{zone.vector}{names of states or regions, for example. same length as wts, or rows in mydf}
+\item{zone.vector}{optional names of states or regions, for example. same length as wts, or rows in mydf}
+
+\item{zoneOverallName}{optonal If not by zone, name of entire domain to use in table column called REGION. Default is USA.}
 }
 \description{
-create lookup table as file of pop-weighted percentiles, mean, sd by state or region
+also see \cr\cr
+  ejscreen.lookuptables  and \cr\cr
+  write.wtd.pctiles.by.zone   and \cr\cr
+  table.pop.pctile  and \cr\cr
+  map service with lookup tables \cr\cr \cr\cr
+\preformatted{
+}
 }
 \examples{
   \dontrun{

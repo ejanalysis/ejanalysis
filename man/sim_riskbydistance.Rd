@@ -25,19 +25,19 @@ sim_riskbydistance(
 
 \item{ypopdensity.end}{at furthest point}
 
-\item{ypopdensity.rate}{decay rate with distance such as 0.95 for 5% drop per 1 of the 100 distance increments}
+\item{ypopdensity.rate}{decay rate with distance such as 0.95 for 5 percent drop per 1 of the 100 distance increments}
 
 \item{ydemog.start}{Demographic group of interest nearby, as percent of pop, 0-100}
 
 \item{ydemog.end}{at furthest point}
 
-\item{ydemog.rate}{decay rate with distance such as 0.95 for 5% drop per 1 of the 100 distance increments}
+\item{ydemog.rate}{decay rate with distance such as 0.95 for 5 percent drop per 1 of the 100 distance increments}
 
 \item{yrisk.start}{Risk metric (e.g., 0 to 100) at nearest point.}
 
 \item{yrisk.end}{at furthest point}
 
-\item{yrisk.rate}{decay rate with distance such as 0.95 for 5% drop per 1 of the 100 distance increments}
+\item{yrisk.rate}{decay rate with distance such as 0.95 for 5 percent drop per 1 of the 100 distance increments}
 
 \item{silent}{whether to print subset of table to console, and suggested plot code}
 }
@@ -47,7 +47,7 @@ silently returns data.frame of many indicators, at each of the 100 distances
 \description{
 Creates a simple set of 100 distances and at each distance simulated
   demographics, risk levels, population density and size, etc.
-  Useful to explore how those decay with distance and how the 
+  Useful to explore how those decay with distance and how the
   EJ metrics one might use depend on those factors and domain analyzed.
 }
 \examples{

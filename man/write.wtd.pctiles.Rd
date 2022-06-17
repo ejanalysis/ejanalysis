@@ -4,18 +4,14 @@
 \alias{write.wtd.pctiles}
 \title{create lookup table as file of pop-weighted percentiles, mean, std.dev}
 \usage{
-write.wtd.pctiles(mydf, wts, folder = getwd(), filename, missingcode = NA)
+write.wtd.pctiles(mydf, wts, filename)
 }
 \arguments{
 \item{mydf}{data.frame with numeric data. Each column will be examined to calculate mean, sd, and percentiles}
 
 \item{wts}{vector of numbers such as population counts as weights, as long as nrow(mydf)}
 
-\item{folder}{optional path to directory for file to be saved}
-
 \item{filename}{prefix to use for filename to be saved locally}
-
-\item{missingcode}{optional value to be treated as NA}
 }
 \description{
 create lookup table as file of pop-weighted percentiles, mean, std.dev

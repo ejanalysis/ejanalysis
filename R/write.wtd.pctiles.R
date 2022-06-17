@@ -3,22 +3,16 @@
 #' @param mydf data.frame with numeric data. Each column will be examined to calculate mean, sd, and percentiles
 #' @param wts vector of numbers such as population counts as weights, as long as nrow(mydf)
 #' @param filename prefix to use for filename to be saved locally
-#' @param missingcode optional value to be treated as NA
-#' @param folder optional path to directory for file to be saved
 #' @examples
 #'   \dontrun{
 #'   write.wtd.pctiles(bg20[ , names.e], wts = bg20$pop, filename = 'envt-data')
 #'   }
 #'
 #' @export
-write.wtd.pctiles <- function(mydf, wts, folder = getwd(), filename, missingcode = NA) {
+write.wtd.pctiles <- function(mydf, wts, filename) {
+
+  write.wtd.pctiles.by.zone(mydf=mydf, wts=wts, filename=filename)
   # FUNCTION TO WRITE CSV FILE WITH PERCENTILES AND MEAN, AND MAYBE STD DEVIATION,
   # LIKE A LOOKUP TABLE
-  r = data.frame(sapply(mydf, function(x) analyze.stuff::wtd.pctiles.exact(x, wts) ) )
-  r = rbind(r, t(data.frame(mean=sapply(mydf, function(x) Hmisc::wtd.mean(x, wts, na.rm=TRUE) ) ) ))
-  r = rbind(r, t(data.frame(std.dev=sapply(mydf, function(x) sqrt(Hmisc::wtd.var(x, wts, na.rm=TRUE)) ) ) ))
-  r
-  write.csv(r, file=file.path(folder, paste(filename, ".csv", sep="")))
-  return(r)
-  # Example of usage:  write.wtd.pctiles(bg20[ , names.e], bg20$pop, 'envt-data')
+   # Example of usage:  write.wtd.pctiles(bg20[ , names.e], bg20$pop, 'envt-data')
 }
