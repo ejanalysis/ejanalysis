@@ -51,7 +51,7 @@
 #'           main='Distribution of scores by EPA Region')
 #'
 #' # Demog suscept (how to show vs others??), one panel per ENVT FACTOR (ie per col in scores df)
-#' data('names.evars')
+#' data('names.e')
 #' # NOT
 #' pop.cdf(bg[ , names.e], bg$VSI.eo, bg$pop, log='x', subtitles=FALSE,
 #'          allothers=TRUE, ylab='frequency in population',
