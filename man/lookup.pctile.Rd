@@ -40,26 +40,38 @@ it still returns 0 as the percentile, but with a warning that the value checked 
  \dontrun{
    What is environmental score at given percentile?
  ejanalysis::lookup.pctile(40,'cancer',lookupUSA)
- # [1] 84
+ #   84
  ejanalysis::lookup.pctile(40,'cancer',lookupStates,'WV')
- # [1] 93
+ #   93
  #    What is percentile of given environmental score?
  ejscreen::lookupUSA[lookupUSA$PCTILE=='84' ,'cancer']
- # [1] 39.83055
+ #   39.83055
  ejscreen::lookupStates[lookupStates$PCTILE=='84' & lookupStates$REGION =='WV','cancer']
- # [1] 33.36371
+ #   33.36371
  # also see ejanalysis::assign.pctiles
  }
   \dontrun{
     library(ejscreen)
-    bg <- bg19[sample(1:NROW(bg19), 100), ]
+
+       evarname <- 'traffic.score'
+       evalues <- bg21[ , evarname]
+       emax <- max(evalues,na.rm = TRUE)
+       plot(lookupUSA[,evarname], lookupUSA$PCTILE, xlab = evarname, main='contents of lookup table', type='b')
+
+       plot(x = (1:1000) * (emax / 1000),
+        y = lookup.pctile(myvector = (1:1000) * emax / 1000, varname.in.lookup.table = evarname, lookup = lookupUSA),
+        ylim = c(0,100),   type='b',
+        xlab=evarname, ylab='percentile per lookup table' , main='Percentiles for various envt scores, as looked up in lookup table')
+      abline(v = lookupUSA[ lookupUSA$PCTILE == 'mean', evarname])
+
+    bg <- bg21[sample(1:NROW(bg21), 100), ]
     state.pctile.pm <- lookup.pctile(myvector = bg$pm, varname.in.lookup.table = 'pm',
-       lookup = lookupStates19, zone = bg$ST)
+       lookup = lookupStates21, zone = bg$ST)
     plot(state.pctile.pm, bg$pctile.pm, pch = '.')
     text(state.pctile.pm, bg$pctile.pm, labels = paste(bg$ST, round(bg$pm,1)), cex = 0.8)
     abline(0,1)
-    lookupStates19[lookupStates19$PCTILE == 'mean', c('REGION', 'pm')]
-    lookupUSA19[lookupUSA19$PCTILE == 'mean', c('REGION', 'pm')]
+    lookupStates21[lookupStates21$PCTILE == 'mean', c('REGION', 'pm')]
+    lookupUSA21[lookupUSA21$PCTILE == 'mean', c('REGION', 'pm')]
   }
 }
 \seealso{

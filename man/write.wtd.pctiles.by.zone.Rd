@@ -7,7 +7,7 @@
 write.wtd.pctiles.by.zone(
   mydf,
   wts = NULL,
-  filename,
+  filename = NULL,
   zone.vector = NULL,
   zoneOverallName = "USA"
 )
@@ -17,7 +17,7 @@ write.wtd.pctiles.by.zone(
 
 \item{wts}{optional vector of numbers such as population counts as weights, as long as nrow(mydf)}
 
-\item{filename}{prefix to use for filename to be saved locally}
+\item{filename}{prefix to use for filename to be saved locally (.csv is added by the function). If not provided, no file is saved.}
 
 \item{zone.vector}{optional names of states or regions, for example. same length as wts, or rows in mydf}
 
@@ -34,13 +34,13 @@ also see \cr\cr
 }
 \examples{
   \dontrun{
-  bg = ejscreen::bg21
-  pctilevariables <- c(names.e, names.d, names.ej)
-   ejanalysis::write.wtd.pctiles(mydf = bg[ , pctilevariables], wts = bg$pop, filename =  'lookupUSA')
+  bg = ejscreen::bg21plus # want demog subgroups but also want PR eventually
+  pctilevariables <- c(names.e, names.d, names.d.subgroups, names.ej)
+   ejanalysis::write.wtd.pctiles(mydf = bg[ , pctilevariables], wts = bg$pop, filename =  'lookupUSA21')
    ejanalysis::write.wtd.pctiles.by.zone(mydf = bg[ , pctilevariables], wts = bg$pop,
-                                   zone.vector = bg$REGION, filename =  'lookupRegions')
+                                   zone.vector = bg$REGION, filename =  'lookupRegions21')
    ejanalysis::write.wtd.pctiles.by.zone(mydf = bg[ , pctilevariables], wts = bg$pop,
-                                   zone.vector = bg$ST,     filename =  'lookupStates')
+                                   zone.vector = bg$ST,     filename =  'lookupStates21')
   }
 
 }

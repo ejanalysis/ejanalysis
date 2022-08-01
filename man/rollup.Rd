@@ -38,7 +38,7 @@ require(analyze.stuff)
 require(ejanalysis)
 require(ejscreen)
 
-data(names.evars); data(names.ejvars); data(names.d)
+data(names.e); data(names.ej); data(names.d)
 # Available for rolling up by: 'FIPS', "FIPS.TRACT", "FIPS.COUNTY", "FIPS.ST", 'REGION'
 
 # Get the sum for all the raw counts, and area
