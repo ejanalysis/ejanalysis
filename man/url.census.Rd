@@ -2,9 +2,15 @@
 % Please edit documentation in R/url.census.R
 \name{url.census}
 \alias{url.census}
-\title{See webpage with data on Census unit(s) from American Fact Finder}
+\title{See webpage with data on Census unit(s) from American Fact Finder - may not be used}
 \usage{
-url.census(fips, censustable = "P2", censusfile = "DEC/10_PL", launch = TRUE)
+url.census(
+  fips,
+  censustable = "P2",
+  censusfile = "DEC/10_PL",
+  launch = TRUE,
+  clean = TRUE
+)
 }
 \arguments{
 \item{fips}{vector of FIPS}
@@ -14,6 +20,8 @@ url.census(fips, censustable = "P2", censusfile = "DEC/10_PL", launch = TRUE)
 \item{censusfile}{'DEC/10_PL' by default. Also see 'DEC_10_SF1' for example.}
 
 \item{launch}{TRUE by default, whether to open page in web browser}
+
+\item{clean}{Does not use clean.fips1215() if FALSE, which helps if the countiesall or other list is not yet updated, for example and lacks some new FIPS code}
 }
 \value{
 Can open a webpage. Returns vector of URL(s) as character

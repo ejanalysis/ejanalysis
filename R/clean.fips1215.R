@@ -1,4 +1,4 @@
-#' @title Check and clean Census block group or block FIPS
+#' @title Check and clean Census block group or block FIPS - only check number of characters and if NA, not if valid number otherwise
 #'
 #' @description Check if valid Census block group or block FIPS, warn if not, add missing leading zero if inferred.
 #' @details For information on FIPS codes, see \url{http://www.census.gov/geo/reference/ansi.html},

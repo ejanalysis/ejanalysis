@@ -2,7 +2,7 @@
 % Please edit documentation in R/clean.fips1215.R
 \name{clean.fips1215}
 \alias{clean.fips1215}
-\title{Check and clean Census block group or block FIPS}
+\title{Check and clean Census block group or block FIPS - only check number of characters and if NA, not if valid number otherwise}
 \usage{
 clean.fips1215(fips)
 }

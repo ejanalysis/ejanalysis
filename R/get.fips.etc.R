@@ -1,8 +1,8 @@
-#' @title Get tract, county, state, region info from US Census block group FIPS codes
+#' @title Get tract, county, state, region info from US Census block group FIPS codes (unused?)
 #' @description
 #'   Use US Census block group FIPS codes to get more information about each block group's overall location, such as State and County name.
-#'   It does not check to see if the codes are valid other than counting how many characters each has.
 #' @param fips Vector of US Census block group FIPS codes (missing leading zeroes are added).
+#' @param clean Does not use clean.fips() if FALSE, which helps if the countiesall or other list is not yet updated, for example and lacks some new FIPS code
 #' @return Returns a data.frame with these fields: c('FIPS', 'FIPS.TRACT', 'FIPS.COUNTY', 'FIPS.ST', 'ST', 'countyname', 'statename', 'REGION')
 #'   where FIPS is the input fips, the next few are the first few characters of fips corresponding to tract, county, or state, ST is the 2-letter state abbreviation, statename is state name, countyname is county name, and REGION is USEPA Region 1-10.
 #' @examples
@@ -10,16 +10,16 @@
 #'   "400353734002", "371190030121", "250235022001", "550439609001", "060730170302")
 #'  get.fips.etc(x)
 #' @export
-get.fips.etc <- function(fips) {
+get.fips.etc <- function(fips, clean.fips=TRUE) {
   ######################################################################################################### #
   # Make partial FIPS fields and county and ST and REGION info
   # input should be a vector of block group fips codes
   ######################################################################################################### #
-  fips <- clean.fips(fips)
+  if (clean) {fips <- clean.fips(fips)}
   x <- data.frame(FIPS=fips,
-                  FIPS.TRACT=ejanalysis::get.fips.tract(fips),
-                  FIPS.COUNTY=ejanalysis::get.fips.county(fips),
-                  FIPS.ST=ejanalysis::get.fips.st(fips),
+                  FIPS.TRACT=ejanalysis::get.fips.tract(fips, clean=clean),
+                  FIPS.COUNTY=ejanalysis::get.fips.county(fips, clean=clean),
+                  FIPS.ST=ejanalysis::get.fips.st(fips, clean=clean),
                   stringsAsFactors=FALSE)
   x$countyname <- ejanalysis::get.county.info(query=x$FIPS.COUNTY, fields='fullname')$fullname
   stateinfo <- ejanalysis::get.state.info(query=x$FIPS.ST, fields=c('ST', 'statename'))

@@ -5,7 +5,7 @@
 #' @param filename prefix to use for filename to be saved locally
 #' @examples
 #'   \dontrun{
-#'   write.wtd.pctiles(bg20[ , names.e], wts = bg20$pop, filename = 'envt-data')
+#'   write.wtd.pctiles(bg22[ , names.e], wts = bg22$pop, filename = 'envt-data')
 #'   }
 #'
 #' @export
@@ -14,5 +14,5 @@ write.wtd.pctiles <- function(mydf, wts, filename) {
   write.wtd.pctiles.by.zone(mydf=mydf, wts=wts, filename=filename)
   # FUNCTION TO WRITE CSV FILE WITH PERCENTILES AND MEAN, AND MAYBE STD DEVIATION,
   # LIKE A LOOKUP TABLE
-   # Example of usage:  write.wtd.pctiles(bg20[ , names.e], bg20$pop, 'envt-data')
+   # Example of usage:  write.wtd.pctiles(bg22[ , names.e], bg22$pop, 'envt-data')
 }

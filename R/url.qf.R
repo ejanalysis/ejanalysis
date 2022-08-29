@@ -30,6 +30,7 @@
 #' #WHERE YYYYY = 	STATE 2-DIGIT FIPS AND COUNTY 3-DIGIT FIPS = 5 DIGITS TOTAL
 #' @param fips Vector of numeric or character class, required. Can be state FIPs as number or character, for example.
 #' @param launch TRUE by default, whether to open page in web browser (max=1st 3 URLs opened)
+#' @param clean Does not use clean.fips() if FALSE, which helps if the countiesall or other list is not yet updated, for example and lacks some new FIPS code
 #' @return Returns table of FIPS, geographic scale, and URL
 #' @examples
 #'  url.qf( c( '011030001003001', '011030001003', '01103000100', '01005', 1,
@@ -40,9 +41,9 @@
 #'  }
 #' @template seealsoFIPS
 #' @export
-url.qf <- function(fips="", launch=TRUE) {
+url.qf <- function(fips="", launch=TRUE, clean=TRUE) {
 
-  FIPS <- clean.fips(fips)
+  if (clean) {FIPS <- clean.fips(fips)} # checks length, NAs, infers missing leading zero, warns
 
   geo <- rep("bad FIPS", length(FIPS))
   geo[nchar(FIPS) == 2]	<- "state"

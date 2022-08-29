@@ -2,12 +2,14 @@
 % Please edit documentation in R/get.fips.etc.R
 \name{get.fips.etc}
 \alias{get.fips.etc}
-\title{Get tract, county, state, region info from US Census block group FIPS codes}
+\title{Get tract, county, state, region info from US Census block group FIPS codes (unused?)}
 \usage{
-get.fips.etc(fips)
+get.fips.etc(fips, clean.fips = TRUE)
 }
 \arguments{
 \item{fips}{Vector of US Census block group FIPS codes (missing leading zeroes are added).}
+
+\item{clean}{Does not use clean.fips() if FALSE, which helps if the countiesall or other list is not yet updated, for example and lacks some new FIPS code}
 }
 \value{
 Returns a data.frame with these fields: c('FIPS', 'FIPS.TRACT', 'FIPS.COUNTY', 'FIPS.ST', 'ST', 'countyname', 'statename', 'REGION')
@@ -15,7 +17,6 @@ Returns a data.frame with these fields: c('FIPS', 'FIPS.TRACT', 'FIPS.COUNTY', '
 }
 \description{
 Use US Census block group FIPS codes to get more information about each block group's overall location, such as State and County name.
-  It does not check to see if the codes are valid other than counting how many characters each has.
 }
 \examples{
  x=c("391670211002", "060730185143", "261079609003", 02, 02610,

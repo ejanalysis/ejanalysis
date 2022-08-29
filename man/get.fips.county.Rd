@@ -4,10 +4,12 @@
 \alias{get.fips.county}
 \title{Get County FIPS from block or block group FIPS}
 \usage{
-get.fips.county(fips)
+get.fips.county(fips, clean = TRUE)
 }
 \arguments{
 \item{fips}{Vector of one or more elements, character class, 5, 11, 12 or 15 characters long after missing leading zeroes inferred (county, tract, block group or block), required.}
+
+\item{clean}{Does not use clean.fips() if FALSE, which helps if the countiesall or other list is not yet updated, for example and lacks some new FIPS code}
 }
 \value{
 Returns a vector of one or more character elements, same lengths as fips
@@ -18,7 +20,7 @@ Extract partial FIPS code from longer FIPS code
 }
 \details{
 Each fips passed to the function is a FIPS code (see \url{http://www.census.gov/geo/reference/ansi.html}.)
-  It does not check to see if the codes are valid other than counting how many characters each has.
+  It does not check to see if the codes are valid other than counting how many characters each has if clean=FALSE.
 }
 \examples{
 samplefips <- c("011030001003", "011030001003001", 02610, 11030001003001, 35, 1,

@@ -4,10 +4,14 @@
 \alias{addFIPScomponents}
 \title{Add col for each component of longer FIPS}
 \usage{
-addFIPScomponents(bg)
+addFIPScomponents(bg, fipscolname = "FIPS", clean = TRUE)
 }
 \arguments{
-\item{bg}{Data.frame with a character column called FIPS}
+\item{bg}{Data.frame with a character column called FIPS (or specified otherwise)}
+
+\item{fipscolname}{FIPS by default but could specify some other name to be found as col in bg}
+
+\item{clean}{Does not use clean.fips() if FALSE, which helps if the countiesall or other list is not yet updated, for example and lacks some new FIPS code}
 }
 \value{
 Returns the whole data.frame with new columns in front:

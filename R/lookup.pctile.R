@@ -37,8 +37,7 @@
 #'  # also see ejanalysis::assign.pctiles
 #'  }
 #'   \dontrun{
-#'     library(ejscreen)
-#'
+#'      library(ejscreen)
 #'        evarname <- 'traffic.score'
 #'        evalues <- bg21[ , evarname]
 #'        emax <- max(evalues,na.rm = TRUE)
@@ -50,14 +49,6 @@
 #'         xlab=evarname, ylab='percentile per lookup table' , main='Percentiles for various envt scores, as looked up in lookup table')
 #'       abline(v = lookupUSA[ lookupUSA$PCTILE == 'mean', evarname])
 #'
-#'     bg <- bg21[sample(1:NROW(bg21), 100), ]
-#'     state.pctile.pm <- lookup.pctile(myvector = bg$pm, varname.in.lookup.table = 'pm',
-#'        lookup = lookupStates21, zone = bg$ST)
-#'     plot(state.pctile.pm, bg$pctile.pm, pch = '.')
-#'     text(state.pctile.pm, bg$pctile.pm, labels = paste(bg$ST, round(bg$pm,1)), cex = 0.8)
-#'     abline(0,1)
-#'     lookupStates21[lookupStates21$PCTILE == 'mean', c('REGION', 'pm')]
-#'     lookupUSA21[lookupUSA21$PCTILE == 'mean', c('REGION', 'pm')]
 #'   }
 #' @export
 lookup.pctile <- function(myvector, varname.in.lookup.table, lookup, zone) {

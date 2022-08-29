@@ -4,10 +4,12 @@
 \alias{get.fips.tract}
 \title{Get Census tract FIPS from block or block group FIPS}
 \usage{
-get.fips.tract(fips)
+get.fips.tract(fips, clean = TRUE)
 }
 \arguments{
 \item{fips}{Vector of one or more elements, character class, 11, 12 or 15 characters long after missing leading zeroes inferred (tract, block group or block), required.}
+
+\item{clean}{Does not use clean.fips() if FALSE, which helps if the countiesall or other list is not yet updated, for example and lacks some new FIPS code}
 }
 \value{
 Returns a vector of one or more character elements, same lengths as fips.

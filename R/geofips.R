@@ -17,6 +17,7 @@
 #'   specific type of fips, including fips.st, fips.county, fips.tract, fips.bg, fips.block.
 #'   Names for tracts, blockgroups, and blocks are not provided or interpreted.
 #'   Variations also work such as plural and case-insensitive.
+#' @param clean Does not use clean.fips() if FALSE, which helps if the countiesall or other list is not yet updated, for example and lacks some new FIPS code
 #' @return Returns vector of same length as x, containing fips as character elements with any leading zeroes, and/or names of geographies.
 #' @seealso \code{\link[ejanalysis]{get.fips.st}} and related functions noted there, \code{\link[ejanalysis]{clean.fips}}, \code{\link[ejanalysis]{get.state.info}}
 #' @examples
@@ -24,12 +25,12 @@
 #'     '01121', 1121, '060690006002', 60690006002, '011210118001025')
 #'    geofips(c('01121', 'Montgomery County, Maryland'), c('state', 'fips.st')
 #' @export
-geofips <- function(x, to) {
+geofips <- function(x, to, clean=TRUE) {
   stop('not done yet')
   if (1==0) {
     xx <- x
+    if (clean) {tryfips <- clean.fips(x) } # checks length, NAs, infers missing leading zero, warns
 
-    tryfips <- clean.fips(x)
     isfips <- !is.na(tryfips)
     xx[isfips] <- tryfips[isfips]
 

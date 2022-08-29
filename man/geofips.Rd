@@ -4,7 +4,7 @@
 \alias{geofips}
 \title{Convert between FIPS / ANSI codes and Names of U.S. Geographies}
 \usage{
-geofips(x, to)
+geofips(x, to, clean = TRUE)
 }
 \arguments{
 \item{x}{Required vector of one or more numeric or character FIPS and/or names of geographic locations.
@@ -23,6 +23,8 @@ specific type of name including state, county, tract, bg (or blockgroup), or blo
 specific type of fips, including fips.st, fips.county, fips.tract, fips.bg, fips.block.
 Names for tracts, blockgroups, and blocks are not provided or interpreted.
 Variations also work such as plural and case-insensitive.}
+
+\item{clean}{Does not use clean.fips() if FALSE, which helps if the countiesall or other list is not yet updated, for example and lacks some new FIPS code}
 }
 \value{
 Returns vector of same length as x, containing fips as character elements with any leading zeroes, and/or names of geographies.

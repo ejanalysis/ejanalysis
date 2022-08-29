@@ -2,7 +2,7 @@
 % Please edit documentation in R/make.bin.pctile.cols.byzone.R
 \name{make.bin.pctile.cols.byzone}
 \alias{make.bin.pctile.cols.byzone}
-\title{May be obsolete- Percentile and bin number fields, by zone, such as percentiles within each State}
+\title{May be obsolete-not used -was Percentile and bin number fields, by zone, such as percentiles within each State}
 \usage{
 make.bin.pctile.cols.byzone(
   bg,
@@ -10,6 +10,7 @@ make.bin.pctile.cols.byzone(
   wtsvarname,
   keyvarname = "FIPS",
   datavarnames = gsub(keyvarname, "", names(bg)),
+  clean = TRUE,
   ...
 )
 }
@@ -23,6 +24,8 @@ make.bin.pctile.cols.byzone(
 \item{keyvarname}{Name of field in bg that has unique ID per row (per place). Default is "FIPS"}
 
 \item{datavarnames}{Vector of names of fields in bg that have numeric data for which percentiles are calculated.}
+
+\item{clean}{Does not use clean.fips() if FALSE, which helps if the countiesall or other list is not yet updated, for example and lacks some new FIPS code}
 
 \item{...}{Other parameters passed to \code{\link{make.bin.pctile.cols}} such as \code{cutpoints} and \code{labels}}
 }

@@ -4,12 +4,14 @@
 \alias{url.qf}
 \title{US Census Quickfacts Webpage URL}
 \usage{
-url.qf(fips = "", launch = TRUE)
+url.qf(fips = "", launch = TRUE, clean = TRUE)
 }
 \arguments{
 \item{fips}{Vector of numeric or character class, required. Can be state FIPs as number or character, for example.}
 
 \item{launch}{TRUE by default, whether to open page in web browser (max=1st 3 URLs opened)}
+
+\item{clean}{Does not use clean.fips() if FALSE, which helps if the countiesall or other list is not yet updated, for example and lacks some new FIPS code}
 }
 \value{
 Returns table of FIPS, geographic scale, and URL

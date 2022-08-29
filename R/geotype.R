@@ -7,11 +7,12 @@
 #'   FIPS codes here are all the relevant digits starting with the 2-character state FIPS,
 #'   so county fips must be 4-5 digits or characters for example (leading zeroes are inferred where
 #'   possible and included in outputs). See \code{\link{clean.fips}} for details.
+#' @param cleancounties whether to try to validate county FIPS based on list that ideally is always up to date
 #' @return ***TBD *** Returns *** types as character strings, and maybe cleaned values themselves? ***
 #' @seealso \code{\link{geofips}}, \code{\link[ejanalysis]{get.fips.st}} and related functions noted there, \code{\link[ejanalysis]{clean.fips}}, \code{\link[ejanalysis]{get.state.info}}
 #' @examples # none yet
 #' @export
-geotype <- function(x) {
+geotype <- function(x, cleancounties=TRUE) {
   stop('not done yet')
 
   # figure out what type of geo these are
@@ -48,9 +49,9 @@ geotype <- function(x) {
     if (nchar(fips)==1) {fips <- lead.zeroes(fips, 2)}
     if (nchar(fips)==4) {fips <- lead.zeroes(fips, 5)}
 
-    if (nchar(fips)==2 && (fips %in% valid.FIPS.ST$FIPS.ST)) {fipstype <- 'fips.state'} else {
-      if (nchar(fips)==5 && (fips %in% valid.FIPS.COUNTY)) {fipstype <- 'fips.county'} else {
-        if (tolower(fips) %in% valid.FIPS.ST$statename) {fipstype <- 'name.state'} else {
+    if (nchar(fips)==2 &&      (fips %in% valid.FIPS.ST$FIPS.ST)) {fipstype <- 'fips.state'} else {
+      if (nchar(fips)==5 &&    (fips %in% valid.FIPS.COUNTY))     {fipstype <- 'fips.county'} else {
+        if (tolower(fips) %in% valid.FIPS.ST$statename)           {fipstype <- 'name.state'}   else {
 
           # TRY TO FIGURE OUT COUNTY FROM COUNTYNAME BUT NEED STATE ALSO AND NOT YET IMPLEMENTED:
 
@@ -70,13 +71,13 @@ geotype <- function(x) {
       }
     }
 
-######## another version / start
+######## another version / started on this but likely incomplete...
 
     valid.states <- ejanalysis::get.state.info()[ , c('FIPS.ST', 'statename', 'ST')]
     #   ejanalysis::get.state.info   uses data(lookup.states, package='proxistat')
     valid.states$statename <- tolower(valid.states$statename)
 
-    valid.counties  <- ejanalysis::get.county.info()
+    valid.counties  <- ejanalysis::get.county.info() # but that has to be updated regularly in proxistat...
     # that uses  data(countiesall, package='proxistat') # has "ST", "countyname", "FIPS.COUNTY", "statename", "fullname"
 
     # What type of fips or name was provided if any?
@@ -119,7 +120,11 @@ geotype <- function(x) {
     stateok[stateportion %in% valid.states$statename]  <- TRUE
     stateok[STportion %in% valid.states$FIPS.ST]  <- TRUE
     #cat(stateportion, countyportion, stateok,'\n')
-    countyok <- (tolower(countyportion) %in% tolower(valid.counties$countyname))
+    if (cleancounties) {
+      countyok <- (tolower(countyportion) %in% tolower(valid.counties$countyname))
+    } else {
+
+    }
 
     fips[countyok  &  stateok] <- valid.counties$FIPS.COUNTY[match(
       paste(tolower(countyportion[countyok  &  stateok]), tolower(stateportion[countyok  &  stateok]), sep = ''),

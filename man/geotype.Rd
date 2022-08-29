@@ -4,7 +4,7 @@
 \alias{geotype}
 \title{Infer Type of Data as FIPS / ANSI Codes or Names of U.S. Geographies}
 \usage{
-geotype(x)
+geotype(x, cleancounties = TRUE)
 }
 \arguments{
 \item{x}{Required vector of one or more numeric or character FIPS and/or names of geographic locations.
@@ -13,6 +13,8 @@ Names for tracts, blockgroups, and blocks are not provided or interpreted.
 FIPS codes here are all the relevant digits starting with the 2-character state FIPS,
 so county fips must be 4-5 digits or characters for example (leading zeroes are inferred where
 possible and included in outputs). See \code{\link{clean.fips}} for details.}
+
+\item{cleancounties}{whether to try to validate county FIPS based on list that ideally is always up to date}
 }
 \value{
 ***TBD *** Returns *** types as character strings, and maybe cleaned values themselves? ***

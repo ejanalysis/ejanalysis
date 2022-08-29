@@ -1,5 +1,7 @@
 #' @title create lookup table as file of pop-weighted or unwtd percentiles, mean, sd for US or by state or region
-#' @description   also see \cr\cr
+#' @description check which functions actually get used for this now.
+#' @details
+#'   also see \cr\cr
 #'   ejscreen.lookuptables ??   \cr\cr
 #'
 #'   make.bin.pctile.cols   uses  assign.pctiles
@@ -8,11 +10,11 @@
 #'     pctiles.exact uses                  quantile(x, type = 1, probs = (1:100)/100, na.rm = TRUE))
 #'       The inverse of quantile is ecdf  (empirical cumulative distribution function)
 #'        a step function with jumps i/n at observation values, where i is the number of tied observations at that value. Missing values are ignored.
-
-For observations x= (x1,x2, ... xn), Fn is the fraction of observations less or equal to t, i.e.,
-
-Fn(t) = #{xi <= t}/n = 1/n sum(i=1,n) Indicator(xi <= t).
-
+#'
+#'  For observations x= (x1,x2, ... xn), Fn is the fraction of observations less or equal to t, i.e.,
+#'
+#'  Fn(t) = #{xi <= t}/n = 1/n sum(i=1,n) Indicator(xi <= t).
+#'
 #'       quantile() can use nine different quantile algorithms discussed in Hyndman and Fan (1996), -- Hyndman, R. J. and Fan, Y. (1996) Sample quantiles in statistical packages, American Statistician 50, 361–365. doi: 10.2307/2684934.
 #'       defined as weighted averages of consecutive order statistics.
 #'       type 1 is used here, and is "Inverse of empirical distribution function."

@@ -5,6 +5,7 @@
 #'   and also see \url{https://www.census.gov/geo/reference/geoidentifiers.html}
 #'   It does not check to see if the codes are valid other than counting how many characters each has.
 #' @param fips Vector of one or more elements, character class, 12 or 15 characters long (block group or block), required.
+#' @param clean Does not use clean.fips() if FALSE, which helps if the countiesall or other list is not yet updated, for example and lacks some new FIPS code
 #' @return Returns a vector of one or more character elements, same lengths as fips
 #' @template seealsoFIPS
 #' @examples
@@ -12,8 +13,8 @@
 #'  NA, 'invalidtext', '02')
 #' get.fips.st(samplefips)
 #' @export
-get.fips.st <- function(fips) {
-  fips <- clean.fips(fips) # checks length, NAs, infers missing leading zero, warns
+get.fips.st <- function(fips, clean=TRUE) {
+  if (clean) {fips <- clean.fips(fips)} # checks length, NAs, infers missing leading zero, warns
   fips[nchar(fips) < 2] <- NA
   return(as.character(substr(fips, 1, 2)))
 }

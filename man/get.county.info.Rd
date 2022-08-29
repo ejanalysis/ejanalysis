@@ -26,6 +26,7 @@ Function that reports some or all of a table of data
   for 1 or more counties. Query terms can be 5-digit FIPS,
   or 'countyname, statename', or just statename or just 2-letter state abbrev.
   'Montgomery, MD' will not work. 'Montgomery County, Maryland' will work.
+  ** UPDATED 6/2022 TO ACS 2020 COUNTY LIST (this relies on proxistat::countiesall)
 
   Requested fields can include any of these: "ST", "countyname", "FIPS.COUNTY", "statename", "fullname"
 }
