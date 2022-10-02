@@ -168,10 +168,10 @@ ej.added <- function(e, d, p, vs='nond', silent=TRUE) {
     plotd <- function(n) {
       x = ej.added(mydat[,names.e[n] ], mydat$VSI.eo,mydat$pop)
       # These differ but shouldn't really differ???
-      lims = quantile(x,probs = c(0.01,0.99),na.rm = TRUE)
+      lims = stats::quantile(x,probs = c(0.01,0.99),na.rm = TRUE)
       plot(x, mydat[,names.ej[n]], pch='.', main='comparison of manual calc of excess cases added to EJ Index', xlab='manually calculated contribution of mydat to excess cases among v', ylab='EJ Index', xlim=lims, ylim=lims)
-      abline(h = quantile(mydat[,names.ej[n]],probs = c(0.8,.9,.95),na.rm = TRUE))
-      abline(v = quantile(x,probs = c(0.8,.9,.95),na.rm = TRUE))
+      abline(h = stats::quantile(mydat[,names.ej[n]],probs = c(0.8,.9,.95),na.rm = TRUE))
+      abline(v = stats::quantile(x,probs = c(0.8,.9,.95),na.rm = TRUE))
     }
     plotd(2)
 
