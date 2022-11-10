@@ -12,10 +12,10 @@
 #'   # See ejscreen package function called ejscreen.rollup()
 #'   \dontrun{
 #'   # draft of COMPLETE EXAMPLE - NOT TESTED:
-#' # SPECIFY FIELDS TO ROLLUP VIA WTD AVG AND
-#' # WHICH TO DO VIA SUM OVER US/REGION/COUNTY/STATE/TRACT
+#'  # SPECIFY FIELDS TO ROLLUP VIA WTD AVG AND
+#'  # WHICH TO DO VIA SUM OVER US/REGION/COUNTY/STATE/TRACT
 #'
-#' # load('bg ... plus race eth subgrps ACS0812.RData') # if not already working with it
+#'  # load('bg ... plus race eth subgrps ACS0812.RData') # if not already working with it
 #'
 #' require(analyze.stuff)
 #' require(ejanalysis)
@@ -24,7 +24,7 @@
 #' data(names.e); data(names.ej); data(names.d)
 #' # Available for rolling up by: 'FIPS', "FIPS.TRACT", "FIPS.COUNTY", "FIPS.ST", 'REGION'
 #'
-#' # Get the sum for all the raw counts, and area
+#'  # Get the sum for all the raw counts, and area
 #' sumnames <- c('area', 'pop', 'povknownratio', 'age25up', 'hhlds', 'builtunits',
 #'               'mins', 'lowinc', 'lths', 'lingiso', 'under5', 'over64', 'pre1960',
 #'               'VNI.eo', 'VNI.svi6',
@@ -41,7 +41,7 @@
 #' tracts   <- rollup( bg[ , sumnames], FUN=function(z) sum(z, na.rm = TRUE), prefix = '', by=bg$FIPS.TRACT)
 #' names(tracts)[1] <- 'FIPS.TRACT'
 #'
-#' # Get the rollups of wtd.mean cols (at least E cols)
+#'  # Get the rollups of wtd.mean cols (at least E cols)
 #' avgnames <- names.e
 #' us.avg       <- rollup( bg[ , avgnames], prefix = '', wts=bg$pop)
 #' regions.avg  <- rollup( bg[ , avgnames], prefix = '', wts=bg$pop, by=bg$REGION)
@@ -53,14 +53,14 @@
 #' tracts.avg   <- rollup( bg[ , avgnames], prefix = '', wts=bg$pop, by=bg$FIPS.TRACT)
 #' names(tracts.avg)   <- gsub('by', 'FIPS.TRACT',  names(tracts.avg))
 #'
-#' # Merge sum and mean types of cols
+#'  # Merge sum and mean types of cols
 #' us <- cbind(us, us.avg, stringsAsFactors=FALSE)
 #' regions  <- merge(regions, regions.avg, by='REGION')
 #' states   <- merge(states,   states.avg, by='FIPS.ST')
 #' counties <- merge(counties, counties.avg, by='FIPS.COUNTY')
 #' tracts   <- merge(tracts,   tracts.avg, by='FIPS.TRACT')
 #'
-#'# Now calculate the derived fields like pct demog fields, EJ indexes, pctiles, bins, etc.
+#'  # Now calculate the derived fields like pct demog fields, EJ indexes, pctiles, bins, etc.
 #' See ejscreen::ejscreen.acs.calc()
 #'
 #' }
