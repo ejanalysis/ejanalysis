@@ -3,7 +3,7 @@
 #' @details
 #'   also see \cr\cr
 #'   ejscreen.lookuptables ??   \cr\cr
-#'
+#'  \preformatted{
 #'   make.bin.pctile.cols   uses  assign.pctiles
 #'
 #'   write.wtd.pctiles.by.zone  uses wtd.pctiles.exact or pctiles.exact  \cr\cr
@@ -41,7 +41,7 @@
 #'     wtd.pctiles.exact uses   Hmisc::wtd.quantile(x, wts, type = "i/n", probs = (1:100)/100) ,  na.rm = na.rm))
 #'       "i/n" uses the inverse of the empirical distribution function,
 #'       using  wt/T, where wt is the cumulative weight and T is the total weight (usually total sample size).
-#'
+#'    }
 #'   table.pop.pctile  and \cr\cr
 #'   map service with lookup tables \cr\cr \cr\cr
 #' \preformatted{
