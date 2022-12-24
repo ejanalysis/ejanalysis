@@ -27,6 +27,23 @@
 #' @examples
 #' ## #
 #' \dontrun{
+#'
+#'
+#'   bg <- ejscreen::bg22[, c(ejscreen::names.d, 'pop', ejscreen::names.e, 'REGION')]
+#'
+#' e <- bg$pm[!is.na(bg$pm)]
+#' dpct <- bg$pctmin
+#' dcount   <- bg$pop[!is.na(bg$pm)] *      dpct[!is.na(bg$pm)]
+#' refcount <- bg$pop[!is.na(bg$pm)] * (1 - dpct[!is.na(bg$pm)])
+#' brks <- 0:17
+#' etxt <- 'PM2.5'
+#' dtxt <- 'Minorities'
+#'
+#' pop.cdf(        e, pcts = dpct, pops = bg$pop)
+#' pop.cdf2(       e, dcount, refcount, etxt, dtxt, brks)
+#' pop.cdf.density(e, dcount, refcount, etxt, dtxt )
+#'
+#'
 #' # pop.cdf( 31:35, c(0.10, 0.10, 0.40, 0, 0.20), 1001:1005 )
 #'
 #' set.seed(99)
@@ -74,9 +91,13 @@
 #'
 #' }
 #' @export
-pop.cdf <- function(scores, pcts, pops, allothers=TRUE, col='red', main, weights, ...) {
+pop.cdf <- function(scores, pcts, pops, allothers=TRUE, col='lightblue', main, weights, ...) {
+  # e, dcount, refcount, etxt, dtxt, brks=10, ...
 
-  if (missing(main)) {main <- paste('Histogram of scores in selected group (', col, ') ', ifelse(allothers, 'vs. rest of the population',''), sep='')}
+  if (missing(main)) {main <- paste0(
+    'Histogram of scores in selected group (', col, ') ',
+    ifelse(allothers, 'vs. rest of the population', '')
+  )}
   if (missing(pops)) {pops <- 1}
   if (!missing(weights)) {warning('weights parameter is currently ignored, since pops*(1-pcts) is used as weights now')}
 
@@ -84,7 +105,6 @@ pop.cdf <- function(scores, pcts, pops, allothers=TRUE, col='red', main, weights
     stop('Scores or pcts must be a vector -- They cannot both be data.frames or have 2+ dimensions currently')
     # could just say is.vector(scores) & ... but a list() is also a vector.
   }
-
 
   valids <- !is.na(scores)
   if (length(dim(scores))!=0) {
@@ -110,7 +130,6 @@ pop.cdf <- function(scores, pcts, pops, allothers=TRUE, col='red', main, weights
 
   # still need to handle case where multiple scores, one group
 
-
   if (allothers) {
     plotrix::weighted.hist(x=scores, w=      pcts  * pops, freq=FALSE, col=col,  main=main, xlim=range(scores), ...)
     plotrix::weighted.hist(x=scores, w= (1 - pcts) * pops, freq=FALSE, add=TRUE, main=main, ...)
@@ -121,13 +140,13 @@ pop.cdf <- function(scores, pcts, pops, allothers=TRUE, col='red', main, weights
     # can't pass df to weighted.hist
     if (length(col)!=length(pcts[1, ])) {col=rep(col,length(pcts[1,]))}
 
-    plotrix::weighted.hist(scores,       pcts[, 1] * pops, freq=FALSE, col=col[1], main=main, ...)
+    plotrix::weighted.hist(scores,       pcts[ , 1] * pops, freq=FALSE, col=col[1], main=main, ...)
     for (i in 2:length(pcts[1,])) {
-      plotrix::weighted.hist(scores,       pcts[ , i] * pops, freq=FALSE, col=col[i], add=TRUE, ...)
+      plotrix::weighted.hist(scores,     pcts[ , i] * pops, freq=FALSE, col=col[i], add=TRUE, ...)
     }
   }
 
-
+  legend(x = "right", legend = c("Reference", dtxt), fill = c("white", "lightblue"))
 
   #plotrix::weighted.hist(bg$proximity.rmp, bg$pop * bg$pctmin,     xlim=c(0,1.8), freq=FALSE, breaks=c(0:18)/10 , col='red', main='pop hist for pctmin of RMP score')
   #plotrix::weighted.hist(bg$proximity.rmp, bg$pop * (1-bg$pctmin), xlim=c(0,1.8), freq=FALSE, breaks=c(0:18)/10 , add=TRUE)
