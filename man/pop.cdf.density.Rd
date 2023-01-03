@@ -32,6 +32,20 @@ Assumes you have weights for each and are comparing values in one group vs anoth
 }
 \examples{
 \dontrun{
+  bg <- ejscreen::bg22[, c(ejscreen::names.d, 'pop', ejscreen::names.e, 'REGION')]
+
+e <- bg$pm[!is.na(bg$pm)]
+dpct <- bg$pctmin
+dcount   <- bg$pop[!is.na(bg$pm)] *      dpct[!is.na(bg$pm)]
+refcount <- bg$pop[!is.na(bg$pm)] * (1 - dpct[!is.na(bg$pm)])
+brks <- 0:17
+etxt <- 'PM2.5'
+dtxt <- 'Minorities'
+
+pop.cdf(        e, pcts = dpct, pops = bg$pop)
+pop.cdf2(       e, dcount, refcount, etxt, dtxt, brks)
+pop.cdf.density(e, dcount, refcount, etxt, dtxt )
+
   pop.cdf.density(e = e, dcount = dcount, refcount = refcount, etxt = etxt, dtxt = dtxt,
 }
 }

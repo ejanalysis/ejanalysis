@@ -4,7 +4,7 @@
 \alias{pop.cdf2}
 \title{Overlay Two PDFs as Weighted Histograms}
 \usage{
-pop.cdf2(e, dcount, refcount, etxt, dtxt, brks = 10)
+pop.cdf2(e, dcount, refcount, etxt, dtxt, brks = 10, ...)
 }
 \arguments{
 \item{e}{Environmental or other indicator values vector}
@@ -18,6 +18,8 @@ pop.cdf2(e, dcount, refcount, etxt, dtxt, brks = 10)
 \item{dtxt}{Character string to name d in graph}
 
 \item{brks}{Default is 10. Passed as breaks param to plot function}
+
+\item{...}{passed to plotrix::weighted.hist()}
 }
 \value{
 Creates a plot
@@ -38,18 +40,22 @@ load("~/../../Dropbox/EJSCREEN/R analysis/bg 2015-04-22 Rnames plus subgroups.RD
 # main='pop hist for pctmin of RMP score', xlim=c(0,1.8),freq=FALSE,breaks=c(0:18)/10,col='red')
 #weighted.hist(bg$proximity.rmp,bg$pop*(1-bg$pctmin),
 # main='pop hist for pctmin of RMP score', xlim=c(0,1.8),freq=FALSE,breaks=c(0:18)/10,add=TRUE)
-e <- bg$pm[!is.na(bg$pm)]
-dcount   <- bg$pop[!is.na(bg$pm)] * bg$pctmin[!is.na(bg$pm)]
-refcount <- bg$pop[!is.na(bg$pm)] * (1 - bg$pctmin[!is.na(bg$pm)])
-brks = 0:17
-etxt = 'PM2.5'
-dtxt = 'minorities'
 
-#pop.cdf2(e, dcount, refcount, etxt, dtxt, brks)
-pop.cdf2(e = e, dcount = dcount, refcount = refcount,
- etxt = etxt, dtxt = dtxt, brks = brks)
-#  BUT, why does it not look the same as ... !!!
-pop.cdf(scores = e, pcts = bg$pctmin, pops = bg$pop, breaks = brks,
+  bg <- ejscreen::bg22[, c(ejscreen::names.d, 'pop', ejscreen::names.e, 'REGION')]
+
+e <- bg$pm[!is.na(bg$pm)]
+dpct <- bg$pctmin
+dcount   <- bg$pop[!is.na(bg$pm)] *      dpct[!is.na(bg$pm)]
+refcount <- bg$pop[!is.na(bg$pm)] * (1 - dpct[!is.na(bg$pm)])
+brks <- 0:17
+etxt <- 'PM2.5'
+dtxt <- 'Minorities'
+
+pop.cdf(        e, pcts = dpct, pops = bg$pop)
+pop.cdf2(       e, dcount, refcount, etxt, dtxt, brks)
+pop.cdf.density(e, dcount, refcount, etxt, dtxt )
+
+pop.cdf(scores = e, pcts = bg$pctmin, pops = bg$pop,
  main='PM2.5 distribution within each group (minority vs other)',
   ylab='Density (percentage of group population)')
 }

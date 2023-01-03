@@ -1,7 +1,7 @@
 #' @title Just print Relative Risks (RR) info by demog group by risk type by zone
 #' @description Currently does not do anything other than print. Takes zone-specific RRS values and prints them for viewing.
 #'   Just another way to specify which subset of the RR array you want to view.
-#' @param rrs A three dimensional array that is created by \code{\link{RR}} and has format like RRS[d, e, zone]
+#' @param x A three dimensional array that is created by \code{\link{RR}} and has format like RRS[d, e, zone]
 #' @param d Optional. Vector of names of demographic groups that must be subset of first dimension of RRS. Default is all.
 #' @param e Optional. Vector of names of environmental risk indicators that must be subset of second dimension of RRS. Default is all.
 #' @param zone Optional. Vector of zone names that must be subset of names of third dimension of RRS. Default is all.

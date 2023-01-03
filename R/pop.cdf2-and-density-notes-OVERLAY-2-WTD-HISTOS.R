@@ -1,7 +1,10 @@
-# if (1==0) {
+if (1==0) {
 #   # HOW TO PLOT WEIGHTED HISTOGRAMS, OVERLAID 1 DEMOG GROUP VS ALL OTHERS:
 #
-#   # ALSO SEE  https://plot.ly/ggplot2/geom_histogram/
+#   # ALSO SEE  'https://medium.com/@nickmartin812/how-to-r-visualizing-distributions-49ea4141fb32'
+#   #   for overlapping boxplots or density plots (pdf), not histograms.
+#   # and ggridges:: package
+#     # and maybe https://plot.ly/ggplot2/geom_histogram/
 #
 #   # see pop.cdf2
 #   # see pop.cdf
@@ -57,4 +60,4 @@
   abline(v=wtd.mean(bg$pm, weights = (1-bg$pctmin) * bg$pop), col='black')
   #?plot
   axis(side = 1, at = 4:14 )
-# }
+}
