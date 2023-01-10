@@ -1,7 +1,6 @@
 Package: ejanalysis
 Title: Tools for Environmental Justice (EJ) Analysis
 Version: 2.1.1
-Date: 2022-11-11
 Description: Tools that simplify some basic tasks in exploring and analyzing
     a dataset in a matrix or data.frame that contains data on demographics
     (e.g., counts of residents in poverty) and local environmental indicators
