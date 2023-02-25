@@ -67,7 +67,15 @@ This function requires, for each Census unit, demographic data on total populati
  densities <- round(drop(RR.means(e = data.frame(pop.density=1000*bg$pop/bg$area),
   d = bg[, c(namesd, namesdsub)], pop = bg$pop, dlab = c('Avg pop density', 'Avg if not in this demog group'))),2)
  densities[order(densities[,3],decreasing = T),]
-
+\dontrun{
+ # if the blockgroup data were a data.table...
+ bg <- data.frame(data.table::copy(EJAM::blockgroupstats))
+ x <- ejanalysis::RR.means(
+   bg[ ,   EJAM::names_e],
+   bg[ , c(EJAM::names_d, EJAM::names_d_subgroups)]/100,
+   bg$pop
+ )
+ }
 }
 \seealso{
 \itemize{
