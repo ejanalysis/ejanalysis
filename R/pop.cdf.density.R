@@ -1,6 +1,9 @@
-#' @title Overlay Two PDFs as Weighted Histogram-Like Density Plots
-#' @description Use plot(density()) to see overlay of two distribution functions.
-#' @details Assumes you have weights for each and are comparing values in one group vs another.
+#' @title Overlay 2 PDFs as Weighted Histograms
+#' @description OK but there now are better ways to compare pdf plots
+#' @details  For an easy, nice, smoothed density plot,
+#'   try plot(stats::density(bw = .001)); points(density(, bw = .001), col="red")
+#'   to see overlay of two frequency distributions.
+#'   Assumes you have weights for each and are comparing values in one group vs another.
 #' @param e Environmental or other indicator values vector
 #' @param dcount Vector of weights for the demographic group of interest, such as population counts of Hispanics by Census tract.
 #' @param refcount Vector of weights for the reference group, such as population counts of individuals who are not Hispanic, by Census tract.
@@ -27,7 +30,7 @@
 #' pop.cdf.density(e, dcount, refcount, etxt, dtxt )
 #'
 #'   pop.cdf.density(e = e, dcount = dcount, refcount = refcount, etxt = etxt, dtxt = dtxt,
-#                adjust=2, brks = brks)
+#'                adjust=2, brks = brks)
 #' }
 #' @export
 pop.cdf.density <- function(e, dcount, refcount, etxt, dtxt, brks=10, ...) {

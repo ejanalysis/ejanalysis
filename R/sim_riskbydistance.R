@@ -3,7 +3,7 @@
 #'
 #' Creates a simple set of 100 distances and at each distance simulated
 #'   demographics, risk levels, population density and size, etc.
-#'   Useful to explore how those decay with distance and how the
+#'   Useful to see how those decay with distance and how the
 #'   EJ metrics one might use depend on those factors and domain analyzed.
 #'
 #' @param dist Best not to change this. Distances simulated, such as 1 through 100 (that could be kilometers, for example).
@@ -23,7 +23,7 @@
 #'
 #' @examples
 #'   x <- sim_riskbydistance()
-#'   sim_plotrisk(x)
+#'   plot_3_by_distance(x)
 #'   sim_plotratios(x)
 sim_riskbydistance <- function(dist = 1:100,
                                ypopdensity.start = 100,
@@ -115,7 +115,7 @@ sim_riskbydistance <- function(dist = 1:100,
     cat("\nTry these: \n\n ")
     cat("x <- sim_riskbydistance() \n\n")
     # cat("plot(x$dist, x$riskratio.tohere, main = 'Ratio of mean risk among Demog group to mean risk among everyone else\n(for residents up to the given distance)', xlab='Distance from emissions source', ylab='Risk Ratio') \n\n")
-    cat("sim_plotrisk(x)  \n\n")
+    cat("plot_3_by_distance(x)  \n\n")
     cat("sim_plotratios(x)  \n\n")
     cat("sim_plotratios()  \n\n")
   }
@@ -124,7 +124,7 @@ sim_riskbydistance <- function(dist = 1:100,
   # cat("points(x$dist, 100 * x$dshare.of.cases.tohere / x$pctd.tohere, col='blue')  \n ")
   # cat("legend('topright', legend = c('Demog group mean risk / everyone elses', 'Demog group share of cases / their share of pop'), fill = c('black','blue')) \n\n ")
 
-  sim_plotrisk(outputs)
+  plot_3_by_distance(outputs)
 
   invisible(as.data.frame(outputs))
 
