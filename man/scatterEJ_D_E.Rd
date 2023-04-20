@@ -2,17 +2,19 @@
 % Please edit documentation in R/scatterEJ_D_E.R
 \name{scatterEJ_D_E}
 \alias{scatterEJ_D_E}
-\title{scatterplot EJScreen Demog vs Envt vs EJ Index}
+\title{scatterplot EJScreen Demog vs Envt vs EJ Index
+See one point per blockgroup, x=demog pctile, y=envt pctile, color=EJ pctile}
 \usage{
 scatterEJ_D_E(
-  d = bg21$pctile.VSI.eo,
-  e = bg21$pctile.traffic.score,
-  ejbin = bg21$bin.EJ.DISPARITY.traffic.score.eo,
+  d,
+  e,
+  ejbin,
   ename = "",
   legendtitle = "Percentiles of EJ Index (with yellow/orange/red as in the maps)",
   colors11 = c("white", "lightgray", "lightgreen", "darkgray", "purple", "black",
     "darkblue", "lightblue", "yellow", "orange", "red"),
-  main = "EJ Index percentile bins",
+  main =
+    "What combinations of E and D result in EJ Index being in various bins\\n                          so that place is shown on maps as in a given color-coded EJ Index percentile bin",
   mylegend = c("<10", "10-20", "20s", "30s", "40s", "50-60", "60s", "70s", "80-90",
     "90-95", ">95"),
   ...
@@ -42,4 +44,27 @@ Nothing. Draws a scatter plot.
 }
 \description{
 scatterplot EJScreen Demog vs Envt vs EJ Index
+See one point per blockgroup, x=demog pctile, y=envt pctile, color=EJ pctile
+}
+\examples{
+ \dontrun{
+ if (require(ejscreen)) {
+ bg = ejscreen::bg22
+ dd = bg$pctile.VSI.eo
+ ee = bg$pctile.traffic.score
+ jj = bg$bin.EJ.DISPARITY.traffic.score.eo
+ scatterEJ_D_E(d=dd, e = ee, ejbin = jj, ename = "Traffic Score")
+ }
+
+ if (require(EJAM)) {
+ bg = data.table(copy(EJAM::blockgroupstats))
+ ee = with(EJAM::blockgroupstats, as.vector(100 * make.pctile.cols(
+   traffic.score, as.df = F)) )
+ dd = with(blockgroupstats, as.vector(100 * make.pctile.cols(
+   VSI.eo, as.df = F)))
+ jj = with(blockgroupstats, as.vector(1 * make.bin.cols( as.vector(make.pctile.cols(
+   EJ.DISPARITY.traffic.score.eo, as.df = FALSE)), as.df = F)))
+ scatterEJ_D_E(d=dd, e = ee, ejbin = jj, ename = "Traffic Score")
+ }
+}
 }

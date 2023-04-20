@@ -2,7 +2,7 @@
 % Please edit documentation in R/pop.cdf.density.R
 \name{pop.cdf.density}
 \alias{pop.cdf.density}
-\title{Overlay Two PDFs as Weighted Histogram-Like Density Plots}
+\title{Overlay 2 PDFs as Weighted Histograms}
 \usage{
 pop.cdf.density(e, dcount, refcount, etxt, dtxt, brks = 10, ...)
 }
@@ -25,10 +25,13 @@ pop.cdf.density(e, dcount, refcount, etxt, dtxt, brks = 10, ...)
 Creates a plot
 }
 \description{
-Use plot(density()) to see overlay of two distribution functions.
+OK but there now are better ways to compare pdf plots
 }
 \details{
-Assumes you have weights for each and are comparing values in one group vs another.
+For an easy, nice, smoothed density plot,
+  try plot(stats::density(bw = .001)); points(density(, bw = .001), col="red")
+  to see overlay of two frequency distributions.
+  Assumes you have weights for each and are comparing values in one group vs another.
 }
 \examples{
 \dontrun{
@@ -47,6 +50,7 @@ pop.cdf2(       e, dcount, refcount, etxt, dtxt, brks)
 pop.cdf.density(e, dcount, refcount, etxt, dtxt )
 
   pop.cdf.density(e = e, dcount = dcount, refcount = refcount, etxt = etxt, dtxt = dtxt,
+               adjust=2, brks = brks)
 }
 }
 \seealso{
