@@ -3,21 +3,17 @@
 #' @description Function that reports some or all of a table of data
 #'   about queried (or all) US Counties (and county equivalents)
 #'   for 1 or more counties. Query terms can be 5-digit FIPS,
-#'   or 'countyname, statename', or just statename or just 2-letter state abbrev.
-#'   'Montgomery, MD' will not work. 'Montgomery County, Maryland' will work.
-#'   ** UPDATED 6/2022 TO ACS 2020 COUNTY LIST (this relies on proxistat::countiesall)
+#'   or  countyname, statename   or just   statename   or just   2-letter state abbrev.
+#'    Montgomery, MD   will not work.   Montgomery County, Maryland   will work.
+#'  UPDATED 6/2022 TO ACS 2020 COUNTY LIST (this relies on proxistat::countiesall)
 #'
-#'   Requested fields can include any of these: "ST", "countyname", "FIPS.COUNTY", "statename", "fullname"
-#' @details  Converted basic data to data, so now can also say data(counties, package='proxistat') or x <- countiesall via lazy loading. \cr
-#'   help(county.names, package='choroplethr') \cr
-#'   data(county.names) \cr
-#'   compare that function to this one: \cr
-#'   > length(county.names[,1]) \cr
-#'   [1] 3142 \cr
-#'   > length(get.county.info()[,1]) \cr
-#'   > head(county.names) \cr
+#'   Requested fields can include any of these: ST, countyname, FIPS.COUNTY, statename, fullname
+#' @details  Converted basic data to data, so now can also say data(counties, package="proxistat")
+#'   or x <- countiesall via lazy loading. \cr
+#'   Also see various packages like acs package or help( package="choroplethr") \cr
 #'   Also see:
-#'    \url{https://www.census.gov/geographies/reference-files/time-series/geo/gazetteer-files.html}
+#'
+#'  <https://www.census.gov/geographies/reference-files/time-series/geo/gazetteer-files.html>
 #'
 #'   Note this other possible list of abbreviations (not used) lacks US, PR, DC:  \cr
 #'   require(datasets); state.abb \cr
@@ -36,7 +32,9 @@
 #' QUERY, ST, countyname, FIPS.COUNTY, statename, fullname
 #'
 #' @examples
-#'  testdata <- c('01001', 1001, '1001', "Montgomery County, Maryland", "Montgomery County, MD", 'montgomery county, maryland', "Montgomery County MD", "MontgomeryCountyMD", "Montgomery County", "NY")
+#'  testdata <- c('01001', 1001, '1001', "Montgomery County, Maryland", "Montgomery County, MD",
+#'    'montgomery county, maryland', "Montgomery County MD", "MontgomeryCountyMD",
+#'    "Montgomery County", "NY")
 #'  testonlystates <- c('NY', 'NJ')
 #'  get.county.info(testdata)
 #'  get.county.info(testonlystates)

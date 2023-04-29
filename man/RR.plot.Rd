@@ -22,19 +22,19 @@ RR.plot(
 )
 }
 \arguments{
-\item{rrs}{Table as from \code{\link{RR.table}} function, of relative risk by demographic group, risk type, and zone (3 dimensions).}
+\item{rrs}{Table as from \code{\link[=RR.table]{RR.table()}} function, of relative risk by demographic group, risk type, and zone (3 dimensions).}
 
-\item{dnames}{Demographic group names to be found as names of first dim of RRS. Optional, default is \code{\link[ejscreen]{names.d.subgroups}} and \code{\link[ejscreen]{names.d}} from the ejscreen dataset.}
+\item{dnames}{Demographic group names to be found as names of first dim of RRS. Optional, default is \code{\link[ejscreen:names.d]{ejscreen::names.d.subgroups()}} and \code{\link[ejscreen:names.d]{ejscreen::names.d()}} from the ejscreen dataset.}
 
-\item{enames}{Environmental factor or risk type names to be found as names of second dim of RRS. Optional, default is \code{\link[ejscreen]{names.e}} from ejscreen package.}
+\item{enames}{Environmental factor or risk type names to be found as names of second dim of RRS. Optional, default is \code{\link[ejscreen:names.e]{ejscreen::names.e()}} from ejscreen package.}
 
 \item{zone}{Zone name to be found among names for third dim of RRS. Default is "USA"}
 
 \item{enames.nice}{optional character vector of labels to use instead of enames on the plot, same length and order as enames}
 
-\item{mycolors}{optional vector of colors to use for the vector of dnames, default is from \code{\link{rainbow}}}
+\item{mycolors}{optional vector of colors to use for the vector of dnames, default is from \code{\link[=rainbow]{rainbow()}}}
 
-\item{type}{optional as in \code{\link{plot}}, default is 'b' for both lines and points}
+\item{type}{optional as in \code{\link[=plot]{plot()}}, default is 'b' for both lines and points}
 
 \item{maxchar}{optional number, default 15. x axis labels are truncated to this length.}
 
@@ -48,7 +48,7 @@ RR.plot(
 
 \item{decreasing}{optional logical, default is TRUE. How to sort if sorted is TRUE. All sorted dimensions get sorted the same way.}
 
-\item{...}{optional additional parameters to pass to \code{\link{plot}}}
+\item{...}{optional additional parameters to pass to \code{\link[=plot]{plot()}}}
 }
 \value{
 draws a line plot
@@ -56,10 +56,6 @@ draws a line plot
 \description{
 Draws a plot using relative risk information, one line per demographic group.
 }
-\examples{
-#
-  ## #
-}
 \seealso{
-\code{\link{RR.table}}
+\code{\link[=RR.table]{RR.table()}}
 }

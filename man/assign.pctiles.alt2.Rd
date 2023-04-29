@@ -26,7 +26,7 @@ and find what percentile a given value is at.
 \details{
 Assign percentile as cumulative sum of (the weights ranked by the value x).
 Then fixes ties.
-	# Could also add parameter like in rank(), na.last,
+# Could also add parameter like in rank(), na.last,
 defining na.rm but also where to rank NA values if included, etc.
 Default now is like na.last=NA, but like na.last='last' if na.rm=FALSE
 Could also add parameter like in rank(), ties.method, defining if ties get min, max, or mean of percentiles initially assigned to ties.

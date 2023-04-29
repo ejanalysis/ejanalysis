@@ -1,6 +1,6 @@
 #' @title RR for one environmental indicator, one demographic group
 #'
-#' @description **Probably obsolete given \code{\link{RR}}. \cr\cr
+#' @description **Probably obsolete given [RR()]. \cr\cr
 #'   Inputs are vectors over small places like Census blocks or block groups
 #'   or possibly individuals (ideally) but then d would be a dummy=1 for selected group and 0 for people not in selected group
 #'

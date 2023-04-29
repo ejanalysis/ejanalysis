@@ -1,6 +1,6 @@
 #' @title Weighted Percentiles and Bin Numbers for Each Column, by zone, such as percentiles within each State
 #'
-#' @description This function just combines \code{\link{make.pctile.cols}} and \code{\link{make.bin.cols}}.
+#' @description This function just combines [make.pctile.cols()] and [make.bin.cols()].
 #' Takes a data.frame of values and returns a data.frame (or matrix) of percentiles,
 #' showing the percentile of a value within all values in its column, as well as bin numbers,
 #' showing what bin each falls into, based on specified cutoffs defining bins. \cr\cr
@@ -11,8 +11,8 @@
 #' @param prefix.bin Optional character element, default is 'bin.', provides text to paste to beginning of input data.frame column names to use as bin output column names.
 #' @param as.df Optional logical TRUE by default, in which case matrix results are converted to data.frame
 #' @param zone NULL by default, but if a vector is provided, it defines zones to group by, so percentiles are within a given zone only.
-#' @param cutpoints Default is 1:11. see \code{\link{make.bin.cols}}
-#' @param labels Default is c(0.00, 0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90,  0.95,  1.00). see \code{\link{make.bin.cols}}
+#' @param cutpoints Default is 1:11. see [make.bin.cols()]
+#' @param labels Default is c(0.00, 0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90,  0.95,  1.00). see [make.bin.cols()]
 #' @return Returns a matrix or data.frame
 #' @template seePctiles
 #' @export

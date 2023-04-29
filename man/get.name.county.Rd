@@ -19,12 +19,12 @@ Extracts partial (e.g., just state or county name) text name of a place from the
 }
 \details{
 Inputs can be tracts or block groups as in the relevant ACS summary files, possibly others at some point.  \cr
- For tracts, there are only 3 parts to placename (tract, county, state)  \cr
+For tracts, there are only 3 parts to placename (tract, county, state)  \cr
 For block groups, there are 4 parts to placename (block group, tract, county, state) \cr
 Note that County names are not unique -- the same County name may exist in 2+ States. \cr
 also see \url{http://www.census.gov/geo/reference/ansi.html}  \cr
 See \url{http://www.census.gov/geo/reference/codes/files/national_county.txt} but file has moved
- Note old code was in GET COUNTY NAMES FROM NHGIS DATASET.R
+Note old code was in GET COUNTY NAMES FROM NHGIS DATASET.R
 }
 \examples{
 # Test data where some are block groups and some are tracts,
@@ -48,7 +48,7 @@ head(mynames2, 20)
 }
 \seealso{
 \code{\link{clean.fips1215}}, \code{\link{get.fips.bg}}, \code{\link{get.fips.tract}}, \code{\link{get.fips.county}}, \code{\link{get.fips.st}} to get partial FIPS from longer FIPS, or
-  \code{\link{get.name.county}}, \code{\link{get.name.state}} to extract name from longer Census name, or
-  \code{\link{get.state.info}}, \code{\link{get.county.info}}, \code{\link{get.epa.region}}
-  to look up info such as FIPS, state abbreviation, statename, countyname, or region based on FIPS or name.
+\code{\link{get.name.county}}, \code{\link{get.name.state}} to extract name from longer Census name, or
+\code{\link{get.state.info}}, \code{\link{get.county.info}}, \code{\link{get.epa.region}}
+to look up info such as FIPS, state abbreviation, statename, countyname, or region based on FIPS or name.
 }

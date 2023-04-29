@@ -3,7 +3,7 @@
 \name{RR.table.addmaxzone}
 \alias{RR.table.addmaxzone}
 \title{Add to an existing RR.table the max relative risk value from any zone in the table
- This function adds RR values from the max zone but RR.table already does this.}
+This function adds RR values from the max zone but RR.table already does this.}
 \usage{
 RR.table.addmaxzone(x, testing = FALSE)
 }
@@ -14,5 +14,5 @@ RR.table.addmaxzone(x, testing = FALSE)
 }
 \description{
 Add to an existing RR.table the max relative risk value from any zone in the table
- This function adds RR values from the max zone but RR.table already does this.
+This function adds RR values from the max zone but RR.table already does this.
 }

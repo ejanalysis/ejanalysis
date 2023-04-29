@@ -2,7 +2,7 @@
 #'
 #' @description Takes values (vector, matrix, or data.frame) and returns percentiles,
 #'   showing the percentile of a value within all values in its column.
-#' @param values Data.frame, matrix, or vector of values. One column at a time is analyzed using \code{\link{assign.pctiles}}
+#' @param values Data.frame, matrix, or vector of values. One column at a time is analyzed using [assign.pctiles()]
 #' @param weights Optional numeric vector of weights (default is unweighted) to create weighted percentiles, such as population-weighted quantiles. Unweighted if not specified. Vector same length as number of rows in values parameter (or elements if vector).
 #' @param prefix Optional character element, default is 'pctile.', provides text to paste to beginning of input data.frame column names to use as output column names.
 #' @param as.df Optional logical TRUE by default, in which case matrix results are converted to data.frame

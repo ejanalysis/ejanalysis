@@ -2,24 +2,22 @@
 #'
 #' @description
 #'  Draws a plot using relative risk information, one line per demographic group.
-#' @param rrs Table as from \code{\link{RR.table}} function, of relative risk by demographic group, risk type, and zone (3 dimensions).
-#' @param dnames Demographic group names to be found as names of first dim of RRS. Optional, default is \code{\link[ejscreen]{names.d.subgroups}} and \code{\link[ejscreen]{names.d}} from the ejscreen dataset.
-#' @param enames Environmental factor or risk type names to be found as names of second dim of RRS. Optional, default is \code{\link[ejscreen]{names.e}} from ejscreen package.
+#' @param rrs Table as from [RR.table()] function, of relative risk by demographic group, risk type, and zone (3 dimensions).
+#' @param dnames Demographic group names to be found as names of first dim of RRS. Optional, default is [ejscreen::names.d.subgroups()] and [ejscreen::names.d()] from the ejscreen dataset.
+#' @param enames Environmental factor or risk type names to be found as names of second dim of RRS. Optional, default is [ejscreen::names.e()] from ejscreen package.
 #' @param zone Zone name to be found among names for third dim of RRS. Default is "USA"
 #' @param enames.nice optional character vector of labels to use instead of enames on the plot, same length and order as enames
 #' @param sorted optional logical, default is TRUE. Whether to sort before plotting.
 #' @param margins optional numeric vector, default is c(1, 2, 3). Specifies which dimensions to sort if sorted is TRUE.
 #' @param decreasing optional logical, default is TRUE. How to sort if sorted is TRUE. All sorted dimensions get sorted the same way.
-#' @param type optional as in \code{\link{plot}}, default is 'b' for both lines and points
-#' @param mycolors optional vector of colors to use for the vector of dnames, default is from \code{\link{rainbow}}
+#' @param type optional as in [plot()], default is 'b' for both lines and points
+#' @param mycolors optional vector of colors to use for the vector of dnames, default is from [rainbow()]
 #' @param maxchar optional number, default 15. x axis labels are truncated to this length.
 #' @param cex.axis optional default 0.5, size of enames lables on x axis
 #' @param cex.legend optional default 0.8, size of dnames in legend
-#' @param ... optional additional parameters to pass to \code{\link{plot}}
+#' @param ... optional additional parameters to pass to [plot()]
 #' @return draws a line plot
-#' @seealso \code{\link{RR.table}}
-#' @examples #
-#'   ## #
+#' @seealso [RR.table()]
 #' @export
 RR.plot <-
   function(rrs,

@@ -1,9 +1,9 @@
 #' @title Identify EPA Region for given state (or FIPS)
 #'
 #' @description Identify US Environmental Protection Agency region(s) containing given state(s) (or via FIPS)
-#' @details For EPA Regions, see \url{http://www2.epa.gov/aboutepa#pane-4} or \url{http://www2.epa.gov/aboutepa/visiting-regional-office}.
-#'   For information on FIPS codes, see \url{http://www.census.gov/geo/reference/ansi.html},
-#'   and also see \url{https://www.census.gov/geo/reference/geoidentifiers.html}
+#' @details For EPA Regions, see <http://www2.epa.gov/aboutepa#pane-4> or <http://www2.epa.gov/aboutepa/visiting-regional-office>.
+#'   For information on FIPS codes, see <http://www.census.gov/geo/reference/ansi.html>,
+#'   and also see <https://www.census.gov/geo/reference/geoidentifiers.html>
 #' @param state Vector of numeric or character class, required. Can be state FIPs as number or character, 2-character state abbreviation, or full state name
 #' @return Returns a vector of numbers, same length as state
 #' @examples

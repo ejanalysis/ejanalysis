@@ -6,7 +6,7 @@
 #'
 #' @details
 #'   This is based on US Census Bureau recommendations for working with American Community Survey summary file data.
-#'   See \url{http://www.census.gov/programs-surveys/acs/guidance.html} and \url{http://www.census.gov/library/publications/2009/acs/researchers.html}
+#'   See <http://www.census.gov/programs-surveys/acs/guidance.html> and <http://www.census.gov/library/publications/2009/acs/researchers.html>
 #'   For example, one can estimate MOE for percent poor in a block group, given
 #'   estimates and margins of error for the count who are poor, and the count for whom poverty status is known.
 #'
@@ -15,7 +15,7 @@
 #' @param a.moe Margins of error for numerators, as a vector  (should be same length as a).
 #' @param b.moe Margins of error for denominators, as a vector (should be same length as a, or it is recycled).
 #' @return Returns margin(s) of error same shape as parameter a
-#' @seealso \code{\link{sumoe}}
+#' @seealso [sumoe()]
 #' @examples
 #' 	 x <- pct.moe(15, 100, 3, 10)
 #' @export

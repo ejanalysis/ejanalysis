@@ -46,9 +46,9 @@ silently returns data.frame of many indicators, at each of the 100 distances
 }
 \description{
 Creates a simple set of 100 distances and at each distance simulated
-  demographics, risk levels, population density and size, etc.
-  Useful to see how those decay with distance and how the
-  EJ metrics one might use depend on those factors and domain analyzed.
+demographics, risk levels, population density and size, etc.
+Useful to see how those decay with distance and how the
+EJ metrics one might use depend on those factors and domain analyzed.
 }
 \examples{
   x <- sim_riskbydistance()

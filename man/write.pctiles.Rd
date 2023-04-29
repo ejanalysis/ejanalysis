@@ -16,6 +16,6 @@ A data.frame with percentiles, mean, and standard deviation. Same number of colu
 }
 \description{
 Given a data.frame, for each column in the data.frame,
-  this function just returns percentiles, mean, and standard deviation.
-  Also saves that as a csv file.
+this function just returns percentiles, mean, and standard deviation.
+Also saves that as a csv file.
 }

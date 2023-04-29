@@ -17,20 +17,20 @@ Clean up US Census FIPS (add any missing leading zeroes)
 }
 \details{
 For information on FIPS codes, see \url{http://www.census.gov/geo/reference/ansi.html},
-  and also see \url{https://www.census.gov/geo/reference/geoidentifiers.html} \cr\cr
- If FIPS provided is 1-2 digits long assume it is a State.\cr
- If FIPS provided is 3 digits long, it is a mistake and return NA.\cr
- If FIPS provided is 4-5 digits, assume it is a County.\cr
- If FIPS provided is 6-9 digits, it is a mistake and return NA.\cr
- If FIPS provided is 10 digits long, assume it is a tract missing a leading zero on the state portion (should have 11 characters).\cr
- If FIPS provided is 11 digits long, assume it is a tract (correctly 11 characters), not simply a block group FIPS missing a leading zero (block group FIPS would correctly would have 12 characters).\cr
- If FIPS provided is 12 digits long, assume it is a block group (correctly 12 characters).\cr
- If FIPS provided is 13 digits long, it is a mistake and return NA.\cr
- If FIPS provided is 14 OR 15 digits long, assume it is a block.
+and also see \url{https://www.census.gov/geo/reference/geoidentifiers.html} \cr\cr
+If FIPS provided is 1-2 digits long assume it is a State.\cr
+If FIPS provided is 3 digits long, it is a mistake and return NA.\cr
+If FIPS provided is 4-5 digits, assume it is a County.\cr
+If FIPS provided is 6-9 digits, it is a mistake and return NA.\cr
+If FIPS provided is 10 digits long, assume it is a tract missing a leading zero on the state portion (should have 11 characters).\cr
+If FIPS provided is 11 digits long, assume it is a tract (correctly 11 characters), not simply a block group FIPS missing a leading zero (block group FIPS would correctly would have 12 characters).\cr
+If FIPS provided is 12 digits long, assume it is a block group (correctly 12 characters).\cr
+If FIPS provided is 13 digits long, it is a mistake and return NA.\cr
+If FIPS provided is 14 OR 15 digits long, assume it is a block.
 }
 \seealso{
 \code{\link{clean.fips1215}}, \code{\link{get.fips.bg}}, \code{\link{get.fips.tract}}, \code{\link{get.fips.county}}, \code{\link{get.fips.st}} to get partial FIPS from longer FIPS, or
-  \code{\link{get.name.county}}, \code{\link{get.name.state}} to extract name from longer Census name, or
-  \code{\link{get.state.info}}, \code{\link{get.county.info}}, \code{\link{get.epa.region}}
-  to look up info such as FIPS, state abbreviation, statename, countyname, or region based on FIPS or name.
+\code{\link{get.name.county}}, \code{\link{get.name.state}} to extract name from longer Census name, or
+\code{\link{get.state.info}}, \code{\link{get.county.info}}, \code{\link{get.epa.region}}
+to look up info such as FIPS, state abbreviation, statename, countyname, or region based on FIPS or name.
 }

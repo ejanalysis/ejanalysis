@@ -13,8 +13,8 @@ url.open(myurl)
 Just launches browser to open URL
 }
 \description{
-Just the same as \code{\link{browseURL}}
+Just the same as \code{\link[=browseURL]{browseURL()}}
 }
 \seealso{
-\code{\link{browseURL}}, and \code{\link{shell.exec}} which this uses
+\code{\link[=browseURL]{browseURL()}}, and \code{\link[=shell.exec]{shell.exec()}} which this uses
 }

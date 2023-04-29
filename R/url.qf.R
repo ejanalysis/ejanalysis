@@ -1,8 +1,8 @@
 #' @title US Census Quickfacts Webpage URL
 #'
 #' @description Get URL for webpage that provides basic demographic information from United States Census Bureau.
-#' @details  For information on FIPS codes, see \url{http://www.census.gov/geo/reference/ansi.html},
-#'   and also see \url{https://www.census.gov/geo/reference/geoidentifiers.html} \cr\cr
+#' @details  For information on FIPS codes, see <http://www.census.gov/geo/reference/ansi.html>,
+#'   and also see <https://www.census.gov/geo/reference/geoidentifiers.html> \cr\cr
 #'   	#################### \cr\cr
 #' If FIPS provided is 10 digits long, assume it is a tract missing a leading zero on the state portion (should have 11 characters).\cr
 #' If FIPS provided is 11 digits long, assume it is a tract (correctly 11 characters), not simply a block group FIPS missing a leading zero (block group FIPS would correctly would have 12 characters).\cr
@@ -16,7 +16,7 @@
 #' # URL FORMATS FOR QUICKFACTS REPORT ON A COUNTY FROM CENSUS QUICKFACTS SITE: \cr
 #' #\cr
 #' #A WHOLE STATE: \cr
-#' # \url{http://quickfacts.census.gov/qfd/states/01000.html} \cr
+#' # <http://quickfacts.census.gov/qfd/states/01000.html> \cr
 #' # \cr
 #' #WHERE 01000 = STATE 2-DIGIT FIPS,  PLUS 3 ZEROES \cr
 #' # \cr

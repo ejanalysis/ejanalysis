@@ -17,7 +17,7 @@
 #' @param cutpoints Optional vector of cutpoints defining edges of bins. Default is every 0.10 from 0 through 1.00, as well as 0.95
 #' @param labels Vector of bin numbers (defining what is returned for values in those bins), optional (default is 1 through 11, and NA values are put in bin 0).
 #' @param prefix Optional character element, ".bin" by default, pasted as prefix to each column name of pctile.df, and used as names of returned columns.
-#' @return Returns a data.frame, matrix, or vector (depending on \code{as.df}) the same shape as pctile.df
+#' @return Returns a data.frame, matrix, or vector (depending on `as.df`) the same shape as pctile.df
 #' @template seePctiles
 #' @examples
 #' 	#  new.bin.cols <- make.bin.cols(places[ , names.e.pctile])

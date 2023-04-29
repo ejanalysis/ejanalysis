@@ -17,7 +17,7 @@ RR.plotbar(
 )
 }
 \arguments{
-\item{x}{Results of \code{\link{RR.means}} function, mean indicator score or risk by demographic group}
+\item{x}{Results of \code{\link[=RR.means]{RR.means()}} function, mean indicator score or risk by demographic group}
 
 \item{dname}{Demographic group name to be found among names of first dim of x. Required.}
 
@@ -29,17 +29,17 @@ RR.plotbar(
 
 \item{reflab}{optional character vector of lable to use for reference group. Default is Non-dlab (e.g., "Non-Poor")}
 
-\item{cex.names}{optional numeric vector passed to \code{\link{barplot}}}
+\item{cex.names}{optional numeric vector passed to \code{\link[=barplot]{barplot()}}}
 
-\item{cex.axis}{optional numeric vector passed to \code{\link{barplot}}}
+\item{cex.axis}{optional numeric vector passed to \code{\link[=barplot]{barplot()}}}
 
-\item{...}{optional other parameters passed to \code{\link{barplot}}}
+\item{...}{optional other parameters passed to \code{\link[=barplot]{barplot()}}}
 }
 \value{
 draws a barplot, returns the two values as named list
 }
 \description{
-Draws a plot using group means from \code{\link{RR.means}}
+Draws a plot using group means from \code{\link[=RR.means]{RR.means()}}
 }
 \examples{
 \dontrun{
@@ -47,9 +47,10 @@ Draws a plot using group means from \code{\link{RR.means}}
     ### x should be the output of RR.means()
     x <- RR.means(e = bgtest$traffic.score, d = bgtest$pctmin, pop = bgtest$pop)
     RR.plotbar(x, 'pctlths', 'proximity.rmp')
-    RR.plotbar(x, 'pctmin', 'proximity.tsdf', dlab = 'Minorities', elab = 'Haz. Waste TSD Facility Proximity Score', ylab = 'Proximity Score')
+    RR.plotbar(x, 'pctmin', 'proximity.tsdf', dlab = 'Minorities',
+      elab = 'Haz. Waste TSD Facility Proximity Score', ylab = 'Proximity Score')
  }
 }
 \seealso{
-\code{\link{RR.plot}}
+\code{\link[=RR.plot]{RR.plot()}}
 }

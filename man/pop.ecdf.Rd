@@ -35,7 +35,7 @@ Can also be a vector of colors if pcts is a data.frame with one column per group
 
 \item{weights}{Not used currently. See \code{pops} parameter}
 
-\item{subtitles}{Logical FALSE by default, which means extra info is not shown (see help on \code{\link[Hmisc]{Ecdf}})}
+\item{subtitles}{Logical FALSE by default, which means extra info is not shown (see help on \code{\link[Hmisc:Ecdf]{Hmisc::Ecdf()}})}
 
 \item{...}{other optional parameters to pass to Ecdf}
 }
@@ -43,18 +43,18 @@ Can also be a vector of colors if pcts is a data.frame with one column per group
 draws a plot
 }
 \description{
-Draws a plot using \code{\link[Hmisc]{Ecdf}}, overlaying cumulative distribution functions,
- one for each subgroup specified.
- Useful to compare 2 groups based on each groups entire pdf or cdf  distribution of peoples scores,
- using data from small places like census block groups, based on having for each place the pop total
- and \% of pop that is in each group or perhaps already have count in each group.
+Draws a plot using \code{\link[Hmisc:Ecdf]{Hmisc::Ecdf()}}, overlaying cumulative distribution functions,
+one for each subgroup specified.
+Useful to compare 2 groups based on each groups entire pdf or cdf  distribution of peoples scores,
+using data from small places like census block groups, based on having for each place the pop total
+and \\% of pop that is in each group or perhaps already have count in each group.
 }
 \details{
 Notes: \cr
 to compare zones, \cr
 compare demog groups, (see parameter called group)\cr
 compare multiple groups and/or multiple zones, like hisp vs others in us vs ca all on one graph\cr
-see \code{\link{Ecdf}} for options & try passing a data.frame instead of just vector\cr
+see \code{\link[=Ecdf]{Ecdf()}} for options & try passing a data.frame instead of just vector\cr
 }
 \examples{
 ## #
@@ -116,5 +116,5 @@ pop.ecdf(bg$traffic.score, bg$ST=='CA', bg$pop * bg$VSI.eo, log='x')
 }
 }
 \seealso{
-\code{\link[Hmisc]{Ecdf}} \code{\link{RR}} \code{\link{pop.cdf}}   \code{\link{pop.cdf2}} \code{\link{pop.ecdf}}  \code{\link{pop.cdf.density}}
+\code{\link[Hmisc:Ecdf]{Hmisc::Ecdf()}} \code{\link[=RR]{RR()}} \code{\link[=pop.cdf]{pop.cdf()}}   \code{\link[=pop.cdf2]{pop.cdf2()}} \code{\link[=pop.ecdf]{pop.ecdf()}}  \code{\link[=pop.cdf.density]{pop.cdf.density()}}
 }

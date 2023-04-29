@@ -21,6 +21,6 @@ ejRRadded(E, D = 1, P = 1, na.rm = TRUE, n = 5, ...)
 }
 \description{
 Formulas for pop counts, pop demog pct, risk, cases, RR,
- excess risk, excess cases (like EJ index sum),
- and how those are different under 4 alt scenarios like E of D is set to that of dref.
+excess risk, excess cases (like EJ index sum),
+and how those are different under 4 alt scenarios like E of D is set to that of dref.
 }

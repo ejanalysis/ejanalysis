@@ -37,7 +37,7 @@ pop.ecdf.dd(
 
 \item{sorted}{Optional logical, default is TRUE. Should the legend be sorted in order of population weighted mean values of e?}
 
-\item{log}{Default is ''. Passed to \code{\link{pop.ecdf}}}
+\item{log}{Default is ''. Passed to \code{\link[=pop.ecdf]{pop.ecdf()}}}
 
 \item{...}{Other optional parameters to pass to Ecdf}
 }
@@ -45,11 +45,11 @@ pop.ecdf.dd(
 Draws a plot
 }
 \description{
-Draws a plot using \code{\link[Hmisc]{Ecdf}}, overlaying cumulative distribution functions,
- one for each subgroup specified, and one for overall population.
- Useful to compare subgroups based on the distribution of scores among people in that subgroup
- using data from small places like census block groups, based on having for each place the pop total
- and % of pop that is in each group.
+Draws a plot using \code{\link[Hmisc:Ecdf]{Hmisc::Ecdf()}}, overlaying cumulative distribution functions,
+one for each subgroup specified, and one for overall population.
+Useful to compare subgroups based on the distribution of scores among people in that subgroup
+using data from small places like census block groups, based on having for each place the pop total
+and \% of pop that is in each group.
 }
 \examples{
 ## #
@@ -61,5 +61,5 @@ esim= rlnorm(12000, log(10), log(1.15)) + rnorm(12000, 1, 0.5) * pctminsim - 1
 }
 }
 \seealso{
-\code{\link[Hmisc]{Ecdf}} \code{\link{RR}} \code{\link{pop.cdf}}   \code{\link{pop.cdf2}} \code{\link{pop.ecdf}}  \code{\link{pop.cdf.density}}
+\code{\link[Hmisc:Ecdf]{Hmisc::Ecdf()}} \code{\link[=RR]{RR()}} \code{\link[=pop.cdf]{pop.cdf()}}   \code{\link[=pop.cdf2]{pop.cdf2()}} \code{\link[=pop.ecdf]{pop.ecdf()}}  \code{\link[=pop.cdf.density]{pop.cdf.density()}}
 }

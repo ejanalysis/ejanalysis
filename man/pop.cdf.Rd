@@ -21,7 +21,7 @@ pop.cdf(
 \item{pcts}{Numeric vector or data.frame, required. Same number of vector elements or data.frame
 rows as length of scores. Specifies the fraction of population that is in demographic group(s) of interest, one row per place, one group per column.}
 
-\item{pops}{Vector used to define weights as pop*pcts, and if allothers=TRUE, for pop*(1-pcts) for nongroup}
+\item{pops}{Vector used to define weights as pop\emph{pcts, and if allothers=TRUE, for pop}(1-pcts) for nongroup}
 
 \item{allothers}{Logical value, optional, TRUE by default. Whether to plot a series for everyone else, using 1-pct}
 
@@ -38,18 +38,18 @@ Can also be a vector of colors if pcts is a data.frame with one column per group
 Draws a plot
 }
 \description{
-Draws a histogram plot using \code{\link[plotrix]{weighted.hist}}, overlaying distribution functions,
- one for each subgroup specified.
- Useful to compare 2 groups based on each groups entire pdf distribution of peoples scores,
- using data from small places like census block groups, based on having for each place the pop total
- and % of pop that is in each group or perhaps already have count in each group.
+Draws a histogram plot using \code{\link[plotrix:weighted.hist]{plotrix::weighted.hist()}}, overlaying distribution functions,
+one for each subgroup specified.
+Useful to compare 2 groups based on each groups entire pdf distribution of peoples scores,
+using data from small places like census block groups, based on having for each place the pop total
+and \% of pop that is in each group or perhaps already have count in each group.
 }
 \details{
 Notes: \cr
 to compare zones, \cr
 compare demog groups, (see parameter called group)\cr
 compare multiple groups and/or multiple zones, like hisp vs others in us vs ca all on one graph\cr
-see \code{\link[plotrix]{weighted.hist}} for options \cr
+see \code{\link[plotrix:weighted.hist]{plotrix::weighted.hist()}} for options \cr
 }
 \examples{
 ## #
@@ -116,5 +116,5 @@ pop.cdf(bg$traffic.score, bg$ST=='CA', bg$pop * bg$VSI.eo, log='x')
 }
 }
 \seealso{
-\code{\link[Hmisc]{Ecdf}} \code{\link{RR}} \code{\link{pop.cdf}}   \code{\link{pop.cdf2}} \code{\link{pop.ecdf}}  \code{\link{pop.cdf.density}}
+\code{\link[Hmisc:Ecdf]{Hmisc::Ecdf()}} \code{\link[=RR]{RR()}} \code{\link[=pop.cdf]{pop.cdf()}}   \code{\link[=pop.cdf2]{pop.cdf2()}} \code{\link[=pop.ecdf]{pop.ecdf()}}  \code{\link[=pop.cdf.density]{pop.cdf.density()}}
 }

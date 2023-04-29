@@ -19,13 +19,13 @@ Returns margin(s) of error same shape as parameter estimates
 }
 \description{
 Estimates the margin of error (MOE) that characterizes uncertainty, for a sum of estimates,
-  based on their MOE values.
+based on their MOE values.
 }
 \details{
 This is based on US Census Bureau recommendations for working with American Community Survey summary file data.
-  This also works for differences (subtraction), not just sums.
-  For example, one can estimate MOE for number of people with less than high school education in a block group, given
-  estimates and margins of error for the count whose educational attainment is no school, first grade, second grade... 11th grade.
+This also works for differences (subtraction), not just sums.
+For example, one can estimate MOE for number of people with less than high school education in a block group, given
+estimates and margins of error for the count whose educational attainment is no school, first grade, second grade... 11th grade.
 }
 \examples{
  povknownratio <- c(500, 2000, 1500); povknownratio.m <- c(100, 300, 250)
@@ -35,5 +35,5 @@ This is based on US Census Bureau recommendations for working with American Comm
  cbind(lowinc=lowinc, MOE=lowinc.m, PCTMOE=round(lowinc.m/lowinc,2))
 }
 \seealso{
-\code{\link{pct.moe}}
+\code{\link[=pct.moe]{pct.moe()}}
 }

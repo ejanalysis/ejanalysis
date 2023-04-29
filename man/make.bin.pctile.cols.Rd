@@ -28,15 +28,15 @@ make.bin.pctile.cols(
 
 \item{prefix.pctile}{Optional character element, default is 'pctile.', provides text to paste to beginning of input data.frame column names to use as pctile output column names.}
 
-\item{cutpoints}{Default is 1:11. see \code{\link{make.bin.cols}}}
+\item{cutpoints}{Default is 1:11. see \code{\link[=make.bin.cols]{make.bin.cols()}}}
 
-\item{labels}{Default is c(0.00, 0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90,  0.95,  1.00). see \code{\link{make.bin.cols}}}
+\item{labels}{Default is c(0.00, 0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90,  0.95,  1.00). see \code{\link[=make.bin.cols]{make.bin.cols()}}}
 }
 \value{
 Returns a matrix or data.frame
 }
 \description{
-This function just combines \code{\link{make.pctile.cols}} and \code{\link{make.bin.cols}}.
+This function just combines \code{\link[=make.pctile.cols]{make.pctile.cols()}} and \code{\link[=make.bin.cols]{make.bin.cols()}}.
 Takes a data.frame of values and returns a data.frame (or matrix) of percentiles,
 showing the percentile of a value within all values in its column, as well as bin numbers,
 showing what bin each falls into, based on specified cutoffs defining bins. \cr\cr

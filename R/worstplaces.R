@@ -1,6 +1,6 @@
 #' @title Places with worst RR
 #' @description View one key part of table of Relative Risk results by group by envt risk factor
-#' @param rrs Required. This has to be the output of one of the functions like \code{\link{RR.table}}
+#' @param rrs Required. This has to be the output of one of the functions like [RR.table()]
 #' @param d name of demographic field with percent (fraction) of population that is in each given demographic group, in dimnames(rrs)[[1]]
 #' @param e name of environmental risk factor in dimnames(rrs)[[2]]
 #' @param n worst 10 by default

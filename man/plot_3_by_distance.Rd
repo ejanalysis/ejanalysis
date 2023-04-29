@@ -4,9 +4,9 @@
 \alias{plot_3_by_distance}
 \title{create plot of 3 indicators versus distance
 This makes a very simple scatter plot of 3 variables on y axis
-  as a function of distance on the x axis.
-  For example, it can show risk, percent demographic score, and population
-  density, e.g., using numbers created at random by sim_riskbydistance()}
+as a function of distance on the x axis.
+For example, it can show risk, percent demographic score, and population
+density, e.g., using numbers created at random by sim_riskbydistance()}
 \usage{
 plot_3_by_distance(
   x,
@@ -18,11 +18,11 @@ plot_3_by_distance(
 )
 }
 \arguments{
-\item{x}{data.frame such as output from [sim_riskbydistance()], with
+\item{x}{data.frame such as output from \code{\link[=sim_riskbydistance]{sim_riskbydistance()}}, with
 colnames like risk, pctd, popdensity, and dist (the defaults)
 or any 3 with values for y axis and 1 with values for x axis like distance.}
 
-\item{xname}{colname in x so that x[,xname] can be used as x values in plot}
+\item{xname}{colname in x so that x\link{,xname} can be used as x values in plot}
 
 \item{xlab}{like in plot(), a string label for x axis}
 
@@ -37,10 +37,10 @@ they could be percentages, or percentiles, for example.}
 \description{
 create plot of 3 indicators versus distance
 This makes a very simple scatter plot of 3 variables on y axis
-  as a function of distance on the x axis.
-  For example, it can show risk, percent demographic score, and population
-  density, e.g., using numbers created at random by sim_riskbydistance()
+as a function of distance on the x axis.
+For example, it can show risk, percent demographic score, and population
+density, e.g., using numbers created at random by sim_riskbydistance()
 }
 \seealso{
-[sim_riskbydistance()]
+\code{\link[=sim_riskbydistance]{sim_riskbydistance()}}
 }

@@ -19,10 +19,10 @@ get.pctile(x, values, wts = 1, or.tied = TRUE, na.rm = TRUE)
 }
 \description{
 Given a vector of numbers (a dataset), and one or more specific values of interest,
-  determine at what percentile(s) are those selected values. In other words,
-  what fraction of all of the numbers (actually weighted based on cumulative sum of weights)
-  are smaller than (or tied with) the selected value(s) of interest?
-  Based on analyze.stuff::pct.above (\code{\link[analyze.stuff]{pct.above}})
+determine at what percentile(s) are those selected values. In other words,
+what fraction of all of the numbers (actually weighted based on cumulative sum of weights)
+are smaller than (or tied with) the selected value(s) of interest?
+Based on analyze.stuff::pct.above (\code{\link[analyze.stuff:pct.above]{analyze.stuff::pct.above()}})
 }
 \examples{
 get.pctile(89:95, 1:100)

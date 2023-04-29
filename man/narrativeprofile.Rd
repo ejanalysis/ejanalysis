@@ -31,7 +31,9 @@ URL that is link to Census Bureau webpage with narrative profile of multiple sta
 }
 \description{
 For 1 tract, URL could be for example
-  https://www.census.gov/acs/www/data/data-tables-and-tools/narrative-profiles/2019/report.php?geotype=tract&tract=700311&state=24&county=031
- For 1 county, URL could be for example
-  https://www.census.gov/acs/www/data/data-tables-and-tools/narrative-profiles/2019/report.php?geotype=county&state=21&county=017
+(https://www.census.gov/acs/www/data/data-tables-and-tools/narrative-profiles/
+2019/report.php?geotype=tract&tract=700311&state=24&county=031)
+For 1 county, URL could be for example
+(https://www.census.gov/acs/www/data/data-tables-and-tools/narrative-profiles/
+2019/report.php?geotype=county&state=21&county=017)
 }

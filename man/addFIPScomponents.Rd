@@ -15,9 +15,9 @@ addFIPScomponents(bg, fipscolname = "FIPS", clean = TRUE)
 }
 \value{
 Returns the whole data.frame with new columns in front:
-  'FIPS', 'FIPS.TRACT', 'FIPS.COUNTY', 'FIPS.ST', 'ST', 'statename', 'REGION'
+'FIPS', 'FIPS.TRACT', 'FIPS.COUNTY', 'FIPS.ST', 'ST', 'statename', 'REGION'
 }
 \description{
 Given a data.frame with FIPS col that is the full state county tract blockgroup FIPS
- returns the data.frame with extra columns up front, with components of FIPS.
+returns the data.frame with extra columns up front, with components of FIPS.
 }

@@ -6,7 +6,7 @@
 #' @param mydf data.frame with numeric data. Each column will be examined to calculate mean, sd, and percentiles, for each zone.
 #' @param filename prefix to use for filename to be saved locally
 #' @param zone.vector names of states or regions, for example. same length as wts, or rows in mydf
-#' @seealso \link{write.wtd.pctiles.by.zone}
+#' @seealso [write.wtd.pctiles.by.zone]
 #' @export
 write.pctiles.by.zone <- function(mydf, filename, zone.vector) {
 

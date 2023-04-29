@@ -20,7 +20,7 @@ By default, returns numeric vector length of myvector.
 }
 \description{
 This is used with lookup or us, a data.frame that is a lookup table created by
-\code{\link{write.pctiles}}, \code{\link{write.pctiles.by.zone}}, \code{\link{write.wtd.pctiles}}, or \code{\link{write.wtd.pctiles.by.zone}}.
+\code{\link[=write.pctiles]{write.pctiles()}}, \code{\link[=write.pctiles.by.zone]{write.pctiles.by.zone()}}, \code{\link[=write.wtd.pctiles]{write.wtd.pctiles()}}, or \code{\link[=write.wtd.pctiles.by.zone]{write.wtd.pctiles.by.zone()}}.
 The data.frame us or lookup must have a field called "PCTILE" that contains quantiles/percentiles
 and other column(s) with values that fall at those percentiles.
 This function accepts lookup table (or uses one called us if that is in memory),
@@ -55,16 +55,19 @@ it still returns 0 as the percentile, but with a warning that the value checked 
        evarname <- 'traffic.score'
        evalues <- bg21[ , evarname]
        emax <- max(evalues,na.rm = TRUE)
-       plot(lookupUSA[,evarname], lookupUSA$PCTILE, xlab = evarname, main='contents of lookup table', type='b')
+       plot(lookupUSA[,evarname], lookupUSA$PCTILE, xlab = evarname,
+       main='contents of lookup table', type='b')
 
        plot(x = (1:1000) * (emax / 1000),
-        y = lookup.pctile(myvector = (1:1000) * emax / 1000, varname.in.lookup.table = evarname, lookup = lookupUSA),
+        y = lookup.pctile(myvector = (1:1000) * emax / 1000, varname.in.lookup.table = evarname,
+        lookup = lookupUSA),
         ylim = c(0,100),   type='b',
-        xlab=evarname, ylab='percentile per lookup table' , main='Percentiles for various envt scores, as looked up in lookup table')
+        xlab=evarname, ylab='percentile per lookup table' ,
+        main='Percentiles for various envt scores, as looked up in lookup table')
       abline(v = lookupUSA[ lookupUSA$PCTILE == 'mean', evarname])
 
   }
 }
 \seealso{
-\code{\link{write.pctiles}}, \code{\link{write.pctiles.by.zone}}, \code{\link{write.wtd.pctiles}}, and \code{\link{write.wtd.pctiles.by.zone}}
+\code{\link[=write.pctiles]{write.pctiles()}}, \code{\link[=write.pctiles.by.zone]{write.pctiles.by.zone()}}, \code{\link[=write.wtd.pctiles]{write.wtd.pctiles()}}, and \code{\link[=write.wtd.pctiles.by.zone]{write.wtd.pctiles.by.zone()}}
 }

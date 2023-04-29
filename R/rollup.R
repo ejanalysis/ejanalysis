@@ -6,8 +6,8 @@
 #' @param FUN Default is weighted mean
 #' @param prefix Default is 'wtd.mean.'
 #' @param by No default. Vector that defines groups, for aggregating by group.
-#' @param na.rm Default is TRUE, NOT USED IF FUN IS DEFINED BY CALL TO THIS FUNCTION. passed to \code{\link[Hmisc]{wtd.mean}}
-#' @seealso \code{\link{wtd.colMeans}} \code{\link[ejscreen]{ejscreen.rollup}}
+#' @param na.rm Default is TRUE, NOT USED IF FUN IS DEFINED BY CALL TO THIS FUNCTION. passed to [Hmisc::wtd.mean()]
+#' @seealso [wtd.colMeans()] [ejscreen::ejscreen.rollup()]
 #' @examples
 #'   # See ejscreen package function called ejscreen.rollup()
 #'   \dontrun{
@@ -32,13 +32,17 @@
 #'               names.d.subgroups.count, 'nonmins')
 #' # Get the rollups of summed cols
 #' us       <- rollup( bg[ , sumnames], FUN=function(z) sum(z, na.rm = TRUE), prefix = '')
-#' regions  <- rollup( bg[ , sumnames], FUN=function(z) sum(z, na.rm = TRUE), prefix = '', by=bg$REGION)
+#' regions  <- rollup( bg[ , sumnames], FUN=function(z) sum(z, na.rm = TRUE), prefix = '',
+#'   by=bg$REGION)
 #' names(regions)[1] <- 'REGION'
-#' states   <- rollup( bg[ , sumnames], FUN=function(z) sum(z, na.rm = TRUE), prefix = '', by=bg$FIPS.ST)
+#' states   <- rollup( bg[ , sumnames], FUN=function(z) sum(z, na.rm = TRUE), prefix = '',
+#'   by=bg$FIPS.ST)
 #' names(states)[1] <- 'FIPS.ST'
-#' counties <- rollup( bg[ , sumnames], FUN=function(z) sum(z, na.rm = TRUE), prefix = '', by=bg$FIPS.COUNTY)
+#' counties <- rollup( bg[ , sumnames], FUN=function(z) sum(z, na.rm = TRUE), prefix = '',
+#'   by=bg$FIPS.COUNTY)
 #' names(counties)[1] <- 'FIPS.COUNTY'
-#' tracts   <- rollup( bg[ , sumnames], FUN=function(z) sum(z, na.rm = TRUE), prefix = '', by=bg$FIPS.TRACT)
+#' tracts   <- rollup( bg[ , sumnames], FUN=function(z) sum(z, na.rm = TRUE), prefix = '',
+#'   by=bg$FIPS.TRACT)
 #' names(tracts)[1] <- 'FIPS.TRACT'
 #'
 #'  # Get the rollups of wtd.mean cols (at least E cols)
@@ -107,7 +111,7 @@ rollup <- function(x, by=NULL, wts = NULL, FUN, prefix = 'wtd.mean.', na.rm = TR
   #  ),
   #  by = "REGION"
   #  ]
-  #     BUT that can be done via ejscreen.acs.calc or ejscreen.create after the rollup of sums of counts
+  #   BUT that can be done via ejscreen.acs.calc or ejscreen.create after rollup of sums of counts
   #
   #   # ... NEWER CODE:
   #   ############################## #

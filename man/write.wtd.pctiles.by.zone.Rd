@@ -27,61 +27,65 @@ write.wtd.pctiles.by.zone(
 check which functions actually get used for this now.
 }
 \details{
-also see \cr\cr
-  ejscreen.lookuptables ??   \cr\cr
- \preformatted{
-  make.bin.pctile.cols   uses  assign.pctiles
+also see: \cr
+ejscreen.lookuptables ??
 
-  write.wtd.pctiles.by.zone  uses wtd.pctiles.exact or pctiles.exact  \cr\cr
-    pctiles.exact uses                  stats::quantile(x, type = 1, probs = (1:100)/100, na.rm = TRUE))
-      The inverse of quantile is ecdf  (empirical cumulative distribution function)
-       a step function with jumps i/n at observation values, where i is the number of tied observations at that value. Missing values are ignored.
+make.bin.pctile.cols   uses  assign.pctiles
 
- For observations x= (x1,x2, ... xn), Fn is the fraction of observations less or equal to t, i.e.,
+write.wtd.pctiles.by.zone  uses wtd.pctiles.exact or pctiles.exact  \cr
+pctiles.exact uses
+stats::quantile(x, type = 1, probs = (1:100)/100, na.rm = TRUE))
+The inverse of quantile is ecdf  (empirical cumulative distribution function)
+a step function with jumps i/n at observation values,
+where i is the number of tied observations at that value. Missing values are ignored.
 
- Fn(t) = #{xi <= t}/n = 1/n sum(i=1,n) Indicator(xi <= t).
+For observations x= (x1,x2, ... xn), Fn is the fraction of observations less or equal to t, i.e.,
 
-      stats::quantile() can use nine different quantile algorithms discussed in Hyndman and Fan (1996), -- Hyndman, R. J. and Fan, Y. (1996) Sample quantiles in statistical packages, American Statistician 50, 361–365. doi: 10.2307/2684934.
-      defined as weighted averages of consecutive order statistics.
-      type 1 is used here, and is "Inverse of empirical distribution function."
+Fn(t) = #{xi <= t}/n = 1/n sum(i=1,n) Indicator(xi <= t).
 
-      Sample quantiles of type i are defined by:
+stats::quantile() can use nine different quantile algorithms discussed in
+Hyndman and Fan (1996), -- Hyndman, R. J. and Fan, Y. (1996)
+Sample quantiles in statistical packages, American Statistician 50, 361–365. doi: 10.2307/2684934.
+defined as weighted averages of consecutive order statistics.
 
-                   Q[i](p) = (1 - γ) x[j] + γ x[j+1],
+type 1 is used here, and is "Inverse of empirical distribution function."
 
-                   i = type of formula to use (1 through 9).
-                   p is the percentage (0 through 1).
-                   x[j] is the jth order statistic,
-                   (j-m)/n ≤ p < (j-m+1)/n,
-                   n is the sample size, the value of
-                   γ is a function of
-                     j = floor(np + m)     --so this is roughly how many data points are smaller.
-                     g =       np + m - j,  --so this is roughly
-                     m = a constant determined by the sample quantile type. (m= 0 or -0.5 here)
-        Discontinuous sample quantile types 1, 2, and 3
+\if{html}{\out{<div class="sourceCode">}}\preformatted{  Sample quantiles of type i are defined by:
 
-        For types 1, 2 and 3, Q[i](p) is a discontinuous function of p, with
-        m = 0 when i = 1 or i = 2, and m = -1/2 when i = 3.
-        Type 1 =  Inverse of empirical distribution function. γ = 0 if g = 0, and 1 otherwise.
+               Q[i](p) = (1 - Y) x[j] + Y x[j+1],
 
-    wtd.pctiles.exact uses   Hmisc::wtd.quantile(x, wts, type = "i/n", probs = (1:100)/100) ,  na.rm = na.rm))
-      "i/n" uses the inverse of the empirical distribution function,
-      using  wt/T, where wt is the cumulative weight and T is the total weight (usually total sample size).
-   }
-  table.pop.pctile  and \cr\cr
-  map service with lookup tables \cr\cr \cr\cr
-\preformatted{
-}
+               i = type of formula to use (1 through 9).
+               p is the percentage (0 through 1).
+               x[j] is the jth order statistic,
+               (j-m)/n less than or equal to p < (j-m+1)/n,
+               n is the sample size, the value of
+               Y is a function of
+                 j = floor(np + m)     --so this is roughly how many data points are smaller.
+                 g =       np + m - j,  --so this is roughly
+                 m = a constant determined by the sample quantile type. (m= 0 or -0.5 here)
+    Discontinuous sample quantile types 1, 2, and 3
+
+    For types 1, 2 and 3, Q[i](p) is a discontinuous function of p, with
+    m = 0 when i = 1 or i = 2, and m = -1/2 when i = 3.
+    Type 1 =  Inverse of empirical distribution function. Y = 0 if g = 0, and 1 otherwise.
+
+wtd.pctiles.exact uses
+  Hmisc::wtd.quantile(x, wts, type = "i/n", probs = (1:100)/100) ,  na.rm = na.rm))
+  "i/n" uses the inverse of the empirical distribution function,
+  using  wt/T, where wt is the cumulative weight and T is the total weight (usually total sample size).
+}\if{html}{\out{</div>}}
+
+table.pop.pctile  and \cr\cr
+map service with lookup tables \cr\cr \cr\cr
 }
 \examples{
-  \dontrun{
-  bg = ejscreen::bg21plus # want demog subgroups but also want PR eventually
-  pctilevariables <- c(names.e, names.d, names.d.subgroups, names.ej)
-   ejanalysis::write.wtd.pctiles(mydf = bg[ , pctilevariables], wts = bg$pop, filename =  'lookupUSA21')
-   ejanalysis::write.wtd.pctiles.by.zone(mydf = bg[ , pctilevariables], wts = bg$pop,
-                                   zone.vector = bg$REGION, filename =  'lookupRegions21')
-   ejanalysis::write.wtd.pctiles.by.zone(mydf = bg[ , pctilevariables], wts = bg$pop,
-                                   zone.vector = bg$ST,     filename =  'lookupStates21')
-  }
+
+  # bg = ejscreen::bg21plus # want demog subgroups but also want PR eventually
+  # pctilevariables <- c(names.e, names.d, names.d.subgroups, names.ej)
+  # ejanalysis::write.wtd.pctiles(mydf = bg[ , pctilevariables], wts = bg$pop, filename =  'lookupUSA21')
+  # ejanalysis::write.wtd.pctiles.by.zone(mydf = bg[ , pctilevariables], wts = bg$pop,
+  #                                 zone.vector = bg$REGION, filename =  'lookupRegions21')
+  # ejanalysis::write.wtd.pctiles.by.zone(mydf = bg[ , pctilevariables], wts = bg$pop,
+  #                                 zone.vector = bg$ST,     filename =  'lookupStates21')
 
 }

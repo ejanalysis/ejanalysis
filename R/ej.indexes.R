@@ -32,32 +32,32 @@
 #' @param na.rm Default is FALSE. NOTE: This is complicated but important. See notes in source code about handling NA values in various formulas here.
 #' @param prefix Optional character string used as first part of each colname in results. Default is "EJ.DISPARITY."
 #' @param type Specifies type of EJ Index. Default is type=1. Several formulas are available: \cr
-#' \itemize{
-#'  \item For type=1,   ej.indexes = weights * env.df * (demog  - us.demog)  ## This is the EJ Index in EJScreen from 2015-2022. Note: us.demog could also be called d.avg.all, and note that na.rm is currently ignored for type=1
-#'  \item For type=1.5, ej.indexes = weights * env.df * (demog  - d.avg.all.elsewhere) # for a place that is one of many this can be almost identical to type 1 \cr
-#'  \item For type=2.1, ej.indexes = weights * demog  * (env.df - e.avg.all)  # like type 1 but env and demog roles are swapped \cr
-#'  \item For type=2,   ej.indexes = weights * demog  * (env.df - e.avg.nond) \cr
-#'  \item For type=2.5, ej.indexes = weights * demog  * (env.df - e.avg.nond.elsewhere )  \cr
-#'  \item For type=3,   ej.indexes = weights * ((demog * env.df) - (d.avg.all           * e.avg.nond ) )   \cr
-#'  \item For type=3.5, ej.indexes = weights * ((demog * env.df) - (d.avg.all.elsewhere * e.avg.nond.elsewhere) )   \cr
-#'  \item For type 4  , ej.indexes = weights * ((demog - d.avg.all          ) * (env.df - e.avg.nond ) ) \cr
-#'  \item For type=4.5, ej.indexes = weights * ((demog - d.avg.all.elsewhere) * (env.df - e.avg.nond.elsewhere) ) \cr
 #'
-#'  \item For type=5  , ej.indexes = weights * env.df * demog ## A "Population Risk" or "Burden" index = Number of cases among D group if e is individual risk, or just "people-points among D" if e is "points" \cr
+#'  - For type=1,   ej.indexes = weights * env.df * (demog  - us.demog)  ## This is the EJ Index in EJScreen from 2015-2022. Note: us.demog could also be called d.avg.all, and note that na.rm is currently ignored for type=1
+#'  - For type=1.5, ej.indexes = weights * env.df * (demog  - d.avg.all.elsewhere) # for a place that is one of many this can be almost identical to type 1 \cr
+#'  - For type=2.1, ej.indexes = weights * demog  * (env.df - e.avg.all)  # like type 1 but env and demog roles are swapped \cr
+#'  - For type=2,   ej.indexes = weights * demog  * (env.df - e.avg.nond) \cr
+#'  - For type=2.5, ej.indexes = weights * demog  * (env.df - e.avg.nond.elsewhere )  \cr
+#'  - For type=3,   ej.indexes = weights * ((demog * env.df) - (d.avg.all           * e.avg.nond ) )   \cr
+#'  - For type=3.5, ej.indexes = weights * ((demog * env.df) - (d.avg.all.elsewhere * e.avg.nond.elsewhere) )   \cr
+#'  - For type 4  , ej.indexes = weights * ((demog - d.avg.all          ) * (env.df - e.avg.nond ) ) \cr
+#'  - For type=4.5, ej.indexes = weights * ((demog - d.avg.all.elsewhere) * (env.df - e.avg.nond.elsewhere) ) \cr
 #'
-#'  \item For type=6,   ej.indexes = env.df *  demog ## A "unweighted" simple product of Envt x percent_D. A "percent-based" indicator = percent in group D times envt indicator  \cr
-#'  \item For type=7,   ej.indexes = env.df * (demog  - us.demog) # Like type 1 or EJScreen 2.0, but without the pop count in the formula  \cr
-#' }
+#'  - For type=5  , ej.indexes = weights * env.df * demog ## A "Population Risk" or "Burden" index = Number of cases among D group if e is individual risk, or just "people-points among D" if e is "points" \cr
+#'
+#'  - For type=6,   ej.indexes = env.df *  demog ## A "unweighted" simple product of Envt x percent_D. A "percent-based" indicator = percent in group D times envt indicator  \cr
+#'  - For type=7,   ej.indexes = env.df * (demog  - us.demog) # Like type 1 or EJScreen 2.0, but without the pop count in the formula  \cr
+#'
 #'  where
-#' \itemize{
-#'  \item us.demog = overall demog where avg person lives (pop wtd mean of demog). This may be almost exactly the same as d.avg.all.elsewhere \cr
-#'  \item d.avg.all            = overall value for d as fraction of entire population (including the one place being analyzed). \cr
-#'  \item d.avg.all.elsewhere  = overall value for d as fraction of entire population other than the one place being analyzed. \cr
-#'  \item e.avg.all            =  avg environmental indicator value for average person  \cr
-#'  \item e.avg.nond           =  avg environmental indicator value for average person who is not in the D-group, among all (including the one place being analyzed). This is typically the expected as opposed to observed value of e within group D, in the context of EJ analysis of disparity in e. \cr
-#'  \item e.avg.nond.elsewhere =  avg environmental indicator value for average person who is not in the D-group, among all except in the one place being analyzed. \cr
-#' }
-#' @return Returns a numeric data.frame (or matrix if \code{as.df=FALSE}) of EJ indexes, one per place per environmental indicator.
+#'
+#'  - us.demog = overall demog where avg person lives (pop wtd mean of demog). This may be almost exactly the same as d.avg.all.elsewhere \cr
+#'  - d.avg.all            = overall value for d as fraction of entire population (including the one place being analyzed). \cr
+#'  - d.avg.all.elsewhere  = overall value for d as fraction of entire population other than the one place being analyzed. \cr
+#'  - e.avg.all            =  avg environmental indicator value for average person  \cr
+#'  - e.avg.nond           =  avg environmental indicator value for average person who is not in the D-group, among all (including the one place being analyzed). This is typically the expected as opposed to observed value of e within group D, in the context of EJ analysis of disparity in e. \cr
+#'  - e.avg.nond.elsewhere =  avg environmental indicator value for average person who is not in the D-group, among all except in the one place being analyzed. \cr
+#'
+#' @return Returns a numeric data.frame (or matrix if `as.df=FALSE`) of EJ indexes, one per place per environmental indicator.
 #' @examples
 #'  statedat <- data.frame(state.x77)
 #'  hist(myej <- ej.indexes(env.df=statedat[ , c('Life.Exp', 'Frost')],

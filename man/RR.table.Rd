@@ -31,14 +31,14 @@ RR.table(
 }
 \value{
 Compiles RR values in array of 3 dimensions: \code{RRS[Dnames, Enames, Zcolnames]}
-  Returns a matrix with
-  one demographic group per row,
-  one environmental risk indicator per column, and
-  third dimension for which zone (e.g., which US State)
+Returns a matrix with
+one demographic group per row,
+one environmental risk indicator per column, and
+third dimension for which zone (e.g., which US State)
 }
 \description{
 Make table of Relative Risk results by zone by group by envt risk factor.
-  See source code for notes on this work.
+See source code for notes on this work.
 }
 \examples{
     # (This is very slow right now)

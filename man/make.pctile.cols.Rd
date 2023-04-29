@@ -13,7 +13,7 @@ make.pctile.cols(
 )
 }
 \arguments{
-\item{values}{Data.frame, matrix, or vector of values. One column at a time is analyzed using \code{\link{assign.pctiles}}}
+\item{values}{Data.frame, matrix, or vector of values. One column at a time is analyzed using \code{\link[=assign.pctiles]{assign.pctiles()}}}
 
 \item{weights}{Optional numeric vector of weights (default is unweighted) to create weighted percentiles, such as population-weighted quantiles. Unweighted if not specified. Vector same length as number of rows in values parameter (or elements if vector).}
 
@@ -28,7 +28,7 @@ Returns a matrix or data.frame
 }
 \description{
 Takes values (vector, matrix, or data.frame) and returns percentiles,
-  showing the percentile of a value within all values in its column.
+showing the percentile of a value within all values in its column.
 }
 \seealso{
 \code{\link{make.bin.pctile.cols}} to call functions below, converting columns of values to percentiles and then bins \cr

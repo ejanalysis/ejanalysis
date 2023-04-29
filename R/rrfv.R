@@ -1,6 +1,6 @@
 #' @title Vectorized version of rrf (relative risk) - **not tested, possibly obsolete
 #'
-#' @description Probably obsolete given \code{\link{RR}}. Provides Relative Risk (RR) by demographic group by indicator based on Census data
+#' @description Probably obsolete given [RR()]. Provides Relative Risk (RR) by demographic group by indicator based on Census data
 #'   Inputs are vectors over small places like Census blocks or block groups
 #'   or possibly individuals (ideally) but then d would be a dummy=1 for selected group and 0 for people not in selected group.
 #'   For one environmental indicator, multiple demographic groups.

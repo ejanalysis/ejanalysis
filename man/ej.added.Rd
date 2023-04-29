@@ -38,7 +38,7 @@ e = environmental points or individual risk (vector of places) \cr
 p = population counts (vector of places) \cr
 d = demographic fraction that is in specified demographic group (vector of places) \cr \cr
 
-For example, if e=cancer risk (individual risk) and p=pop and d=%lowincome,
+For example, if e=cancer risk (individual risk) and p=pop and d=\%lowincome,
 value returned is number of cases among lowincome individuals in excess of what it
 would be if their average risk was the same as that of nonlowincome individuals. \cr
 net excess vulnerable * E = net excess people-points \cr

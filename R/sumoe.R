@@ -15,7 +15,7 @@
 #' @param moes A matrix of data.frame like estimates parameter, but with MOE values for the corresponding counts provided in estimates.
 #' @param include0 Default is FALSE. If TRUE, based MOE on all data, even where estimate is zero, which gives MOEs that create conservatively wide confidence intervals.
 #' @return Returns margin(s) of error same shape as parameter estimates
-#' @seealso \code{\link{pct.moe}}
+#' @seealso [pct.moe()]
 #' @examples
 #'  povknownratio <- c(500, 2000, 1500); povknownratio.m <- c(100, 300, 250)
 #'  pov2plus <- c(300, 1000, 1400); pov2plus.m <- c(100, 300, 200)

@@ -42,33 +42,33 @@ while 0.9 would mean and 10 percent cut in the environmental indicator value.}
 }
 \value{
 Returns a list of results:
-  \enumerate{
-  \item rrs data.frame, one column per environmental indicator, one row per cutoff value
-  \item rrs2 data.frame, Relative risks 2
-  \item state.tables A list
-  \item worst.as.pct Worst as percent, vector as long as number of environmental indicators
-  \item worst.as.pct.of.bgs Worst as percent of places (e.g., block groups)
-  }
+\enumerate{
+\item rrs data.frame, one column per environmental indicator, one row per cutoff value
+\item rrs2 data.frame, Relative risks 2
+\item state.tables A list
+\item worst.as.pct Worst as percent, vector as long as number of environmental indicators
+\item worst.as.pct.of.bgs Worst as percent of places (e.g., block groups)
+}
 }
 \description{
 Function to analyze data on demographic and environmental (e) indicators by place (e.g., Census block group)
-  to get stats on what percent of population or places could account for
-  all risk ratio (RR, or ratio of mean e in one demog group vs others), and what is risk ratio if you reduce e (environmental indicator)
-  by using some multiplier on e, in top x percent of places
+to get stats on what percent of population or places could account for
+all risk ratio (RR, or ratio of mean e in one demog group vs others), and what is risk ratio if you reduce e (environmental indicator)
+by using some multiplier on e, in top x percent of places
 }
 \details{
 The effects of one place on overall RR is related to an ej.index, which here is a metric describing one place's contribution to an overall metric of disparity.
-  RR is one overall metric of disparity, the ratio of mean environmental indicator value in one demographic group over the mean in the reference group.
-  If RR = E/e, where E=avg environmental indicator or risk in key demographic group and e= in reference group,
-  another metric of disparity is the excess individual risk, or E-e.
-  The excess population risk or excess cases would be (E-e) * p * d where p=total population and d=fraction that is in key demographic group.
-  Various counterfactuals could be used here for
-  scenario defining what it means to address the top places and
-  what is used to define top places.
+RR is one overall metric of disparity, the ratio of mean environmental indicator value in one demographic group over the mean in the reference group.
+If RR = E/e, where E=avg environmental indicator or risk in key demographic group and e= in reference group,
+another metric of disparity is the excess individual risk, or E-e.
+The excess population risk or excess cases would be (E-e) * p * d where p=total population and d=fraction that is in key demographic group.
+Various counterfactuals could be used here for
+scenario defining what it means to address the top places and
+what is used to define top places.
 }
 \examples{
  ## #
 }
 \seealso{
-\code{\link{RR}} and \code{\link{RR.if.address.top.x}} and \code{\link{ej.indexes}} and \code{\link{ej.added}}
+\code{\link[=RR]{RR()}} and \code{\link[=RR.if.address.top.x]{RR.if.address.top.x()}} and \code{\link[=ej.indexes]{ej.indexes()}} and \code{\link[=ej.added]{ej.added()}}
 }

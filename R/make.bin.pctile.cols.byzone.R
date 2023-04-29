@@ -9,7 +9,7 @@
 #' @param keyvarname Name of field in bg that has unique ID per row (per place). Default is "FIPS"
 #' @param datavarnames Vector of names of fields in bg that have numeric data for which percentiles are calculated.
 #' @param clean Does not use clean.fips() if FALSE, which helps if the countiesall or other list is not yet updated, for example and lacks some new FIPS code
-#' @param ... Other parameters passed to \code{\link{make.bin.pctile.cols}} such as \code{cutpoints} and \code{labels}
+#' @param ... Other parameters passed to [make.bin.pctile.cols()] such as `cutpoints` and `labels`
 #' @return Returns a data.frame with one percentiles field and one bin numbers field for each of the datavarnames
 make.bin.pctile.cols.byzone <- function(bg, zone, wtsvarname, keyvarname='FIPS', datavarnames=gsub(keyvarname, '', names(bg)), clean=TRUE,  ... ) {
 

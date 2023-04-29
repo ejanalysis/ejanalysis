@@ -8,7 +8,7 @@
 #' @param Zcolname name of column with name of zone such as US State name
 #' @param digits Default is 4. How many significant digits to use.
 #' @param testing default is FALSE
-#' @return Compiles RR values in array of 3 dimensions: \code{RRS[Dnames, Enames, Zcolnames]}
+#' @return Compiles RR values in array of 3 dimensions: `RRS[Dnames, Enames, Zcolnames]`
 #'   Returns a matrix with
 #'   one demographic group per row,
 #'   one environmental risk indicator per column, and

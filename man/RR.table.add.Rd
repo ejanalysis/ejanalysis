@@ -11,7 +11,7 @@ RR.table.add(rrs1, rrs2, zones2)
 
 \item{rrs2}{Another table from RR.table()}
 
-\item{zones2}{Zones in rrs2, as vector, default is dimnames(rrs2)[[3]]}
+\item{zones2}{Zones in rrs2, as vector, default is dimnames(rrs2)[\link{3}]}
 }
 \value{
 Returns a new array

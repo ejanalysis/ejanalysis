@@ -3,7 +3,7 @@
 #'   and which Envt risk indicator has highest RR for each Demographic group,
 #'   within each zone (USA, etc.),
 #'   in table of Relative Risk results by zone by group by envt risk factor.
-#' @param x Array results from \code{\link{RR.table}} or related function
+#' @param x Array results from [RR.table()] or related function
 #' @param by optional vector (numeric or character), specifies which of three dimensions should be shown.
 #'  Default is 1, meaning dimension 1 which is demographic indicator.
 #' @param digits optional number of digits to round to, default is 3.

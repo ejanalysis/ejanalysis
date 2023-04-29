@@ -1,8 +1,8 @@
 #' @title Clean up US Census FIPS (Add Missing Leading Zeroes)
 #'
 #' @description Clean up US Census FIPS (add any missing leading zeroes)
-#' @details  For information on FIPS codes, see \url{http://www.census.gov/geo/reference/ansi.html},
-#'   and also see \url{https://www.census.gov/geo/reference/geoidentifiers.html} \cr\cr
+#' @details  For information on FIPS codes, see <http://www.census.gov/geo/reference/ansi.html>,
+#'   and also see <https://www.census.gov/geo/reference/geoidentifiers.html> \cr\cr
 #'  If FIPS provided is 1-2 digits long assume it is a State.\cr
 #'  If FIPS provided is 3 digits long, it is a mistake and return NA.\cr
 #'  If FIPS provided is 4-5 digits, assume it is a County.\cr

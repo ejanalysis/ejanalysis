@@ -1,7 +1,7 @@
 #' @title Calculate a/b for each Subset
 #' @description  Uses data.table package to quickly calculate
 #'   ratio of a/b within each subset of a dataset (e.g., by zone).
-#'   This will be superseded by \code{\link{rollup}} once that is completed.
+#'   This will be superseded by [rollup()] once that is completed.
 #' @param a Required numeric vector, numerator
 #' @param b Required numeric vector, denominator. Same length as a.
 #' @param zone Optional, vector to group by. Same length as a and b.

@@ -1,6 +1,6 @@
 #' @title Sort table of Relative Risk results by zone by group by envt risk factor
 #' @description Sort table of Relative Risk results by zone by group by envt risk factor
-#' @param x Array of RR values from \code{\link{RR}} in array of 3 dimensions: x[Dnames, Enames, Zcolnames]
+#' @param x Array of RR values from [RR()] in array of 3 dimensions: x[Dnames, Enames, Zcolnames]
 #' @param margins optional numeric vector of which dimensions to sort, default is all 3, so margins = c(1, 2, 3) by default
 #' @param decreasing default is TRUE, defines how to sort (note all specified dimensions are sorted the same way by this function)
 #' @return Sorted version of x array of 3 dimensions: RRS[Dnames, Enames, Zcolnames]

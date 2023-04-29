@@ -13,7 +13,7 @@ get.fips.etc(fips, clean = TRUE)
 }
 \value{
 Returns a data.frame with these fields: c("FIPS", "FIPS.TRACT", "FIPS.COUNTY", "FIPS.ST", "ST", "countyname", "statename", "REGION")
-  where FIPS is the input fips, the next few are the first few characters of fips corresponding to tract, county, or state, ST is the 2-letter state abbreviation, statename is state name, countyname is county name, and REGION is USEPA Region 1-10.
+where FIPS is the input fips, the next few are the first few characters of fips corresponding to tract, county, or state, ST is the 2-letter state abbreviation, statename is state name, countyname is county name, and REGION is USEPA Region 1-10.
 }
 \description{
 Use US Census block group FIPS codes to get more location information about each block group, such as State and County name.

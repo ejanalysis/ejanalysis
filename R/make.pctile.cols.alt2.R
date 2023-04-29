@@ -4,7 +4,7 @@
 #' showing the percentile of a value within all values in its column.
 #' @param raw.data.frame Data.frame of values
 #' @param weights Optional Numeric vector of weights to create weighted percentiles, such as population-weighted quantiles. Unweighted if not specified. Vector same length as number of rows in data.frame.
-#' @param na.rm Default is TRUE. Passed to \code{\link{assign.pctiles.alt2}}
+#' @param na.rm Default is TRUE. Passed to [assign.pctiles.alt2()]
 #' @param prefix Optional character element, default is 'pctile.', provides text to paste to beginning of input data.frame column names to use as output column names.
 #' @param as.df Optional logical TRUE by default, in which case matrix results are converted to data.frame
 #' @param zone NULL by default, but if a vector is provided, it defines zones to group by, so percentiles are within a given zone only.

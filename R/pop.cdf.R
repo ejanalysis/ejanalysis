@@ -1,7 +1,7 @@
 #' @title Draw PDF (overlays histograms) comparing distributions of scores in selected demographic groups
 #'
 #' @description
-#'  Draws a histogram plot using \code{\link[plotrix]{weighted.hist}}, overlaying distribution functions,
+#'  Draws a histogram plot using [plotrix::weighted.hist()], overlaying distribution functions,
 #'  one for each subgroup specified.
 #'  Useful to compare 2 groups based on each groups entire pdf distribution of peoples scores,
 #'  using data from small places like census block groups, based on having for each place the pop total
@@ -11,19 +11,19 @@
 #' to compare zones, \cr
 #' compare demog groups, (see parameter called group)\cr
 #' compare multiple groups and/or multiple zones, like hisp vs others in us vs ca all on one graph\cr
-#' see \code{\link[plotrix]{weighted.hist}} for options \cr
+#' see [plotrix::weighted.hist()] for options \cr
 #' @param scores Numeric vector (not data.frame currently), required. Values to analyze.
 #' @param pcts Numeric vector or data.frame, required. Same number of vector elements or data.frame
 #'   rows as length of scores. Specifies the fraction of population that is in demographic group(s) of interest, one row per place, one group per column.
 #' @param pops Vector used to define weights as pop*pcts, and if allothers=TRUE, for pop*(1-pcts) for nongroup
-#' @param weights Not used currently (see \code{pop} parameter)
+#' @param weights Not used currently (see `pop` parameter)
 #' @param allothers Logical value, optional, TRUE by default. Whether to plot a series for everyone else, using 1-pct
 #' @param col Optional, default is 'red' to signify line color red for key demographic group.
 #'   Can also be a vector of colors if pcts is a data.frame with one column per group, one color per group.
 #' @param main Optional character specifying plot title. Default title notes colors of lines and if reference group used.
 #' @param ... other optional parameters to pass to weighted.hist()
 #' @return Draws a plot
-#' @seealso \code{\link[Hmisc]{Ecdf}} \code{\link{RR}} \code{\link{pop.cdf}}   \code{\link{pop.cdf2}} \code{\link{pop.ecdf}}  \code{\link{pop.cdf.density}}
+#' @seealso [Hmisc::Ecdf()] [RR()] [pop.cdf()]   [pop.cdf2()] [pop.ecdf()]  [pop.cdf.density()]
 #' @examples
 #' ## #
 #' \dontrun{

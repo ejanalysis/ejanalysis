@@ -20,17 +20,17 @@ Returns margin(s) of error same shape as parameter a
 }
 \description{
 Estimates the margin of error (MOE) that characterizes uncertainty, for a ratio (a/b),
-  based on a, b, and their MOE values.
+based on a, b, and their MOE values.
 }
 \details{
 This is based on US Census Bureau recommendations for working with American Community Survey summary file data.
-  See \url{http://www.census.gov/programs-surveys/acs/guidance.html} and \url{http://www.census.gov/library/publications/2009/acs/researchers.html}
-  For example, one can estimate MOE for percent poor in a block group, given
-  estimates and margins of error for the count who are poor, and the count for whom poverty status is known.
+See \url{http://www.census.gov/programs-surveys/acs/guidance.html} and \url{http://www.census.gov/library/publications/2009/acs/researchers.html}
+For example, one can estimate MOE for percent poor in a block group, given
+estimates and margins of error for the count who are poor, and the count for whom poverty status is known.
 }
 \examples{
 	 x <- pct.moe(15, 100, 3, 10)
 }
 \seealso{
-\code{\link{sumoe}}
+\code{\link[=sumoe]{sumoe()}}
 }

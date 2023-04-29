@@ -1,17 +1,17 @@
 #' @title Get information on U.S. State(s)
 #' @description Query information about States, from proxistat package data in data(lookup.states, package='proxistat')
 #' @details
-#'   See \pkg{proxistat} package for data source (\url{http://ejanalysis.github.io/proxistat/})
+#'   See [proxistat::proxistat-package] for data source (<http://ejanalysis.github.io/proxistat/>)
 #'   For 1+ or all US States plus DC, PR, Island Areas (and USA overall for use in FTP URL):\cr\cr
 #'   EPA Region, FIPS, State name, abbreviation for State(s); based on any of these query methods: \cr\cr
 #'   State's FIPS, State's name, OR State's abbreviation, (i.e.,  FIPS.ST, statename, or ST). \cr\cr
-#'   Also see data in packages \pkg{acs} and \pkg{choroplethr} \cr\cr
-#'   Also see \url{http://www.census.gov/geo/reference/docs/state.txt} and \url{http://www.census.gov/geo/reference/ansi.html} \cr
+#'   Also see data in packages [acs] and [choroplethr] \cr\cr
+#'   Also see <http://www.census.gov/geo/reference/docs/state.txt> and <http://www.census.gov/geo/reference/ansi.html> \cr
 #'     # Note on definitions of is.usa, is.contiguous.us, etc.:  \cr
-#' \url{https://www.census.gov/geo/reference/gtc/gtc_usa.html} \cr
-#' \url{https://www.census.gov/geo/reference/gtc/gtc_codes.html} \cr
-#' \url{https://www.census.gov/geo/reference/gtc/gtc_island.html} \cr
-#' \url{http://en.wikipedia.org/wiki/Contiguous_United_States} \cr\cr
+#' <https://www.census.gov/geo/reference/gtc/gtc_usa.html> \cr
+#' <https://www.census.gov/geo/reference/gtc/gtc_codes.html> \cr
+#' <https://www.census.gov/geo/reference/gtc/gtc_island.html> \cr
+#' <http://en.wikipedia.org/wiki/Contiguous_United_States> \cr\cr
 #' Also note this other possible list of abbreviations (not used) lacks US, PR, DC: \cr
 #' require(datasets); state.abb \cr\cr
 #' Note another possible list of States, abbrev, FIPS \cr
@@ -19,9 +19,9 @@
 #'   require(acs) \cr
 #'   print(fips.state) \cr\cr
 #' Note FIPS were also available here: \cr
-#'  State: \url{http://www.census.gov/geo/reference/ansi_statetables.html}  \cr
-#'  County: \url{http://www.census.gov/geo/www/codes/county/download.html}  \cr\cr
-#' Also see \url{https://www.census.gov/geo/reference/state-area.html} for info on state area and internal point
+#'  State: <http://www.census.gov/geo/reference/ansi_statetables.html>  \cr
+#'  County: <http://www.census.gov/geo/www/codes/county/download.html>  \cr\cr
+#' Also see <https://www.census.gov/geo/reference/state-area.html> for info on state area and internal point
 #' @param query vector of 1+ elements, which can be \cr
 #'   state FIPS code(s) (as numbers or strings with numbers), \cr
 #'   state name(s) (exactly matching formats here), or \cr

@@ -17,17 +17,17 @@
 #' , etc.
 #' @details
 #' Key functions include
-#' \itemize{
-#' \item \code{\link{RR}}
-#' \item \code{\link{pop.ecdf}}
-#' \item \code{\link{ej.indexes}}
-#' \item \code{\link{assign.pctiles}}
-#' \item \code{\link{make.bin.pctile.cols}}
-#' \item \code{\link{get.county.info}}
-#' \item \code{\link{state.health.url}}
-#' }
+#'
+#' - [RR()]
+#' - [pop.ecdf()]
+#' - [ej.indexes()]
+#' - [assign.pctiles()]
+#' - [make.bin.pctile.cols()]
+#' - [get.county.info()]
+#' - [state.health.url()]
+#'
 #' @references
 #'
-#' \url{http://ejanalysis.github.io} \cr
-#' \url{http://www.ejanalysis.com/} \cr
+#' <http://ejanalysis.github.io> \cr
+#' <http://www.ejanalysis.com/> \cr
 NULL

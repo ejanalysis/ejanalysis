@@ -12,7 +12,7 @@ RR.table.vs.us(
 )
 }
 \arguments{
-\item{x}{A three dimensional array that is created by \code{\link{RR}} and has format like RRS[d, e, zone] but where zone must include the name USA}
+\item{x}{A three dimensional array that is created by \code{\link[=RR]{RR()}} and has format like RRS\link{d, e, zone} but where zone must include the name USA}
 
 \item{d}{Vector of names of demographic groups that must be subset of first dimension of RRS}
 
@@ -21,7 +21,7 @@ RR.table.vs.us(
 \item{zone}{Vector of zone names that must be subset of names of third dimension of RRS}
 }
 \value{
-numeric results same shape as RRS[d, e, zone]
+numeric results same shape as RRS\link{d, e, zone}
 }
 \description{
 Takes zone-specific RRS values and divides each value by the corresponding value for the USA overall.

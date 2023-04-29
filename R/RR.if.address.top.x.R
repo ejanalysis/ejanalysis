@@ -28,14 +28,14 @@
 #' @param mycuts optional vector of cutoff values to analyze. Default is c(50,80,90:100)
 #' @param silent optional logical, default is TRUE, while FALSE means more information is printed
 #' @return Returns a list of results:
-#'   \enumerate{
-#'   \item rrs data.frame, one column per environmental indicator, one row per cutoff value
-#'   \item rrs2 data.frame, Relative risks 2
-#'   \item state.tables A list
-#'   \item worst.as.pct Worst as percent, vector as long as number of environmental indicators
-#'   \item worst.as.pct.of.bgs Worst as percent of places (e.g., block groups)
-#'   }
-#' @seealso \code{\link{RR}} and \code{\link{RR.if.address.top.x}} and \code{\link{ej.indexes}} and \code{\link{ej.added}}
+#'
+#'   1. rrs data.frame, one column per environmental indicator, one row per cutoff value
+#'   2. rrs2 data.frame, Relative risks 2
+#'   3. state.tables A list
+#'   4. worst.as.pct Worst as percent, vector as long as number of environmental indicators
+#'   5. worst.as.pct.of.bgs Worst as percent of places (e.g., block groups)
+#'
+#' @seealso [RR()] and [RR.if.address.top.x()] and [ej.indexes()] and [ej.added()]
 #' @examples
 #'  ## #
 #' @export

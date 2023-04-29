@@ -10,9 +10,9 @@
 #' @param etxt Character string to name e in graph
 #' @param dtxt Character string to name d in graph
 #' @param brks Default is 10. Passed as breaks param to plot function
-#' @param ... other parameters passed to \code{plot} # used to pass to density() but this is more useful
+#' @param ... other parameters passed to `plot` # used to pass to density() but this is more useful
 #' @return Creates a plot
-#' @seealso \code{\link{pop.cdf}}   \code{\link{pop.cdf2}} \code{\link{pop.ecdf}}  \code{\link{pop.cdf.density}}
+#' @seealso [pop.cdf()]   [pop.cdf2()] [pop.ecdf()]  [pop.cdf.density()]
 #' @examples
 #' \dontrun{
 #'   bg <- ejscreen::bg22[, c(ejscreen::names.d, 'pop', ejscreen::names.e, 'REGION')]

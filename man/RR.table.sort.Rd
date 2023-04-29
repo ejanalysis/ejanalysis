@@ -7,18 +7,18 @@
 RR.table.sort(x, margins = c(1, 2, 3), decreasing = TRUE)
 }
 \arguments{
-\item{x}{Array of RR values from \code{\link{RR}} in array of 3 dimensions: x[Dnames, Enames, Zcolnames]}
+\item{x}{Array of RR values from \code{\link[=RR]{RR()}} in array of 3 dimensions: x\link{Dnames, Enames, Zcolnames}}
 
 \item{margins}{optional numeric vector of which dimensions to sort, default is all 3, so margins = c(1, 2, 3) by default}
 
 \item{decreasing}{default is TRUE, defines how to sort (note all specified dimensions are sorted the same way by this function)}
 }
 \value{
-Sorted version of x array of 3 dimensions: RRS[Dnames, Enames, Zcolnames]
-  Returns an array with
-  one demographic group per row,
-  one environmental risk indicator per column, and
-  third dimension for which zone (e.g., which US State)
+Sorted version of x array of 3 dimensions: RRS\link{Dnames, Enames, Zcolnames}
+Returns an array with
+one demographic group per row,
+one environmental risk indicator per column, and
+third dimension for which zone (e.g., which US State)
 }
 \description{
 Sort table of Relative Risk results by zone by group by envt risk factor

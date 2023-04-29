@@ -1,8 +1,8 @@
 #' @title Check and clean Census block group or block FIPS - only check number of characters and if NA, not if valid number otherwise
 #'
 #' @description Check if valid Census block group or block FIPS, warn if not, add missing leading zero if inferred.
-#' @details For information on FIPS codes, see \url{http://www.census.gov/geo/reference/ansi.html},
-#'   and also see \url{https://www.census.gov/geo/reference/geoidentifiers.html}
+#' @details For information on FIPS codes, see <http://www.census.gov/geo/reference/ansi.html>,
+#'   and also see <https://www.census.gov/geo/reference/geoidentifiers.html>
 #' @param fips Vector of one or more elements, ideally character class, ideally 12 or 15 characters long (block group or block), required.
 #' @return Returns a vector of one or more character elements, same lengths as fips, NA if NA input
 #' @template seealsoFIPS

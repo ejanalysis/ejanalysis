@@ -2,9 +2,9 @@
 #'
 #' @description This function breaks up a 3-dimensional table of RR values (e.g., by demographic group, by environmental indicator, by geographic zone),
 #'   and saves data for each zone to a 2-dimensional table in a file.
-#'   Requires table in format provided by \code{\link{RR}} and related functions.
+#'   Requires table in format provided by [RR()] and related functions.
 #'
-#' @param my.RR.table Required RR table from function such as \code{\link{RR}}
+#' @param my.RR.table Required RR table from function such as [RR()]
 #' @param folder Optional directory, default is current working directory. Specifies where to save files.
 #' @return Returns the file names as a character vector, after saving them locally.
 #'   Saves one file per zone, with rownames and header.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/url.census.R
 \name{url.census}
 \alias{url.census}
-\title{See webpage with data on Census unit(s) from American Fact Finder - may not be used}
+\title{See webpage with data on Census units from American Fact Finder - may not be used}
 \usage{
 url.census(
   fips,
@@ -15,7 +15,9 @@ url.census(
 \arguments{
 \item{fips}{vector of FIPS}
 
-\item{censustable}{'P2' by default but can be another table code. e.g., see \url{http://factfinder.census.gov/faces/affhelp/jsf/pages/metadata.xhtml?lang=en&type=dataset&id=dataset.en.DEC_10_SF1}}
+\item{censustable}{'P2' by default but can be another table code e.g., see
+
+(http://factfinder.census.gov/faces/affhelp/jsf/pages/metadata.xhtml?lang=en&type=dataset&id=dataset.en.DEC_10_SF1)}
 
 \item{censusfile}{'DEC/10_PL' by default. Also see 'DEC_10_SF1' for example.}
 
@@ -31,23 +33,35 @@ DRAFT CODE to see webpage with table of Census Bureau data via AFF WITHOUT NEEDI
 }
 \details{
 For information on FIPS codes, see \url{http://www.census.gov/geo/reference/ansi.html},
-  and also see \url{https://www.census.gov/geo/reference/geoidentifiers.html}. \cr\cr
- For links to AFF, see \url{http://factfinder2.census.gov/files/AFF_deep_linking_guide.pdf} \cr
-  e.g. to get 1 block census 2010 pop, for block fips 360610127001000 :  \url{http://factfinder2.census.gov/bkmk/table/1.0/en/DEC/10_SF1/P1/1000000US360610127001000} \cr
-  e.g. to get 1 block census 2010 RACE/ETH/NHWA, for block fips 360610127002001 :  \url{http://factfinder2.census.gov/bkmk/table/1.0/en/DEC/10_PL/P2/1000000US360610127002001} \cr
-  Notice the second one gets P2 from 10_PL not 10_SF1, because P2 in SF1 means something different !!! \cr
-  # TO GET RACE/ETHNICITY CENSUS 2010 COUNTS ON ONE BLOCK: \cr
-  # block fips 360610127002001 \cr
-  # \url{http://factfinder2.census.gov/bkmk/table/1.0/en/DEC/10_PL/P2/1000000US360610127002001} \cr
-  # TO GET RACE/ETHNICITY CENSUS 2010 COUNTS ON TWO BLOCKS: \cr
-  # \url{http://factfinder2.census.gov/bkmk/table/1.0/en/DEC/10_PL/P2/1000000US360610127002001|1000000US360610127002000} \cr
+
+and also see (https://www.census.gov/geo/reference/geoidentifiers.html)
+
+For links to AFF, see (http://factfinder2.census.gov/files/AFF_deep_linking_guide.pdf)
+
+e.g. to get 1 block census 2010 pop, for block fips 360610127001000 :
+
+(http://factfinder2.census.gov/bkmk/table/1.0/en/DEC/10_SF1/P1/1000000US360610127001000)
+
+e.g. to get 1 block census 2010 RACE/ETH/NHWA, for block fips 360610127002001 :
+
+(http://factfinder2.census.gov/bkmk/table/1.0/en/DEC/10_PL/P2/1000000US360610127002001)
+
+Notice the second one gets P2 from 10_PL not 10_SF1, because P2 in SF1 means something different
+TO GET RACE/ETHNICITY CENSUS 2010 COUNTS ON ONE BLOCK:
+block fips 360610127002001
+
+(http://factfinder2.census.gov/bkmk/table/1.0/en/DEC/10_PL/P2/1000000US360610127002001)
+
+TO GET RACE/ETHNICITY CENSUS 2010 COUNTS ON TWO BLOCKS:
+
+\url{http://factfinder2.census.gov/bkmk/table/1.0/en/DEC/10_PL/P2/1000000US360610127002001|1000000US360610127002000}
 }
 \examples{
-  myfips <- '360610127002001'
+  myfips <- "360610127002001"
   url.census(myfips, launch=FALSE)
-  myfips <- c('360610127002001', '360610127002000')
+  myfips <- c("360610127002001", "360610127002000")
   url.census(myfips, launch=FALSE)
 }
 \seealso{
-\code{\link{url.censusblock}} and \code{\link[countyhealthrankings]{urls.countyhealthrankings}} (see \url{http://ejanalysis.github.io/countyhealthrankings})
+\code{\link[=url.censusblock]{url.censusblock()}} and  (http://ejanalysis.github.io/countyhealthrankings)
 }

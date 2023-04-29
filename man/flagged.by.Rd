@@ -15,7 +15,7 @@ flagged.by(x, cutoff, or.tied, below, ...)
 
 \item{below}{Logical. Default is FALSE. If TRUE, uses > or >= cutoff. If FALSE, uses < or <= cutoff.}
 
-\item{...}{optional additional parameters to pass to \code{\link[analyze.stuff]{cols.above.which}}}
+\item{...}{optional additional parameters to pass to \code{\link[analyze.stuff:cols.above.which]{analyze.stuff::cols.above.which()}}}
 }
 \value{
 Returns a logical matrix the same size as x.

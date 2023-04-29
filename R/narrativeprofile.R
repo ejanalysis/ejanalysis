@@ -1,10 +1,11 @@
 #' Get County or Tract Narrative Profile webpage from Census
 #'
-#'
 #'  For 1 tract, URL could be for example
-#'   https://www.census.gov/acs/www/data/data-tables-and-tools/narrative-profiles/2019/report.php?geotype=tract&tract=700311&state=24&county=031
+#'   (https://www.census.gov/acs/www/data/data-tables-and-tools/narrative-profiles/
+#'   2019/report.php?geotype=tract&tract=700311&state=24&county=031)
 #'  For 1 county, URL could be for example
-#'   https://www.census.gov/acs/www/data/data-tables-and-tools/narrative-profiles/2019/report.php?geotype=county&state=21&county=017
+#'   (https://www.census.gov/acs/www/data/data-tables-and-tools/narrative-profiles/
+#'   2019/report.php?geotype=county&state=21&county=017)
 #'
 #' @param yearnumber for what year of the 1-year American Community Survey data
 #' @param geotype county or tract
@@ -16,7 +17,8 @@
 #' @return URL that is link to Census Bureau webpage with narrative profile of multiple statistics
 #' @export
 #'
-narrativeprofile <- function(yearnumber=2020, geotype='county', statenumber2='24', countynumber3='031', tractnumber6=NULL, launch=FALSE) {
+narrativeprofile <- function(yearnumber=2020, geotype='county',
+                             statenumber2='24', countynumber3='031', tractnumber6=NULL, launch=FALSE) {
 
   # CENSUS NARRATIVE PROFILE WEBPAGES VIA URL ENCODED
 

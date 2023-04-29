@@ -23,7 +23,7 @@ state.health.url(
 
 \item{scope}{Character, default is "state" view in results, but can be "national" view as well}
 
-\item{ind}{Health Indicator code number. Number, default is 66. Possible values: \cr
+\item{ind}{Health Indicator code number. Number, default is 66. Possible values:
 \itemize{
 \item 6=Cancer Incidence: Incidence of breast, cervical, lung and colorectal cancer per 100,000 population; age adjusted
 \item 7=Cancer Incidence by Race: Incidence of breast, cervical, lung and colorectal cancer per 100,000 population; age adjusted
@@ -42,7 +42,7 @@ state.health.url(
 
 \item{char}{default is 87. unclear what this controls. 91=?, 119=?, 121=?  58? others possible.}
 
-\item{time}{Code for which years are covered by the data. default is 3, which means 2009-2010. Possible values: \cr
+\item{time}{Code for which years are covered by the data. default is 3, which means 2009-2010. Possible values:
 \itemize{
 \item 3=2009-2010
 \item 22=2010-2011
@@ -76,35 +76,66 @@ URL(s) character vector, default: \url{http://www.rwjf.org/en/research-publicati
 Robert Woods Johnson Foundation provides health indicator data by state. This function provides a basic interface to those webpages.
 }
 \details{
-NEWER URL SCHEME NOW... E.G. \url{http://www.rwjf.org/en/how-we-work/rel/research-features/rwjf-datahub/national.html#q/scope/national/ind/10/dist/0/char/0/time/3/viz/map/cmp/brkdwn}
+NEWER URL SCHEME NOW...
+
+<http://www.rwjf.org/en/how-we-work/rel/research-features/rwjf-datahub/national.html#q/
+scope/national/ind/10/dist/0/char/0/time/3/viz/map/cmp/brkdwn>
 
 see also related percent insured data here: e.g.,
 \url{http://datacenter.shadac.org/profile/70#2/alabama/percent,moe,count/a/hide}
+
 DEFAULT IF NO PARAMETERS USED:
+
 state.health.url() \cr
 url created: \cr
-http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/scope/state/ind/66/dist/23/char/87/time/3/viz/bar/fstate/33/locs/33,52,9/cmp/stcmp \cr
+http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/
+scope/state/ind/66/dist/23/char/87/time/3/viz/bar/fstate/33/locs/33,52,9/cmp/stcmp \cr
 url that it resolves to on website: \cr
-http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/scope/state/ind/66/dist/23/char/87/time/3/viz/bar/fstate/33/locs/33,52,9/cmp/stcmp \cr
-# state.health.url("MD") \cr
-# url created: \cr
-# \url{http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/scope/state/ind/66/dist/23/char/87/time/14/viz/bar/fstate/21/locs/21/cmp/stcmp} \cr
-# url that it resolves to on website should be  \cr
-# \url{http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/scope/state/ind/66/dist/23/char/87/time/3/viz/bar/fstate/21/locs/21,52/cmp/stcmp} \cr
-#	URL scheme for linking to Resources for health data by state or by county: \cr \cr
+http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/
+scope/state/ind/66/dist/23/char/87/time/3/viz/bar/fstate/33/locs/33,52,9/cmp/stcmp \cr
+}
+\section{state.health.url("MD") \cr}{
+
+}
+
+\section{url created: \cr}{
+
+}
+
+\section{<http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/}{
+scope/state/ind/66/dist/23/char/87/time/14/viz/bar/fstate/21/locs/21/cmp/stcmp> \cr
+
+scope/state/ind/66/dist/23/char/87/time/3/viz/bar/fstate/21/locs/21,52/cmp/stcmp> \cr
+}
+
+\section{url that it resolves to on website should be  \cr}{
+
+}
+
+\section{URL scheme for linking to Resources for health data by state or by county: \cr \cr}{
 #State-level data from SHADAC: \url{http://www.shadac.org/} \cr
 #State-level data from RWJF: \url{http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub.html} \cr
 ***** see entire US clickable map of states
-# shell.exec('http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/scope/national/ind/31/dist/29/char/119/time/13/viz/map/fstate/2/locs/2,52/cmp/brkdwn')
-# Use this URL format to figure out API or state-specific set of links to nice state reports.
-Public health, premature deaths, MD vs US, 2009-2010
-\url{http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/scope/state/ind/66/dist/23/char/91/time/3/viz/bar/fstate/21/locs/21,52/cmp/stcmp}
-Public health, life expectancy, MD (state number 21) vs US
-\url{http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/scope/state/ind/31/dist/29/char/119/time/14/viz/line/fstate/21/locs/21,52/cmp/brkdwn}
-\url{http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/scope/state/ind/31/dist/29/char/119/time/14/viz/bar/fstate/21/locs/21,52/cmp/stcmp} \cr
-Cancer by race in arizona (defaults to 2008-2009):
-\url{http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/scope/state/ind/7/dist/22/char/85/time/18/viz/bar/fstate/3/locs/3,52/cmp/stcmp}
 }
+
+\section{shell.exec('http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/}{
+scope/national/ind/31/dist/29/char/119/time/13/viz/map/fstate/2/locs/2,52/cmp/brkdwn')
+}
+
+\section{Use this URL format to figure out API or state-specific set of links to nice state reports.}{
+Public health, premature deaths, MD vs US, 2009-2010
+<http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/
+scope/state/ind/66/dist/23/char/91/time/3/viz/bar/fstate/21/locs/21,52/cmp/stcmp>
+Public health, life expectancy, MD (state number 21) vs US
+<http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/
+scope/state/ind/31/dist/29/char/119/time/14/viz/line/fstate/21/locs/21,52/cmp/brkdwn>
+<http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/
+scope/state/ind/31/dist/29/char/119/time/14/viz/bar/fstate/21/locs/21,52/cmp/stcmp> \cr
+Cancer by race in arizona (defaults to 2008-2009):
+<http://www.rwjf.org/en/research-publications/research-features/rwjf-datahub/national.html#q/
+scope/state/ind/7/dist/22/char/85/time/18/viz/bar/fstate/3/locs/3,52/cmp/stcmp>
+}
+
 \examples{
 #
  shell.exec(state.health.url('CA'))

@@ -29,9 +29,9 @@ OK but there now are better ways to compare pdf plots
 }
 \details{
 For an easy, nice, smoothed density plot,
-  try plot(stats::density(bw = .001)); points(density(, bw = .001), col="red")
-  to see overlay of two frequency distributions.
-  Assumes you have weights for each and are comparing values in one group vs another.
+try plot(stats::density(bw = .001)); points(density(, bw = .001), col="red")
+to see overlay of two frequency distributions.
+Assumes you have weights for each and are comparing values in one group vs another.
 }
 \examples{
 \dontrun{
@@ -54,5 +54,5 @@ pop.cdf.density(e, dcount, refcount, etxt, dtxt )
 }
 }
 \seealso{
-\code{\link{pop.cdf}}   \code{\link{pop.cdf2}} \code{\link{pop.ecdf}}  \code{\link{pop.cdf.density}}
+\code{\link[=pop.cdf]{pop.cdf()}}   \code{\link[=pop.cdf2]{pop.cdf2()}} \code{\link[=pop.ecdf]{pop.ecdf()}}  \code{\link[=pop.cdf.density]{pop.cdf.density()}}
 }

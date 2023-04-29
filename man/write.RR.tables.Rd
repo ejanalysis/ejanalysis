@@ -7,19 +7,19 @@
 write.RR.tables(my.RR.table, folder = getwd())
 }
 \arguments{
-\item{my.RR.table}{Required RR table from function such as \code{\link{RR}}}
+\item{my.RR.table}{Required RR table from function such as \code{\link[=RR]{RR()}}}
 
 \item{folder}{Optional directory, default is current working directory. Specifies where to save files.}
 }
 \value{
 Returns the file names as a character vector, after saving them locally.
-  Saves one file per zone, with rownames and header.
-  Format is one demographic group per row and one environmental indicator per column, plus max per row and max per column
+Saves one file per zone, with rownames and header.
+Format is one demographic group per row and one environmental indicator per column, plus max per row and max per column
 }
 \description{
 This function breaks up a 3-dimensional table of RR values (e.g., by demographic group, by environmental indicator, by geographic zone),
-  and saves data for each zone to a 2-dimensional table in a file.
-  Requires table in format provided by \code{\link{RR}} and related functions.
+and saves data for each zone to a 2-dimensional table in a file.
+Requires table in format provided by \code{\link[=RR]{RR()}} and related functions.
 }
 \examples{
   # RRS.REGION <- RR.table(mydat=bg, Enames=names.e,

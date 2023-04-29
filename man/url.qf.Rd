@@ -21,33 +21,47 @@ Get URL for webpage that provides basic demographic information from United Stat
 }
 \details{
 For information on FIPS codes, see \url{http://www.census.gov/geo/reference/ansi.html},
-  and also see \url{https://www.census.gov/geo/reference/geoidentifiers.html} \cr\cr
-  	#################### \cr\cr
+and also see \url{https://www.census.gov/geo/reference/geoidentifiers.html} \cr\cr
+#################### \cr\cr
 If FIPS provided is 10 digits long, assume it is a tract missing a leading zero on the state portion (should have 11 characters).\cr
 If FIPS provided is 11 digits long, assume it is a tract (correctly 11 characters), not simply a block group FIPS missing a leading zero (block group FIPS would correctly would have 12 characters).\cr
 If FIPS provided is 12 digits long, assume it is a block group (correctly 12 characters).\cr
 If FIPS provided is 13 digits long, it is a block group.\cr
 If FIPS provided is 14 OR 15 digits long, assume it is a block. But that will not work in this function. \cr
 If FIPS is none of the above, return a default URL \cr\cr
-
-# NOTES:\cr
+}
+\section{NOTES:\cr}{
 #\cr
-# URL FORMATS FOR QUICKFACTS REPORT ON A COUNTY FROM CENSUS QUICKFACTS SITE: \cr
+}
+
+\section{URL FORMATS FOR QUICKFACTS REPORT ON A COUNTY FROM CENSUS QUICKFACTS SITE: \cr}{
 #\cr
 #A WHOLE STATE: \cr
-# \url{http://quickfacts.census.gov/qfd/states/01000.html} \cr
-# \cr
+}
+
+\section{\url{http://quickfacts.census.gov/qfd/states/01000.html} \cr}{
+
+}
+
+\section{\cr}{
 #WHERE 01000 = STATE 2-DIGIT FIPS,  PLUS 3 ZEROES \cr
-# \cr
+
 #A SINGLE COUNTY: \cr
-# e.g., url{http://quickfacts.census.gov/qfd/states/01/01005.html} \cr
-# \cr
+
 #URL = \cr
-# http://quickfacts.census.gov/qfd/states/XX/YYYYY.html \cr
-# \cr
+
 #WHERE XX =	STATE 2-DIGIT FIPS \cr
 #WHERE YYYYY = 	STATE 2-DIGIT FIPS AND COUNTY 3-DIGIT FIPS = 5 DIGITS TOTAL
 }
+
+\section{e.g., url{http://quickfacts.census.gov/qfd/states/01/01005.html} \cr}{
+
+}
+
+\section{http://quickfacts.census.gov/qfd/states/XX/YYYYY.html \cr}{
+
+}
+
 \examples{
  url.qf( c( '011030001003001', '011030001003', '01103000100', '01005', 1,
    c(8:10), 99999) )
@@ -58,7 +72,7 @@ If FIPS is none of the above, return a default URL \cr\cr
 }
 \seealso{
 \code{\link{clean.fips1215}}, \code{\link{get.fips.bg}}, \code{\link{get.fips.tract}}, \code{\link{get.fips.county}}, \code{\link{get.fips.st}} to get partial FIPS from longer FIPS, or
-  \code{\link{get.name.county}}, \code{\link{get.name.state}} to extract name from longer Census name, or
-  \code{\link{get.state.info}}, \code{\link{get.county.info}}, \code{\link{get.epa.region}}
-  to look up info such as FIPS, state abbreviation, statename, countyname, or region based on FIPS or name.
+\code{\link{get.name.county}}, \code{\link{get.name.state}} to extract name from longer Census name, or
+\code{\link{get.state.info}}, \code{\link{get.county.info}}, \code{\link{get.epa.region}}
+to look up info such as FIPS, state abbreviation, statename, countyname, or region based on FIPS or name.
 }

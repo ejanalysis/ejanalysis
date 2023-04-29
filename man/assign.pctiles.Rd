@@ -7,7 +7,7 @@
 assign.pctiles(values, weights = NULL, zone = NULL, na.rm = TRUE)
 }
 \arguments{
-\item{values}{vector, required, with numeric values. To do this with a matrix, see \code{\link{make.pctile.cols}}}
+\item{values}{vector, required, with numeric values. To do this with a matrix, see \code{\link[=make.pctile.cols]{make.pctile.cols()}}}
 
 \item{weights}{Optional, NULL by default (not fully tested), vector of weights for weighted percentiles (e.g., population weighted).}
 
@@ -24,16 +24,16 @@ For the vector, look at the distribution of values across all rows in a given zo
 and find what percentile a given value is at.
 }
 \details{
-Relies on the \code{\link[Hmisc]{wtd.Ecdf}} function.
-  COULD BE RECODED TO BE FASTER USING data.table package *** see notes in \code{\link{rollup.pct}} and \code{\link{rollup}}
-  Could also add parameter like in rank(), na.last,
-  defining na.rm but also where to rank NA values if included, etc.
+Relies on the \code{\link[Hmisc:wtd.stats]{Hmisc::wtd.Ecdf()}} function.
+COULD BE RECODED TO BE FASTER USING data.table package *** see notes in \code{\link[=rollup.pct]{rollup.pct()}} and \code{\link[=rollup]{rollup()}}
+Could also add parameter like in rank(), na.last,
+defining na.rm but also where to rank NA values if included, etc.
 
-  Default now is like na.last=NA, but like na.last='last' if na.rm=FALSE
+Default now is like na.last=NA, but like na.last='last' if na.rm=FALSE
 
-  ****Could also add parameter like in rank(), ties.method, defining if ties get min, max, or mean of percentiles initially assigned to ties.
-  Default for ties up to mid2022 was like ties.method=max ?
-  But EJScreen will redefine percentiles to set tied values at lower end of that group, min
+****Could also add parameter like in rank(), ties.method, defining if ties get min, max, or mean of percentiles initially assigned to ties.
+Default for ties up to mid2022 was like ties.method=max ?
+But EJScreen will redefine percentiles to set tied values at lower end of that group, min
 }
 \examples{
 x <- c(30, 40, 50, 12,12,5,5,13,13,13,13,13,8,9,9,9,9,9,10:20,20,20,20,21:30)

@@ -18,8 +18,8 @@ Returns a table with a/b calculated within each zone.
 }
 \description{
 Uses data.table package to quickly calculate
-  ratio of a/b within each subset of a dataset (e.g., by zone).
-  This will be superseded by \code{\link{rollup}} once that is completed.
+ratio of a/b within each subset of a dataset (e.g., by zone).
+This will be superseded by \code{\link[=rollup]{rollup()}} once that is completed.
 }
 \examples{
   pre1960=1:100; builtunits=rep(c(10, 100),50); zone=rep(c('NY','MA'),50)

@@ -35,8 +35,7 @@
 scatterEJ_D_E <- function(d, e, ejbin, ename='',
                           legendtitle='Percentiles of EJ Index (with yellow/orange/red as in the maps)',
                           colors11 = c( 'white', 'lightgray', 'lightgreen', 'darkgray', 'purple', 'black', 'darkblue', 'lightblue', 'yellow', 'orange', 'red'),
-                          main='What combinations of E and D result in EJ Index being in various bins
-                          so that place is shown on maps as in a given color-coded EJ Index percentile bin',
+                          main='What combinations of E and D result in EJ Index being in various bins\n so that place is shown on maps as in a given color-coded EJ Index percentile bin',
                           mylegend =  c('<10', '10-20','20s', '30s', '40s', '50-60', '60s', '70s', '80-90', '90-95', '>95'),  ...) {
   cx <- colors11
 

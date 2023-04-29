@@ -12,7 +12,7 @@ Allowed types are State, County (or equivalent), tract, block group, and block.
 Names for tracts, blockgroups, and blocks are not provided or interpreted.
 FIPS codes here are all the relevant digits starting with the 2-character state FIPS,
 so county fips must be 4-5 digits or characters for example (leading zeroes are inferred where
-possible and included in outputs). See \code{\link{clean.fips}} for details.}
+possible and included in outputs). See \code{\link[=clean.fips]{clean.fips()}} for details.}
 
 \item{to}{Optional. When the to parameter is not specified, then x that appear to be fips are converted to name, and x that appear to be names are converted to fips.
 Can specify vector of types of geographies (state, etc.) to convert fips to.
@@ -31,7 +31,7 @@ Returns vector of same length as x, containing fips as character elements with a
 }
 \description{
 Tries to interpret vector of one or more FIPS codes and/or names of geographies,
-  and convert between them.
+and convert between them.
 }
 \examples{
    geofips(c('NY', 'Alabama', 1, 14, 'Montgomery County, Maryland',
@@ -39,5 +39,5 @@ Tries to interpret vector of one or more FIPS codes and/or names of geographies,
    geofips(c('01121', 'Montgomery County, Maryland'), c('state', 'fips.st')
 }
 \seealso{
-\code{\link[ejanalysis]{get.fips.st}} and related functions noted there, \code{\link[ejanalysis]{clean.fips}}, \code{\link[ejanalysis]{get.state.info}}
+\code{\link[=get.fips.st]{get.fips.st()}} and related functions noted there, \code{\link[=clean.fips]{clean.fips()}}, \code{\link[=get.state.info]{get.state.info()}}
 }

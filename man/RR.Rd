@@ -31,24 +31,23 @@ numeric results as vector or data.frame
 }
 \description{
 Finds the ratio of mean indicator value in one demographic subgroup to mean in everyone else,
-  based on data for each spatial unit such as for block groups or tracts.
+based on data for each spatial unit such as for block groups or tracts.
 }
 \details{
 This function requires, for each Census unit, demographic data on total population and percent in each demographic group,
-  and some indicator(s) for each Census unit, such as health status, exposure estimates, or environmental health risk.
-  For example, given population count, percent Hispanic, and ppm of ozone for each tract, this calculates the ratio
-  of the population mean tract-level ozone concentration among Hispanics divided by the same value among all non-Hispanics.
-  The result is a ratio of means for two demographic groups, or for each of several groups and indicators.
-  Each e (for environmental indicator) or d (for demographic percentage) is specified as a vector over small places like Census blocks or block groups
-  or even individuals (ideally) but then d would be a dummy=1 for selected group and 0 for people not in selected group
+and some indicator(s) for each Census unit, such as health status, exposure estimates, or environmental health risk.
+For example, given population count, percent Hispanic, and ppm of ozone for each tract, this calculates the ratio
+of the population mean tract-level ozone concentration among Hispanics divided by the same value among all non-Hispanics.
+The result is a ratio of means for two demographic groups, or for each of several groups and indicators.
+Each e (for environmental indicator) or d (for demographic percentage) is specified as a vector over small places like Census blocks or block groups
+or even individuals (ideally) but then d would be a dummy=1 for selected group and 0 for people not in selected group
 
-  note: this currently does not use rrf() & rrfv() but perhaps it would be faster if it did? but rrfv not tested for multiple demog groups \cr
+note: this currently does not use rrf() & rrfv() but perhaps it would be faster if it did? but rrfv not tested for multiple demog groups \cr
 
+NEED TO VERIFY/TEST THIS: REMOVES PLACES WITH NA in any one or more of the values used (e, d, pop, dref) in numerators and denominators. \cr
 
-   NEED TO VERIFY/TEST THIS: REMOVES PLACES WITH NA in any one or more of the values used (e, d, pop, dref) in numerators and denominators. \cr
-
-   Note also that THIS REMOVES NA VALUES FOR one e factor and not for another,
-  so results can use different places & people for different e factors
+Note also that THIS REMOVES NA VALUES FOR one e factor and not for another,
+so results can use different places & people for different e factors
 }
 \examples{
   bg <- structure(list(state = structure(c(1L, 2L, 3L, 4L, 5L, 6L, 7L,
@@ -109,7 +108,8 @@ RR(bg$pcthisp, bg$pcthisp, bg$pop)
    Avg Hispanic persons local percent Hispanic (their blockgroup) is 4x as everyone elses on avg,
   but avg low income persons local percent low income is only 1.8x as high as everyone elses.
  # cbind(RR=RR(e=data.frame(local_pct_hispanic=bg$pcthisp, local_pct_lowincome=bg$pctlowinc),
- # d= cbind(Ratio_of_avg_among_hispanics_to_avg_among_nonhispanics=bg$pcthisp, avg_among_lowinc_vs_rest_of_pop=bg$pctlowinc), bg$pop))
+ # d= cbind(Ratio_of_avg_among_hispanics_to_avg_among_nonhispanics=bg$pcthisp,
+   avg_among_lowinc_vs_rest_of_pop=bg$pctlowinc), bg$pop))
 
 # RR(bg[ , names.e], bg$pctlowinc, bg$pop)
  # sapply(bg[ , names.d], function(z) RR(bg[ , names.e], z, bg$pop) )

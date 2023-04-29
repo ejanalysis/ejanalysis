@@ -17,23 +17,23 @@ FIPS.ST, ST, statename, ftpname, REGION, is.usa.plus.pr, is.usa, is.state, is.co
 }
 \value{
 A data.frame (if query has 2+ elements), providing all or specified fields of information, covering matching states/dc/pr/island areas,
-  a vector of the same type of information for just one place (if only 1 query term, i.e., one element in the query vector is provided),
-  or NA if certain problems arise.\cr\cr
-  If no query term, or fields not specified, then all information fields are returned: \cr
-     get.state.info()[1:2, ]\cr\cr
-  statename FIPS.ST ST ftpname REGION is.usa.plus.pr is.usa is.state is.contiguous.us \cr
+a vector of the same type of information for just one place (if only 1 query term, i.e., one element in the query vector is provided),
+or NA if certain problems arise.\cr\cr
+If no query term, or fields not specified, then all information fields are returned: \cr
+get.state.info()\link{1:2, }\cr\cr
+statename FIPS.ST ST ftpname REGION is.usa.plus.pr is.usa is.state is.contiguous.us \cr
 1   Alabama      01 AL Alabama      4           TRUE   TRUE     TRUE             TRUE \cr
 2    Alaska      02 AK  Alaska     10           TRUE   TRUE     TRUE            FALSE \cr \cr
 
-  is.island.areas area.sqmi area.sqkm landarea.sqmi landarea.sqkm waterarea.sqmi waterarea.sqkm \cr
+is.island.areas area.sqmi area.sqkm landarea.sqmi landarea.sqkm waterarea.sqmi waterarea.sqkm \cr
 1           FALSE     52420    135767         50645        131171           1775           4597 \cr
 2           FALSE    665384   1723337        570641       1477953          94743         245383 \cr \cr
 
-  inland.sqmi inland.sqkm coastal.sqmi coastal.sqkm greatlakes.sqmi greatlakes.sqkm \cr
+inland.sqmi inland.sqkm coastal.sqmi coastal.sqkm greatlakes.sqmi greatlakes.sqkm \cr
 1        1058        2740          517         1340               0               0 \cr
 2       19304       49997        26119        67647               0               0 \cr \cr
 
-  territorial.sqmi territorial.sqkm      lat        lon \cr
+territorial.sqmi territorial.sqkm      lat        lon \cr
 1              199              516 32.73963  -86.84346 \cr
 2            49320           127739 63.34619 -152.83707 \cr
 }
@@ -41,13 +41,13 @@ A data.frame (if query has 2+ elements), providing all or specified fields of in
 Query information about States, from proxistat package data in data(lookup.states, package='proxistat')
 }
 \details{
-See \pkg{proxistat} package for data source (\url{http://ejanalysis.github.io/proxistat/})
-  For 1+ or all US States plus DC, PR, Island Areas (and USA overall for use in FTP URL):\cr\cr
-  EPA Region, FIPS, State name, abbreviation for State(s); based on any of these query methods: \cr\cr
-  State's FIPS, State's name, OR State's abbreviation, (i.e.,  FIPS.ST, statename, or ST). \cr\cr
-  Also see data in packages \pkg{acs} and \pkg{choroplethr} \cr\cr
-  Also see \url{http://www.census.gov/geo/reference/docs/state.txt} and \url{http://www.census.gov/geo/reference/ansi.html} \cr
-    # Note on definitions of is.usa, is.contiguous.us, etc.:  \cr
+See \link[proxistat:proxistat-package]{proxistat::proxistat-package} for data source (\url{http://ejanalysis.github.io/proxistat/})
+For 1+ or all US States plus DC, PR, Island Areas (and USA overall for use in FTP URL):\cr\cr
+EPA Region, FIPS, State name, abbreviation for State(s); based on any of these query methods: \cr\cr
+State's FIPS, State's name, OR State's abbreviation, (i.e.,  FIPS.ST, statename, or ST). \cr\cr
+Also see data in packages \link{acs} and \link{choroplethr} \cr\cr
+Also see \url{http://www.census.gov/geo/reference/docs/state.txt} and \url{http://www.census.gov/geo/reference/ansi.html} \cr
+# Note on definitions of is.usa, is.contiguous.us, etc.:  \cr
 \url{https://www.census.gov/geo/reference/gtc/gtc_usa.html} \cr
 \url{https://www.census.gov/geo/reference/gtc/gtc_codes.html} \cr
 \url{https://www.census.gov/geo/reference/gtc/gtc_island.html} \cr
@@ -56,11 +56,11 @@ Also note this other possible list of abbreviations (not used) lacks US, PR, DC:
 require(datasets); state.abb \cr\cr
 Note another possible list of States, abbrev, FIPS \cr
 which has island areas but not US total and not leading zeroes on FIPS: \cr
-  require(acs) \cr
-  print(fips.state) \cr\cr
+require(acs) \cr
+print(fips.state) \cr\cr
 Note FIPS were also available here: \cr
- State: \url{http://www.census.gov/geo/reference/ansi_statetables.html}  \cr
- County: \url{http://www.census.gov/geo/www/codes/county/download.html}  \cr\cr
+State: \url{http://www.census.gov/geo/reference/ansi_statetables.html}  \cr
+County: \url{http://www.census.gov/geo/www/codes/county/download.html}  \cr\cr
 Also see \url{https://www.census.gov/geo/reference/state-area.html} for info on state area and internal point
 }
 \examples{
@@ -77,7 +77,7 @@ Also see \url{https://www.census.gov/geo/reference/state-area.html} for info on 
 }
 \seealso{
 \code{\link{clean.fips1215}}, \code{\link{get.fips.bg}}, \code{\link{get.fips.tract}}, \code{\link{get.fips.county}}, \code{\link{get.fips.st}} to get partial FIPS from longer FIPS, or
-  \code{\link{get.name.county}}, \code{\link{get.name.state}} to extract name from longer Census name, or
-  \code{\link{get.state.info}}, \code{\link{get.county.info}}, \code{\link{get.epa.region}}
-  to look up info such as FIPS, state abbreviation, statename, countyname, or region based on FIPS or name.
+\code{\link{get.name.county}}, \code{\link{get.name.state}} to extract name from longer Census name, or
+\code{\link{get.state.info}}, \code{\link{get.county.info}}, \code{\link{get.epa.region}}
+to look up info such as FIPS, state abbreviation, statename, countyname, or region based on FIPS or name.
 }

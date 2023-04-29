@@ -61,5 +61,5 @@ pop.cdf(scores = e, pcts = bg$pctmin, pops = bg$pop,
 }
 }
 \seealso{
-\code{\link{pop.cdf}}   \code{\link{pop.cdf2}} \code{\link{pop.ecdf}}  \code{\link{pop.cdf.density}}
+\code{\link[=pop.cdf]{pop.cdf()}}   \code{\link[=pop.cdf2]{pop.cdf2()}} \code{\link[=pop.ecdf]{pop.ecdf()}}  \code{\link[=pop.cdf.density]{pop.cdf.density()}}
 }

@@ -19,8 +19,8 @@ RR.cut.if.gone(e, d, pop, dref, na.rm = TRUE)
 }
 \description{
 As with RR function, calculates RR as ratio of means in one demographic group vs reference,
-  based on Census demographic data and environmental indicator data on each place.
-  Then this finds how much smaller RR would be if the given place did not exist.
+based on Census demographic data and environmental indicator data on each place.
+Then this finds how much smaller RR would be if the given place did not exist.
 }
 \examples{
  # x=RR.cut.if.gone(bg[ , names.e[8]], bg$pctlowinc, bg$pop)

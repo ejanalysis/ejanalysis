@@ -35,7 +35,7 @@ and specify dlab = c('mean in this group', 'mean in reference group') for exampl
 \item{dlab}{optional character vector of two names for columns of output, default is c('group', 'not'), where the second refers to the reference group used.}
 
 \item{formulatype}{Optional, default is 'manual', which is like sum(x * wts) / sum(wts) with na.rm=T,
-or formulatype can be 'Hmisc' to use \code{\link[Hmisc]{wtd.mean}} (Hmisc::wtd.mean), or 'base' to use \code{\link{weighted.mean}}}
+or formulatype can be 'Hmisc' to use \code{\link[Hmisc:wtd.stats]{Hmisc::wtd.mean()}} (Hmisc::wtd.mean), or 'base' to use \code{\link[=weighted.mean]{weighted.mean()}}}
 
 \item{na.rm}{optional, default is TRUE. No effect if formulatype = manual (default). Not really the right results when na.rm = FALSE anyway.}
 }
@@ -44,17 +44,17 @@ numeric results as array
 }
 \description{
 Finds the mean indicator value in one demographic subgroup and mean in everyone else,
-  based on data for each spatial unit such as for block groups or tracts.
+based on data for each spatial unit such as for block groups or tracts.
 }
 \details{
 This function requires, for each Census unit, demographic data on total population and percent in each demographic group,
-  and some indicator(s) for each Census unit, such as health status, exposure estimates, or environmental health risk.
-  For example, given population count, percent Hispanic, and ppm of ozone for each tract, this calculates the
-  population mean tract-level ozone concentration among Hispanics and the same value among all non-Hispanics.
-  The result is a table of means for a demographic subset, or for each of several groups and indicators.
-  Each e (for environmental indicator) or d (for demographic percentage) is specified as a vector over small places like Census blocks or block groups
-  or even individuals (ideally) but then d would be a dummy=1 for selected group and 0 for people not in selected group
-  NOTE: could NA values cause a problem here?
+and some indicator(s) for each Census unit, such as health status, exposure estimates, or environmental health risk.
+For example, given population count, percent Hispanic, and ppm of ozone for each tract, this calculates the
+population mean tract-level ozone concentration among Hispanics and the same value among all non-Hispanics.
+The result is a table of means for a demographic subset, or for each of several groups and indicators.
+Each e (for environmental indicator) or d (for demographic percentage) is specified as a vector over small places like Census blocks or block groups
+or even individuals (ideally) but then d would be a dummy=1 for selected group and 0 for people not in selected group
+NOTE: could NA values cause a problem here?
 }
 \examples{
  bg=ejanalysis::bgtest

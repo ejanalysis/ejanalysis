@@ -22,13 +22,13 @@ Key functions help to find relative risk or similar ratios of means in demograph
 \details{
 Key functions include
 \itemize{
-\item \code{\link{RR}}
-\item \code{\link{pop.ecdf}}
-\item \code{\link{ej.indexes}}
-\item \code{\link{assign.pctiles}}
-\item \code{\link{make.bin.pctile.cols}}
-\item \code{\link{get.county.info}}
-\item \code{\link{state.health.url}}
+\item \code{\link[=RR]{RR()}}
+\item \code{\link[=pop.ecdf]{pop.ecdf()}}
+\item \code{\link[=ej.indexes]{ej.indexes()}}
+\item \code{\link[=assign.pctiles]{assign.pctiles()}}
+\item \code{\link[=make.bin.pctile.cols]{make.bin.pctile.cols()}}
+\item \code{\link[=get.county.info]{get.county.info()}}
+\item \code{\link[=state.health.url]{state.health.url()}}
 }
 }
 \references{

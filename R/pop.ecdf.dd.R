@@ -1,7 +1,7 @@
 #' @title Draw an Ecdf plot showing the distribution of scores in each demographic subgroup
 #'
 #' @description
-#'  Draws a plot using \code{\link[Hmisc]{Ecdf}}, overlaying cumulative distribution functions,
+#'  Draws a plot using [Hmisc::Ecdf()], overlaying cumulative distribution functions,
 #'  one for each subgroup specified, and one for overall population.
 #'  Useful to compare subgroups based on the distribution of scores among people in that subgroup
 #'  using data from small places like census block groups, based on having for each place the pop total
@@ -16,10 +16,10 @@
 #' @param mycolors Optional vector of colors as long as number of columns in mydf, specifies colors of lines
 #' @param refcolor Optional color, default is 'black'
 #' @param sorted Optional logical, default is TRUE. Should the legend be sorted in order of population weighted mean values of e?
-#' @param log Default is ''. Passed to \code{\link{pop.ecdf}}
+#' @param log Default is ''. Passed to [pop.ecdf()]
 #' @param ... Other optional parameters to pass to Ecdf
 #' @return Draws a plot
-#' @seealso \code{\link[Hmisc]{Ecdf}} \code{\link{RR}} \code{\link{pop.cdf}}   \code{\link{pop.cdf2}} \code{\link{pop.ecdf}}  \code{\link{pop.cdf.density}}
+#' @seealso [Hmisc::Ecdf()] [RR()] [pop.cdf()]   [pop.cdf2()] [pop.ecdf()]  [pop.cdf.density()]
 #' @examples
 #' ## #
 #' \dontrun{

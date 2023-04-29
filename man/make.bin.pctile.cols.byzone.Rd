@@ -27,13 +27,13 @@ make.bin.pctile.cols.byzone(
 
 \item{clean}{Does not use clean.fips() if FALSE, which helps if the countiesall or other list is not yet updated, for example and lacks some new FIPS code}
 
-\item{...}{Other parameters passed to \code{\link{make.bin.pctile.cols}} such as \code{cutpoints} and \code{labels}}
+\item{...}{Other parameters passed to \code{\link[=make.bin.pctile.cols]{make.bin.pctile.cols()}} such as \code{cutpoints} and \code{labels}}
 }
 \value{
 Returns a data.frame with one percentiles field and one bin numbers field for each of the datavarnames
 }
 \description{
 May be obsolete- just uses make.bin.pctile.cols() which now has a zone parameter.
-  Get weighted percentiles and bin numbers, by subset of rows (zone), for each column of data.
-  This can be used to calculate population-weighted percentiles within each State, for national data on Census block groups, for example.
+Get weighted percentiles and bin numbers, by subset of rows (zone), for each column of data.
+This can be used to calculate population-weighted percentiles within each State, for national data on Census block groups, for example.
 }

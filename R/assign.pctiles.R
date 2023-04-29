@@ -2,8 +2,8 @@
 #'
 #' @description For the vector, look at the distribution of values across all rows in a given zone (e.g., places in zone),
 #' and find what percentile a given value is at.
-#' @details Relies on the \code{\link[Hmisc]{wtd.Ecdf}} function.
-#'   COULD BE RECODED TO BE FASTER USING data.table package *** see notes in \code{\link{rollup.pct}} and \code{\link{rollup}}
+#' @details Relies on the [Hmisc::wtd.Ecdf()] function.
+#'   COULD BE RECODED TO BE FASTER USING data.table package *** see notes in [rollup.pct()] and [rollup()]
 #'   Could also add parameter like in rank(), na.last,
 #'   defining na.rm but also where to rank NA values if included, etc.
 #'
@@ -13,7 +13,7 @@
 #'   Default for ties up to mid2022 was like ties.method=max ?
 #'   But EJScreen will redefine percentiles to set tied values at lower end of that group, min
 #'
-#' @param values vector, required, with numeric values. To do this with a matrix, see \code{\link{make.pctile.cols}}
+#' @param values vector, required, with numeric values. To do this with a matrix, see [make.pctile.cols()]
 #' @param weights Optional, NULL by default (not fully tested), vector of weights for weighted percentiles (e.g., population weighted).
 #' @param na.rm NOT IMPLEMENTED HERE. Logical, optional, TRUE by default. Should NA values (missing data) be removed first to get percentile of those with valid data.
 #'   If FALSE, NA values are treated as being at the high percentiles.

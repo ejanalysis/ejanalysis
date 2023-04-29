@@ -91,7 +91,8 @@
 #'    Avg Hispanic persons local percent Hispanic (their blockgroup) is 4x as everyone elses on avg,
 #'   but avg low income persons local percent low income is only 1.8x as high as everyone elses.
 #'  # cbind(RR=RR(e=data.frame(local_pct_hispanic=bg$pcthisp, local_pct_lowincome=bg$pctlowinc),
-#'  # d= cbind(Ratio_of_avg_among_hispanics_to_avg_among_nonhispanics=bg$pcthisp, avg_among_lowinc_vs_rest_of_pop=bg$pctlowinc), bg$pop))
+#'  # d= cbind(Ratio_of_avg_among_hispanics_to_avg_among_nonhispanics=bg$pcthisp,
+#'    avg_among_lowinc_vs_rest_of_pop=bg$pctlowinc), bg$pop))
 #'
 #' # RR(bg[ , names.e], bg$pctlowinc, bg$pop)
 #'  # sapply(bg[ , names.d], function(z) RR(bg[ , names.e], z, bg$pop) )

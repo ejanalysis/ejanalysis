@@ -7,7 +7,7 @@
 #'   Names for tracts, blockgroups, and blocks are not provided or interpreted.
 #'   FIPS codes here are all the relevant digits starting with the 2-character state FIPS,
 #'   so county fips must be 4-5 digits or characters for example (leading zeroes are inferred where
-#'   possible and included in outputs). See \code{\link{clean.fips}} for details.
+#'   possible and included in outputs). See [clean.fips()] for details.
 #' @param to Optional. When the to parameter is not specified, then x that appear to be fips are converted to name, and x that appear to be names are converted to fips.
 #'   Can specify vector of types of geographies (state, etc.) to convert fips to.
 #'   This is useful to find County or State names for a list of tract fips, for example.
@@ -19,7 +19,7 @@
 #'   Variations also work such as plural and case-insensitive.
 #' @param clean Does not use clean.fips() if FALSE, which helps if the countiesall or other list is not yet updated, for example and lacks some new FIPS code
 #' @return Returns vector of same length as x, containing fips as character elements with any leading zeroes, and/or names of geographies.
-#' @seealso \code{\link[ejanalysis]{get.fips.st}} and related functions noted there, \code{\link[ejanalysis]{clean.fips}}, \code{\link[ejanalysis]{get.state.info}}
+#' @seealso [ejanalysis::get.fips.st()] and related functions noted there, [ejanalysis::clean.fips()], [ejanalysis::get.state.info()]
 #' @examples
 #'    geofips(c('NY', 'Alabama', 1, 14, 'Montgomery County, Maryland',
 #'     '01121', 1121, '060690006002', 60690006002, '011210118001025')

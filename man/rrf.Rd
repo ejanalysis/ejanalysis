@@ -22,9 +22,9 @@ pop is population count of place (or pop=1 if this is a vector of individuals)}
 Returns one number
 }
 \description{
-**Probably obsolete given \code{\link{RR}}. \cr\cr
-  Inputs are vectors over small places like Census blocks or block groups
-  or possibly individuals (ideally) but then d would be a dummy=1 for selected group and 0 for people not in selected group
+**Probably obsolete given \code{\link[=RR]{RR()}}. \cr\cr
+Inputs are vectors over small places like Census blocks or block groups
+or possibly individuals (ideally) but then d would be a dummy=1 for selected group and 0 for people not in selected group
 }
 \examples{
 #

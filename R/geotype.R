@@ -6,10 +6,10 @@
 #'   Names for tracts, blockgroups, and blocks are not provided or interpreted.
 #'   FIPS codes here are all the relevant digits starting with the 2-character state FIPS,
 #'   so county fips must be 4-5 digits or characters for example (leading zeroes are inferred where
-#'   possible and included in outputs). See \code{\link{clean.fips}} for details.
+#'   possible and included in outputs). See [clean.fips()] for details.
 #' @param cleancounties whether to try to validate county FIPS based on list that ideally is always up to date
 #' @return ***TBD *** Returns *** types as character strings, and maybe cleaned values themselves? ***
-#' @seealso \code{\link{geofips}}, \code{\link[ejanalysis]{get.fips.st}} and related functions noted there, \code{\link[ejanalysis]{clean.fips}}, \code{\link[ejanalysis]{get.state.info}}
+#' @seealso [geofips()], [ejanalysis::get.fips.st()] and related functions noted there, [ejanalysis::clean.fips()], [ejanalysis::get.state.info()]
 #' @examples # none yet
 #' @export
 geotype <- function(x, cleancounties=TRUE) {

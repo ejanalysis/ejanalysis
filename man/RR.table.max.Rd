@@ -7,7 +7,7 @@
 RR.table.max(x, by = 1, digits = 3)
 }
 \arguments{
-\item{x}{Array results from \code{\link{RR.table}} or related function}
+\item{x}{Array results from \code{\link[=RR.table]{RR.table()}} or related function}
 
 \item{by}{optional vector (numeric or character), specifies which of three dimensions should be shown.
 Default is 1, meaning dimension 1 which is demographic indicator.}
@@ -16,13 +16,13 @@ Default is 1, meaning dimension 1 which is demographic indicator.}
 }
 \value{
 The full x array, except only the first two elements of the specified dimension,
-  which should be the two elements with the max number and text saying which name is that max.
+which should be the two elements with the max number and text saying which name is that max.
 }
 \description{
 See which Demographic group has highest RR for each Envt risk indicator,
-  and which Envt risk indicator has highest RR for each Demographic group,
-  within each zone (USA, etc.),
-  in table of Relative Risk results by zone by group by envt risk factor.
+and which Envt risk indicator has highest RR for each Demographic group,
+within each zone (USA, etc.),
+in table of Relative Risk results by zone by group by envt risk factor.
 }
 \seealso{
 \itemize{

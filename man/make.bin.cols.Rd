@@ -28,7 +28,7 @@ Returns a data.frame, matrix, or vector (depending on \code{as.df}) the same sha
 }
 \description{
 Simplifies creation of data.frame or matrix (or vector) with columns that specify bins by bin number,
-  based on values (percentiles for example) and specified cutpoints. Each bin is defined by cutpoints.
+based on values (percentiles for example) and specified cutpoints. Each bin is defined by cutpoints.
 }
 \details{
 This is one way to prepare data to be mapped in a series of choropleths, for example (color-coded maps).

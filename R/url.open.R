@@ -1,9 +1,9 @@
 #' @title Launch a web browser to go to a URL, like browseURL does
 #'
-#' @description Just the same as \code{\link{browseURL}}
+#' @description Just the same as [browseURL()]
 #' @param myurl required character element, URL to open
 #' @return Just launches browser to open URL
-#' @seealso \code{\link{browseURL}}, and \code{\link{shell.exec}} which this uses
+#' @seealso [browseURL()], and [shell.exec()] which this uses
 #' @export
 url.open <- function(myurl) {
 

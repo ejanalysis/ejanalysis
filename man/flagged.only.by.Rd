@@ -23,11 +23,11 @@ Flag which cells are the only one in the row that is at/above a cutoff (find row
 }
 \details{
 For a data.frame with a few cols of related data, find which cells are the only one in the row that is at/above some cutoff.
-  This can find rows that meet only 1 of several criteria, for example.
-  Returns a logical matrix or data.frame, with TRUE for each cell that meets the test.
-  Can be used in EJ analysis in identifying places (rows) that were only flagged because one of the indicator(s) is at/above a cutoff, threshold value.
-  For example, if there were four criteria to be met in flagging a location, this function identifies
-  places that met only one of the criteria, and can show which one was met.
+This can find rows that meet only 1 of several criteria, for example.
+Returns a logical matrix or data.frame, with TRUE for each cell that meets the test.
+Can be used in EJ analysis in identifying places (rows) that were only flagged because one of the indicator(s) is at/above a cutoff, threshold value.
+For example, if there were four criteria to be met in flagging a location, this function identifies
+places that met only one of the criteria, and can show which one was met.
 }
 \note{
 Future work: these functions could have wts, na.rm, & allow cutoffs or benchmarks as a vector (not just 1 number), & have benchnames.

@@ -12,7 +12,7 @@ RR.table.view(
 )
 }
 \arguments{
-\item{x}{A three dimensional array that is created by \code{\link{RR}} and has format like RRS[d, e, zone]}
+\item{x}{A three dimensional array that is created by \code{\link[=RR]{RR()}} and has format like RRS\link{d, e, zone}}
 
 \item{d}{Optional. Vector of names of demographic groups that must be subset of first dimension of RRS. Default is all.}
 
@@ -21,11 +21,11 @@ RR.table.view(
 \item{zone}{Optional. Vector of zone names that must be subset of names of third dimension of RRS. Default is all.}
 }
 \value{
-prints RRS[d, e, zone]
+prints RRS\link{d, e, zone}
 }
 \description{
 Currently does not do anything other than print. Takes zone-specific RRS values and prints them for viewing.
-  Just another way to specify which subset of the RR array you want to view.
+Just another way to specify which subset of the RR array you want to view.
 }
 \examples{
  t(round(RR.table.view(

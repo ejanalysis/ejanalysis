@@ -3,7 +3,7 @@
 #'   determine at what percentile(s) are those selected values. In other words,
 #'   what fraction of all of the numbers (actually weighted based on cumulative sum of weights)
 #'   are smaller than (or tied with) the selected value(s) of interest?
-#'   Based on analyze.stuff::pct.above (\code{\link[analyze.stuff]{pct.above}})
+#'   Based on analyze.stuff::pct.above ([analyze.stuff::pct.above()])
 #' @param x Vector of numeric values (the distribution within which percentiles are sought)
 #' @param values Required vector of one or more numbers for which percentiles are sought.
 #' @param wts Optional weights, default is 1 (equal weighting). Useful to find for example what percent of people have an x score (at or) below a given value.
