@@ -29,13 +29,17 @@
 #' @return numeric results as array
 #' @template seealsoRR
 #' @examples
+#'  # use an example smaller dataset
 #'  bg=ejanalysis::bgtest
- # namese = c("pm", "o3", "cancer", "resp", "dpm", "pctpre1960", "traffic.score",
- #  "proximity.npl", "proximity.rmp", "proximity.tsdf", "proximity.npdes", "ust")
- # namesd = c("VSI.eo", "pctmin", "pctlowinc", "pctlths", "pctlingiso", "pctunder5", "pctover64")
- # namesdsub = c("pctnhwa", "pcthisp", "pctnhba", "pctnhaa", "pctnhaiana", "pctnhnhpia",  "pctnhotheralone", "pctnhmulti")
+#'   namese = c("pm", "o3", "cancer", "resp", "dpm", "pctpre1960", "traffic.score",
+#'    "proximity.npl", "proximity.rmp", "proximity.tsdf", "proximity.npdes", "ust")
+#'   namesd = c("VSI.eo", "pctmin", "pctlowinc", "pctlths", "pctlingiso", "pctunder5", "pctover64")
+#'   namesdsub = c("pctnhwa", "pcthisp", "pctnhba", "pctnhaa", "pctnhaiana",
+#'  "pctnhnhpia",  "pctnhotheralone", "pctnhmulti")
+#'  # stats on 1 Demographic group
 #'  drop(RR.means(bg[ , namese], bg$pcthisp, bg$pop))
-#'  x=RR.means(bg[,namese], bg[,namesd], bg$pop)
+#'  # all E, all D
+#'  x <- RR.means(bg[,namese], bg[,namesd], bg$pop)
 #'  round(x[,'ratio',],2)
 #'  x[ , ,'traffic.score']
 #'  x['pctlowinc',,]
@@ -44,13 +48,30 @@
 #'   d = bg[, c(namesd, namesdsub)], pop = bg$pop, dlab = c('Avg pop density', 'Avg if not in this demog group'))),2)
 #'  densities[order(densities[,3],decreasing = T),]
 #' \dontrun{
-#'  # if the blockgroup data were a data.table...
-#'  bg <- data.frame(data.table::copy(EJAM::blockgroupstats))
-#'  x <- ejanalysis::RR.means(
-#'    bg[ ,   EJAM::names_e],
-#'    bg[ , c(EJAM::names_d, EJAM::names_d_subgroups)]/100,
-#'    bg$pop
-#'  )
+#' # for ejscreen bg22 data.frame
+#' # population density of blockgroup, by demographic group
+#' densities <- round(drop(RR.means(
+#'   e = data.frame(pop.density=1000*bg22$pop/bg22$area),
+#'   d = bg22[, c(names.d, names.d.subgroups)],
+#'   pop = bg22$pop,
+#'   dlab = c('Avg pop density', 'Avg if not in this demog group'))),2)
+#' # just 1 Envt factor
+#'  drop(RR.means(bg22[, "traffic.score"], bg22[,c(names.d, names.d.subgroups)], pop = bg22$pop))
+#'  # just 1 Demog group
+#'  drop(RR.means(bg22[, c('pm','o3','dpm','resp', 'cancer')], bg22[,"pctlowinc"], pop = bg22$pop))
+#'  # multiple E, multiple D
+#'  RR.means(bg22[, c('pm','o3','dpm','resp', 'cancer')], bg22[,c("pctlowinc", "pctunemployed")], pop = bg22$pop)
+#'  # All E, All D (a bit slow)
+#'  x <- RR.means(bg22[,names.e], bg22[,names.d], pop = bg22$pop)
+#'  t(round(x[,'ratio',],2))
+#'
+#'  # if the blockgroup data were a data.table not just data.frame:
+#'  #bg <- data.frame(data.table::copy(EJAM::blockgroupstats))
+#'  #x <- ejanalysis::RR.means(
+#'  #  bg[ ,   EJAM::names_e],
+#'  #  bg[ , c(EJAM::names_d, EJAM::names_d_subgroups)]/100,
+#'  #  bg$pop
+#'  #)
 #'  }
 #' @export
 RR.means <- function(e, d, pop, dref, dlab = c('group', 'not'), formulatype = 'manual', na.rm = TRUE) {
