@@ -58,33 +58,56 @@ lookup.pctile <- function(myvector, varname.in.lookup.table, lookup, zone) {
 
 	if (missing(lookup) & (exists('us'))) {lookup <- us}
 	if (missing(lookup) & !exists('us')) {stop('must specify lookup= or have it in memory named "us"')}
-  if (missing(zone) & lookup$REGION[1] != 'USA') {stop(
-    'If lookup is not us, need to specify zone="NY" for example')}
+  if (missing(zone) & lookup$REGION[1] != 'USA') {stop('If lookup is not us, need to specify zone="NY" for example')}
 	# lookup table must have PCTILE field (& this removes the row called 'mean')
 	if (!('PCTILE' %in% names(lookup))) {stop(
 	  'lookup must have a field called "PCTILE" that contains quantiles/percentiles')}
-	lookup <- lookup[lookup$PCTILE != "std.dev", ]
+  lookup <- lookup[lookup$PCTILE != "std.dev", ] #   slow - should drop before using the dataset
 	lookup <- lookup[lookup$PCTILE != "mean", ]
 
-	if (missing(zone)) {
-	  whichinterval <- findInterval(myvector, lookup[ , varname.in.lookup.table])
+	if (!(varname.in.lookup.table %in% colnames(lookup))) {
+	  warning(paste0(varname.in.lookup.table, " must be a column in lookup table"))
+	  return(rep(NA, length(myvector)))
 	} else {
-	  if (any(!(zone %in% lookup$REGION))) {stop('zone(s) not found in lookup')}
+	  if (missing(zone)) {
 
-	  # also see similar code in ejanalysis::assign.pctiles()
-	  whichinterval <- vector(length = NROW(myvector))
+	    whichinterval <- findInterval(myvector, lookup[ , varname.in.lookup.table])
 
-	  for (z in unique(zone)) {
+	  } else {
+	    if (any(!(zone %in% lookup$REGION))) {stop('zone(s) not found in lookup')}
 
-	    # should be OK if some or all those values in myvector are NA
-	    # should check what if some or all in lookup are NA, though
+	    # also see similar code in ejanalysis::lookup.pctiles() !
 
-	    whichinterval[zone == z] <- findInterval(myvector[zone == z], lookup[lookup$REGION == z, varname.in.lookup.table])
+	    whichinterval <- vector(length = NROW(myvector))
+
+	    for (z in unique(zone)) {
+	      #  for each zone
+	      myvector_selection <- myvector[zone == z] # sort(myvector)
+	      myvector_lookup <-   lookup[lookup$REGION == z, varname.in.lookup.table]
+
+	      # should be OK if some or all those values in myvector are NA?
+	      #  if some or all in lookup are NA, though it crashes unless that case is handled
+	      if (any(is.na(myvector_lookup))) {
+	        whichinterval[zone == z] <- rep(NA, length(myvector_selection))
+	        warning("No percentile info available for ", varname.in.lookup.table, " in ", z)
+
+	 # *** THIS WILL STILL FAIL - JUST SETTING whichinterval TO NA may not work below
+	        # where it tries to use it to subset...  lookup$PCTILE[whichinterval]
+
+	      } else {
+	        whichinterval[zone == z] <- findInterval(myvector_selection, myvector_lookup)
+	      }
+	    }
 	  }
 	}
 
+
+	# *** BELOW SEEMS WRONG IF WE ARE DOING IT ZONE BY ZONE ABOVE, BUT NOT BELOW
+
+
 	# would be an error if zeroeth row were selected here,
-	# so just say it is at the lowest percentile listed (which is 0) even if it is below the minimum value that supposedly defines the lower edge
+	# so just say it is at the lowest percentile listed (which is 0)
+	# even if it is below the minimum value that supposedly defines the lower edge
 	belowmin <- (whichinterval == 0)
 	if (any(belowmin, na.rm = TRUE)) {
 	  whichinterval[!is.na(belowmin) & belowmin]  <- 1
@@ -92,7 +115,16 @@ lookup.pctile <- function(myvector, varname.in.lookup.table, lookup, zone) {
 	}
 	whichinterval[is.na(belowmin)] <- NA
 	# returns NA if belowmin is NA
-	return(as.numeric(lookup$PCTILE[whichinterval]))
 
+
+
+	return(as.numeric(lookup$PCTILE[whichinterval]))
 }
+
+
+
+
+
+
+
 
