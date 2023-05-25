@@ -20,16 +20,16 @@
 #' @param d.pct Demographic percentage, as fraction, defining what fraction of population in each place (row) is in demographic group of interest. Required.
 #' @param popcounts Numeric vector of counts of total population in each place
 #' @param d.pct.us xxxxx
-#' @param or.tied Logical value, optional, TRUE by default, in which case ties of ranking variable with a cutoff value (value >= cutoff) are included in places within that bin.
+#' @param or.tied Logical value, optional, TRUE by default, in which case ties of ranking variable with a threshold value (value >= threshold) are included in places within that bin.
 #' @param if.multiply.e.by Optional, 0 by default. Specifies the number that environmental indicator values would be multiplied by
 #'   in the scenario where some places are addressed. Zero means those top-ranked places would have the environmental indicator set to zero,
 #'   while 0.9 would mean and 10 percent cut in the environmental indicator value.
 #' @param zones Subsets of places such as States
-#' @param mycuts optional vector of cutoff values to analyze. Default is c(50,80,90:100)
+#' @param mycuts optional vector of threshold values to analyze. Default is c(50,80,90:100)
 #' @param silent optional logical, default is TRUE, while FALSE means more information is printed
 #' @return Returns a list of results:
 #'
-#'   1. rrs data.frame, one column per environmental indicator, one row per cutoff value
+#'   1. rrs data.frame, one column per environmental indicator, one row per threshold value
 #'   2. rrs2 data.frame, Relative risks 2
 #'   3. state.tables A list
 #'   4. worst.as.pct Worst as percent, vector as long as number of environmental indicators
@@ -60,9 +60,9 @@ RR.if.address.top.x <- function(rank.by.df, e.df, d.pct, popcounts, d.pct.us, or
     for (mycut.i in 1:length(mycuts) ) {
 
       if (or.tied) {
-        worst.x <- ( rank.by.df[ , i] >= mycuts[mycut.i]) # those above given EJ %ile cutoff, or specified cutoff
+        worst.x <- ( rank.by.df[ , i] >= mycuts[mycut.i]) # those above given EJ %ile threshold, or specified threshold
       } else {
-        worst.x <- ( rank.by.df[ , i] > mycuts[mycut.i]) # those above given EJ %ile cutoff, or specified cutoff
+        worst.x <- ( rank.by.df[ , i] > mycuts[mycut.i]) # those above given EJ %ile threshold, or specified threshold
       }
       worst.x[is.na(worst.x)] <- FALSE
 
@@ -83,8 +83,8 @@ RR.if.address.top.x <- function(rank.by.df, e.df, d.pct, popcounts, d.pct.us, or
       cat('\n')
     }
 
-    # Now for a calculated cutoff, not the specified cutoff:
-    # Calculate the cutoff that will get RR==1, using specified rank.by.df and if.multiply.e.by, etc.:
+    # Now for a calculated threshold, not the specified threshold:
+    # Calculate the threshold that will get RR==1, using specified rank.by.df and if.multiply.e.by, etc.:
 
     # DOES NOT WORK YET ***
 

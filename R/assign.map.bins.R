@@ -2,7 +2,7 @@
 #'
 #' @description Takes a vector (not matrix or df) of values and returns a vector of bin numbers.
 #' For creating color-coded maps (choropleths), assign each place (e.g., each row of a single column) to a bin.
-#' Each bin represents one map color, and is defined by cutoff values.
+#' Each bin represents one map color, and is defined by threshold values.
 #' @details
 #' The default bins 0-11 are defined as follows: \cr
 #' bin 0: PCTILE=NA \cr

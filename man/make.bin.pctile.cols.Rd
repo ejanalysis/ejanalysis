@@ -39,7 +39,7 @@ Returns a matrix or data.frame
 This function just combines \code{\link[=make.pctile.cols]{make.pctile.cols()}} and \code{\link[=make.bin.cols]{make.bin.cols()}}.
 Takes a data.frame of values and returns a data.frame (or matrix) of percentiles,
 showing the percentile of a value within all values in its column, as well as bin numbers,
-showing what bin each falls into, based on specified cutoffs defining bins. \cr\cr
+showing what bin each falls into, based on specified cutpoints defining bins. \cr\cr
 ** Work in progress/ not fully tested, e.g., need to test if all code below works with both as.df=TRUE and as.df=FALSE
 }
 \seealso{

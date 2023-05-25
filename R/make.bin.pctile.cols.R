@@ -3,7 +3,7 @@
 #' @description This function just combines [make.pctile.cols()] and [make.bin.cols()].
 #' Takes a data.frame of values and returns a data.frame (or matrix) of percentiles,
 #' showing the percentile of a value within all values in its column, as well as bin numbers,
-#' showing what bin each falls into, based on specified cutoffs defining bins. \cr\cr
+#' showing what bin each falls into, based on specified cutpoints defining bins. \cr\cr
 #' ** Work in progress/ not fully tested, e.g., need to test if all code below works with both as.df=TRUE and as.df=FALSE
 #' @param raw.data.frame Data.frame of values
 #' @param weights Optional Numeric vector of weights to create weighted percentiles, such as population-weighted quantiles. Unweighted if not specified. Vector same length as number of rows in data.frame.
