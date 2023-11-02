@@ -1,4 +1,5 @@
-#' @title Infer Type of Data as FIPS / ANSI Codes or Names of U.S. Geographies
+#' @title Infer Type of Data as FIPS / ANSI Codes or Names of U.S. Geographies - obsolete.
+#' See EJAM package function called fipstype()
 #' @description
 #'   Tries to interpret vector of one or more FIPS codes and/or names of geographies.
 #' @param x Required vector of one or more numeric or character FIPS and/or names of geographic locations.
