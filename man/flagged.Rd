@@ -2,22 +2,22 @@
 % Please edit documentation in R/flagged.R
 \name{flagged}
 \alias{flagged}
-\title{Which rows have a value above cutoff in at least one column}
+\title{Which rows have a value above threshold in at least one column}
 \usage{
-flagged(df, cutoff = 0.8, or.tied = TRUE)
+flagged(df, threshold = 0.8, or.tied = TRUE)
 }
 \arguments{
 \item{df}{Data.frame with numeric values to be checked against the threshold.}
 
-\item{cutoff}{Number that is the threshold that must be (met or) exceeded for a row to be flagged. Optional, default is 0.80}
+\item{threshold}{Number that is the threshold that must be (met or) exceeded for a row to be flagged. Optional, default is 0.80}
 
-\item{or.tied}{Logical, optional, default is TRUE, in which case a value equal to the cutoff also flags the row.}
+\item{or.tied}{Logical, optional, default is TRUE, in which case a value equal to the threshold also flags the row.}
 }
 \value{
 Returns a logical vector or data.frame the shape of df
 }
 \description{
-Flags rows that have values above some cutoff in at least one column.
+Flags rows that have values above some threshold in at least one column.
 }
 \details{
 The use of na.rm=TRUE in this function means it will always ignore NA values in a given place and take the max of the valid (non-NA) values instead of returning NA when there is an NA in that row
