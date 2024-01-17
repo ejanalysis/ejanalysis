@@ -28,7 +28,7 @@ RR.if.address.top.x(
 
 \item{d.pct.us}{xxxxx}
 
-\item{or.tied}{Logical value, optional, TRUE by default, in which case ties of ranking variable with a cutoff value (value >= cutoff) are included in places within that bin.}
+\item{or.tied}{Logical value, optional, TRUE by default, in which case ties of ranking variable with a threshold value (value >= threshold) are included in places within that bin.}
 
 \item{if.multiply.e.by}{Optional, 0 by default. Specifies the number that environmental indicator values would be multiplied by
 in the scenario where some places are addressed. Zero means those top-ranked places would have the environmental indicator set to zero,
@@ -36,14 +36,14 @@ while 0.9 would mean and 10 percent cut in the environmental indicator value.}
 
 \item{zones}{Subsets of places such as States}
 
-\item{mycuts}{optional vector of cutoff values to analyze. Default is c(50,80,90:100)}
+\item{mycuts}{optional vector of threshold values to analyze. Default is c(50,80,90:100)}
 
 \item{silent}{optional logical, default is TRUE, while FALSE means more information is printed}
 }
 \value{
 Returns a list of results:
 \enumerate{
-\item rrs data.frame, one column per environmental indicator, one row per cutoff value
+\item rrs data.frame, one column per environmental indicator, one row per threshold value
 \item rrs2 data.frame, Relative risks 2
 \item state.tables A list
 \item worst.as.pct Worst as percent, vector as long as number of environmental indicators

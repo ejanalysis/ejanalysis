@@ -2,7 +2,8 @@
 % Please edit documentation in R/geotype.R
 \name{geotype}
 \alias{geotype}
-\title{Infer Type of Data as FIPS / ANSI Codes or Names of U.S. Geographies}
+\title{Infer Type of Data as FIPS / ANSI Codes or Names of U.S. Geographies - obsolete.
+See EJAM package function called fipstype()}
 \usage{
 geotype(x, cleancounties = TRUE)
 }
