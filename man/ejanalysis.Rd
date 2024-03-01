@@ -35,4 +35,12 @@ Key functions include
 \url{http://ejanalysis.github.io} \cr
 \url{http://www.ejanalysis.com/} \cr
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/ejanalysis/ejanalysis}
+  \item Report bugs at \url{https://github.com/ejanalysis/ejanalysis/issues}
+}
+
+}
 \concept{justice EJ demographic}

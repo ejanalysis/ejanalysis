@@ -41,7 +41,7 @@ territorial.sqmi territorial.sqkm      lat        lon \cr
 Query information about States, from proxistat package data in data(lookup.states, package='proxistat')
 }
 \details{
-See \link[proxistat:proxistat-package]{proxistat::proxistat-package} for data source (\url{http://ejanalysis.github.io/proxistat/})
+See proxistat package for data source (\url{http://ejanalysis.github.io/proxistat/})
 For 1+ or all US States plus DC, PR, Island Areas (and USA overall for use in FTP URL):\cr\cr
 EPA Region, FIPS, State name, abbreviation for State(s); based on any of these query methods: \cr\cr
 State's FIPS, State's name, OR State's abbreviation, (i.e.,  FIPS.ST, statename, or ST). \cr\cr
