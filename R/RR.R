@@ -11,8 +11,7 @@
 #'
 #'   note: this currently does not use rrf() & rrfv() but perhaps it would be faster if it did? but rrfv not tested for multiple demog groups \cr
 #'
-#'
-#'    NEED TO VERIFY/TEST THIS: REMOVES PLACES WITH NA in any one or more of the values used (e, d, pop, dref) in numerators and denominators. \cr
+#'    VERIFY/TEST THIS: REMOVES PLACES WITH NA in any one or more of the values used (e, d, pop, dref) in numerators and denominators. \cr
 #'
 #'    Note also that THIS REMOVES NA VALUES FOR one e factor and not for another,
 #'   so results can use different places & people for different e factors
@@ -31,88 +30,105 @@
 #'   (or dref= vector of ones and zeroes if this is a vector of individuals)
 #' @param na.rm Optional, logical, TRUE by default. Specify if NA values should be removed first.
 #' @return numeric results as vector or data.frame
-#' @template seealsoRR
+#'
+#' @seealso
+#' - [RR()] to calculate overall disparity metric as relative risk (RR), ratio of mean environmental indicator values across demographic groups
+#' - [RR.table()] to create 3-D table of RR values, by demographic group by environmental indicator by zone
+#' - [RR.table.sort()] to sort existing RR table
+#' - [RR.table.add()] to add zone(s) to existing RR table
+#' - [write.RR.tables()] to write a file with a table or RR by indicator by group
+#' - [pop.ecdf()] to compare plots of cumulative frequency distribution of indicator values by group
+#' - [RR.cut.if.gone()] to find local contribution to RR
+#' - [RR.if.address.top.x()] to find how much RR would change if top-ranked places had different conditions
+#' - [ej.added()] to find EJ Index as local contribution to sum of EJ Indexes
+#' - [ej.indexes()] for local contribution to a variety of overall disparity metrics such as excess risk
+#'
 #' @examples
-#'   bg <- structure(list(state = structure(c(1L, 2L, 3L, 4L, 5L, 6L, 7L,
-#'  8L, 10L, 11L, 12L, 13L, 14L, 15L, 16L, 17L, 18L, 19L, 20L, 21L,
-#'  22L, 23L, 24L, 25L, 26L, 27L, 28L, 29L, 30L, 31L, 32L, 33L, 34L,
-#'  35L, 36L, 37L, 38L, 39L, 41L, 42L, 43L, 44L, 45L, 46L, 47L, 48L,
-#'  49L, 50L, 51L, 52L), .Label = c("Alabama", "Alaska", "Arizona",
-#'  "Arkansas", "California", "Colorado", "Connecticut", "Delaware",
-#'  "District of Columbia", "Florida", "Georgia", "Hawaii", "Idaho",
-#'  "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana",
-#'  "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota",
-#'  "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire",
-#'  "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota",
-#'  "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Puerto Rico",
-#'  "Rhode Island", "South Carolina", "South Dakota", "Tennessee",
-#'  "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia",
-#'  "Wisconsin", "Wyoming"), class = "factor"), pcthisp = c(0.0381527239296627,
-#'  0.056769492321473, 0.296826116572835, 0.0635169313105461, 0.375728960493789,
-#'  0.206327251656949, 0.134422275491411, 0.0813548250199138, 0.2249082771481,
-#'  0.0878682317249484, 0.0901734019211436, 0.111947738331921, 0.158094676641822,
-#'  0.0599941716405598, 0.0495552961203499, 0.104741084665558, 0.0301921562004411,
-#'  0.0425162900517816, 0.0129720920573869, 0.0816325860392955, 0.0960897601513277,
-#'  0.0442948677533508, 0.0470583828855611, 0.0264973278249911, 0.0354626134972627,
-#'  0.0292535716628734, 0.0914761950105784, 0.265451497002445, 0.0283535007142456,
-#'  0.177132117215957, 0.463472498001496, 0.176607017430808, 0.0834317084560556,
-#'  0.0209906647364226, 0.0307719359181436, 0.0883052970054721, 0.117261303415395,
-#'  0.0568442805511265, 0.124769233546578, 0.0503041778042313, 0.0279186292931113,
-#'  0.0454229079840698, 0.376044616311455, 0.129379195461843, 0.0151111594281676,
-#'  0.0788112971314249, 0.111945098129999, 0.0119028512046327, 0.0589405823830593,
-#'  0.0893971780534219), pop = c(3615, 365, 2212, 2110, 21198, 2541,
-#'  3100, 579, 8277, 4931, 868, 813, 11197, 5313, 2861, 2280, 3387,
-#'  3806, 1058, 4122, 5814, 9111, 3921, 2341, 4767, 746, 1544, 590,
-#'  812, 7333, 1144, 18076, 5441, 637, 10735, 2715, 2284, 11860,
-#'  931, 2816, 681, 4173, 12237, 1203, 472, 4981, 3559, 1799, 4589,
-#'  376), murder = c(15.1, 11.3, 7.8, 10.1, 10.3, 6.8, 3.1, 6.2,
-#'  10.7, 13.9, 6.2, 5.3, 10.3, 7.1, 2.3, 4.5, 10.6, 13.2, 2.7, 8.5,
-#'  3.3, 11.1, 2.3, 12.5, 9.3, 5, 2.9, 11.5, 3.3, 5.2, 9.7, 10.9,
-#'  11.1, 1.4, 7.4, 6.4, 4.2, 6.1, 2.4, 11.6, 1.7, 11, 12.2, 4.5,
-#'  5.5, 9.5, 4.3, 6.7, 3, 6.9), area = c(50708, 566432, 113417,
-#'  51945, 156361, 103766, 4862, 1982, 54090, 58073, 6425, 82677,
-#'  55748, 36097, 55941, 81787, 39650, 44930, 30920, 9891, 7826,
-#'  56817, 79289, 47296, 68995, 145587, 76483, 109889, 9027, 7521,
-#'  121412, 47831, 48798, 69273, 40975, 68782, 96184, 44966, 1049,
-#'  30225, 75955, 41328, 262134, 82096, 9267, 39780, 66570, 24070,
-#'  54464, 97203), temp = c(62.8, 26.6, 60.3, 60.4, 59.4, 45.1, 49,
-#'  55.3, 70.7, 63.5, 70, 44.4, 51.8, 51.7, 47.8, 54.3, 55.6, 66.4,
-#'  41, 54.2, 47.9, 44.4, 41.2, 63.4, 54.5, 42.7, 48.8, 49.9, 43.8,
-#'  52.7, 53.4, 45.4, 59, 40.4, 50.7, 59.6, 48.4, 48.8, 50.1, 62.4,
-#'  45.2, 57.6, 64.8, 48.6, 42.9, 55.1, 48.3, 51.8, 43.1, 42)), .Names = c("state",
-#'  "pcthisp", "pop", "murder", "area", "temp"), class = "data.frame", row.names = c(NA,
-#'  -50L))
 #'
-#'   RR(bg$area, bg$pcthisp, bg$pop)
-#'  # Avg Hispanic lives in a State that is 69 percent larger than
-#'  #   that of avg. non-Hispanic
+#'  # See examples for [RR.table()] and [RR.means()] and [RR()]
 #'
-#' RR(bg$pcthisp, bg$pcthisp, bg$pop)
-#'    Avg Hispanic persons local percent Hispanic (their blockgroup) is 4x as everyone elses on avg,
-#'   but avg low income persons local percent low income is only 1.8x as high as everyone elses.
-#'  # cbind(RR=RR(e=data.frame(local_pct_hispanic=bg$pcthisp, local_pct_lowincome=bg$pctlowinc),
-#'  # d= cbind(Ratio_of_avg_among_hispanics_to_avg_among_nonhispanics=bg$pcthisp,
-#'    avg_among_lowinc_vs_rest_of_pop=bg$pctlowinc), bg$pop))
+#'  ########################################  #
 #'
-#' # RR(bg[ , names.e], bg$pctlowinc, bg$pop)
-#'  # sapply(bg[ , names.d], function(z) RR(bg[ , names.e], z, bg$pop) )
+#'  ##    if just using ejanalysis pkg test data:
+#'  bg <- ejanalysis::bgtest
+#'   enames <- c("pm", "o3", "cancer", "resp", "dpm", "pctpre1960", "traffic.score",
+#'    "proximity.npl", "proximity.rmp", "proximity.tsdf", "proximity.npdes", "ust")
+#'  dnames = c("pctlingiso", "pctlowinc")
+#'  dnames.subgroups.count =  c("hisp", "nhwa", "nhba", "nhaiana",
+#'    "nhaa", "nhnhpia", "nhotheralone", "nhmulti")
+#'  dnames.subgroups.pct = c("pcthisp", "pctnhwa", "pctnhba", "pctnhaiana",
+#'    "pctnhaa", "pctnhnhpia", "pctnhotheralone", "pctnhmulti")
+#'
+#'  ##    if EJAM pkg available:
+#'  # bg <- as.data.frame(EJAM::blockgroupstats)
+#'  # enames = EJAM::names_e
+#'  # dnames = EJAM::names_d
+#'  # dnames.subgroups.count = EJAM::names_d_subgroups_count
+#'  # dnames.subgroups.pct  =  EJAM::names_d_subgroups
+#'
+#'  ##    if EJAM pkg not available and using ejscreen pkg data:
+#'  # bg <- ejscreen::bg22
+#'  # enames = ejscreen::names.e
+#'  # dnames = ejscreen::names.d
+#'  # dnames.subgroups.count = ejscreen::names.d.subgroups
+#'  # dnames.subgroups.pct  =  ejscreen::names.d.subgroups.pct
+#'
+#'  ########################################  #
+#'
+#'  x <- ejanalysis::RR(e = bg[, enames], d = bg[, dnames], pop = bg$pop)
+#'  round(x, 2)
+#'  t(round(x, 2))
+#'
+#'  sapply(bg[ , dnames], function(z) round(RR(bg[ , enames], z, bg$pop), 2))
+#'
+#' ejanalysis::RR(bg$pcthisp, bg$pcthisp, bg$pop)
+#'  #  Avg Hispanic persons local percent Hispanic (their blockgroup)
+#'  #  is 4x as everyone elses on avg,
+#'  #  but avg low income persons local percent low income
+#'  #  is only 1.8x as high as everyone elses.
+#'
+#'  cbind(RR = RR(
+#'      e = data.frame(
+#'        local_pct_hispanic = bg$pcthisp,
+#'        local_pct_lowincome = bg$pctlowinc),
+#'      d = cbind(
+#'        Ratio_of_avg_among_hispanics_to_avg_among_nonhispanics = bg$pcthisp,
+#'        avg_among_lowinc_vs_rest_of_pop = bg$pctlowinc),
+#'      bg$pop))
+#'
 #' @export
+#'
 RR <- function(e, d, pop, dref, na.rm=TRUE) {
 
-    RR.for.one.e <- function(e, d, pop, dref, na.rm=TRUE) {
+  if (missing(e) || missing(d) || missing(pop)) { stop('Missing e, d, &/or pop argument')}
+  if (any(d > 1, na.rm = TRUE)) {
+    message('d was expected to be fractions < 1, not 0-100...')
+    drefmax = 100
+  } else {
+    drefmax = 1
+  }
+  if (missing(dref)) {
+    if (drefmax == 100) {
+      warning("Assuming dref is 100 - d, since some d values were > 1, so assuming it was a percentage expressed as zero to 100")
+    }
+    dref <- drefmax - d
+  } # if reference groups percents not specified, it is assumed to be everyone other than d...
+  # If dref is everyone including the d group, that dilutes the RR (as when people compare demographics here to the US average overall.)
+  # That makes a big difference if "here" is a large fraction of "overall."
+
+  ################################################################ #
+  ################################################################ #
+  RR.for.one.e <- function(e, d, pop, dref, na.rm=TRUE) {
 
     # for one envt factor,
     # for 1+ demog groups
 
-    if (missing(e) || missing(d) || missing(pop)) { stop('Missing e, d, &/or pop argument')}
-    if (any(d > 1, na.rm=TRUE)) {stop('d must be fractions < 1, not 0-100')}
-    if (missing(dref)) {dref <- 1 - d} # if reference groups percents not specified, it is assumed to be everyone other than d
 
     if (is.vector(d)) {
       # for one e, one d:
       #  **** put in +e-e  +d-d and  +dref-dref because I THINK WHERE e IS NA and pop and d are valid, this otherwise would remove those from numerator of group's risk but not from denominator!!!
-      (  sum(pop * e *  d +dref-dref, na.rm=na.rm) / sum(pop *  d     +e-e +dref-dref, na.rm=na.rm)) /
-        (sum(pop * e * (dref) +d-d,   na.rm=na.rm) / sum(pop * (dref) +e-e +d-d,       na.rm=na.rm))
+      (  sum(pop * e *  d + dref - dref, na.rm = na.rm) / sum(pop *  d     + e - e + dref - dref, na.rm = na.rm)) /
+        (sum(pop * e * (dref) + d - d,   na.rm = na.rm) / sum(pop * (dref) + e - e + d - d,       na.rm = na.rm))
       # weighted.mean function in base should give same result but have not confirmed true for strange cases like NA values etc.
       # weighted.mean(e, pop * d +dref-dref, na.rm=na.rm) / weighted.mean(e, pop * d   +e-e +dref-dref, na.rm=na.rm)
       #(sum(pop * e *  d,     na.rm=na.rm) / sum(pop *  d,     na.rm=na.rm)) /
@@ -120,31 +136,24 @@ RR <- function(e, d, pop, dref, na.rm=TRUE) {
     } else {
       # for one e, multiple d: vectorized version  ( but also see analyze.stuff::wtd.colMeans()  )
       #  **** put in +e-e  +d-d and  +dref-dref because I THINK WHERE e IS NA and pop and d are valid, this otherwise would remove those from numerator of group's risk but not from denominator!!!
-      (  colSums(pop * e *  d +dref-dref, na.rm=na.rm) / colSums(pop *  d     +e-e +dref-dref, na.rm=na.rm)) /
-        (colSums(pop * e * (dref) +d-d,   na.rm=na.rm) / colSums(pop * (dref) +e-e +d-d,       na.rm=na.rm))
+      (  colSums(pop * e *  d + dref - dref, na.rm = na.rm) / colSums(pop *  d     + e - e + dref - dref, na.rm = na.rm)) /
+        (colSums(pop * e * (dref) + d - d,   na.rm = na.rm) / colSums(pop * (dref) + e - e + d - d,       na.rm = na.rm))
     }
   }
-
-  if (missing(e) || missing(d) || missing(pop)) { stop('Missing e, d, &/or pop argument')}
-  if (any(d > 1, na.rm=TRUE)) {stop('d must be fractions < 1, not 0-100')}
-  if (missing(dref)) {dref <- 1 - d} # if reference groups percents not specified, it is assumed to be everyone other than d...
-  # If dref is everyone including the d group, that dilutes the RR (as when people compare demographics here to the US average overall.)
-  # That makes a big difference if "here" is a large fraction of "overall."
-
-  #browser() # **********************************************
+  ################################################################ #
+  ################################################################ #
 
   # handle single envt factor
   if ( is.vector(e) && length(e) > 1 ) {
     # 1 E
-    x <- RR.for.one.e(e=e, d=d, pop=pop, dref=dref)
+    x <- RR.for.one.e(e = e, d = d, pop = pop, dref = dref)
     if (NCOL(d) > 1) {
       # 1 E but multiple D
-      x=array(x, dim = NCOL(d), dimnames = list(d=names(x)))
+      x <- array(x, dim = NCOL(d), dimnames = list(d = names(x)))
     } else {
       # # 1 E and 1 D
-       # no dimnames
+      # no dimnames
     }
-
     return(x)
     # could warn if length(d)!=length(e) & neither is an integer multiple of the other
     # same for length(pop)
@@ -153,14 +162,14 @@ RR <- function(e, d, pop, dref, na.rm=TRUE) {
   # handle multiple envt factors
   if ((is.data.frame(e) || is.matrix(e)) && length(e[ , 1]) > 1) {
     myresults <- sapply(e, function(x) RR.for.one.e(x, d, pop, dref))
-if (NCOL(d) > 1) {
-  # multiple E multiple D
-  names(dimnames(myresults)) <- c('d', 'e') #
+    if (NCOL(d) > 1) {
+      # multiple E multiple D
+      names(dimnames(myresults)) <- c('d', 'e') #
 
-} else {
-  # multiple E but 1 D
-  myresults=array(myresults, dim = NCOL(e), dimnames = list(e=names(myresults)))
-}
+    } else {
+      # multiple E but 1 D
+      myresults <- array(myresults, dim = NCOL(e), dimnames = list(e = names(myresults)))
+    }
     return(myresults)
   }
 

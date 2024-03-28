@@ -13,7 +13,7 @@
 #'   pop is population count of place (or pop=1 if this is a vector of individuals)
 #' @param na.rm Logical optional TRUE by default in which case NA values (missing values) are removed first. If FALSE, any NA value in pop, e, or d would make result NA.
 #' @return Returns numeric vector if one demographic group? ** check
-#' @template seealsoRR
+#' @seealso [RR()]
 #' @examples #
 #'  # rrfv(places$pm, places[ , unlist(Dlist)],  places$pop)
 #' @export

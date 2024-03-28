@@ -14,52 +14,82 @@
 #'  If FIPS provided is 14 OR 15 digits long, assume it is a block.
 #' @param fips Vector of numeric or character class, required. Can be state FIPs as number or character, for example.
 #' @return Returns vector of FIPS (all characters from 2-digit State code onwards as appropriate) as character with leading zeroes
-#' @template seealsoFIPS
+#' @seealso [clean.fips()]
 #' @export
 clean.fips <- function(fips) {
 
-  #	TRY TO CLEAN UP FIPS AND INFER GEOGRAPHIC SCALE
+  #	TRY TO CLEAN UP vector of FIPS AND INFER GEOGRAPHIC SCALE
+  # # Very similar to ejanalysis package file clean.fips()
 
-  FIPS <- fips
-  FIPS <- gsub(" ", "", as.character(FIPS))
+  fips[nchar(fips) == 0]	<- NA
+  # 1 or 2 characters is state fips
+  fips[nchar(fips) == 1]	<- paste0("0", fips[nchar(fips) == 1])
+  # 3 is bad
+  fips[nchar(fips) == 3]	<- NA
+  # 4 or 5 is county
+  fips[nchar(fips) == 4]	<- paste0("0", fips[nchar(fips) == 4])
+  # 6-9 are bad
+  fips[nchar(fips) == 6]	<- NA
+  fips[nchar(fips) == 7]	<- NA
+  fips[nchar(fips) == 8]	<- NA
+  fips[nchar(fips) == 9]	<- NA
+  # 10 or 11 is tract
+  fips[nchar(fips) == 10]	<- paste0("0", fips[nchar(fips) == 10])
+  # 12 is blockgroup
+  # 13 is bad
+  fips[nchar(fips) == 13]	<- NA
+  # 14-15 is block
+  fips[nchar(fips) == 14]	<- paste0("0", fips[nchar(fips) == 14])
+  fips[nchar(fips) >= 16]	<- NA
 
-  # bad
-  FIPS[nchar(FIPS) == 0]	<- NA
+  # MAYBE COULD Remove if State or county code is invalid?
 
-  # state
-  FIPS[nchar(FIPS) == 1]	<- analyze.stuff::lead.zeroes(FIPS[nchar(FIPS) == 1], 2)
-  #FIPS[nchar(FIPS) == 2]	<- analyze.stuff::lead.zeroes(FIPS[nchar(FIPS) == 2], 2)
+  # return(fips)
 
-  # bad
-  FIPS[nchar(FIPS) == 3]	<- NA
+  FIPS = fips
 
-  # county
-  FIPS[nchar(FIPS) == 4]	<- analyze.stuff::lead.zeroes(FIPS[nchar(FIPS)==4], 5)
-  #FIPS[nchar(FIPS) == 5]	<- analyze.stuff::lead.zeroes(FIPS[nchar(FIPS)==5], 5)
-
-  # bad
-  FIPS[nchar(FIPS) == 6]	<- NA
-  FIPS[nchar(FIPS) == 7]	<- NA
-  FIPS[nchar(FIPS) == 8]	<- NA
-  FIPS[nchar(FIPS) == 9]	<- NA
-
-  # tract
-  FIPS[nchar(FIPS) == 10]	<- analyze.stuff::lead.zeroes(FIPS[nchar(FIPS)==10], 11)
-  #FIPS[nchar(FIPS) == 11]	<- analyze.stuff::lead.zeroes(FIPS[nchar(FIPS)==11], 11)
-
-
-  # block group
-  #FIPS[nchar(FIPS) == 12]	<- analyze.stuff::lead.zeroes(FIPS[nchar(FIPS)==12], 12)
-
-  # bad
-  FIPS[nchar(FIPS) == 13]	<- NA
-
-  # block
-  FIPS[nchar(FIPS) == 14]	<- analyze.stuff::lead.zeroes(FIPS[nchar(FIPS)==14], 15)
-  #FIPS[nchar(FIPS) == 15]	<- analyze.stuff::lead.zeroes(FIPS[nchar(FIPS)==15], 15)
-
-  # bad
-  FIPS[nchar(FIPS) > 15]	<- NA
+  # #	TRY TO CLEAN UP FIPS AND INFER GEOGRAPHIC SCALE
+  #
+  # FIPS <- fips
+  # FIPS <- gsub(" ", "", as.character(FIPS))
+  #
+  # # bad
+  # FIPS[nchar(FIPS) == 0]	<- NA
+  #
+  # # state
+  # FIPS[nchar(FIPS) == 1]	<- analyze.stuff::lead.zeroes(FIPS[nchar(FIPS) == 1], 2) ## cannot assign NA values into subscripted FIPS ***
+  # #FIPS[nchar(FIPS) == 2]	<- analyze.stuff::lead.zeroes(FIPS[nchar(FIPS) == 2], 2)
+  #
+  # # bad
+  # FIPS[nchar(FIPS) == 3]	<- NA
+  #
+  # # county
+  # FIPS[nchar(FIPS) == 4]	<- analyze.stuff::lead.zeroes(FIPS[nchar(FIPS)==4], 5)
+  # #FIPS[nchar(FIPS) == 5]	<- analyze.stuff::lead.zeroes(FIPS[nchar(FIPS)==5], 5)
+  #
+  # # bad
+  # FIPS[nchar(FIPS) == 6]	<- NA
+  # FIPS[nchar(FIPS) == 7]	<- NA
+  # FIPS[nchar(FIPS) == 8]	<- NA
+  # FIPS[nchar(FIPS) == 9]	<- NA
+  #
+  # # tract
+  # FIPS[nchar(FIPS) == 10]	<- analyze.stuff::lead.zeroes(FIPS[nchar(FIPS)==10], 11)
+  # #FIPS[nchar(FIPS) == 11]	<- analyze.stuff::lead.zeroes(FIPS[nchar(FIPS)==11], 11)
+  #
+  #
+  # # block group
+  # #FIPS[nchar(FIPS) == 12]	<- analyze.stuff::lead.zeroes(FIPS[nchar(FIPS)==12], 12)
+  #
+  # # bad
+  # FIPS[nchar(FIPS) == 13]	<- NA
+  #
+  # # block
+  # FIPS[nchar(FIPS) == 14]	<- analyze.stuff::lead.zeroes(FIPS[nchar(FIPS)==14], 15)
+  # #FIPS[nchar(FIPS) == 15]	<- analyze.stuff::lead.zeroes(FIPS[nchar(FIPS)==15], 15)
+  #
+  # # bad
+  # FIPS[nchar(FIPS) > 15]	<- NA
 
   # Remove if State code is invalid.
   #   info from ejanalysis::get.state.info() or data(lookup.states, package='proxistat')

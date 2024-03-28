@@ -14,10 +14,27 @@
 #' @param cutpoints Default is 1:11. see [make.bin.cols()]
 #' @param labels Default is c(0.00, 0.10, 0.20, 0.30, 0.40, 0.50, 0.60, 0.70, 0.80, 0.90,  0.95,  1.00). see [make.bin.cols()]
 #' @return Returns a matrix or data.frame
-#' @template seePctiles
+#'
+#' @seealso
+#' [make.bin.pctile.cols()] to call functions below, converting columns of values to percentiles and then bins
+#' [assign.pctiles()] for one vector, assign (weighted) percentile (quantile) to each value within its zone (subset)
+#' [assign.pctiles.alt2()] as an alternative method, to replicate assign.pctiles, but not by zone
+#' [get.pctile()] to get (weighted) percentile of just 1+ values within given vector of values
+#' [make.pctile.cols()] for a data.frame, assign percentiles, return a same-sized df that is wtd.quantile of each value within its column
+#' [make.pctile.cols.alt2()] as an alternative method, to replicate make.pctile.cols
+#' [assign.map.bins()] for one vector (or data.frame) of values (e.g. percentiles), return same-sized df that is bin number (map color bin) using preset breaks.
+#' [make.bin.cols()] for a data.frame of values (e.g. percentiles), return same-sized df that is bin number (map color bin) using preset breaks.
+#' [write.pctiles()] to save file that is lookup table of percentiles for columns of a data.frame
+#' [write.pctiles.by.zone()] to save file that is lookup table of percentiles for columns of a data.frame, for each geographic zone (subset of rows)
+#' [write.wtd.pctiles()] to save file that is lookup table of weighted percentiles for columns of a data.frame
+#' [write.wtd.pctiles.by.zone()] to save file that is lookup table of weighted percentiles for columns of a data.frame, for each geographic zone (subset of rows)
+#' [lookup.pctile()] to look up current approx weighted percentiles in a lookup table that is already in global memory
+#'
 #' @export
+#'
 make.bin.pctile.cols <- function(raw.data.frame, weights=NULL, zone=NULL, as.df=TRUE, prefix.bin='bin.', prefix.pctile='pctile.', cutpoints=c( (0:9)/10, 0.95, 1), labels=1:11) {
-  #this.as.df <- as.df; this.weights <- weights # this is one way to pass those parameters to the next functions if they say as.df=this.as.df, etc.
+
+    #this.as.df <- as.df; this.weights <- weights # this is one way to pass those parameters to the next functions if they say as.df=this.as.df, etc.
   pctile.df <- make.pctile.cols(raw.data.frame, weights=weights, zone=zone, as.df=as.df, prefix=prefix.pctile)
   bin.df    <- make.bin.cols(pctile.df, as.df=as.df, prefix=prefix.bin, cutpoints=cutpoints, labels=labels)
 #  if (as.df) {

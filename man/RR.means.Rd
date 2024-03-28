@@ -22,7 +22,8 @@ one row per Census unit and one column per indicator.}
 
 \item{pop}{Vector of one row per location providing population count of place (or pop=1 if this is a vector of individuals), to convert d into a count since d is a fraction}
 
-\item{dref}{optional specifies reference group, default is 1 - d, meaning all people who are not in given group,
+\item{dref}{optional - NONDEFAULTS ARE NOT YET CONFIRMED TO WORK HERE.
+This specifies reference group, default is 1 - d, meaning all people who are not in given group,
 so each D group is compared to all non-D people. This is why dlab has the default it does.
 But dref can be used to specify a single reference group used for all D analyzed.
 For the reference group to be the entire overall population, use dref = 1, and say dlab = c('avg in group', 'avg overall') for example.
@@ -57,64 +58,75 @@ or even individuals (ideally) but then d would be a dummy=1 for selected group a
 NOTE: could NA values cause a problem here?
 }
 \examples{
- # use an example smaller dataset
- bg=ejanalysis::bgtest
-  namese = c("pm", "o3", "cancer", "resp", "dpm", "pctpre1960", "traffic.score",
-   "proximity.npl", "proximity.rmp", "proximity.tsdf", "proximity.npdes", "ust")
-  namesd = c("VSI.eo", "pctmin", "pctlowinc", "pctlths", "pctlingiso", "pctunder5", "pctover64")
-  namesdsub = c("pctnhwa", "pcthisp", "pctnhba", "pctnhaa", "pctnhaiana",
- "pctnhnhpia",  "pctnhotheralone", "pctnhmulti")
- # stats on 1 Demographic group
- drop(RR.means(bg[ , namese], bg$pcthisp, bg$pop))
- # all E, all D
- x <- RR.means(bg[,namese], bg[,namesd], bg$pop)
- round(x[,'ratio',],2)
- x[ , ,'traffic.score']
- x['pctlowinc',,]
 
- densities <- round(drop(RR.means(e = data.frame(pop.density=1000*bg$pop/bg$area),
-  d = bg[, c(namesd, namesdsub)], pop = bg$pop, dlab = c('Avg pop density', 'Avg if not in this demog group'))),2)
- densities[order(densities[,3],decreasing = T),]
+ # See examples for [RR.table()] and [RR.means()] and [RR()]
+
+ ########################################  #
+
+ ##    if just using ejanalysis pkg test data:
+ bg <- ejanalysis::bgtest
+  enames <- c("pm", "o3", "cancer", "resp", "dpm", "pctpre1960", "traffic.score",
+   "proximity.npl", "proximity.rmp", "proximity.tsdf", "proximity.npdes", "ust")
+ dnames = c("pctlingiso", "pctlowinc")
+ dnames.subgroups.count =  c("hisp", "nhwa", "nhba", "nhaiana",
+   "nhaa", "nhnhpia", "nhotheralone", "nhmulti")
+ dnames.subgroups.pct = c("pcthisp", "pctnhwa", "pctnhba", "pctnhaiana",
+   "pctnhaa", "pctnhnhpia", "pctnhotheralone", "pctnhmulti")
+
+ ##    if EJAM pkg available:
+ # bg <- as.data.frame(EJAM::blockgroupstats)
+ # enames = EJAM::names_e
+ # dnames = EJAM::names_d
+ # dnames.subgroups.count = EJAM::names_d_subgroups_count
+ # dnames.subgroups.pct  =  EJAM::names_d_subgroups
+
+ ##    if EJAM pkg not available and using ejscreen pkg data:
+ # bg <- ejscreen::bg22
+ # enames = ejscreen::names.e
+ # dnames = ejscreen::names.d
+ # dnames.subgroups.count = ejscreen::names.d.subgroups
+ # dnames.subgroups.pct  =  ejscreen::names.d.subgroups.pct
+
+ ########################################  #
+
+ # stats on 1 Demographic group
+ drop(RR.means(bg[ , enames], bg$pcthisp, bg$pop))
+ # all E, all D
+ x <- RR.means(bg[, enames], bg[, dnames], bg$pop)
+ round(x[, 'ratio',],2)
+ x[ , , 'traffic.score']
+ x['pctlowinc', , ]
+
+ densities <- round(drop(RR.means(e = data.frame(pop.density = 1000 * bg$pop / bg$area),
+  d = bg[, c(dnames, dnames.subgroups.pct)], pop = bg$pop, dlab = c('Avg pop density', 'Avg if not in this demog group'))),2)
+ densities[order(densities[, 3], decreasing = T),]
+
 \dontrun{
-# for ejscreen bg22 data.frame
+# for ejscreen pkg data.frame
 # population density of blockgroup, by demographic group
 densities <- round(drop(RR.means(
-  e = data.frame(pop.density=1000*bg22$pop/bg22$area),
-  d = bg22[, c(names.d, names.d.subgroups)],
-  pop = bg22$pop,
+  e = data.frame(pop.density = 1000 * bg$pop / bg$area),
+  d = bg[, c(dnames, dnames.subgroups.pct)],
+  pop = bg$pop,
   dlab = c('Avg pop density', 'Avg if not in this demog group'))),2)
 # just 1 Envt factor
- drop(RR.means(bg22[, "traffic.score"], bg22[,c(names.d, names.d.subgroups)], pop = bg22$pop))
+ drop(RR.means(bg[, "traffic.score"], bg[,c(dnames, dnames.subgroups.pct)], pop = bg$pop))
  # just 1 Demog group
- drop(RR.means(bg22[, c('pm','o3','dpm','resp', 'cancer')], bg22[,"pctlowinc"], pop = bg22$pop))
+ drop(RR.means(bg[, enames], bg[, "pctlowinc"], pop = bg$pop))
  # multiple E, multiple D
- RR.means(bg22[, c('pm','o3','dpm','resp', 'cancer')], bg22[,c("pctlowinc", "pctunemployed")], pop = bg22$pop)
+ RR.means(bg[, enames], bg[, c("pctlowinc", "pctunemployed")], pop = bg$pop)
  # All E, All D (a bit slow)
- x <- RR.means(bg22[,names.e], bg22[,names.d], pop = bg22$pop)
+ x <- RR.means(bg[, enames], bg[, dnames], pop = bg$pop)
  t(round(x[,'ratio',],2))
 
- # if the blockgroup data were a data.table not just data.frame:
- #bg <- data.frame(data.table::copy(EJAM::blockgroupstats))
- #x <- ejanalysis::RR.means(
- #  bg[ ,   EJAM::names_e],
- #  bg[ , c(EJAM::names_d, EJAM::names_d_subgroups)]/100,
+ # x <- ejanalysis::RR.means(
+ #  bg[ , enames],
+ #  bg[ , c(dnames, dnames.subgroups.pct)] / 100,
  #  bg$pop
- #)
+ # )
  }
+
 }
 \seealso{
-\itemize{
-\item \code{\link{ej.indexes}} for local contribution to a variety of overall disparity metrics such as excess risk
-\item \code{\link{RR}} to calculate overall disparity metric as relative risk (RR), ratio of mean environmental indicator values across demographic groups
-\item \code{\link{RR.table}} to create 3-D table of RR values, by demographic group by environmental indicator by zone
-\item \code{\link{RR.table.sort}} to sort existing RR table
-\item \code{\link{RR.table.add}} to add zone(s) to existing RR table
-\item \code{\link{write.RR.tables}} to write a file with a table or RR by indicator by group
-\item \code{\link{ej.added}} to find EJ Index as local contribution to sum of EJ Indexes
-\item \code{\link{RR.cut.if.gone}} to find local contribution to RR
-\item \code{\link{RR.if.address.top.x}} to find how much RR would change if top-ranked places had different conditions
-\item \code{\link{rrfv}} for obsolete attempt to vectorize rrf
-\item \code{\link{rrf}} for older simpler function for RR of one indicator for one demographic group
-\item \code{\link{pop.ecdf}} to compare plots of cumulative frequency distribution of indicator values by group
-}
+\code{\link[=RR]{RR()}}
 }

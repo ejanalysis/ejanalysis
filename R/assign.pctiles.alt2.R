@@ -15,7 +15,7 @@
 #'   If FALSE, NA values are treated as being at the high percentiles.
 #' @param zone Optional, NULL by default, *** not yet implemented here.
 #' @return Returns a numeric vector or data.frame same size as x.
-#' @template seePctiles
+#' @seealso [make.bin.pctile.cols()] and [assign.pctiles()]
 #' @examples
 #' x <- c(30, 40, 50, 12,12,5,5,13,13,13,13,13,8,9,9,9,9,9,10:20,20,20,20,21:30)
 #' weights <- rep(c(2,3), length(x)/2)
@@ -78,14 +78,14 @@ assign.pctiles.alt2 <- function(x, weights=NULL, na.rm=TRUE, zone=NULL) {
 	# aggregate applied to all x can be slow, since it calculates max for every nontied as well, but it works
 	# aggregate gives only sorted list of unique x values, so need to expand to x length, via match (or merge could work too)
 
-	pctile.with.ties.as.max <- aggregate(pctiles, by=list(x[i]), max)
+	pctile.with.ties.as.max <- aggregate(pctiles, by = list(x[i]), max)
 	pctiles2 <- pctile.with.ties.as.max$x[match(x, pctile.with.ties.as.max[ , 1])][i]
 
 	return(pctiles2[original])
 }
 
 ############################################## #
-if (1==0) {
+if (1 == 0) {
 
 	#	NOTE: THIS IS HOW rank() WORKS (from R help):
 	#

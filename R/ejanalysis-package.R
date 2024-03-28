@@ -1,8 +1,15 @@
-#' @docType package
+
+
 #' @title Tools for Environmental Justice (EJ) Analysis
 #' @name ejanalysis
 #' @aliases ejanalysis-package
 #' @concept justice EJ demographic
+#'
+#' @importFrom grDevices rainbow
+#' @importFrom graphics abline axis barplot legend lines points
+#' @importFrom stats addmargins aggregate density rnorm runif sd weighted.mean
+#' @importFrom utils browseURL data head str write.csv
+#'
 #' @description This R package provides tools for environmental justice (EJ) analysis,
 #' including metrics characterizing disparities between demographic groups,
 #' such as differences in environmental or other indicators measured for each Census unit
@@ -30,4 +37,5 @@
 #'
 #' <http://ejanalysis.github.io> \cr
 #' <http://www.ejanalysis.com/> \cr
+"_PACKAGE"
 NULL

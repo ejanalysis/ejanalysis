@@ -10,7 +10,7 @@
 #'	also see http://www.census.gov/geo/reference/ansi.html  \cr
 #'	See <http://www.census.gov/geo/reference/codes/files/national_county.txt> but file has moved
 #'  Note old code was in GET COUNTY NAMES FROM NHGIS DATASET.R
-#' @template seealsoFIPS
+#' @seealso [clean.fips()]
 #' @return character vector of names
 #' @examples
 #' # Test data where some are block groups and some are tracts,

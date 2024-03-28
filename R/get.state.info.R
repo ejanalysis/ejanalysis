@@ -48,7 +48,7 @@
 #'   territorial.sqmi territorial.sqkm      lat        lon \cr
 #' 1              199              516 32.73963  -86.84346 \cr
 #' 2            49320           127739 63.34619 -152.83707 \cr
-#' @template seealsoFIPS
+#' @seealso [clean.fips()]
 #' @examples
 #' # data(lookup.states, package='proxistat')
 #' # x <- get.state.info(); str(x); cat('\n'); x[ 1:2, ]

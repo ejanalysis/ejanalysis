@@ -39,7 +39,7 @@
 #'  url.qf( c( '011030001003001', '011030001003', '01103000100', '01005', 1,
 #'    ejanalysis::get.state.info()[ , 'FIPS.ST'], 99999) )
 #'  }
-#' @template seealsoFIPS
+#' @seealso [clean.fips()]
 #' @export
 url.qf <- function(fips="", launch=TRUE, clean=TRUE) {
 

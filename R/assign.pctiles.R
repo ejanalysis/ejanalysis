@@ -19,7 +19,21 @@
 #'   If FALSE, NA values are treated as being at the high percentiles.
 #' @param zone Optional, NULL by default, defines subsets of rows, so a percentile is found among rows that are within a given zone only.
 #' @return Returns a numeric vector same size as x, but if zone is specified, provides percentile with given zone.
-#' @template seePctiles
+#' @seealso
+#' [make.bin.pctile.cols()] to call functions below, converting columns of values to percentiles and then bins
+#' [assign.pctiles()] for one vector, assign (weighted) percentile (quantile) to each value within its zone (subset)
+#' [assign.pctiles.alt2()] as an alternative method, to replicate assign.pctiles, but not by zone
+#' [get.pctile()] to get (weighted) percentile of just 1+ values within given vector of values
+#' [make.pctile.cols()] for a data.frame, assign percentiles, return a same-sized df that is wtd.quantile of each value within its column
+#' [make.pctile.cols.alt2()] as an alternative method, to replicate make.pctile.cols
+#' [assign.map.bins()] for one vector (or data.frame) of values (e.g. percentiles), return same-sized df that is bin number (map color bin) using preset breaks.
+#' [make.bin.cols()] for a data.frame of values (e.g. percentiles), return same-sized df that is bin number (map color bin) using preset breaks.
+#' [write.pctiles()] to save file that is lookup table of percentiles for columns of a data.frame
+#' [write.pctiles.by.zone()] to save file that is lookup table of percentiles for columns of a data.frame, for each geographic zone (subset of rows)
+#' [write.wtd.pctiles()] to save file that is lookup table of weighted percentiles for columns of a data.frame
+#' [write.wtd.pctiles.by.zone()] to save file that is lookup table of weighted percentiles for columns of a data.frame, for each geographic zone (subset of rows)
+#' [lookup.pctile()] to look up current approx weighted percentiles in a lookup table that is already in global memory
+#'
 #' @examples
 #' x <- c(30, 40, 50, 12,12,5,5,13,13,13,13,13,8,9,9,9,9,9,10:20,20,20,20,21:30)
 #' wts <- rep(c(2,3), length(x)/2)
@@ -65,9 +79,10 @@
 #'  }
 #'
 #' @export
+#'
 assign.pctiles <- function(values, weights=NULL, zone=NULL, na.rm=TRUE) {
 
-if (weights == 1) {weights <- NULL} # to work with make.pctile.cols( where default was weights=1 )
+if (all(weights == 1)) {weights <- NULL} # to work with make.pctile.cols( where default was weights=1 )
 
   #  FUNCTION TO ASSIGN THE EXACT WEIGHTED (or unweighted) PERCENTILE NUMBER TO EACH LOCATION'S RAW INDICATOR SCORE
   if (!missing(na.rm))	{warning('na.rm is not implemented yet')}

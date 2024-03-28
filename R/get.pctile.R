@@ -9,7 +9,7 @@
 #' @param wts Optional weights, default is 1 (equal weighting). Useful to find for example what percent of people have an x score (at or) below a given value.
 #' @param or.tied Default is TRUE which means percentile represents what fraction have x at or below value, not just below value.
 #' @param na.rm Logical, optional, TRUE by default. Should NA values (missing data) be removed first to get percentile of those with valid (nonmissing) data.
-#' @template seePctiles
+#' @seealso [make.bin.pctile.cols()] and [assign.pctiles()]
 #' @examples
 #' get.pctile(89:95, 1:100)
 #' get.pctile(89:95, 1:100, c(rep(1,90), rep(10000,10)))

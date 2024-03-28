@@ -14,7 +14,7 @@
 #' @param cutpoints Optional vector of cutpoints defining edges of bins. Default is every 0.10 from 0 to 1.00, as well as 0.95
 #' @param labels vector of bin numbers, optional (default is 1 through 11, and NA values are put in bin 0).
 #' @return Returns a vector bin numbers.
-#' @template seePctiles
+#' @seealso [make.bin.pctile.cols()] and [assign.pctiles()]
 #' @examples
 #' junk<-c(0,0.799,0.8, 0.8000001, 0.8999999,0.95,0.95001,1)
 #' data.frame(pctile=junk, bin=assign.map.bins(junk))

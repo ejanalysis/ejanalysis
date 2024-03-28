@@ -24,7 +24,7 @@ This is a simple wrapper for the ineq::Kolm function, but
 it makes explicit the need to transform x first if x measures a harm or cost.
 }
 \details{
-The Kolm-Pollak inequality index is provided by the package \link{ineq}
+The Kolm-Pollak inequality index is provided by the package ineq
 but that index is only suitable for use with a variable where larger values are preferred, such as with income.
 The need for this type of transformation is noted by Maguire and Sheriff (2011) in \url{http://dx.doi.org/10.3390/ijerph8051707}
 Many variables represent negative outcomes, such as measures of risks to health, or costs.
