@@ -7,7 +7,7 @@
 #' @param fips Vector of one or more elements, character class, 12 or 15 characters long (block group or block), required.
 #' @param clean Does not use clean.fips() if FALSE, which helps if the countiesall or other list is not yet updated, for example and lacks some new FIPS code
 #' @return Returns a vector of one or more character elements, same lengths as fips
-#' @template seealsoFIPS
+#' @seealso [clean.fips()]
 #' @examples
 #' samplefips <- c("011030001003", "011030001003001", 02610, 11030001003001, 35, 1,
 #'  NA, 'invalidtext', '02')

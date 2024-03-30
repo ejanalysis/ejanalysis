@@ -8,7 +8,7 @@
 #' @param as.df Optional logical TRUE by default, in which case matrix results are converted to data.frame
 #' @param zone NULL by default, but if a vector is provided, it defines zones to group by, so percentiles are within a given zone only.
 #' @return Returns a matrix or data.frame
-#' @template seePctiles
+#' @seealso [make.bin.pctile.cols()] and [assign.pctiles()]
 #' @export
 make.pctile.cols <- function(values, weights=1, prefix='pctile.', as.df=TRUE, zone=NULL) {
 

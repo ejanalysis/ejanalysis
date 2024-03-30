@@ -6,7 +6,7 @@
 #'   It does not check to see if the codes are valid other than counting how many characters each has.
 #' @param fips Vector of one or more elements, character class, 12 or 15 characters long FIPS (block group or block), required.
 #' @return Returns a vector of one or more character elements, same lengths as fips
-#' @template seealsoFIPS
+#' @seealso [clean.fips()]
 #' @examples
 #' samplefips <- c("011030001003", "011030001003001", 11030001003001, 35, 1, NA, 'invalidtext', '02')
 #' get.fips.bg(samplefips)

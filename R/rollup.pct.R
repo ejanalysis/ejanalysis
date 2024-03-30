@@ -6,7 +6,7 @@
 #' @param b Required numeric vector, denominator. Same length as a.
 #' @param zone Optional, vector to group by. Same length as a and b.
 #' @return Returns a table with a/b calculated within each zone.
-#' @template seePctiles
+#' @seealso [make.bin.pctile.cols()] and [assign.pctiles()]
 #' @examples
 #'   pre1960=1:100; builtunits=rep(c(10, 100),50); zone=rep(c('NY','MA'),50)
 #'   rollup.pct(a,b,zone)

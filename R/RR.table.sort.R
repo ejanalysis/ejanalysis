@@ -8,7 +8,7 @@
 #'   one demographic group per row,
 #'   one environmental risk indicator per column, and
 #'   third dimension for which zone (e.g., which US State)
-#' @template seealsoRR
+#' @seealso [RR()]
 #' @examples
 #' RRS.US  <- RR.table(mydat=bg, Enames=names.e, Dnames=c(names.d, names.d.subgroups.pct),
 #'  popcolname='pop')

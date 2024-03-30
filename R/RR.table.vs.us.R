@@ -5,7 +5,7 @@
 #' @param e Vector of names of environmental risk indicators that must be subset of second dimension of RRS
 #' @param zone Vector of zone names that must be subset of names of third dimension of RRS
 #' @return numeric results same shape as RRS[d, e, zone]
-#' @template seealsoRR
+#' @seealso [RR()]
 #' @export
 RR.table.vs.us <- function(x, d=names.d[names.d %in% names(x)], e=names.e[names.e %in% names(x)], zone=names(x[1,1,])) {
   round(x[d, e, zone] / x[d, e, 'USA'], 2)

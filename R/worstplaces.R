@@ -6,7 +6,7 @@
 #' @param n worst 10 by default
 #' @param digits round to 2 by default
 #' @return matrix
-#' @template seealsoRR
+#' @seealso [RR()]
 #' @examples  \dontrun{
 #'   data(bgtest, package = 'ejanalysis')
 #'   RRS.US  <- RR.table(mydat = bgtest, Enames = names.e, Dnames = names.d, popcolname = 'pop')

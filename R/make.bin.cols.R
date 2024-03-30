@@ -18,7 +18,7 @@
 #' @param labels Vector of bin numbers (defining what is returned for values in those bins), optional (default is 1 through 11, and NA values are put in bin 0).
 #' @param prefix Optional character element, ".bin" by default, pasted as prefix to each column name of pctile.df, and used as names of returned columns.
 #' @return Returns a data.frame, matrix, or vector (depending on `as.df`) the same shape as pctile.df
-#' @template seePctiles
+#' @seealso [make.bin.pctile.cols()] and [assign.pctiles()]
 #' @examples
 #' 	#  new.bin.cols <- make.bin.cols(places[ , names.e.pctile])
 #' 	# new.bin.cols <- make.bin.cols( new.pctile.cols )

@@ -2,7 +2,7 @@
 % Please edit documentation in R/geofips.R
 \name{geofips}
 \alias{geofips}
-\title{Convert between FIPS / ANSI codes and Names of U.S. Geographies}
+\title{DRAFT - IN PROGRESS - Convert between FIPS / ANSI codes and Names of U.S. Geographies}
 \usage{
 geofips(x, to, clean = TRUE)
 }
@@ -35,7 +35,7 @@ and convert between them.
 }
 \examples{
    geofips(c('NY', 'Alabama', 1, 14, 'Montgomery County, Maryland',
-    '01121', 1121, '060690006002', 60690006002, '011210118001025')
+    '01121', 1121, '060690006002', 60690006002, '011210118001025'))
    geofips(c('01121', 'Montgomery County, Maryland'), c('state', 'fips.st')
 }
 \seealso{

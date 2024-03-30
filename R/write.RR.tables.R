@@ -9,7 +9,7 @@
 #' @return Returns the file names as a character vector, after saving them locally.
 #'   Saves one file per zone, with rownames and header.
 #'   Format is one demographic group per row and one environmental indicator per column, plus max per row and max per column
-#' @template seealsoRR
+#' @seealso [RR()]
 #' @examples
 #'   # RRS.REGION <- RR.table(mydat=bg, Enames=names.e,
 #'   # Dnames=c(names.d, names.d.subgroups.pct), popcolname='pop', Zcolname='REGION')

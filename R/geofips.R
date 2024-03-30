@@ -1,4 +1,4 @@
-#' @title Convert between FIPS / ANSI codes and Names of U.S. Geographies
+#' @title DRAFT - IN PROGRESS - Convert between FIPS / ANSI codes and Names of U.S. Geographies
 #' @description
 #'   Tries to interpret vector of one or more FIPS codes and/or names of geographies,
 #'   and convert between them.
@@ -22,12 +22,12 @@
 #' @seealso [ejanalysis::get.fips.st()] and related functions noted there, [ejanalysis::clean.fips()], [ejanalysis::get.state.info()]
 #' @examples
 #'    geofips(c('NY', 'Alabama', 1, 14, 'Montgomery County, Maryland',
-#'     '01121', 1121, '060690006002', 60690006002, '011210118001025')
+#'     '01121', 1121, '060690006002', 60690006002, '011210118001025'))
 #'    geofips(c('01121', 'Montgomery County, Maryland'), c('state', 'fips.st')
 #' @export
 geofips <- function(x, to, clean=TRUE) {
   stop('not done yet')
-  if (1==0) {
+  if (1 == 0) {
     xx <- x
     if (clean) {tryfips <- clean.fips(x) } # checks length, NAs, infers missing leading zero, warns
 
@@ -43,7 +43,7 @@ geofips <- function(x, to, clean=TRUE) {
 
 
     if (missing(to)) {
-      xx[isgeo]  <- geotofips(xx[isgeo], type=geotype(xx[isgeo]))
+      xx[isgeo]  <- geotofips(xx[isgeo], type = geotype(xx[isgeo]))
       xx[isfips] <- fipstogeo(xx[isgeo])
     } else {
       # to was specified

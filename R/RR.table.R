@@ -13,26 +13,75 @@
 #'   one demographic group per row,
 #'   one environmental risk indicator per column, and
 #'   third dimension for which zone (e.g., which US State)
-#' @template seealsoRR
+#' @seealso [RR()]
+#'
 #' @examples
+#'
 #'     # (This is very slow right now)
-#'     # Ratios <- ejanalysis::RR.table(bg21plus, Enames = names.e, Dnames = c(names.d, names.d.subgroups), popcolname = 'pop', digits = 2)
-#'     # MeansByGroup_and_Ratios <- ejanalysis::RR.means(subset(bg21plus, select=names.e), subset(bg21plus, select = c(names.d, names.d.subgroups)), bg21plus$pop)
-#' data(bgtest, package = 'ejanalysis')
-#' RRS.US  <- RR.table(mydat = bgtest, Enames = names.e, Dnames = c(names.d, names.d.subgroups.pct),
-#'  popcolname = 'pop')
-#' RRS.ST  <- RR.table(mydat = bgtest, Enames = names.e, Dnames = c(names.d, names.d.subgroups.pct),
-#'  popcolname = 'pop', Zcolname = 'ST')
+#'
+#'  # See examples for [RR.table()] and [RR.means()] and [RR()]
+#'
+#'  ########################################  #
+#'
+#'  ##    if just using ejanalysis pkg test data:
+#'  bg <- ejanalysis::bgtest
+#'   enames <- c("pm", "o3", "cancer", "resp", "dpm", "pctpre1960", "traffic.score",
+#'    "proximity.npl", "proximity.rmp", "proximity.tsdf", "proximity.npdes", "ust")
+#'  dnames = c("pctlingiso", "pctlowinc")
+#'  dnames.subgroups.count =  c("hisp", "nhwa", "nhba", "nhaiana",
+#'    "nhaa", "nhnhpia", "nhotheralone", "nhmulti")
+#'  dnames.subgroups.pct = c("pcthisp", "pctnhwa", "pctnhba", "pctnhaiana",
+#'    "pctnhaa", "pctnhnhpia", "pctnhotheralone", "pctnhmulti")
+#'
+#'  ##    if EJAM pkg available:
+#'  # bg <- as.data.frame(EJAM::blockgroupstats)
+#'  # enames = EJAM::names_e
+#'  # dnames = EJAM::names_d
+#'  # dnames.subgroups.count = EJAM::names_d_subgroups_count
+#'  # dnames.subgroups.pct  =  EJAM::names_d_subgroups
+#'
+#'  ##    if EJAM pkg not available and using ejscreen pkg data:
+#'  # bg <- ejscreen::bg22
+#'  # enames = ejscreen::names.e
+#'  # dnames = ejscreen::names.d
+#'  # dnames.subgroups.count = ejscreen::names.d.subgroups
+#'  # dnames.subgroups.pct  =  ejscreen::names.d.subgroups.pct
+#'
+#'  ########################################  #
+#'  Ratios <- ejanalysis::RR.table(bg, Enames = enames,
+#'    Dnames = c(dnames, dnames.subgroups.pct),
+#'    popcolname = 'pop', digits = 2)
+#'
+#'  # done like this, it still has NA values:
+#'
+#'  MeansByGroup_and_Ratios <- ejanalysis::RR.means(
+#'    subset(bg, select = enames),
+#'    subset(bg, select = c(dnames, dnames.subgroups.pct)),
+#'    bg$pop)
+#'
+#' RRS.US  <- RR.table(mydat = bg, Enames = enames,
+#'   Dnames = c(dnames, dnames.subgroups.pct),
+#'   popcolname = 'pop')
+#' RRS.ST  <- RR.table(mydat = bg, Enames = enames,
+#'   Dnames = c(dnames, dnames.subgroups.pct),
+#'   popcolname = 'pop', Zcolname = 'ST')
 #' RRS <- RR.table.add(RRS.ST, RRS.US)
 #' RRS['pctlowinc', , ]
-#' RRS[ , , 'CA']  # RRS[,,'PR']
+#' RRS[ , , 'CA']  # RRS[, , 'PR']
 #' RRS[ , 'pm', ]
-#' RRS.REGION  <- RR.table(mydat = bgtest, Enames = names.e, Dnames = c(names.d, names.d.subgroups.pct),
-#'  popcolname='pop', Zcolname='REGION')
+#' RRS.REGION  <- RR.table(mydat = bg,
+#'   Enames = enames,
+#'   Dnames = c(dnames, dnames.subgroups.pct),
+#'   popcolname = 'pop', Zcolname = 'REGION')
 #' RRS2 <- RR.table.add(RRS, RRS.REGION)
 #' RRS2[ , , '8']
+#'
 #' @export
-RR.table <- function(mydat, Enames=ejscreen::names.e[ejscreen::names.e %in% names(mydat)], Dnames=ejscreen::names.d[ejscreen::names.d %in% names(mydat)], popcolname='pop', Zcolname, testing=FALSE, digits=4) {
+#'
+RR.table <- function(mydat,
+                     Enames=ejscreen::names.e[ejscreen::names.e %in% names(mydat)],
+                     Dnames=ejscreen::names.d[ejscreen::names.d %in% names(mydat)],
+                     popcolname='pop', Zcolname, testing=FALSE, digits=4) {
 
   # Compile RR values in array of 3 dimensions: RRS[Dnames, Enames, Zcolnames]
   # one Demog group per row,
@@ -145,9 +194,9 @@ RR.table <- function(mydat, Enames=ejscreen::names.e[ejscreen::names.e %in% name
     # but still show max RR of the E's with valid data
 
     x <- RR(mydat[inzone , Enames], mydat[inzone, Dnames], mydat[inzone, popcolname])
-    z <- round(rbind(myzone.max = analyze.stuff::colMaxs(x, na.rm = FALSE), x), digits)
+    z <- round(rbind(myzone.max = matrixStats::colMaxs(x, na.rm = FALSE), x), digits) # analyze.stuff version did not work here
 
-    x <- cbind(myzone.max = analyze.stuff::rowMaxs(z, na.rm = TRUE), z)
+    x <- cbind(myzone.max = analyze.stuff::rowMaxs(z, na.rm = TRUE), z)  # see if matrixStats:: version is same or better now
     # rownames(x)[1] <- paste(Znames[myzone.i], '.maxD', sep = '')
     # colnames(x)[length(colnames(x))] <- paste(Znames[myzone.i], '.maxE', sep = '')
     RRS[ , , myzone.i] <- x

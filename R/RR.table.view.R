@@ -11,7 +11,7 @@
 #'    d = 'pctlowinc'
 #'   ), 2))
 #' @return prints RRS[d, e, zone]
-#' @template seealsoRR
+#' @seealso [RR()]
 #' @export
 RR.table.view <- function(x, d = dimnames(x)[[1]], e = dimnames(x)[[2]], zone = dimnames(x)[[3]]) {
   print(x[d, e, zone] )

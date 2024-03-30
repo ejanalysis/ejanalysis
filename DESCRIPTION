@@ -10,7 +10,7 @@ Description: Tools that simplify some basic tasks in exploring and analyzing
     For any imported/suggested packages not on CRAN, see http://ejanalysis.github.io
 Suggests:
   countyhealthrankings,
-  sp
+  ejanalysis
 Imports:
   analyze.stuff,
   data.table,

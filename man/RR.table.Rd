@@ -41,36 +41,67 @@ Make table of Relative Risk results by zone by group by envt risk factor.
 See source code for notes on this work.
 }
 \examples{
+
     # (This is very slow right now)
-    # Ratios <- ejanalysis::RR.table(bg21plus, Enames = names.e, Dnames = c(names.d, names.d.subgroups), popcolname = 'pop', digits = 2)
-    # MeansByGroup_and_Ratios <- ejanalysis::RR.means(subset(bg21plus, select=names.e), subset(bg21plus, select = c(names.d, names.d.subgroups)), bg21plus$pop)
-data(bgtest, package = 'ejanalysis')
-RRS.US  <- RR.table(mydat = bgtest, Enames = names.e, Dnames = c(names.d, names.d.subgroups.pct),
- popcolname = 'pop')
-RRS.ST  <- RR.table(mydat = bgtest, Enames = names.e, Dnames = c(names.d, names.d.subgroups.pct),
- popcolname = 'pop', Zcolname = 'ST')
+
+ # See examples for [RR.table()] and [RR.means()] and [RR()]
+
+ ########################################  #
+
+ ##    if just using ejanalysis pkg test data:
+ bg <- ejanalysis::bgtest
+  enames <- c("pm", "o3", "cancer", "resp", "dpm", "pctpre1960", "traffic.score",
+   "proximity.npl", "proximity.rmp", "proximity.tsdf", "proximity.npdes", "ust")
+ dnames = c("pctlingiso", "pctlowinc")
+ dnames.subgroups.count =  c("hisp", "nhwa", "nhba", "nhaiana",
+   "nhaa", "nhnhpia", "nhotheralone", "nhmulti")
+ dnames.subgroups.pct = c("pcthisp", "pctnhwa", "pctnhba", "pctnhaiana",
+   "pctnhaa", "pctnhnhpia", "pctnhotheralone", "pctnhmulti")
+
+ ##    if EJAM pkg available:
+ # bg <- as.data.frame(EJAM::blockgroupstats)
+ # enames = EJAM::names_e
+ # dnames = EJAM::names_d
+ # dnames.subgroups.count = EJAM::names_d_subgroups_count
+ # dnames.subgroups.pct  =  EJAM::names_d_subgroups
+
+ ##    if EJAM pkg not available and using ejscreen pkg data:
+ # bg <- ejscreen::bg22
+ # enames = ejscreen::names.e
+ # dnames = ejscreen::names.d
+ # dnames.subgroups.count = ejscreen::names.d.subgroups
+ # dnames.subgroups.pct  =  ejscreen::names.d.subgroups.pct
+
+ ########################################  #
+ Ratios <- ejanalysis::RR.table(bg, Enames = enames,
+   Dnames = c(dnames, dnames.subgroups.pct),
+   popcolname = 'pop', digits = 2)
+
+ # done like this, it still has NA values:
+
+ MeansByGroup_and_Ratios <- ejanalysis::RR.means(
+   subset(bg, select = enames),
+   subset(bg, select = c(dnames, dnames.subgroups.pct)),
+   bg$pop)
+
+RRS.US  <- RR.table(mydat = bg, Enames = enames,
+  Dnames = c(dnames, dnames.subgroups.pct),
+  popcolname = 'pop')
+RRS.ST  <- RR.table(mydat = bg, Enames = enames,
+  Dnames = c(dnames, dnames.subgroups.pct),
+  popcolname = 'pop', Zcolname = 'ST')
 RRS <- RR.table.add(RRS.ST, RRS.US)
 RRS['pctlowinc', , ]
-RRS[ , , 'CA']  # RRS[,,'PR']
+RRS[ , , 'CA']  # RRS[, , 'PR']
 RRS[ , 'pm', ]
-RRS.REGION  <- RR.table(mydat = bgtest, Enames = names.e, Dnames = c(names.d, names.d.subgroups.pct),
- popcolname='pop', Zcolname='REGION')
+RRS.REGION  <- RR.table(mydat = bg,
+  Enames = enames,
+  Dnames = c(dnames, dnames.subgroups.pct),
+  popcolname = 'pop', Zcolname = 'REGION')
 RRS2 <- RR.table.add(RRS, RRS.REGION)
 RRS2[ , , '8']
+
 }
 \seealso{
-\itemize{
-\item \code{\link{ej.indexes}} for local contribution to a variety of overall disparity metrics such as excess risk
-\item \code{\link{RR}} to calculate overall disparity metric as relative risk (RR), ratio of mean environmental indicator values across demographic groups
-\item \code{\link{RR.table}} to create 3-D table of RR values, by demographic group by environmental indicator by zone
-\item \code{\link{RR.table.sort}} to sort existing RR table
-\item \code{\link{RR.table.add}} to add zone(s) to existing RR table
-\item \code{\link{write.RR.tables}} to write a file with a table or RR by indicator by group
-\item \code{\link{ej.added}} to find EJ Index as local contribution to sum of EJ Indexes
-\item \code{\link{RR.cut.if.gone}} to find local contribution to RR
-\item \code{\link{RR.if.address.top.x}} to find how much RR would change if top-ranked places had different conditions
-\item \code{\link{rrfv}} for obsolete attempt to vectorize rrf
-\item \code{\link{rrf}} for older simpler function for RR of one indicator for one demographic group
-\item \code{\link{pop.ecdf}} to compare plots of cumulative frequency distribution of indicator values by group
-}
+\code{\link[=RR]{RR()}}
 }
