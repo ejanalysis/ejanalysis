@@ -1,4 +1,3 @@
-#' @docType package
 #' @title Tools for Environmental Justice (EJ) Analysis
 #' @name ejanalysis
 #' @aliases ejanalysis-package
@@ -27,7 +26,8 @@
 #' - [state.health.url()]
 #'
 #' @references
-#'
+#' - More information on the package is available at
 #' <http://ejanalysis.github.io> \cr
 #' <http://www.ejanalysis.com/> \cr
+"_PACKAGE"
 NULL
