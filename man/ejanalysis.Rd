@@ -32,8 +32,11 @@ Key functions include
 }
 }
 \references{
+\itemize{
+\item More information on the package is available at
 \url{http://ejanalysis.github.io} \cr
 \url{http://www.ejanalysis.com/} \cr
+}
 }
 \seealso{
 Useful links:
